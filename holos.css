@@ -452,6 +452,8 @@ section { position: relative; }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 1000px) {
+  .nav-links { display: none; }
+  .menu-toggle { display: grid; }
   .hero-grid { grid-template-columns: 1fr; }
   .hero-visual { order: -1; }
   .fw-layout, .founder { grid-template-columns: 1fr; }

@@ -115,7 +115,7 @@
 
     /* PLATFORM / RESULTS */
     "The results experience": { he:"חוויית התוצאות", ar:"تجربة النتائج", ru:"Опыт результатов", es:"La experiencia de resultados", fr:"L'expérience des résultats", de:"Das Ergebnis-Erlebnis" },
-    "Results that feel like": { he:"תוצאות שמרגישות כמו", ar:"نتائج تشعر وكأنّك", ru:"Результаты, в которых вы", es:"Resultados que se sienten como", fr:"Des résultats qui donnent le sentiment d'être", de:"Ergebnisse, die sich anfühlen, als" },
+    "Results that feel like": { he:"תוצאות שמרגישות כמו", ar:"نتائج تشعر وكأنّك", ru:"Результаты, после которых чувствуешь", es:"Resultados que se sienten como", fr:"Des résultats qui donnent le sentiment d'être", de:"Ergebnisse, die sich anfühlen, als" },
     "being": { he:"להיות", ar:"", ru:"", es:"", fr:"", de:"" },
     "Six scores, a living balance wheel, and visualizations drawn from every tradition — rendered with the restraint of a fine instrument, not a dashboard.": { he:"שישה ציונים, גלגל איזון חי, וויזואליזציות השאובות מכל מסורת — מעוצבות באיפוק של כלי נגינה משובח, לא לוח בקרה.", ar:"ست نقاط، وعجلة توازنٍ حيّة، وتصوّراتٌ مستمدّةٌ من كل تقليد — مصمَّمة بانضباط آلةٍ راقية، لا لوحة بيانات.", ru:"Шесть оценок, живое колесо баланса и визуализации из каждой традиции — оформленные со сдержанностью тонкого инструмента, а не приборной панели.", es:"Seis puntuaciones, una rueda de equilibrio viva y visualizaciones de cada tradición, con la sobriedad de un instrumento fino, no un panel.", fr:"Six scores, une roue d'équilibre vivante et des visualisations issues de chaque tradition — avec la retenue d'un bel instrument, pas d'un tableau de bord.", de:"Sechs Werte, ein lebendiges Balance-Rad und Visualisierungen aus jeder Tradition — mit der Zurückhaltung eines feinen Instruments, nicht eines Dashboards." },
     "Wellness": { he:"בריאות", ar:"العافية", ru:"Благополучие", es:"Bienestar", fr:"Bien-être", de:"Wohlbefinden" },
@@ -309,7 +309,122 @@
     "Phlegm": { he:"ליחה", ar:"البلغم", ru:"Слизь", es:"Flema", fr:"Flegme", de:"Schleim" },
     "Integral 82": { he:"אינטגרלי 82", ar:"تكاملي 82", ru:"Интегрально 82", es:"Integral 82", fr:"Intégral 82", de:"Integral 82" },
     "Energy trend · 12 weeks": { he:"מגמת אנרגיה · 12 שבועות", ar:"اتجاه الطاقة · 12 أسبوعًا", ru:"Тренд энергии · 12 недель", es:"Tendencia de energía · 12 semanas", fr:"Tendance énergie · 12 semaines", de:"Energietrend · 12 Wochen" },
-    "Five-Element flow": { he:"זרימת חמשת היסודות", ar:"تدفّق العناصر الخمسة", ru:"Поток пяти элементов", es:"Flujo de cinco elementos", fr:"Flux des cinq éléments", de:"Fünf-Elemente-Fluss" }
+    "Five-Element flow": { he:"זרימת חמשת היסודות", ar:"تدفّق العناصر الخمسة", ru:"Поток пяти элементов", es:"Flujo de cinco elementos", fr:"Flux des cinq éléments", de:"Fünf-Elemente-Fluss" },
+
+    "being understood.": { he:"להיות מובן.", ar:"تُفهم أخيرًا.", ru:"себя наконец понятым.", es:"ser comprendido.", fr:"enfin compris.", de:"würden Sie endlich verstanden." },
+    "7 apps": { he:"7 אפליקציות", ar:"7 تطبيقات", ru:"7 приложений", es:"7 apps", fr:"7 applis", de:"7 Apps" },
+    "0 context": { he:"0 הקשר", ar:"0 سياق", ru:"0 контекста", es:"0 contexto", fr:"0 contexte", de:"0 Kontext" },
+    "1 plan": { he:"תוכנית אחת", ar:"خطة واحدة", ru:"1 план", es:"1 plan", fr:"1 plan", de:"1 Plan" },
+
+    /* FRAMEWORK TABS */
+    "Swarga Integral": { he:"סווארגה אינטגרלי", ar:"سوارغا التكاملي", ru:"Swarga Интеграл", es:"Swarga Integral", fr:"Swarga Intégral", de:"Swarga Integral" },
+    "Evidence-Based": { he:"מבוסס ראיות", ar:"قائم على الأدلة", ru:"Доказательный", es:"Basado en evidencia", fr:"Fondé sur les preuves", de:"Evidenzbasiert" },
+    "Ayurveda": { he:"איורוודה", ar:"الأيورفيدا", ru:"Аюрведа", es:"Ayurveda", fr:"Ayurveda", de:"Ayurveda" },
+    "Daoist": { he:"דאואיסטי", ar:"طاوي", ru:"Даосизм", es:"Daoísta", fr:"Taoïste", de:"Daoistisch" },
+    "Rambam": { he:"רמב״ם", ar:"الرمبام", ru:"Рамбам", es:"Rambam", fr:"Rambam", de:"Rambam" },
+    "Hippocratic": { he:"היפוקרטי", ar:"أبقراطي", ru:"Гиппократ", es:"Hipocrático", fr:"Hippocratique", de:"Hippokratisch" },
+    "Avicenna": { he:"אבן סינא", ar:"ابن سينا", ru:"Авиценна", es:"Avicena", fr:"Avicenne", de:"Avicenna" },
+    "Tibetan": { he:"טיבטי", ar:"تبتي", ru:"Тибет", es:"Tibetano", fr:"Tibétain", de:"Tibetisch" },
+
+    /* ORIGIN LABELS */
+    "✦ Flagship · Proprietary": { he:"✦ ספינת הדגל · קנייני", ar:"✦ رائد · ملكيّ", ru:"✦ Флагман · собственная разработка", es:"✦ Insignia · Propio", fr:"✦ Phare · Propriétaire", de:"✦ Flaggschiff · Proprietär" },
+    "Modern · Peer-reviewed": { he:"מודרני · ביקורת עמיתים", ar:"حديث · محكَّم", ru:"Современный · рецензируемый", es:"Moderno · Revisado por pares", fr:"Moderne · Évalué par les pairs", de:"Modern · Begutachtet" },
+    "Ancient India · ~1500 BCE": { he:"הודו העתיקה · 1500~ לפנה״ס", ar:"الهند القديمة · ~1500 ق.م", ru:"Древняя Индия · ~1500 до н. э.", es:"India antigua · ~1500 a. C.", fr:"Inde ancienne · ~1500 av. J.-C.", de:"Altes Indien · ~1500 v. Chr." },
+    "Ancient China · ~400 BCE": { he:"סין העתיקה · 400~ לפנה״ס", ar:"الصين القديمة · ~400 ق.م", ru:"Древний Китай · ~400 до н. э.", es:"China antigua · ~400 a. C.", fr:"Chine ancienne · ~400 av. J.-C.", de:"Altes China · ~400 v. Chr." },
+    "Maimonides · Córdoba, 1138–1204": { he:"רמב״ם · קורדובה, 1138–1204", ar:"ابن ميمون · قرطبة، 1138–1204", ru:"Маймонид · Кордова, 1138–1204", es:"Maimónides · Córdoba, 1138–1204", fr:"Maïmonide · Cordoue, 1138–1204", de:"Maimonides · Córdoba, 1138–1204" },
+    "Ancient Greece · ~400 BCE": { he:"יוון העתיקה · 400~ לפנה״ס", ar:"اليونان القديمة · ~400 ق.م", ru:"Древняя Греция · ~400 до н. э.", es:"Grecia antigua · ~400 a. C.", fr:"Grèce ancienne · ~400 av. J.-C.", de:"Altes Griechenland · ~400 v. Chr." },
+    "Ibn Sina · Persia, 980–1037": { he:"אבן סינא · פרס, 980–1037", ar:"ابن سينا · فارس، 980–1037", ru:"Ибн Сина · Персия, 980–1037", es:"Ibn Sina · Persia, 980–1037", fr:"Ibn Sina · Perse, 980–1037", de:"Ibn Sina · Persien, 980–1037" },
+    "Tibetan Sowa Rigpa · ~8th c.": { he:"סווה ריגפה הטיבטית · המאה ה-8", ar:"سوا ريغبا التبتية · القرن الثامن", ru:"Тибетская Сова Ригпа · ~VIII век", es:"Sowa Rigpa tibetana · s. VIII", fr:"Sowa Rigpa tibétaine · VIIIe s.", de:"Tibetisches Sowa Rigpa · 8. Jh." },
+
+    /* FRAMEWORK CHIPS */
+    "Physical Body": { he:"גוף פיזי", ar:"الجسد", ru:"Физическое тело", es:"Cuerpo físico", fr:"Corps physique", de:"Physischer Körper" },
+    "Vital Energy": { he:"אנרגיית חיים", ar:"الطاقة الحيوية", ru:"Жизненная энергия", es:"Energía vital", fr:"Énergie vitale", de:"Lebensenergie" },
+    "Emotional Balance": { he:"איזון רגשי", ar:"التوازن العاطفي", ru:"Эмоциональный баланс", es:"Equilibrio emocional", fr:"Équilibre émotionnel", de:"Emotionale Balance" },
+    "Mental Clarity": { he:"בהירות מחשבתית", ar:"صفاء ذهني", ru:"Ясность ума", es:"Claridad mental", fr:"Clarté mentale", de:"Mentale Klarheit" },
+    "Relationships": { he:"מערכות יחסים", ar:"العلاقات", ru:"Отношения", es:"Relaciones", fr:"Relations", de:"Beziehungen" },
+    "Three Doshas": { he:"שלוש הדושות", ar:"الدوشات الثلاث", ru:"Три доши", es:"Tres doshas", fr:"Trois doshas", de:"Drei Doshas" },
+    "Five Elements": { he:"חמשת היסודות", ar:"العناصر الخمسة", ru:"Пять элементов", es:"Cinco elementos", fr:"Cinq éléments", de:"Fünf Elemente" },
+    "Daily routine": { he:"שגרה יומית", ar:"روتين يومي", ru:"Режим дня", es:"Rutina diaria", fr:"Routine quotidienne", de:"Tagesroutine" },
+    "Seasonal diet": { he:"תזונה עונתית", ar:"غذاء موسمي", ru:"Сезонное питание", es:"Dieta estacional", fr:"Alimentation saisonnière", de:"Saisonale Ernährung" },
+    "Yin–Yang": { he:"יין–יאנג", ar:"يين–يانغ", ru:"Инь–Ян", es:"Yin–Yang", fr:"Yin–Yang", de:"Yin–Yang" },
+    "Seasonal flow": { he:"זרימה עונתית", ar:"تدفّق موسمي", ru:"Сезонный поток", es:"Flujo estacional", fr:"Flux saisonnier", de:"Saisonaler Fluss" },
+    "Qi balance": { he:"איזון צ׳י", ar:"توازن تشي", ru:"Баланс ци", es:"Equilibrio del qi", fr:"Équilibre du qi", de:"Qi-Balance" },
+    "Daily rhythm": { he:"מקצב יומי", ar:"إيقاع يومي", ru:"Дневной ритм", es:"Ritmo diario", fr:"Rythme quotidien", de:"Tagesrhythmus" },
+    "Mind–body": { he:"גוף–נפש", ar:"عقل–جسد", ru:"Разум–тело", es:"Mente–cuerpo", fr:"Esprit–corps", de:"Geist–Körper" },
+    "Daily habits": { he:"הרגלים יומיים", ar:"عادات يومية", ru:"Ежедневные привычки", es:"Hábitos diarios", fr:"Habitudes quotidiennes", de:"Tägliche Gewohnheiten" },
+    "Optimization": { he:"אופטימיזציה", ar:"تحسين", ru:"Оптимизация", es:"Optimización", fr:"Optimisation", de:"Optimierung" },
+    "Wind · rLung": { he:"רוח · רלונג", ar:"ريح · رلونغ", ru:"Ветер · рлунг", es:"Viento · rLung", fr:"Vent · rLung", de:"Wind · rLung" },
+    "Bile · mKhris-pa": { he:"מרה · טריפה", ar:"صفراء · تريبا", ru:"Желчь · трипа", es:"Bilis · mKhris-pa", fr:"Bile · mKhris-pa", de:"Galle · mKhris-pa" },
+    "Phlegm · Bad-kan": { he:"ליחה · בקן", ar:"بلغم · بادكان", ru:"Слизь · бекен", es:"Flema · Bad-kan", fr:"Flegme · Bad-kan", de:"Schleim · Bad-kan" },
+
+    /* VIZ-CARD HEADERS & CHIPS */
+    "Integral Balance Wheel": { he:"גלגל האיזון האינטגרלי", ar:"عجلة التوازن التكاملي", ru:"Колесо интегрального баланса", es:"Rueda de equilibrio integral", fr:"Roue d'équilibre intégral", de:"Integrales Balance-Rad" },
+    "11 dims": { he:"11 מימדים", ar:"11 بُعدًا", ru:"11 измерений", es:"11 dimensiones", fr:"11 dimensions", de:"11 Dimensionen" },
+    "Five-Pillar Scores": { he:"ציוני חמשת העמודים", ar:"نقاط الركائز الخمس", ru:"Оценки пяти столпов", es:"Puntuaciones de cinco pilares", fr:"Scores des cinq piliers", de:"Fünf-Säulen-Werte" },
+    "RCT-weighted": { he:"משוקלל RCT", ar:"مرجَّح بالتجارب", ru:"Взвешено по РКИ", es:"Ponderado por ECA", fr:"Pondéré ECR", de:"RCT-gewichtet" },
+    "90-day trend": { he:"מגמת 90 יום", ar:"اتجاه 90 يومًا", ru:"Тренд за 90 дней", es:"Tendencia de 90 días", fr:"Tendance sur 90 jours", de:"90-Tage-Trend" },
+    "Dosha Constitution": { he:"מבנה הדושות", ar:"تكوين الدوشا", ru:"Конституция дош", es:"Constitución de doshas", fr:"Constitution des doshas", de:"Dosha-Konstitution" },
+    "Vata-dominant": { he:"ואטה דומיננטית", ar:"فاتا سائدة", ru:"Доминирует Вата", es:"Vata dominante", fr:"Vata dominant", de:"Vata-dominant" },
+    "Air + Ether": { he:"אוויר + אתר", ar:"هواء + أثير", ru:"Воздух + эфир", es:"Aire + éter", fr:"Air + éther", de:"Luft + Äther" },
+    "Fire + Water": { he:"אש + מים", ar:"نار + ماء", ru:"Огонь + вода", es:"Fuego + agua", fr:"Feu + eau", de:"Feuer + Wasser" },
+    "Earth + Water": { he:"אדמה + מים", ar:"أرض + ماء", ru:"Земля + вода", es:"Tierra + agua", fr:"Terre + eau", de:"Erde + Wasser" },
+    "Five-Element Cycle": { he:"מחזור חמשת היסודות", ar:"دورة العناصر الخمسة", ru:"Цикл пяти элементов", es:"Ciclo de cinco elementos", fr:"Cycle des cinq éléments", de:"Fünf-Elemente-Zyklus" },
+    "Yin 54 · Yang 46": { he:"יין 54 · יאנג 46", ar:"يين 54 · يانغ 46", ru:"Инь 54 · Ян 46", es:"Yin 54 · Yang 46", fr:"Yin 54 · Yang 46", de:"Yin 54 · Yang 46" },
+    "Principles of Balance": { he:"עקרונות האיזון", ar:"مبادئ التوازن", ru:"Принципы баланса", es:"Principios de equilibrio", fr:"Principes d'équilibre", de:"Prinzipien der Balance" },
+    "Educational": { he:"חינוכי", ar:"تعليمي", ru:"Образовательный", es:"Educativo", fr:"Éducatif", de:"Edukativ" },
+    "Four Foundations": { he:"ארבעת היסודות", ar:"الأسس الأربعة", ru:"Четыре основы", es:"Cuatro fundamentos", fr:"Quatre fondements", de:"Vier Grundlagen" },
+    "Preventive": { he:"מונע", ar:"وقائي", ru:"Профилактический", es:"Preventivo", fr:"Préventif", de:"Präventiv" },
+    "Temperament Profile": { he:"פרופיל מזג", ar:"ملف المزاج", ru:"Профиль темперамента", es:"Perfil de temperamento", fr:"Profil de tempérament", de:"Temperament-Profil" },
+    "Sanguine-warm": { he:"סנגוויני-חם", ar:"دموي-دافئ", ru:"Сангвиник, тёплый", es:"Sanguíneo-cálido", fr:"Sanguin-chaud", de:"Sanguinisch-warm" },
+    "Three-Humor Balance": { he:"איזון שלוש הליחות", ar:"توازن الأخلاط الثلاثة", ru:"Баланс трёх начал", es:"Equilibrio de tres humores", fr:"Équilibre des trois humeurs", de:"Drei-Säfte-Balance" },
+    "Wind-led": { he:"מובל רוח", ar:"بقيادة الريح", ru:"Ведёт Ветер", es:"Liderado por Viento", fr:"Dominé par le Vent", de:"Wind-geführt" },
+    "Movement · breath": { he:"תנועה · נשימה", ar:"حركة · نَفَس", ru:"Движение · дыхание", es:"Movimiento · respiración", fr:"Mouvement · souffle", de:"Bewegung · Atem" },
+    "Heat · metabolism": { he:"חום · מטבוליזם", ar:"حرارة · أيض", ru:"Тепло · метаболизм", es:"Calor · metabolismo", fr:"Chaleur · métabolisme", de:"Wärme · Stoffwechsel" },
+    "Structure · calm": { he:"מבנה · רוגע", ar:"بنية · هدوء", ru:"Структура · покой", es:"Estructura · calma", fr:"Structure · calme", de:"Struktur · Ruhe" },
+
+    /* AVICENNA PARAGRAPH (split by em tag) */
+    "From": { he:"מתוך", ar:"من", ru:"Из", es:"De", fr:"Du", de:"Aus" },
+    "The Canon of Medicine": { he:"הקאנון של הרפואה", ar:"القانون في الطب", ru:"«Канона врачебной науки»", es:"El canon de medicina", fr:"Canon de la médecine", de:"dem Kanon der Medizin" },
+    ": your constitution shaped by daily habit and environment. Holos reads temperament and tunes the controllable rhythms of your day.": { he:": מבנה גופך מעוצב בידי הרגל יומי וסביבה. הולוס קורא מזג ומכוונן את מקצבי היום שבשליטתך.", ar:": تكوينك تصوغه العادة اليومية والبيئة. يقرأ هولوس المزاج ويضبط إيقاعات يومك القابلة للتحكم.", ru:": вашу конституцию формируют ежедневные привычки и среда. Holos считывает темперамент и настраивает управляемые ритмы вашего дня.", es:": tu constitución moldeada por el hábito diario y el entorno. Holos lee el temperamento y ajusta los ritmos controlables de tu día.", fr:" : votre constitution façonnée par l'habitude quotidienne et l'environnement. Holos lit le tempérament et règle les rythmes maîtrisables de votre journée.", de:": Ihre Konstitution, geformt von täglicher Gewohnheit und Umfeld. Holos liest das Temperament und stimmt die steuerbaren Rhythmen Ihres Tages ab." },
+
+    /* SCIENCE LEDE (split by em tag) */
+    "Every recommendation traces back to peer-reviewed evidence. Traditions are offered as": { he:"כל המלצה מתחקה אחר ראיות שעברו ביקורת עמיתים. המסורות מוצעות כ־", ar:"كل توصية تستند إلى أدلة محكَّمة. تُقدَّم التقاليد بوصفها", ru:"Каждая рекомендация восходит к рецензируемым данным. Традиции предлагаются как", es:"Cada recomendación se remonta a evidencia revisada por pares. Las tradiciones se ofrecen como", fr:"Chaque recommandation remonte à des preuves évaluées par les pairs. Les traditions sont proposées comme", de:"Jede Empfehlung geht auf begutachtete Evidenz zurück. Traditionen werden angeboten als" },
+    "educational frameworks": { he:"מסגרות חינוכיות", ar:"أطر تعليمية", ru:"образовательные системы", es:"marcos educativos", fr:"cadres éducatifs", de:"edukative Rahmen" },
+    "for reflection — never as medical claims — and labeled as such throughout.": { he:"להתבוננות — לעולם לא כטענות רפואיות — ומסומנות כך לכל האורך.", ar:"للتأمل — لا كادعاءات طبية أبدًا — ومُعلَّمة بذلك في كل مكان.", ru:"для рефлексии — никогда как медицинские утверждения — и всюду помечены именно так.", es:"para la reflexión —nunca como afirmaciones médicas— y así se etiquetan en todo momento.", fr:"pour la réflexion — jamais comme allégations médicales — et signalées comme telles partout.", de:"zur Reflexion — nie als medizinische Aussagen — und durchgehend so gekennzeichnet." },
+
+    /* AI COACH CHAT (split by strong tags) */
+    "Three lenses agree on the cause, and they're complementary. Your": { he:"שלוש עדשות מסכימות על הסיבה, והן משלימות זו את זו. ה־", ar:"ثلاث عدسات تتفق على السبب، وهي متكاملة. لديك", ru:"Три линзы сходятся в причине, и они дополняют друг друга. Ваша", es:"Tres lentes coinciden en la causa, y son complementarias. Tu", fr:"Trois lentilles s'accordent sur la cause, et elles sont complémentaires. Votre", de:"Drei Linsen stimmen in der Ursache überein, und sie ergänzen sich. Ihr" },
+    "runs high in the afternoon, your": { he:"שלך גבוהה אחר הצהריים, נתוני ה־", ar:"مرتفعة بعد الظهر، وبيانات", ru:"высока во второй половине дня, ваши данные", es:"está alta por la tarde, tus datos de", fr:"est élevé l'après-midi, vos données de", de:"ist am Nachmittag hoch, Ihre" },
+    "glucose": { he:"גלוקוז", ar:"الغلوكوز", ru:"глюкозы", es:"glucosa", fr:"glucose", de:"Glukose-Daten" },
+    "data shows a post-lunch dip, and your": { he:"מראים צניחה אחרי ארוחת הצהריים, וה־", ar:"تُظهر هبوطًا بعد الغداء، و", ru:"показывают спад после обеда, а ваш", es:"muestran un bajón tras el almuerzo, y tu", fr:"montrent un creux après le déjeuner, et votre", de:"zeigen ein Nachmittagstief, und Ihr" },
+    "Fire element": { he:"יסוד האש", ar:"عنصر النار لديك", ru:"элемент Огня", es:"elemento Fuego", fr:"élément Feu", de:"Feuer-Element" },
+    "is depleted. Start here:": { he:"מדולדל. התחל כאן:", ar:"مستنزف. ابدأ هنا:", ru:"истощён. Начните отсюда:", es:"está agotado. Empieza aquí:", fr:"est épuisé. Commencez ici :", de:"ist erschöpft. Beginnen Sie hier:" },
+    "A warm, protein-forward lunch and a 5-minute walk at 1:30. Grounding for Vata, steady glucose, and it rekindles Fire. Want me to add it to today's plan?": { he:"ארוחת צהריים חמה עתירת חלבון והליכה של 5 דקות ב-13:30. מקרקעת את הוואטה, מייצבת גלוקוז ומציתה מחדש את האש. שאוסיף לתוכנית של היום?", ar:"غداء دافئ غني بالبروتين ومشي 5 دقائق في 1:30. يؤرّض فاتا ويثبّت الغلوكوز ويوقد النار من جديد. أأضيفه إلى خطة اليوم؟", ru:"Тёплый обед с упором на белок и 5-минутная прогулка в 13:30. Заземляет Вату, выравнивает глюкозу и вновь разжигает Огонь. Добавить это в план на сегодня?", es:"Un almuerzo cálido rico en proteína y una caminata de 5 minutos a la 1:30. Ancla a Vata, estabiliza la glucosa y reaviva el Fuego. ¿Lo añado al plan de hoy?", fr:"Un déjeuner chaud riche en protéines et 5 minutes de marche à 13 h 30. Ancre Vata, stabilise le glucose et ravive le Feu. Je l'ajoute au plan du jour ?", de:"Ein warmes, proteinreiches Mittagessen und 5 Minuten Gehen um 13:30. Erdet Vata, stabilisiert den Blutzucker und entfacht das Feuer neu. Soll ich es in den heutigen Plan aufnehmen?" },
+
+    /* FOUNDER */
+    "\"I spent twenty years watching people optimize their bodies and lose themselves. Holos is the practice I always wanted to give them — science that finally makes room for the soul.\"": { he:"„עשרים שנה צפיתי באנשים ממטבים את גופם ומאבדים את עצמם. הולוס הוא הפרקטיקה שתמיד רציתי להעניק להם — מדע שסוף סוף מפנה מקום לנשמה.”", ar:"“قضيت عشرين عامًا أراقب الناس يحسّنون أجسادهم ويفقدون أنفسهم. هولوس هو الممارسة التي طالما أردت منحهم إياها — علم يفسح أخيرًا مكانًا للروح.”", ru:"«Двадцать лет я смотрел, как люди оптимизируют тело и теряют себя. Holos — практика, которую я всегда хотел им дать: наука, в которой наконец есть место душе.»", es:"«Pasé veinte años viendo a la gente optimizar su cuerpo y perderse a sí misma. Holos es la práctica que siempre quise darles: ciencia que por fin hace sitio al alma.»", fr:"« J'ai passé vingt ans à regarder les gens optimiser leur corps et se perdre. Holos est la pratique que j'ai toujours voulu leur offrir — une science qui fait enfin place à l'âme. »", de:"„Zwanzig Jahre sah ich zu, wie Menschen ihren Körper optimieren und sich selbst verlieren. Holos ist die Praxis, die ich ihnen immer geben wollte — Wissenschaft, die endlich Raum für die Seele lässt.“" },
+    "Moshe Halevi": { he:"משה הלוי", ar:"موشيه هليفي", ru:"Моше Халеви" },
+    "Founder portrait": { he:"דיוקן המייסד", ar:"صورة المؤسس", ru:"Портрет основателя", es:"Retrato del fundador", fr:"Portrait du fondateur", de:"Gründerporträt" },
+    "Moshe — replace": { he:"משה — להחלפה", ar:"موشيه — للاستبدال", ru:"Моше — заменить", es:"Moshe — reemplazar", fr:"Moshe — à remplacer", de:"Moshe — ersetzen" },
+
+    /* TESTIMONIALS */
+    "\"It connected my sleep, my stress, and my sense of purpose in a way no coach ever has. I finally understand my own rhythm.\"": { he:"„זה חיבר את השינה, הלחץ ותחושת המשמעות שלי כפי שאף מאמן לא הצליח. סוף סוף אני מבינה את הקצב של עצמי.”", ar:"“ربط نومي وتوتري وإحساسي بالغاية كما لم يفعل أي مدرب. أخيرًا أفهم إيقاعي.”", ru:"«Он связал мой сон, мой стресс и моё чувство смысла так, как не удавалось ни одному коучу. Я наконец понимаю собственный ритм.»", es:"«Conectó mi sueño, mi estrés y mi sentido de propósito como ningún coach lo había hecho. Por fin entiendo mi propio ritmo.»", fr:"« Il a relié mon sommeil, mon stress et mon sens du but comme aucun coach auparavant. Je comprends enfin mon propre rythme. »", de:"„Es verband meinen Schlaf, meinen Stress und meinen Sinn wie kein Coach zuvor. Endlich verstehe ich meinen eigenen Rhythmus.“" },
+    "\"The Swarga wheel is the first health visual I've ever wanted to frame. And the advice is genuinely doable.\"": { he:"„גלגל הסווארגה הוא הוויזואל הבריאותי הראשון שרציתי למסגר. והעצות באמת ישימות.”", ar:"“عجلة سوارغا أول رسم صحي أردت تأطيره. والنصائح قابلة للتنفيذ حقًا.”", ru:"«Колесо Swarga — первая визуализация здоровья, которую мне захотелось повесить в раму. А советы действительно выполнимы.»", es:"«La rueda Swarga es el primer visual de salud que he querido enmarcar. Y los consejos son realmente factibles.»", fr:"« La roue Swarga est le premier visuel de santé que j'ai voulu encadrer. Et les conseils sont vraiment réalisables. »", de:"„Das Swarga-Rad ist die erste Gesundheitsgrafik, die ich je rahmen wollte. Und die Ratschläge sind wirklich machbar.“" },
+    "\"Comparing the Ayurvedic and evidence-based views side by side changed how I eat. Respectful, never preachy.\"": { he:"„השוואת המבט האיורוודי והמבוסס-ראיות זה לצד זה שינתה את האופן שבו אני אוכלת. מכבד, אף פעם לא מטיף.”", ar:"“مقارنة الرؤية الأيورفيدية بالقائمة على الأدلة جنبًا إلى جنب غيّرت طريقة أكلي. محترم ولا يعظ أبدًا.”", ru:"«Сравнение аюрведического и доказательного взглядов бок о бок изменило то, как я ем. Уважительно и без поучений.»", es:"«Comparar la visión ayurvédica y la basada en evidencia lado a lado cambió mi forma de comer. Respetuoso, nunca sermoneador.»", fr:"« Comparer côte à côte les visions ayurvédique et fondée sur les preuves a changé ma façon de manger. Respectueux, jamais moralisateur. »", de:"„Der direkte Vergleich der ayurvedischen und der evidenzbasierten Sicht hat verändert, wie ich esse. Respektvoll, nie belehrend.“" },
+    "Dr. Lena Ostroff": { he:"ד״ר לנה אוסטרוף", ar:"د. لينا أوستروف", ru:"Д-р Лена Острофф" },
+    "Physician · Tel Aviv": { he:"רופאה · תל אביב", ar:"طبيبة · تل أبيب", ru:"Врач · Тель-Авив", es:"Médica · Tel Aviv", fr:"Médecin · Tel Aviv", de:"Ärztin · Tel Aviv" },
+    "Marcus Reyes": { he:"מרקוס רייס", ar:"ماركوس رييس", ru:"Маркус Рейес" },
+    "Founder · Berlin": { he:"מייסד · ברלין", ar:"مؤسس · برلين", ru:"Основатель · Берлин", es:"Fundador · Berlín", fr:"Fondateur · Berlin", de:"Gründer · Berlin" },
+    "Priya Nair": { he:"פרייה נאיר", ar:"بريا ناير", ru:"Прия Наир" },
+    "Yoga therapist · Lisbon": { he:"מטפלת ביוגה · ליסבון", ar:"معالِجة يوغا · لشبونة", ru:"Йога-терапевт · Лиссабон", es:"Terapeuta de yoga · Lisboa", fr:"Yogathérapeute · Lisbonne", de:"Yogatherapeutin · Lissabon" },
+
+    /* ADVISORY BOARD */
+    "Prof. A. Sharma, MD": { he:"פרופ׳ א׳ שארמה, MD", ar:"أ.د. أ. شارما", ru:"Проф. А. Шарма, MD" },
+    "Dr. R. Cohen, PhD": { he:"ד״ר ר׳ כהן, PhD", ar:"د. ر. كوهين", ru:"Д-р Р. Коэн, PhD" },
+    "Dr. M. Tenzin": { he:"ד״ר מ׳ טנזין", ar:"د. م. تنزين", ru:"Д-р М. Тензин" },
+
+    /* FOOTER */
+    "Holos Health, Inc. — placeholder identity, ready for your brand.": { he:"Holos Health, Inc. — זהות זמנית, מוכנה למותג שלכם.", ar:"Holos Health, Inc. — هوية مؤقتة جاهزة لعلامتك.", ru:"Holos Health, Inc. — временная айдентика, готовая под ваш бренд.", es:"Holos Health, Inc. — identidad provisional, lista para tu marca.", fr:"Holos Health, Inc. — identité provisoire, prête pour votre marque.", de:"Holos Health, Inc. — Platzhalter-Identität, bereit für Ihre Marke." }
   };
 
   /* ---- build per-language reverse maps ---- */
