@@ -52,14 +52,10 @@
   document.addEventListener('click', function (e) {
     if (e.target.closest('.menu-toggle')) {
       var links = document.querySelector('.nav-links');
-      if (links) {
-        var show = links.style.display !== 'flex';
-        links.style.display = show ? 'flex' : '';
-        links.style.cssText += show ? ';position:fixed;top:64px;left:16px;right:16px;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow-md);z-index:99;' : '';
-      }
+      if (links) links.classList.toggle('open');
     } else if (e.target.closest('.nav-links a')) {
       var l = document.querySelector('.nav-links');
-      if (l && window.innerWidth <= 720) { l.style.display = ''; l.removeAttribute('style'); }
+      if (l) l.classList.remove('open');
     }
   });
 
@@ -206,10 +202,16 @@
 
   window.addEventListener('holos:langchange', function () {
     renderAssessment();
-    requestAnimationFrame(drawAll);
+    requestAnimationFrame(function () { drawAll(); syncFaq(); });
   });
 
   /* ---------- FAQ ---------- */
+  function syncFaq() {
+    document.querySelectorAll('.faq-item').forEach(function (item) {
+      var a = item.querySelector('.faq-a');
+      if (a) a.style.maxHeight = item.classList.contains('open') ? a.scrollHeight + 'px' : '0';
+    });
+  }
   document.addEventListener('click', function (e) {
     var q = e.target.closest('.faq-q');
     if (!q) return;
@@ -389,6 +391,7 @@
   function initUI() {
     renderAssessment();
     drawAll();
+    syncFaq();
   }
   if (document.readyState !== 'loading') initUI();
   else document.addEventListener('DOMContentLoaded', initUI);

@@ -8,6 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%237a9e8e' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23b08d4a' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%232b2f45'/%3E%3C/svg%3E" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
 <link rel="stylesheet" href="holos.css" />
 </head>
 <body>
@@ -409,9 +413,19 @@
     </div>
     <!-- screenshots row -->
     <div class="cols-3 reveal" style="margin-top:28px;">
-      <div class="ph" style="aspect-ratio:4/3;"><span class="ph-label">Screenshot<br/>Daily plan view</span></div>
-      <div class="ph" style="aspect-ratio:4/3;"><span class="ph-label">Screenshot<br/>Tradition compare</span></div>
-      <div class="ph" style="aspect-ratio:4/3;"><span class="ph-label">Screenshot<br/>Habit streaks</span></div>
+      <div class="viz-card">
+        <div class="viz-head"><span class="t">Daily plan view</span><span class="chip"><span class="dot"></span> Today</span></div>
+        <div data-val="72" data-color="--sage" style="max-width:96px;margin:0 auto 14px;"></div>
+        <div class="chip" style="width:100%;justify-content:center;">Warm water · 6 min breath</div>
+      </div>
+      <div class="viz-card">
+        <div class="viz-head"><span class="t">Tradition compare</span><span class="chip">Vata-dominant</span></div>
+        <div data-bars='[{"t":"Vata","v":52,"c":"--sky"},{"t":"Pitta","v":31,"c":"--clay"},{"t":"Kapha","v":17,"c":"--sage"}]'></div>
+      </div>
+      <div class="viz-card">
+        <div class="viz-head"><span class="t">Habit streaks</span><span class="chip" style="color:var(--sage-deep)">▲ +18%</span></div>
+        <div data-trend='[40,52,48,60,58,66,72,70,78,82,80,88]'></div>
+      </div>
     </div>
   </div>
 </section>
@@ -445,7 +459,25 @@
 <!-- ============ FOUNDER ============ -->
 <section class="section-pad wrap" id="founder" data-screen-label="Founder">
   <div class="founder">
-    <div class="ph founder-photo reveal"><span class="ph-label">Founder portrait<br/>Moshe — replace</span></div>
+    <div class="art founder-photo reveal" role="img" aria-label="Founder portrait">
+      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="400" height="500" fill="var(--bg-warm)"/>
+        <g fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.45">
+          <circle cx="200" cy="190" r="150"/><circle cx="200" cy="120" r="150"/><circle cx="138" cy="155" r="150"/><circle cx="262" cy="155" r="150"/>
+        </g>
+        <circle cx="200" cy="205" r="118" fill="none" stroke="var(--gold-deep)" stroke-width="1.6" opacity="0.8"/>
+        <g fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M158 158c0-26 19-44 42-44s42 18 42 44c0 18-6 34-14 44 10 4 18 10 18 20"/>
+          <path d="M158 158c0 18 6 34 14 44-10 4-18 10-18 20"/>
+          <path d="M96 408c8-78 50-118 104-118s96 40 104 118"/>
+          <path d="M168 232c10 10 22 15 32 15s22-5 32-15"/>
+        </g>
+        <g fill="var(--sage)">
+          <circle cx="200" cy="60" r="4"/><circle cx="86" cy="205" r="3"/><circle cx="314" cy="205" r="3"/>
+        </g>
+        <path d="M60 448h280" stroke="var(--line)" stroke-width="1"/>
+      </svg>
+    </div>
     <div class="reveal">
       <div class="eyebrow gold"><span class="idx">07</span> Founder &amp; clinical lead</div>
       <blockquote>"I spent twenty years watching people optimize their bodies and lose themselves. Holos is the practice I always wanted to give them — science that finally makes room for the soul."</blockquote>
@@ -475,17 +507,17 @@
       <div class="card quote-card card-hover">
         <div class="stars">★★★★★</div>
         <blockquote>"It connected my sleep, my stress, and my sense of purpose in a way no coach ever has. I finally understand my own rhythm."</blockquote>
-        <div class="by"><div class="ph avatar"></div><div><div class="n">Dr. Lena Ostroff</div><div class="r">Physician · Tel Aviv</div></div></div>
+        <div class="by"><div class="avatar-art" aria-hidden="true"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--surface-2)"/><circle cx="22" cy="17" r="7.5" fill="none" stroke="var(--sage)" stroke-width="2"/><path d="M8 38c2.5-9 8-13 14-13s11.5 4 14 13" fill="none" stroke="var(--sage)" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="22" r="19" fill="none" stroke="var(--sage)" stroke-width="1.2" opacity="0.45"/></svg></div><div><div class="n">Dr. Lena Ostroff</div><div class="r">Physician · Tel Aviv</div></div></div>
       </div>
       <div class="card quote-card card-hover">
         <div class="stars">★★★★★</div>
         <blockquote>"The Swarga wheel is the first health visual I've ever wanted to frame. And the advice is genuinely doable."</blockquote>
-        <div class="by"><div class="ph avatar"></div><div><div class="n">Marcus Reyes</div><div class="r">Founder · Berlin</div></div></div>
+        <div class="by"><div class="avatar-art" aria-hidden="true"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--surface-2)"/><circle cx="22" cy="17" r="7.5" fill="none" stroke="var(--gold-deep)" stroke-width="2"/><path d="M8 38c2.5-9 8-13 14-13s11.5 4 14 13" fill="none" stroke="var(--gold-deep)" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="22" r="19" fill="none" stroke="var(--gold-deep)" stroke-width="1.2" opacity="0.45"/></svg></div><div><div class="n">Marcus Reyes</div><div class="r">Founder · Berlin</div></div></div>
       </div>
       <div class="card quote-card card-hover">
         <div class="stars">★★★★★</div>
         <blockquote>"Comparing the Ayurvedic and evidence-based views side by side changed how I eat. Respectful, never preachy."</blockquote>
-        <div class="by"><div class="ph avatar"></div><div><div class="n">Priya Nair</div><div class="r">Yoga therapist · Lisbon</div></div></div>
+        <div class="by"><div class="avatar-art" aria-hidden="true"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--surface-2)"/><circle cx="22" cy="17" r="7.5" fill="none" stroke="var(--clay)" stroke-width="2"/><path d="M8 38c2.5-9 8-13 14-13s11.5 4 14 13" fill="none" stroke="var(--clay)" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="22" r="19" fill="none" stroke="var(--clay)" stroke-width="1.2" opacity="0.45"/></svg></div><div><div class="n">Priya Nair</div><div class="r">Yoga therapist · Lisbon</div></div></div>
       </div>
     </div>
   </div>
@@ -506,9 +538,9 @@
     <div class="card card-pad reveal">
       <div class="eyebrow" style="margin-bottom:18px;"><span class="idx">●</span> Advisory board</div>
       <div class="eg" style="gap:0;">
-        <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);"><div class="ph avatar"></div><div><div style="font-weight:600;font-size:14.5px;">Prof. A. Sharma, MD</div><div class="faint" style="font-size:13px;">Metabolic medicine</div></div></div>
-        <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);"><div class="ph avatar"></div><div><div style="font-weight:600;font-size:14.5px;">Dr. R. Cohen, PhD</div><div class="faint" style="font-size:13px;">Sleep &amp; circadian science</div></div></div>
-        <div style="display:flex;align-items:center;gap:14px;padding:14px 0;"><div class="ph avatar"></div><div><div style="font-weight:600;font-size:14.5px;">Dr. M. Tenzin</div><div class="faint" style="font-size:13px;">Traditional medicine ethics</div></div></div>
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);"><div class="avatar-art" aria-hidden="true"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--surface-2)"/><circle cx="22" cy="17" r="7.5" fill="none" stroke="var(--indigo)" stroke-width="2"/><path d="M8 38c2.5-9 8-13 14-13s11.5 4 14 13" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="22" r="19" fill="none" stroke="var(--indigo)" stroke-width="1.2" opacity="0.45"/></svg></div><div><div style="font-weight:600;font-size:14.5px;">Prof. A. Sharma, MD</div><div class="faint" style="font-size:13px;">Metabolic medicine</div></div></div>
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);"><div class="avatar-art" aria-hidden="true"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--surface-2)"/><circle cx="22" cy="17" r="7.5" fill="none" stroke="var(--sky)" stroke-width="2"/><path d="M8 38c2.5-9 8-13 14-13s11.5 4 14 13" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="22" r="19" fill="none" stroke="var(--sky)" stroke-width="1.2" opacity="0.45"/></svg></div><div><div style="font-weight:600;font-size:14.5px;">Dr. R. Cohen, PhD</div><div class="faint" style="font-size:13px;">Sleep &amp; circadian science</div></div></div>
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 0;"><div class="avatar-art" aria-hidden="true"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--surface-2)"/><circle cx="22" cy="17" r="7.5" fill="none" stroke="var(--gold)" stroke-width="2"/><path d="M8 38c2.5-9 8-13 14-13s11.5 4 14 13" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="22" r="19" fill="none" stroke="var(--gold)" stroke-width="1.2" opacity="0.45"/></svg></div><div><div style="font-weight:600;font-size:14.5px;">Dr. M. Tenzin</div><div class="faint" style="font-size:13px;">Traditional medicine ethics</div></div></div>
       </div>
     </div>
   </div>

@@ -316,6 +316,7 @@
     "0 context": { he:"0 הקשר", ar:"0 سياق", ru:"0 контекста", es:"0 contexto", fr:"0 contexte", de:"0 Kontext" },
     "1 plan": { he:"תוכנית אחת", ar:"خطة واحدة", ru:"1 план", es:"1 plan", fr:"1 plan", de:"1 Plan" },
 
+    "Holos — Integrative Wellness Intelligence": { he:"הולוס — בינת בריאות אינטגרטיבית", ar:"هولوس — ذكاء العافية التكاملي", ru:"Holos — интегративный интеллект благополучия", es:"Holos — Inteligencia de bienestar integrativa", fr:"Holos — Intelligence de bien-être intégrative", de:"Holos — Integrative Wellness-Intelligenz" },
     /* FRAMEWORK TABS */
     "Swarga Integral": { he:"סווארגה אינטגרלי", ar:"سوارغا التكاملي", ru:"Swarga Интеграл", es:"Swarga Integral", fr:"Swarga Intégral", de:"Swarga Integral" },
     "Evidence-Based": { he:"מבוסס ראיות", ar:"قائم على الأدلة", ru:"Доказательный", es:"Basado en evidencia", fr:"Fondé sur les preuves", de:"Evidenzbasiert" },
@@ -490,6 +491,8 @@
     var html = document.documentElement;
     html.lang = currentLang;
     html.dir = RTL[currentLang] ? 'rtl' : 'ltr';
+    if (!apply.origTitle) apply.origTitle = document.title;
+    document.title = translateText(apply.origTitle);
     var label = document.querySelector('[data-lang-label]');
     if (label) label.textContent = currentLang.toUpperCase();
     document.querySelectorAll('[data-lang]').forEach(function (b) {

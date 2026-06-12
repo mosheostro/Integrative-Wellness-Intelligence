@@ -415,6 +415,20 @@ section { position: relative; }
 .footer a:hover { color: var(--ink); }
 .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding-top: 28px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-faint); }
 
+
+/* ---------- GENERATED ART ---------- */
+.art { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--bg-warm); }
+.art svg { width: 100%; height: 100%; display: block; }
+.avatar-art { width: 44px; height: 44px; border-radius: 50%; flex: none; border: 1px solid var(--line); overflow: hidden; background: var(--surface-2); }
+.avatar-art svg { width: 100%; height: 100%; display: block; }
+
+/* mobile nav panel */
+.nav-links.open {
+  display: flex; position: fixed; top: 64px; left: 16px; right: 16px;
+  flex-direction: column; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 16px; padding: 12px; box-shadow: var(--shadow-md); z-index: 99;
+}
+
 /* ---------- REVEAL / ANIM ---------- */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
 .reveal.in { opacity: 1; transform: none; }
@@ -448,6 +462,8 @@ section { position: relative; }
 [dir="rtl"] .section-head { text-align: right; }
 [dir="rtl"] .section-head[style*="text-align:center"],
 [dir="rtl"] .section-head[style*="text-align: center"] { text-align: center; }
+[dir="rtl"] .opt { text-align: right; }
+[dir="rtl"] .faq-q { text-align: right; }
 [dir="rtl"] body { font-family: "Spectral", "Hanken Grotesk", system-ui, sans-serif; }
 
 /* ---------- RESPONSIVE ---------- */
