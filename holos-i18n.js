@@ -240,12 +240,82 @@
     "Terms": { he:"תנאים", ar:"الشروط", ru:"Условия", es:"Términos", fr:"Conditions", de:"AGB" },
     "Medical disclaimer": { he:"הסרת אחריות רפואית", ar:"إخلاء مسؤولية طبية", ru:"Медицинская оговорка", es:"Aviso médico", fr:"Avertissement médical", de:"Medizinischer Hinweis" },
     "Accessibility": { he:"נגישות", ar:"إمكانية الوصول", ru:"Доступность", es:"Accesibilidad", fr:"Accessibilité", de:"Barrierefreiheit" },
-    "Not a medical device · Wellness & education only": { he:"לא מכשיר רפואי · בריאות וחינוך בלבד", ar:"ليس جهازًا طبيًّا · عافية وتعليم فقط", ru:"Не медицинское устройство · Только благополучие и образование", es:"No es un dispositivo médico · Solo bienestar y educación", fr:"Pas un dispositif médical · Bien-être et éducation uniquement", de:"Kein Medizinprodukt · Nur Wellness & Bildung" }
+    "Not a medical device · Wellness & education only": { he:"לא מכשיר רפואי · בריאות וחינוך בלבד", ar:"ليس جهازًا طبيًّا · عافية وتعليم فقط", ru:"Не медицинское устройство · Только благополучие и образование", es:"No es un dispositivo médico · Solo bienestar y educación", fr:"Pas un dispositif médical · Bien-être et éducation uniquement", de:"Kein Medizinprodukt · Nur Wellness & Bildung" },
+
+    /* JS-rendered assessment + chart labels */
+    "Section 01 / 04 · Daily Rhythm": { he:"חלק 01 / 04 · מקצב יומי", ar:"القسم 01 / 04 · الإيقاع اليومي", ru:"Раздел 01 / 04 · Ежедневный ритм", es:"Sección 01 / 04 · Ritmo diario", fr:"Section 01 / 04 · Rythme quotidien", de:"Abschnitt 01 / 04 · Tagesrhythmus" },
+    "Section 02 / 04 · Nourishment": { he:"חלק 02 / 04 · הזנה", ar:"القسم 02 / 04 · التغذية", ru:"Раздел 02 / 04 · Питание", es:"Sección 02 / 04 · Nutrición", fr:"Section 02 / 04 · Nourrissement", de:"Abschnitt 02 / 04 · Nahrung" },
+    "Section 03 / 04 · Emotional Wellbeing": { he:"חלק 03 / 04 · רווחה רגשית", ar:"القسم 03 / 04 · العافية العاطفية", ru:"Раздел 03 / 04 · Эмоциональное благополучие", es:"Sección 03 / 04 · Bienestar emocional", fr:"Section 03 / 04 · Bien-être émotionnel", de:"Abschnitt 03 / 04 · Emotionales Wohlbefinden" },
+    "Section 04 / 04 · Meaning": { he:"חלק 04 / 04 · משמעות", ar:"القسم 04 / 04 · المعنى", ru:"Раздел 04 / 04 · Смысл", es:"Sección 04 / 04 · Sentido", fr:"Section 04 / 04 · Sens", de:"Abschnitt 04 / 04 · Sinn" },
+    "What best describes your current morning rhythm?": { he:"מה מתאר הכי טוב את מקצב הבוקר הנוכחי שלך?", ar:"ما الذي يصف إيقاع صباحك الحالي بشكل أفضل؟", ru:"Что лучше всего описывает ваш нынешний утренний ритм?", es:"¿Qué describe mejor tu ritmo matutino actual?", fr:"Qu'est-ce qui décrit le mieux votre rythme du matin actuel ?", de:"Was beschreibt Ihren aktuellen Morgenrhythmus am besten?" },
+    "How does your body usually feel after meals?": { he:"איך הגוף שלך מרגיש בדרך כלל אחרי ארוחות?", ar:"كيف يشعر جسدك عادةً بعد الوجبات؟", ru:"Как обычно чувствует себя ваше тело после еды?", es:"¿Cómo suele sentirse tu cuerpo después de comer?", fr:"Comment votre corps se sent-il généralement après les repas ?", de:"Wie fühlt sich Ihr Körper gewöhnlich nach Mahlzeiten an?" },
+    "When the day overwhelms you, how do you most often respond?": { he:"כשהיום מציף אותך, כיצד אתה מגיב לרוב?", ar:"عندما يثقل عليك اليوم، كيف تستجيب غالبًا؟", ru:"Когда день переполняет вас, как вы чаще всего реагируете?", es:"Cuando el día te desborda, ¿cómo sueles responder?", fr:"Quand la journée vous submerge, comment réagissez-vous le plus souvent ?", de:"Wenn der Tag Sie überfordert, wie reagieren Sie meist?" },
+    "What gives your health routine a sense of meaning?": { he:"מה נותן לשגרת הבריאות שלך תחושת משמעות?", ar:"ما الذي يمنح روتين صحتك إحساسًا بالمعنى؟", ru:"Что придаёт вашей оздоровительной рутине ощущение смысла?", es:"¿Qué da sentido a tu rutina de salud?", fr:"Qu'est-ce qui donne du sens à votre routine santé ?", de:"Was gibt Ihrer Gesundheitsroutine Sinn?" },
+    "I wake with a steady ritual and clear first step": { he:"אני מתעורר עם טקס קבוע וצעד ראשון ברור", ar:"أستيقظ مع طقس ثابت وخطوة أولى واضحة", ru:"Я просыпаюсь с устойчивым ритуалом и понятным первым шагом", es:"Me despierto con un ritual estable y un primer paso claro", fr:"Je me réveille avec un rituel stable et une première étape claire", de:"Ich wache mit einem festen Ritual und einem klaren ersten Schritt auf" },
+    "My mornings depend on the demands of the day": { he:"הבקרים שלי תלויים בדרישות היום", ar:"صباحاتي تعتمد على متطلبات اليوم", ru:"Моё утро зависит от требований дня", es:"Mis mañanas dependen de lo que pida el día", fr:"Mes matins dépendent des exigences de la journée", de:"Meine Morgen hängen von den Anforderungen des Tages ab" },
+    "I start slowly and need time before decisions": { he:"אני מתחיל לאט וזקוק לזמן לפני החלטות", ar:"أبدأ ببطء وأحتاج وقتًا قبل القرارات", ru:"Я начинаю медленно и мне нужно время до решений", es:"Empiezo despacio y necesito tiempo antes de decidir", fr:"Je commence lentement et j'ai besoin de temps avant les décisions", de:"Ich beginne langsam und brauche Zeit vor Entscheidungen" },
+    "I often rush and recover later": { he:"לעיתים קרובות אני ממהר ומתאושש אחר כך", ar:"غالبًا ما أستعجل وأتعافى لاحقًا", ru:"Я часто спешу и восстанавливаюсь потом", es:"A menudo voy con prisa y me recupero después", fr:"Je me presse souvent et récupère plus tard", de:"Ich eile oft und erhole mich später" },
+    "Grounded, warm, and satisfied": { he:"מקורקע, חמים ומסופק", ar:"متوازن، دافئ، وراضٍ", ru:"Заземлённо, тепло и сыто", es:"Con arraigo, calidez y satisfacción", fr:"Ancré, chaud et rassasié", de:"Geerdet, warm und zufrieden" },
+    "Clear at first, then a dip arrives": { he:"בהיר בהתחלה, ואז מגיעה ירידה", ar:"واضح في البداية، ثم تأتي هبطة", ru:"Сначала ясно, потом приходит спад", es:"Claro al principio, luego llega un bajón", fr:"Clair d'abord, puis une baisse arrive", de:"Zunächst klar, dann kommt ein Tief" },
+    "Heavy or sleepy for a while": { he:"כבד או ישנוני לזמן מה", ar:"ثقيل أو نعسان لبعض الوقت", ru:"Тяжесть или сонливость на некоторое время", es:"Pesado o con sueño un rato", fr:"Lourd ou somnolent pendant un moment", de:"Eine Weile schwer oder schläfrig" },
+    "Unpredictable; it changes meal to meal": { he:"לא צפוי; זה משתנה מארוחה לארוחה", ar:"غير متوقع؛ يتغير من وجبة لأخرى", ru:"Непредсказуемо; меняется от приёма к приёму", es:"Impredecible; cambia de comida a comida", fr:"Imprévisible ; cela change d'un repas à l'autre", de:"Unvorhersehbar; es wechselt von Mahlzeit zu Mahlzeit" },
+    "I pause and breathe — I've built a way back to center": { he:"אני עוצר ונושם — בניתי דרך לחזור למרכז", ar:"أتوقّف وأتنفّس — بنيتُ طريقًا للعودة إلى مركزي", ru:"Я останавливаюсь и дышу — я нашёл путь обратно к центру", es:"Hago una pausa y respiro: he creado un camino de vuelta al centro", fr:"Je m'arrête et je respire — j'ai trouvé un retour au centre", de:"Ich halte inne und atme — ich habe einen Weg zurück zur Mitte" },
+    "I push through and deal with it later": { he:"אני דוחף קדימה ומטפל בזה אחר כך", ar:"أتجاوز وأتعامل معه لاحقًا", ru:"Я продавливаю и разбираюсь позже", es:"Sigo adelante y lo afronto después", fr:"Je tiens bon et je gère plus tard", de:"Ich mache weiter und kümmere mich später" },
+    "I reach out to someone I trust": { he:"אני פונה למישהו שאני סומך עליו", ar:"أتواصل مع شخصٍ أثق به", ru:"Я обращаюсь к тому, кому доверяю", es:"Acudo a alguien de confianza", fr:"Je me tourne vers une personne de confiance", de:"Ich wende mich an jemanden, dem ich vertraue" },
+    "I tend to absorb it quietly and carry on": { he:"אני נוטה לספוג זאת בשקט וממשיך", ar:"أميل إلى استيعابه بهدوءٍ والمضيّ", ru:"Обычно я молча принимаю это и иду дальше", es:"Suelo asumirlo en silencio y seguir", fr:"J'ai tendance à l'absorber en silence et à continuer", de:"Ich nehme es meist still hin und mache weiter" },
+    "Feeling useful to people I love": { he:"להרגיש מועיל לאנשים שאני אוהב", ar:"أن أكون نافعًا لمن أحب", ru:"Ощущение пользы для близких", es:"Sentirme útil para quienes quiero", fr:"Me sentir utile aux personnes que j'aime", de:"Für geliebte Menschen nützlich sein" },
+    "A deeper spiritual or ethical commitment": { he:"מחויבות רוחנית או אתית עמוקה יותר", ar:"التزام روحي أو أخلاقي أعمق", ru:"Более глубокая духовная или этическая приверженность", es:"Un compromiso espiritual o ético más profundo", fr:"Un engagement spirituel ou éthique plus profond", de:"Ein tieferes spirituelles oder ethisches Anliegen" },
+    "Progress I can see and measure": { he:"התקדמות שאני יכול לראות ולמדוד", ar:"تقدّم أستطيع رؤيته وقياسه", ru:"Прогресс, который я могу видеть и измерять", es:"Progreso que puedo ver y medir", fr:"Des progrès que je peux voir et mesurer", de:"Fortschritt, den ich sehen und messen kann" },
+    "I am still looking for that anchor": { he:"אני עדיין מחפש את העוגן הזה", ar:"ما زلت أبحث عن ذلك المرساة", ru:"Я всё ещё ищу эту опору", es:"Todavía busco ese ancla", fr:"Je cherche encore cet ancrage", de:"Ich suche diesen Anker noch" },
+    "Complete": { he:"להשלים", ar:"إكمال", ru:"Завершить", es:"Completar", fr:"Terminer", de:"Abschließen" },
+    "Your first portrait is ready.": { he:"הדיוקן הראשון שלך מוכן.", ar:"صورتك الأولى جاهزة.", ru:"Ваш первый портрет готов.", es:"Tu primer retrato está listo.", fr:"Votre premier portrait est prêt.", de:"Ihr erstes Porträt ist bereit." },
+    "Holos has enough signal to sketch your balance across rhythm, nourishment, emotion, and meaning.": { he:"להולוס יש מספיק אות כדי לשרטט את האיזון שלך בין מקצב, הזנה, רגש ומשמעות.", ar:"لدى هولوس إشارة كافية لرسم توازنك عبر الإيقاع والتغذية والعاطفة والمعنى.", ru:"У Holos достаточно сигнала, чтобы набросать ваш баланс по ритму, питанию, эмоциям и смыслу.", es:"Holos tiene suficiente señal para bosquejar tu equilibrio entre ritmo, nutrición, emoción y sentido.", fr:"Holos a assez de signaux pour esquisser votre équilibre entre rythme, nourrissement, émotion et sens.", de:"Holos hat genug Signal, um Ihre Balance aus Rhythmus, Nahrung, Emotion und Sinn zu skizzieren." },
+    "View platform preview": { he:"לראות תצוגת פלטפורמה", ar:"عرض معاينة المنصة", ru:"Посмотреть платформу", es:"Ver vista de plataforma", fr:"Voir l'aperçu plateforme", de:"Plattformvorschau ansehen" },
+    "Restart": { he:"להתחיל מחדש", ar:"إعادة البدء", ru:"Начать заново", es:"Reiniciar", fr:"Recommencer", de:"Neu starten" },
+    "Body": { he:"גוף", ar:"الجسد", ru:"Тело", es:"Cuerpo", fr:"Corps", de:"Körper" },
+    "Emotion": { he:"רגש", ar:"العاطفة", ru:"Эмоции", es:"Emoción", fr:"Émotion", de:"Emotion" },
+    "Mind": { he:"תודעה", ar:"العقل", ru:"Разум", es:"Mente", fr:"Esprit", de:"Geist" },
+    "Bonds": { he:"קשרים", ar:"الروابط", ru:"Связи", es:"Vínculos", fr:"Liens", de:"Bindungen" },
+    "Purpose": { he:"תכלית", ar:"الغاية", ru:"Смысл", es:"Propósito", fr:"But", de:"Sinn" },
+    "Place": { he:"מקום", ar:"المكان", ru:"Среда", es:"Lugar", fr:"Lieu", de:"Ort" },
+    "Habit": { he:"הרגל", ar:"العادة", ru:"Привычка", es:"Hábito", fr:"Habitude", de:"Gewohnheit" },
+    "Recovery": { he:"התאוששות", ar:"التعافي", ru:"Восстановление", es:"Recuperación", fr:"Récupération", de:"Erholung" },
+    "Sleep": { he:"שינה", ar:"النوم", ru:"Сон", es:"Sueño", fr:"Sommeil", de:"Schlaf" },
+    "Nutrition": { he:"תזונה", ar:"التغذية", ru:"Питание", es:"Nutrición", fr:"Nutrition", de:"Ernährung" },
+    "Movement": { he:"תנועה", ar:"الحركة", ru:"Движение", es:"Movimiento", fr:"Mouvement", de:"Bewegung" },
+    "Vata": { he:"ואטה", ar:"فاتا", ru:"Вата", es:"Vata", fr:"Vata", de:"Vata" },
+    "Pitta": { he:"פיטה", ar:"بيتا", ru:"Питта", es:"Pitta", fr:"Pitta", de:"Pitta" },
+    "Kapha": { he:"קאפה", ar:"كافا", ru:"Капха", es:"Kapha", fr:"Kapha", de:"Kapha" },
+    "Wood": { he:"עץ", ar:"الخشب", ru:"Дерево", es:"Madera", fr:"Bois", de:"Holz" },
+    "Fire": { he:"אש", ar:"النار", ru:"Огонь", es:"Fuego", fr:"Feu", de:"Feuer" },
+    "Earth": { he:"אדמה", ar:"الأرض", ru:"Земля", es:"Tierra", fr:"Terre", de:"Erde" },
+    "Metal": { he:"מתכת", ar:"المعدن", ru:"Металл", es:"Metal", fr:"Métal", de:"Metall" },
+    "Water": { he:"מים", ar:"الماء", ru:"Вода", es:"Agua", fr:"Eau", de:"Wasser" },
+    "Moderation": { he:"מתינות", ar:"الاعتدال", ru:"Умеренность", es:"Moderación", fr:"Modération", de:"Mäßigung" },
+    "Digestion": { he:"עיכול", ar:"الهضم", ru:"Пищеварение", es:"Digestión", fr:"Digestion", de:"Verdauung" },
+    "Prevention": { he:"מניעה", ar:"الوقاية", ru:"Профилактика", es:"Prevención", fr:"Prévention", de:"Vorbeugung" },
+    "Rhythm": { he:"מקצב", ar:"الإيقاع", ru:"Ритм", es:"Ritmo", fr:"Rythme", de:"Rhythmus" },
+    "Harmony": { he:"הרמוניה", ar:"الانسجام", ru:"Гармония", es:"Armonía", fr:"Harmonie", de:"Harmonie" },
+    "Balance": { he:"איזון", ar:"التوازن", ru:"Баланс", es:"Equilibrio", fr:"Équilibre", de:"Balance" },
+    "Prevent": { he:"מניעה", ar:"الوقاية", ru:"Проф.", es:"Prevenir", fr:"Prévenir", de:"Vorbeugen" },
+    "Environ": { he:"סביבה", ar:"البيئة", ru:"Среда", es:"Entorno", fr:"Environ.", de:"Umfeld" },
+    "Constitution": { he:"מבנה", ar:"التكوين", ru:"Конституция", es:"Constitución", fr:"Constitution", de:"Konstitution" },
+    "Environment": { he:"סביבה", ar:"البيئة", ru:"Окружение", es:"Entorno", fr:"Environnement", de:"Umfeld" },
+    "Rest": { he:"מנוחה", ar:"الراحة", ru:"Отдых", es:"Descanso", fr:"Repos", de:"Ruhe" },
+    "Activity": { he:"פעילות", ar:"النشاط", ru:"Активность", es:"Actividad", fr:"Activité", de:"Aktivität" },
+    "Diet": { he:"תזונה", ar:"النظام الغذائي", ru:"Рацион", es:"Dieta", fr:"Alimentation", de:"Ernährung" },
+    "Wind": { he:"רוח", ar:"الريح", ru:"Ветер", es:"Viento", fr:"Vent", de:"Wind" },
+    "Bile": { he:"מרה", ar:"الصفراء", ru:"Желчь", es:"Bilis", fr:"Bile", de:"Galle" },
+    "Phlegm": { he:"ליחה", ar:"البلغم", ru:"Слизь", es:"Flema", fr:"Flegme", de:"Schleim" },
+    "Integral 82": { he:"אינטגרלי 82", ar:"تكاملي 82", ru:"Интегрально 82", es:"Integral 82", fr:"Intégral 82", de:"Integral 82" },
+    "Energy trend · 12 weeks": { he:"מגמת אנרגיה · 12 שבועות", ar:"اتجاه الطاقة · 12 أسبوعًا", ru:"Тренд энергии · 12 недель", es:"Tendencia de energía · 12 semanas", fr:"Tendance énergie · 12 semaines", de:"Energietrend · 12 Wochen" },
+    "Five-Element flow": { he:"זרימת חמשת היסודות", ar:"تدفّق العناصر الخمسة", ru:"Поток пяти элементов", es:"Flujo de cinco elementos", fr:"Flux des cinq éléments", de:"Fünf-Elemente-Fluss" }
   };
 
   /* ---- build per-language reverse maps ---- */
   var LANGS = ["he","ar","ru","es","fr","de"];
   var DICT = {};
+  var currentLang = 'en';
   LANGS.forEach(function (l) { DICT[l] = {}; });
   Object.keys(T).forEach(function (en) {
     LANGS.forEach(function (l) {
@@ -253,6 +323,18 @@
       if (v) DICT[l][en] = v;
     });
   });
+
+  function normalizeText(text) {
+    return String(text == null ? '' : text).replace(/\s+/g, ' ').trim();
+  }
+
+  function translateText(text, lang) {
+    var target = lang || currentLang;
+    var key = normalizeText(text);
+    if (!key || target === 'en') return text;
+    var dict = DICT[target];
+    return dict && dict[key] ? dict[key] : text;
+  }
 
   /* ---- collect translatable text nodes ---- */
   var cache = null;
@@ -280,34 +362,40 @@
   }
 
   function apply(lang) {
+    currentLang = lang || 'en';
     if (!cache) collect();
-    var dict = DICT[lang];
+    var dict = DICT[currentLang];
     cache.forEach(function (it) {
-      if (lang === 'en' || !dict || !dict[it.core]) {
+      if (currentLang === 'en' || !dict || !dict[it.core]) {
         if (it.node.nodeValue !== it.orig) it.node.nodeValue = it.orig;
       } else {
         it.node.nodeValue = it.lead + dict[it.core] + it.trail;
       }
     });
     var html = document.documentElement;
-    html.lang = lang;
-    html.dir = RTL[lang] ? 'rtl' : 'ltr';
+    html.lang = currentLang;
+    html.dir = RTL[currentLang] ? 'rtl' : 'ltr';
     var label = document.querySelector('[data-lang-label]');
-    if (label) label.textContent = lang.toUpperCase();
+    if (label) label.textContent = currentLang.toUpperCase();
     document.querySelectorAll('[data-lang]').forEach(function (b) {
-      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+      b.classList.toggle('active', b.getAttribute('data-lang') === currentLang);
     });
-    try { localStorage.setItem('holos-lang', lang); } catch (e) {}
+    try { localStorage.setItem('holos-lang', currentLang); } catch (e) {}
+    window.dispatchEvent(new CustomEvent('holos:langchange', { detail: { lang: currentLang } }));
   }
 
-  window.HolosI18n = { set: apply };
+  window.HolosI18n = {
+    set: apply,
+    t: translateText,
+    current: function () { return currentLang; }
+  };
 
   /* ---- init from storage ---- */
   function init() {
     var saved = 'en';
     try { saved = localStorage.getItem('holos-lang') || 'en'; } catch (e) {}
     if (saved && saved !== 'en') apply(saved);
-    else { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; }
+    else { currentLang = 'en'; document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; }
   }
   if (document.readyState !== 'loading') init();
   else document.addEventListener('DOMContentLoaded', init);

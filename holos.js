@@ -75,12 +75,138 @@
     requestAnimationFrame(drawAll);
   });
 
-  /* ---------- ASSESSMENT option select ---------- */
+  function tr(text) {
+    return window.HolosI18n && window.HolosI18n.t ? window.HolosI18n.t(text) : text;
+  }
+
+  /* ---------- ASSESSMENT flow ---------- */
+  var assessmentSteps = [
+    {
+      section: 'Section 01 / 04 · Daily Rhythm',
+      question: 'What best describes your current morning rhythm?',
+      options: [
+        'I wake with a steady ritual and clear first step',
+        'My mornings depend on the demands of the day',
+        'I start slowly and need time before decisions',
+        'I often rush and recover later'
+      ]
+    },
+    {
+      section: 'Section 02 / 04 · Nourishment',
+      question: 'How does your body usually feel after meals?',
+      options: [
+        'Grounded, warm, and satisfied',
+        'Clear at first, then a dip arrives',
+        'Heavy or sleepy for a while',
+        'Unpredictable; it changes meal to meal'
+      ]
+    },
+    {
+      section: 'Section 03 / 04 · Emotional Wellbeing',
+      question: 'When the day overwhelms you, how do you most often respond?',
+      options: [
+        "I pause and breathe — I've built a way back to center",
+        'I push through and deal with it later',
+        'I reach out to someone I trust',
+        'I tend to absorb it quietly and carry on'
+      ]
+    },
+    {
+      section: 'Section 04 / 04 · Meaning',
+      question: 'What gives your health routine a sense of meaning?',
+      options: [
+        'Feeling useful to people I love',
+        'A deeper spiritual or ethical commitment',
+        'Progress I can see and measure',
+        'I am still looking for that anchor'
+      ]
+    }
+  ];
+  var assessment = { step: 0, answers: [0, null, null, null], complete: false };
+
+  function renderAssessment() {
+    var card = document.querySelector('.assess-card');
+    if (!card) return;
+
+    if (assessment.complete) {
+      card.innerHTML =
+        '<div class="assess-body assess-result">' +
+          '<div class="eyebrow"><span class="idx">✓</span> ' + tr('Complete') + '</div>' +
+          '<div class="assess-q">' + tr('Your first portrait is ready.') + '</div>' +
+          '<p class="muted">' + tr('Holos has enough signal to sketch your balance across rhythm, nourishment, emotion, and meaning.') + '</p>' +
+          '<div class="assess-actions">' +
+            '<a href="#platform" class="btn btn-primary btn-sm">' + tr('View platform preview') + ' <span class="arrow">→</span></a>' +
+            '<button class="btn btn-ghost btn-sm" data-assess-restart>' + tr('Restart') + '</button>' +
+          '</div>' +
+        '</div>';
+      return;
+    }
+
+    var item = assessmentSteps[assessment.step];
+    var selected = assessment.answers[assessment.step];
+    var pct = Math.round(((assessment.step + 1) / assessmentSteps.length) * 100);
+    var opts = item.options.map(function (label, i) {
+      var key = String.fromCharCode(65 + i);
+      return '<button class="opt' + (selected === i ? ' sel' : '') + '" data-assess-option="' + i + '">' +
+        '<span class="key">' + key + '</span> ' + tr(label) +
+      '</button>';
+    }).join('');
+
+    card.innerHTML =
+      '<div class="assess-top">' +
+        '<div class="eyebrow"><span class="idx">●</span> ' + tr(item.section) + '</div>' +
+        '<div style="display:flex;align-items:center;gap:14px;"><div class="progress-track"><div class="progress-fill" style="width:' + pct + '%"></div></div><span class="faint" style="font-family:var(--mono);font-size:12px;">' + pct + '%</span></div>' +
+      '</div>' +
+      '<div class="assess-body">' +
+        '<div class="assess-q">' + tr(item.question) + '</div>' +
+        '<div class="opt-grid">' + opts + '</div>' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:14px;flex-wrap:wrap;">' +
+          '<span class="chip"><span class="dot"></span> ' + tr('Adaptive · your answers reshape what comes next') + '</span>' +
+          '<div style="display:flex;gap:10px;">' +
+            '<button class="btn btn-ghost btn-sm" data-assess-back' + (assessment.step === 0 ? ' disabled' : '') + '>' + tr('Back') + '</button>' +
+            '<button class="btn btn-primary btn-sm" data-assess-next>' + tr(assessment.step === assessmentSteps.length - 1 ? 'Complete' : 'Continue') + ' <span class="arrow">→</span></button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  }
+
   document.addEventListener('click', function (e) {
-    var opt = e.target.closest('.opt');
-    if (!opt) return;
-    var grid = opt.closest('.opt-grid');
-    if (grid) grid.querySelectorAll('.opt').forEach(function (o) { o.classList.toggle('sel', o === opt); });
+    var card = e.target.closest('.assess-card');
+    if (!card) return;
+
+    var opt = e.target.closest('[data-assess-option]');
+    if (opt) {
+      assessment.answers[assessment.step] = +opt.getAttribute('data-assess-option');
+      card.querySelectorAll('.opt').forEach(function (o) { o.classList.toggle('sel', o === opt); });
+      return;
+    }
+
+    if (e.target.closest('[data-assess-next]')) {
+      if (assessment.answers[assessment.step] == null) assessment.answers[assessment.step] = 0;
+      if (assessment.step < assessmentSteps.length - 1) assessment.step += 1;
+      else assessment.complete = true;
+      renderAssessment();
+      return;
+    }
+
+    if (e.target.closest('[data-assess-back]') && assessment.step > 0) {
+      assessment.step -= 1;
+      assessment.complete = false;
+      renderAssessment();
+      return;
+    }
+
+    if (e.target.closest('[data-assess-restart]')) {
+      assessment.step = 0;
+      assessment.answers = [0, null, null, null];
+      assessment.complete = false;
+      renderAssessment();
+    }
+  });
+
+  window.addEventListener('holos:langchange', function () {
+    renderAssessment();
+    requestAnimationFrame(drawAll);
   });
 
   /* ---------- FAQ ---------- */
@@ -140,7 +266,7 @@
       svg.appendChild(el('line', { x1: cx, y1: cy, x2: x, y2: y, stroke: faint, 'stroke-width': 1 }));
       var lx = cx + Math.cos(a) * (R + 22), ly = cy + Math.sin(a) * (R + 16);
       var t = el('text', { x: lx, y: ly, 'text-anchor': 'middle', 'dominant-baseline': 'middle', fill: cssvar('--ink-faint'), 'font-size': 9, 'font-family': 'JetBrains Mono, monospace' });
-      t.textContent = axes[i];
+      t.textContent = tr(axes[i]);
       svg.appendChild(t);
     }
     var dpts = '';
@@ -202,7 +328,7 @@
       var rad = 14 + (p.d.v / 100) * 12;
       svg.appendChild(el('circle', { cx: p.x, cy: p.y, r: rad, fill: cssvar(p.d.c), 'fill-opacity': 0.92 }));
       var t = el('text', { x: p.x, y: p.y, 'text-anchor': 'middle', 'dominant-baseline': 'central', fill: cssvar('--bg'), 'font-size': 9.5, 'font-family': 'JetBrains Mono, monospace' });
-      t.textContent = p.d.t;
+      t.textContent = tr(p.d.t);
       svg.appendChild(t);
     }
     host.innerHTML = ''; host.appendChild(svg);
@@ -216,7 +342,7 @@
     data.forEach(function (d, i) {
       var y = i * rowH + 8;
       var lab = el('text', { x: 0, y: y + 6, fill: cssvar('--ink-soft'), 'font-size': 11, 'font-family': 'JetBrains Mono, monospace' });
-      lab.textContent = d.t; svg.appendChild(lab);
+      lab.textContent = tr(d.t); svg.appendChild(lab);
       var bx = 70, bw = w - bx - 34;
       svg.appendChild(el('rect', { x: bx, y: y, width: bw, height: 7, rx: 4, fill: cssvar('--surface-2') }));
       var fill = el('rect', { x: bx, y: y, width: 0, height: 7, rx: 4, fill: cssvar(d.c) });
@@ -260,8 +386,12 @@
     document.querySelectorAll('[data-bars]').forEach(drawBars);
     document.querySelectorAll('[data-trend]').forEach(drawTrend);
   }
-  if (document.readyState !== 'loading') drawAll();
-  else document.addEventListener('DOMContentLoaded', drawAll);
+  function initUI() {
+    renderAssessment();
+    drawAll();
+  }
+  if (document.readyState !== 'loading') initUI();
+  else document.addEventListener('DOMContentLoaded', initUI);
   window.addEventListener('load', drawAll);
 
   /* ---------- year ---------- */

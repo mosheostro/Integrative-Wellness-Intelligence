@@ -142,6 +142,8 @@ section { position: relative; }
 .btn-lg { padding: 16px 28px; font-size: 16px; }
 .arrow { transition: transform .25s; }
 .btn:hover .arrow { transform: translateX(3px); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+.btn:disabled:hover { border-color: var(--line); transform: none; box-shadow: none; }
 
 /* ---------- CARDS ---------- */
 .card {
@@ -337,6 +339,10 @@ section { position: relative; }
 .opt:hover .key { border-color: var(--sage); color: var(--sage-deep); }
 .opt.sel { border-color: var(--sage); background: var(--sage-tint); }
 .opt.sel .key { background: var(--sage); color: var(--bg); border-color: var(--sage); }
+.assess-result { text-align: center; display: grid; justify-items: center; gap: 18px; }
+.assess-result .assess-q { max-width: none; margin-bottom: 0; }
+.assess-result .muted { max-width: 58ch; margin: 0; }
+.assess-actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
 
 /* ---------- AI COACH ---------- */
 .chat { display: grid; gap: 14px; }
