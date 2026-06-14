@@ -29,6 +29,9 @@ export const metadata: Metadata = {
   description:
     'Holos unites modern science with six wisdom traditions into one adaptive wellness intelligence — so your health reflects body, energy, mind, and meaning.',
   keywords: ['wellness', 'integrative health', 'Ayurveda', 'biohacking', 'holistic'],
+  other: {
+    'color-scheme': 'light dark',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

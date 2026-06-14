@@ -209,3 +209,100 @@ body {
 
 /* ── Divider ──────────────────────────────────────────────── */
 .divider { border: 0; height: 1px; background: var(--line); }
+
+/* ── Accessibility ────────────────────────────────────────── */
+/* Skip to main content */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 16px;
+  padding: 8px 20px;
+  background: var(--ink);
+  color: var(--canvas);
+  font-family: var(--font-body);
+  font-size: .85rem;
+  font-weight: 600;
+  border-radius: 0 0 var(--radius) var(--radius);
+  z-index: 9999;
+  transition: top .15s;
+  text-decoration: none;
+}
+.skip-link:focus { top: 0; }
+
+/* Focus-visible — keyboard only, never on mouse */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2.5px solid var(--sage);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Ensure interactive elements have 44px touch targets */
+button, a, [role="button"], [role="link"] {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Exception for inline text links */
+p a, li a, td a, span a {
+  min-height: unset;
+  display: inline;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode */
+@media (forced-colors: active) {
+  :root {
+    --sage:    ButtonText;
+    --ink:     CanvasText;
+    --line:    ButtonBorder;
+    --surface: Canvas;
+    --canvas:  Canvas;
+  }
+}
+
+/* ── Print ────────────────────────────────────────────────── */
+@media print {
+  nav, .AppNav, footer { display: none !important; }
+  body { background: #fff; color: #000; }
+  a::after { content: ' (' attr(href) ')'; font-size: .8em; color: #666; }
+}
+
+/* ── Scrollbar styling ────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-faint); }
+
+/* ── Selection ────────────────────────────────────────────── */
+::selection { background: rgba(122,158,142,.25); color: var(--ink); }
+
+/* ── Dark mode system preference (auto) ──────────────────── */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --canvas:     #16181F;
+    --canvas2:    #1E2029;
+    --surface:    #252832;
+    --surface-2:  #2E3140;
+    --line:       #383B4D;
+    --ink:        #EDE9E0;
+    --ink-soft:   #B8B4A8;
+    --ink-faint:  #7A7A8A;
+    --bg-warm:    #1A1C24;
+  }
+}
+
+/* ── details/summary reset ───────────────────────────────── */
+details summary { cursor: pointer; user-select: none; }
+details summary::-webkit-details-marker { display: none; }
+details[open] summary span:last-child { transform: rotate(45deg); }

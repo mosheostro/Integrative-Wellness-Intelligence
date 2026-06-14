@@ -5,15 +5,23 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
 const NAV_ITEMS = [
-  { href: '/dashboard', label: 'Dashboard', icon: '◈' },
-  { href: '/assessment', label: 'Assess', icon: '◉' },
-  { href: '/coach', label: 'Coach', icon: '◆' },
-  { href: '/progress', label: 'Progress', icon: '◎' },
+  { href: '/dashboard',        label: 'Dashboard',        icon: '◈' },
+  { href: '/assessment',       label: 'Assess',           icon: '◉' },
+  { href: '/coach',            label: 'Coach',            icon: '◆' },
+  { href: '/progress',         label: 'Progress',         icon: '◎' },
+  { href: '/recommendations',  label: 'Actions',          icon: '✦' },
+]
+
+const SECONDARY_ITEMS = [
+  { href: '/journal',  label: 'Journal' },
+  { href: '/goals',    label: 'Goals'   },
+  { href: '/habits',   label: 'Habits'  },
+  { href: '/reports',  label: 'Reports' },
 ]
 
 export function AppNav() {
   const pathname = usePathname()
-  const router = useRouter()
+  const router   = useRouter()
 
   async function signOut() {
     const sb = createClient()
@@ -23,48 +31,137 @@ export function AppNav() {
 
   return (
     <nav style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-      background: 'rgba(var(--canvas-rgb, 250,247,242), 0.85)',
+      position:    'fixed',
+      top:         0,
+      left:        0,
+      right:       0,
+      zIndex:      100,
+      background:  'rgba(var(--canvas-rgb, 250,247,242), 0.92)',
       backdropFilter: 'blur(14px)',
-      borderBottom: '1px solid var(--line)',
-      height: 60,
-      display: 'flex', alignItems: 'center', paddingInline: 'clamp(16px,4vw,40px)',
-      gap: 8,
+      WebkitBackdropFilter: 'blur(14px)',
+      borderBottom:'1px solid var(--line)',
+      height:      60,
+      display:     'flex',
+      alignItems:  'center',
+      paddingInline:'clamp(16px,4vw,36px)',
+      gap:         4,
     }}>
+
       {/* Logo */}
-      <Link href="/dashboard" style={{ display:'flex', alignItems:'center', gap:8, textDecoration:'none', marginRight:16 }}>
-        <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+      <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', marginRight: 12, flexShrink: 0 }}>
+        <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
           <circle cx="16" cy="16" r="14.5" stroke="var(--sage)" strokeWidth="1.4"/>
-          <circle cx="16" cy="16" r="8" stroke="var(--gold-deep)" strokeWidth="1.4"/>
+          <circle cx="16" cy="16" r="8" stroke="var(--gold-deep,#C4A55A)" strokeWidth="1.4"/>
           <circle cx="16" cy="16" r="2.6" fill="var(--ink)"/>
           <path d="M16 1.5V30.5M1.5 16H30.5" stroke="var(--line)" strokeWidth="1"/>
         </svg>
-        <span style={{ fontFamily:'var(--font-serif)', fontWeight:500, fontSize:'1.05rem', color:'var(--ink)' }}>Holos</span>
+        <span style={{ fontFamily: 'var(--font-serif)', fontWeight: 500, fontSize: '1rem', color: 'var(--ink)', letterSpacing: '-.01em' }}>Holos</span>
       </Link>
 
-      {/* Nav links */}
-      <div style={{ display:'flex', gap:4, flex:1 }}>
+      {/* Primary nav */}
+      <div style={{ display: 'flex', gap: 2, flex: 1, overflowX: 'auto' }}>
         {NAV_ITEMS.map(item => {
-          const active = pathname.startsWith(item.href)
+          const active = pathname === item.href || pathname.startsWith(item.href + '/')
           return (
-            <Link key={item.href} href={item.href} style={{
-              display:'flex', alignItems:'center', gap:6, padding:'6px 14px',
-              borderRadius:8, textDecoration:'none', fontSize:'.875rem', fontWeight: active ? 600 : 400,
-              background: active ? 'var(--surface-2)' : 'transparent',
-              color: active ? 'var(--ink)' : 'var(--ink-soft)',
-              transition: 'all .15s',
-            }}>
-              <span style={{ fontFamily:'var(--font-mono)', fontSize:12 }}>{item.icon}</span>
+            <Link key={item.href} href={item.href}
+              style={{
+                display:     'flex',
+                alignItems:  'center',
+                gap:         6,
+                padding:     '6px 12px',
+                borderRadius:8,
+                textDecoration:'none',
+                fontSize:    '.82rem',
+                fontWeight:  active ? 600 : 400,
+                fontFamily:  'var(--font-body)',
+                background:  active ? 'var(--surface-2, rgba(0,0,0,.05))' : 'transparent',
+                color:       active ? 'var(--ink)' : 'var(--ink-soft)',
+                whiteSpace:  'nowrap',
+                flexShrink:  0,
+              }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', color: active ? 'var(--sage)' : 'var(--ink-faint)' }}>
+                {item.icon}
+              </span>
+              {item.label}
+            </Link>
+          )
+        })}
+
+        {/* Divider */}
+        <div style={{ width: 1, height: 20, background: 'var(--line)', margin: '0 6px', alignSelf: 'center', flexShrink: 0 }} />
+
+        {/* Secondary nav */}
+        {SECONDARY_ITEMS.map(item => {
+          const active = pathname === item.href
+          return (
+            <Link key={item.href} href={item.href}
+              style={{
+                display:     'flex',
+                alignItems:  'center',
+                padding:     '6px 10px',
+                borderRadius:8,
+                textDecoration:'none',
+                fontSize:    '.8rem',
+                fontFamily:  'var(--font-body)',
+                fontWeight:  active ? 600 : 400,
+                color:       active ? 'var(--ink)' : 'var(--ink-faint)',
+                background:  active ? 'var(--surface-2, rgba(0,0,0,.05))' : 'transparent',
+                whiteSpace:  'nowrap',
+                flexShrink:  0,
+              }}>
               {item.label}
             </Link>
           )
         })}
       </div>
 
-      {/* Sign out */}
-      <button onClick={signOut} className="btn btn-ghost btn-sm" style={{ marginLeft:'auto' }}>
-        Sign out
-      </button>
+      {/* Right: Profile & sign out */}
+      <div style={{ display: 'flex', gap: 4, alignItems: 'center', marginLeft: 8, flexShrink: 0 }}>
+        <Link href="/profile"
+          style={{
+            display:     'flex',
+            alignItems:  'center',
+            padding:     '6px 12px',
+            borderRadius:8,
+            textDecoration:'none',
+            fontSize:    '.8rem',
+            fontFamily:  'var(--font-body)',
+            color:       pathname === '/profile' ? 'var(--ink)' : 'var(--ink-soft)',
+            background:  pathname === '/profile' ? 'var(--surface-2, rgba(0,0,0,.05))' : 'transparent',
+            whiteSpace:  'nowrap',
+          }}>
+          Profile
+        </Link>
+        <Link href="/settings"
+          style={{
+            display:     'flex',
+            alignItems:  'center',
+            padding:     '6px 10px',
+            borderRadius:8,
+            textDecoration:'none',
+            fontSize:    '.8rem',
+            fontFamily:  'var(--font-body)',
+            color:       pathname === '/settings' ? 'var(--ink)' : 'var(--ink-faint)',
+            background:  pathname === '/settings' ? 'var(--surface-2, rgba(0,0,0,.05))' : 'transparent',
+          }}>
+          Settings
+        </Link>
+        <button onClick={signOut}
+          style={{
+            display:     'flex',
+            alignItems:  'center',
+            padding:     '6px 12px',
+            borderRadius:8,
+            border:      '1px solid var(--line)',
+            background:  'transparent',
+            color:       'var(--ink-soft)',
+            fontFamily:  'var(--font-body)',
+            fontSize:    '.78rem',
+            cursor:      'pointer',
+          }}>
+          Sign out
+        </button>
+      </div>
     </nav>
   )
 }
