@@ -97,7 +97,7 @@ export type ActionType =
 
 export interface RuleAction {
   type:      ActionType
-  payload:   string | number | Record<string, unknown>
+  payload:   string | number | string[] | Record<string, unknown>
 }
 
 export interface Rule {

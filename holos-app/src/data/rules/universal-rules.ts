@@ -119,7 +119,7 @@ export const UNIVERSAL_RULES: Rule[] = [
     priority: 60,
     description: 'All core dimensions strong — shift to optimisation',
     conditions: [
-      { dimension: 'composite', operator: '>=', value: 78 },
+      { dimension: 'energy', operator: '>=', value: 78 },
       { dimension: 'sleep', operator: '>=', value: 70 },
       { dimension: 'stress', operator: '<=', value: 40 },
     ],

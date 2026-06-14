@@ -30,33 +30,35 @@ export default async function ProgressPage() {
   const hasData = (snapshots?.length ?? 0) > 0
 
   const DIMS = ['nutrition','sleep','recovery','movement','emotional','life_balance','purpose','energy'] as const
-  const DIM_LABELS: Record<string, string> = {
+  type Dim = typeof DIMS[number]
+  const DIM_LABELS: Record<Dim, string> = {
     nutrition:'Nutrition', sleep:'Sleep', recovery:'Recovery',
     movement:'Movement', emotional:'Emotional', life_balance:'Balance',
     purpose:'Purpose', energy:'Energy',
   }
 
-  const latest = snapshots?.[snapshots.length - 1]
-  const prev    = snapshots?.[snapshots.length - 2]
+  type Snapshot = Record<string, unknown>
+  const latest = snapshots?.[snapshots.length - 1] as Snapshot | undefined
+  const prev   = snapshots?.[snapshots.length - 2] as Snapshot | undefined
 
-  const trend = (dim: string) => {
+  const trend = (dim: string): number => {
     if (!latest || !prev) return 0
-    return ((latest as Record<string, number>)[dim] ?? 0) - ((prev as Record<string, number>)[dim] ?? 0)
+    return ((latest[dim] as number) ?? 0) - ((prev[dim] as number) ?? 0)
   }
 
   return (
     <div className="wrap" style={{ paddingTop:32, paddingBottom:80 }}>
       <div style={{ marginBottom:36 }}>
-        <div className="eyebrow" style={{ marginBottom:8 }}><span style={{ color:'var(--sage)' }}>◎</span> Progress</div>
+        <div className="eyebrow" style={{ marginBottom:8 }}><span style={{ color:'var(--sage)' }}>&#9675;</span> Progress</div>
         <h1 className="h1">Your Wellness Journey</h1>
       </div>
 
       {!hasData ? (
         <div style={{ textAlign:'center', padding:'60px 0' }}>
-          <div style={{ fontSize:64, marginBottom:20 }}>◎</div>
+          <div style={{ fontSize:64, marginBottom:20 }}>&#9675;</div>
           <h2 className="h2" style={{ marginBottom:12 }}>No data yet</h2>
           <p className="lede" style={{ margin:'0 auto 28px' }}>Complete your first assessment to start tracking your wellness journey.</p>
-          <a href="/assessment" className="btn btn-sage">Take assessment →</a>
+          <a href="/assessment" className="btn btn-sage">Take assessment &#8594;</a>
         </div>
       ) : (
         <>
@@ -64,7 +66,7 @@ export default async function ProgressPage() {
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(160px,1fr))', gap:16, marginBottom:32 }}>
             <div className="card" style={{ textAlign:'center', padding:'20px 16px' }}>
               <div style={{ fontSize:32, fontFamily:'var(--font-serif)', fontWeight:500, color:'var(--sage)', marginBottom:6 }}>
-                {latest?.composite ?? '—'}
+                {(latest?.composite as number) ?? '—'}
               </div>
               <div style={{ fontSize:11, fontFamily:'var(--font-mono)', color:'var(--ink-faint)', textTransform:'uppercase', letterSpacing:'.08em' }}>Latest Score</div>
             </div>
@@ -91,20 +93,18 @@ export default async function ProgressPage() {
           {/* Composite sparkline */}
           {snapshots && snapshots.length > 1 && (
             <div className="card" style={{ marginBottom:24 }}>
-              <div className="eyebrow" style={{ marginBottom:16 }}>◆ Composite Score Over Time</div>
+              <div className="eyebrow" style={{ marginBottom:16 }}>&#9670; Composite Score Over Time</div>
               <div style={{ height:80, display:'flex', alignItems:'flex-end', gap:2 }}>
-                {snapshots.map((s: Record<string, unknown>, i: number) => {
+                {(snapshots as Snapshot[]).map((s, i) => {
                   const composite = (s.composite as number) ?? 50
                   const h = Math.max(4, (composite / 100) * 76)
                   const isLast = i === snapshots.length - 1
                   return (
                     <div key={i}
-                      title={`${s.snapshot_date}: ${composite}`}
+                      title={String(s.snapshot_date) + ': ' + String(composite)}
                       style={{
                         flex:1, height:h, borderRadius:'3px 3px 0 0',
-                        background: isLast
-                          ? 'var(--sage)'
-                          : `hsl(${140 + (composite - 50) * 1.2}, 40%, 60%)`,
+                        background: isLast ? 'var(--sage)' : 'hsl(' + (140 + (composite - 50) * 1.2) + ', 40%, 60%)',
                         transition:'height .4s',
                         cursor:'default',
                         opacity: isLast ? 1 : 0.7,
@@ -114,8 +114,8 @@ export default async function ProgressPage() {
                 })}
               </div>
               <div style={{ display:'flex', justifyContent:'space-between', marginTop:6, fontSize:11, color:'var(--ink-faint)', fontFamily:'var(--font-mono)' }}>
-                <span>{snapshots[0]?.snapshot_date}</span>
-                <span>{snapshots[snapshots.length-1]?.snapshot_date}</span>
+                <span>{String((snapshots[0] as Snapshot)?.snapshot_date ?? '')}</span>
+                <span>{String((snapshots[snapshots.length-1] as Snapshot)?.snapshot_date ?? '')}</span>
               </div>
             </div>
           )}
@@ -123,21 +123,21 @@ export default async function ProgressPage() {
           {/* Dimension comparison */}
           {latest && (
             <div className="card" style={{ marginBottom:24 }}>
-              <div className="eyebrow" style={{ marginBottom:20 }}>◈ Dimension Breakdown</div>
+              <div className="eyebrow" style={{ marginBottom:20 }}>&#9672; Dimension Breakdown</div>
               <div style={{ display:'flex', flexDirection:'column', gap:14 }}>
-                {DIMS.map(dim => {
-                  const val = (latest as Record<string, number>)[dim] ?? 0
+                {DIMS.map((dim) => {
+                  const val = (latest[dim] as number) ?? 0
                   const delta = trend(dim)
                   return (
                     <div key={dim} style={{ display:'flex', alignItems:'center', gap:14 }}>
                       <div style={{ width:88, fontSize:'.8rem', color:'var(--ink-soft)', flexShrink:0 }}>{DIM_LABELS[dim]}</div>
                       <div className="progress-track" style={{ flex:1 }}>
-                        <div className="progress-fill" style={{ width:`${val}%`, background: val >= 70 ? 'var(--sage)' : val >= 50 ? 'var(--gold)' : 'var(--rose)' }} />
+                        <div className="progress-fill" style={{ width:val + '%', background: val >= 70 ? 'var(--sage)' : val >= 50 ? 'var(--gold)' : 'var(--rose)' }} />
                       </div>
                       <div style={{ width:32, textAlign:'right', fontFamily:'var(--font-mono)', fontSize:12, fontWeight:600 }}>{val}</div>
                       {delta !== 0 && (
                         <div style={{ width:28, textAlign:'right', fontSize:11, fontFamily:'var(--font-mono)', color: delta > 0 ? 'var(--sage)' : 'var(--rose)' }}>
-                          {delta > 0 ? `+${delta}` : delta}
+                          {delta > 0 ? '+' + delta : delta}
                         </div>
                       )}
                     </div>
@@ -150,10 +150,10 @@ export default async function ProgressPage() {
           {/* Assessment history */}
           {assessments && assessments.length > 0 && (
             <div className="card">
-              <div className="eyebrow" style={{ marginBottom:16 }}>◎ Assessment History</div>
+              <div className="eyebrow" style={{ marginBottom:16 }}>&#9675; Assessment History</div>
               <div style={{ display:'flex', flexDirection:'column', gap:0 }}>
-                {assessments.map((a: Record<string, unknown>, i: number) => (
-                  <a key={a.id} href={`/results/${a.id}`} style={{
+                {(assessments as { id: string; completed_at: string; composite_score: number | null; wellness_state: string | null; framework: string | null }[]).map((a, i) => (
+                  <a key={a.id} href={'/results/' + a.id} style={{
                     display:'flex', alignItems:'center', gap:16, padding:'14px 0',
                     borderBottom: i < assessments.length-1 ? '1px solid var(--line)' : 'none',
                     textDecoration:'none', color:'inherit',
@@ -169,19 +169,14 @@ export default async function ProgressPage() {
                         {(a.wellness_state ?? 'UNKNOWN').replace(/_/g,' ')}
                       </div>
                       <div style={{ fontSize:'.75rem', color:'var(--ink-faint)', marginTop:2 }}>
-                        {a.framework} · {new Date(a.completed_at).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' })}
+                        {a.framework} &middot; {new Date(a.completed_at).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' })}
                       </div>
                     </div>
-                    <div style={{ color:'var(--sage)', fontSize:18 }}>→</div>
+                    <div style={{ color:'var(--sage)', fontSize:18 }}>&#8594;</div>
                   </a>
- 
-          )}
-        </>
-      )}
-    </div>
-  )
-}
-</div>
+                ))}
+              </div>
+            </div>
           )}
         </>
       )}
