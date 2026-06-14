@@ -23,7 +23,7 @@ export const RAMBAM_RULES: Rule[] = [
     priority: 70,
     description: 'Rambam emphasises prevention over cure',
     conditions: [
-      { dimension: 'composite', operator: 'between', range: [55, 75] },
+      { dimension: 'energy', operator: 'between', range: [55, 75] },
     ],
     actions: [
       { type: 'add_category', payload: 'movement' },

@@ -37,14 +37,15 @@ export default async function DashboardPage() {
   const state   = latestAssessment?.wellness_state ?? 'LIFESTYLE_IMPROVEMENT'
   const firstName = (profile?.full_name ?? 'there').split(' ')[0]
 
-  const DIMS = [
+  type DimDef = { key: string; label: string; color: string; invert?: boolean }
+  const DIMS: DimDef[] = [
     { key: 'nutrition', label: 'Nutrition', color: '--gold-deep' },
     { key: 'sleep',     label: 'Sleep',     color: '--indigo' },
     { key: 'recovery',  label: 'Recovery',  color: '--sage' },
     { key: 'stress',    label: 'Calm',      color: '--rose', invert: true },
     { key: 'movement',  label: 'Movement',  color: '--clay' },
     { key: 'energy',    label: 'Energy',    color: '--sage' },
-  ] as const
+  ]
 
   const radarVals = latestScores
     ? [latestScores.nutrition, latestScores.sleep, latestScores.recovery, 100-latestScores.stress, latestScores.movement, latestScores.emotional, latestScores.life_balance, latestScores.purpose, latestScores.energy]
@@ -105,8 +106,8 @@ export default async function DashboardPage() {
             <div className="card" style={{ marginBottom:24 }}>
               <div className="eyebrow" style={{ marginBottom:12 }}>◎ Composite Trend ({snapshots.length} data points)</div>
               <div style={{ height:60, display:'flex', alignItems:'flex-end', gap:3 }}>
-                {snapshots.map((s, i) => {
-                  const h = Math.max(6, ((s.composite ?? 50) / 100) * 56)
+                {snapshots.map((s: Record<string, unknown>, i: number) => {
+                  const h = Math.max(6, (((s.composite as number) ?? 50) / 100) * 56)
                   const isLast = i === snapshots.length - 1
                   return (
                     <div key={i} title={`${s.snapshot_date}: ${s.composite}`} style={{
@@ -128,7 +129,7 @@ export default async function DashboardPage() {
                 <a href={`/results/${latestAssessment?.id}`} style={{ color:'var(--sage)', fontSize:'.8125rem', textDecoration:'none' }}>See all →</a>
               </div>
               <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
-                {latestRecs.map((rec) => (
+                {latestRecs.map((rec: Record<string, unknown>) => (
                   <div key={rec.id} style={{
                     display:'flex', alignItems:'center', gap:14, padding:'12px 16px',
                     background:'var(--canvas2)', borderRadius:10,
@@ -176,6 +177,8 @@ export default async function DashboardPage() {
           <div style={{ fontSize:80, marginBottom:24 }}>◈</div>
           <h2 className="h2" style={{ marginBottom:12 }}>Your wellness portrait is waiting</h2>
           <p className="lede" style={{ margin:'0 auto 32px' }}>
+            Holos will analyse your responses across 9 dimensions and 8 wisdom traditions to create a living picture of your whole self.
+  
             Holos will analyse your responses across 9 dimensions and 8 wisdom traditions to create a living picture of your whole self.
           </p>
           <a href="/assessment" className="btn btn-primary btn-lg">Begin your assessment →</a>

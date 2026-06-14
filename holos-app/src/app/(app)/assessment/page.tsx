@@ -29,7 +29,7 @@ export default function AssessmentPage() {
       dimension: currentQ.dimension,
     }
     const newAnswers = [...answers, answer]
-    const newAnsweredIds = new Set([...answeredIds, currentQ.id])
+    const newAnsweredIds = new Set(answeredIds); newAnsweredIds.add(currentQ.id)
 
     // Inject adaptive follow-up questions
     const followUps = getNextQuestions(currentQ.id, selected, newAnsweredIds)
@@ -182,6 +182,6 @@ export default function AssessmentPage() {
 
         {error && <p style={{ color:'var(--rose)', marginTop:16, textAlign:'center' }}>{error}</p>}
       </div>
-    </div>
+      </div>
   )
 }

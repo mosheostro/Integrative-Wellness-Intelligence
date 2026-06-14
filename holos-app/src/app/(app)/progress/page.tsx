@@ -93,17 +93,18 @@ export default async function ProgressPage() {
             <div className="card" style={{ marginBottom:24 }}>
               <div className="eyebrow" style={{ marginBottom:16 }}>◆ Composite Score Over Time</div>
               <div style={{ height:80, display:'flex', alignItems:'flex-end', gap:2 }}>
-                {snapshots.map((s, i) => {
-                  const h = Math.max(4, ((s.composite ?? 50) / 100) * 76)
+                {snapshots.map((s: Record<string, unknown>, i: number) => {
+                  const composite = (s.composite as number) ?? 50
+                  const h = Math.max(4, (composite / 100) * 76)
                   const isLast = i === snapshots.length - 1
                   return (
                     <div key={i}
-                      title={`${s.snapshot_date}: ${s.composite}`}
+                      title={`${s.snapshot_date}: ${composite}`}
                       style={{
                         flex:1, height:h, borderRadius:'3px 3px 0 0',
                         background: isLast
                           ? 'var(--sage)'
-                          : `hsl(${140 + ((s.composite ?? 50) - 50) * 1.2}, 40%, 60%)`,
+                          : `hsl(${140 + (composite - 50) * 1.2}, 40%, 60%)`,
                         transition:'height .4s',
                         cursor:'default',
                         opacity: isLast ? 1 : 0.7,
@@ -151,7 +152,7 @@ export default async function ProgressPage() {
             <div className="card">
               <div className="eyebrow" style={{ marginBottom:16 }}>◎ Assessment History</div>
               <div style={{ display:'flex', flexDirection:'column', gap:0 }}>
-                {assessments.map((a, i) => (
+                {assessments.map((a: Record<string, unknown>, i: number) => (
                   <a key={a.id} href={`/results/${a.id}`} style={{
                     display:'flex', alignItems:'center', gap:16, padding:'14px 0',
                     borderBottom: i < assessments.length-1 ? '1px solid var(--line)' : 'none',
@@ -173,9 +174,14 @@ export default async function ProgressPage() {
                     </div>
                     <div style={{ color:'var(--sage)', fontSize:18 }}>→</div>
                   </a>
-                ))}
-              </div>
-            </div>
+ 
+          )}
+        </>
+      )}
+    </div>
+  )
+}
+</div>
           )}
         </>
       )}

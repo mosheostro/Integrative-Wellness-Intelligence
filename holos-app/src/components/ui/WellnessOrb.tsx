@@ -15,7 +15,7 @@ export function WellnessOrb({ score, state, size = 320 }: WellnessOrbProps) {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
     if (!ctx) return
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -118,7 +118,7 @@ export function WellnessOrb({ score, state, size = 320 }: WellnessOrbProps) {
 
     frameRef.current = requestAnimationFrame(draw)
     return () => cancelAnimationFrame(frameRef.current)
-  }, [score, state, size, hue])
+  }, [score, state, size])
 
   return (
     <canvas

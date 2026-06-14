@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
 
     // Persist answers
     await supabase.from('answers').insert(
-      answers.map(a => ({
+      answers.map((a: { questionId: string; optionIndex: number | number[]; dimension: string }) => ({
         assessment_id: assessmentId,
         question_id:   a.questionId,
         question_text: '',
@@ -131,6 +131,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ assessmentId, result }, { status: 201 })
   } catch (err) {
     console.error('Assessment API error:', err)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return 
+  }
+}
+ponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
