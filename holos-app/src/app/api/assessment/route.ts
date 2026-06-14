@@ -131,9 +131,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ assessmentId, result }, { status: 201 })
   } catch (err) {
     console.error('Assessment API error:', err)
-    return 
-  }
-}
-ponse.json({ error: 'Internal server error' }, { status: 500 })
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
