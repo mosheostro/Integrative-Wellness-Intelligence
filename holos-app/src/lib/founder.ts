@@ -26,7 +26,7 @@ export const FOUNDER = {
 
   // Online presence
   website:   'https://svarga-om.com',
-  calendly:  'https://calendly.com/moshe-holos',
+  calendly:  'https://calendly.com/mosheostro',
   linkedin:  'https://linkedin.com/in/moshe-ostrovsky',
   instagram: 'https://instagram.com/holos.wellness',
   youtube:   'https://youtube.com/@holoswellness',
