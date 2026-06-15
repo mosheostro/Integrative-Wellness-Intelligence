@@ -22,7 +22,7 @@ Write-Host ""
 Write-Host "  [2/4] Committing changes..." -ForegroundColor Yellow
 Set-Location $projectDir
 git add -A 2>&1
-git commit -m "feat: complete multi-page SaaS — 20+ pages, marketing site, app pages, audits, knowledge center, accessibility" 2>&1
+git commit -m "feat: wire all links + 6 new pages + route redirects — platform, science, compare, book-session, demo-dashboard, integrations; all dead links in index.html resolved; next.config.ts redirects for 20+ canonical aliases" 2>&1
 git push 2>&1
 Write-Host "       Done" -ForegroundColor Green
 
