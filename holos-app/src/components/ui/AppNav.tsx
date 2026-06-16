@@ -3,25 +3,30 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
-
-const NAV_ITEMS = [
-  { href: '/dashboard',        label: 'Dashboard',        icon: '◈' },
-  { href: '/assessment',       label: 'Assess',           icon: '◉' },
-  { href: '/coach',            label: 'Coach',            icon: '◆' },
-  { href: '/progress',         label: 'Progress',         icon: '◎' },
-  { href: '/recommendations',  label: 'Actions',          icon: '✦' },
-]
-
-const SECONDARY_ITEMS = [
-  { href: '/journal',  label: 'Journal' },
-  { href: '/goals',    label: 'Goals'   },
-  { href: '/habits',   label: 'Habits'  },
-  { href: '/reports',  label: 'Reports' },
-]
+import { useLanguage } from '@/contexts/LanguageContext'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
 
 export function AppNav() {
-  const pathname = usePathname()
-  const router   = useRouter()
+  const pathname  = usePathname()
+  const router    = useRouter()
+  const { strings } = useLanguage()
+  const n = strings.nav
+
+  const NAV_ITEMS = [
+    { href: '/dashboard',       label: n.dashboard, icon: '◈' },
+    { href: '/assessment',      label: n.assess,    icon: '◉' },
+    { href: '/coach',           label: n.coach,     icon: '◆' },
+    { href: '/progress',        label: n.progress,  icon: '◎' },
+    { href: '/recommendations', label: n.actions,   icon: '✦' },
+  ]
+
+  const SECONDARY_ITEMS = [
+    { href: '/journal', label: n.journal },
+    { href: '/goals',   label: n.goals   },
+    { href: '/habits',  label: n.habits  },
+    { href: '/reports', label: n.reports },
+  ]
 
   async function signOut() {
     const sb = createClient()
@@ -115,8 +120,14 @@ export function AppNav() {
         })}
       </div>
 
-      {/* Right: Profile & sign out */}
-      <div style={{ display: 'flex', gap: 4, alignItems: 'center', marginLeft: 8, flexShrink: 0 }}>
+      {/* Right controls */}
+      <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginLeft: 8, flexShrink: 0 }}>
+        {/* Theme + Language */}
+        <ThemeToggle size={30} />
+        <LanguageSwitcher />
+
+        <div style={{ width: 1, height: 18, background: 'var(--line)', margin: '0 2px' }} />
+
         <Link href="/profile"
           style={{
             display:     'flex',
@@ -130,7 +141,7 @@ export function AppNav() {
             background:  pathname === '/profile' ? 'var(--surface-2, rgba(0,0,0,.05))' : 'transparent',
             whiteSpace:  'nowrap',
           }}>
-          Profile
+          {n.profile}
         </Link>
         <Link href="/settings"
           style={{
@@ -144,7 +155,7 @@ export function AppNav() {
             color:       pathname === '/settings' ? 'var(--ink)' : 'var(--ink-faint)',
             background:  pathname === '/settings' ? 'var(--surface-2, rgba(0,0,0,.05))' : 'transparent',
           }}>
-          Settings
+          {n.settings}
         </Link>
         <button onClick={signOut}
           style={{
@@ -159,7 +170,7 @@ export function AppNav() {
             fontSize:    '.78rem',
             cursor:      'pointer',
           }}>
-          Sign out
+          {n.signOut}
         </button>
       </div>
     </nav>

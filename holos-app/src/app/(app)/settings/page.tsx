@@ -2,55 +2,28 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { useLanguage, LOCALE_META, type Locale } from '@/contexts/LanguageContext'
+import { useTheme, type Theme } from '@/contexts/ThemeContext'
 
-type Section = 'account' | 'notifications' | 'privacy' | 'data' | 'danger'
-
-const SECTIONS: { id: Section; label: string; icon: string }[] = [
-  { id: 'account',       label: 'Account',       icon: '◈' },
-  { id: 'notifications', label: 'Notifications',  icon: '◉' },
-  { id: 'privacy',       label: 'Privacy',        icon: '◆' },
-  { id: 'data',          label: 'Data & Export',  icon: '◎' },
-  { id: 'danger',        label: 'Danger Zone',    icon: '✕' },
-]
-
-function Toggle({ label, desc, value, onChange }: { label: string; desc?: string; value: boolean; onChange: (v: boolean) => void }) {
-  return (
-    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, padding: '14px 0', borderBottom: '1px solid var(--line)' }}>
-      <div>
-        <div style={{ fontFamily: 'var(--font-body)', fontSize: '.88rem', fontWeight: 600, color: 'var(--ink)' }}>{label}</div>
-        {desc && <div style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-faint)', marginTop: 2 }}>{desc}</div>}
-      </div>
-      <button onClick={() => onChange(!value)} aria-checked={value} role="switch"
-        style={{
-          width:        44,
-          height:       24,
-          borderRadius: 12,
-          border:       'none',
-          background:   value ? 'var(--sage)' : 'var(--line)',
-          cursor:       'pointer',
-          position:     'relative',
-          flexShrink:   0,
-          transition:   'background .2s',
-        }}>
-        <div style={{
-          width:      18,
-          height:     18,
-          borderRadius: '50%',
-          background: '#fff',
-          position:   'absolute',
-          top:        3,
-          left:       value ? 23 : 3,
-          transition: 'left .2s',
-          boxShadow:  '0 1px 3px rgba(0,0,0,.2)',
-        }} />
-      </button>
-    </div>
-  )
-}
+type Section = 'appearance' | 'account' | 'notifications' | 'privacy' | 'data' | 'danger'
 
 export default function SettingsPage() {
-  const [section, setSection] = useState<Section>('account')
-  const [prefs, setPrefs]     = useState({
+  const { strings, locale, setLocale } = useLanguage()
+  const { theme, setTheme } = useTheme()
+  const s = strings.settings
+  const c = strings.common
+
+  const SECTIONS: { id: Section; label: string; icon: string }[] = [
+    { id: 'appearance',     label: s.appearance,   icon: '◐' },
+    { id: 'account',        label: s.account,      icon: '◈' },
+    { id: 'notifications',  label: s.notifications, icon: '◉' },
+    { id: 'privacy',        label: s.privacy,       icon: '◆' },
+    { id: 'data',           label: s.data,          icon: '◎' },
+    { id: 'danger',         label: s.dangerZone,    icon: '✕' },
+  ]
+
+  const [section, setSection] = useState<Section>('appearance')
+  const [prefs, setPrefs] = useState({
     emailAssessmentReminder: true,
     emailWeeklyDigest:       true,
     emailProductUpdates:     false,
@@ -83,19 +56,27 @@ export default function SettingsPage() {
   }
 
   async function deleteAccount() {
-    const ok = confirm('Are you sure? This will permanently delete your account and all data. This cannot be undone.')
+    const ok = confirm(s.deleteAccountDesc)
     if (!ok) return
-    alert('Please contact support at Moshe.Svarga@gmail.com to complete account deletion.')
+    alert('Please contact support to complete account deletion.')
   }
+
+  const THEME_OPTIONS: { value: Theme; label: string }[] = [
+    { value: 'light',  label: s.themeLight  },
+    { value: 'dark',   label: s.themeDark   },
+    { value: 'system', label: s.themeSystem },
+  ]
+
+  const LOCALES = Object.keys(LOCALE_META) as Locale[]
 
   return (
     <div style={{ maxWidth: 860, margin: '0 auto', padding: '32px 24px', display: 'grid', gridTemplateColumns: '200px 1fr', gap: 32, alignItems: 'start' }}>
       {/* Sidebar nav */}
       <nav style={{ position: 'sticky', top: 80 }}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 12 }}>Settings</div>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 12 }}>{s.title}</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          {SECTIONS.map(s => (
-            <button key={s.id} onClick={() => setSection(s.id)}
+          {SECTIONS.map(sv => (
+            <button key={sv.id} onClick={() => setSection(sv.id)}
               style={{
                 display:     'flex',
                 alignItems:  'center',
@@ -103,17 +84,17 @@ export default function SettingsPage() {
                 padding:     '10px 14px',
                 borderRadius:'var(--radius)',
                 border:      'none',
-                background:  section === s.id ? 'var(--surface)' : 'transparent',
-                color:       section === s.id ? (s.id === 'danger' ? 'var(--rose)' : 'var(--ink)') : 'var(--ink-soft)',
+                background:  section === sv.id ? 'var(--surface)' : 'transparent',
+                color:       section === sv.id ? (sv.id === 'danger' ? 'var(--rose)' : 'var(--ink)') : 'var(--ink-soft)',
                 fontFamily:  'var(--font-body)',
                 fontSize:    '.85rem',
-                fontWeight:  section === s.id ? 600 : 400,
+                fontWeight:  section === sv.id ? 600 : 400,
                 cursor:      'pointer',
                 textAlign:   'left',
-                borderLeft:  section === s.id ? '2px solid var(--sage)' : '2px solid transparent',
+                borderLeft:  section === sv.id ? '2px solid var(--sage)' : '2px solid transparent',
               }}>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.7rem', color: s.id === 'danger' ? 'var(--rose)' : 'var(--sage)' }}>{s.icon}</span>
-              {s.label}
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.7rem', color: sv.id === 'danger' ? 'var(--rose)' : 'var(--sage)' }}>{sv.icon}</span>
+              {sv.label}
             </button>
           ))}
         </div>
@@ -121,18 +102,93 @@ export default function SettingsPage() {
 
       {/* Content */}
       <div>
+
+        {/* ── Appearance ───────────────────────────────────────────── */}
+        {section === 'appearance' && (
+          <div>
+            <STitle>{s.appearance}</STitle>
+            <Card>
+              {/* Theme */}
+              <div style={{ marginBottom: 28 }}>
+                <FieldLabel>{s.theme}</FieldLabel>
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 8 }}>
+                  {THEME_OPTIONS.map(opt => (
+                    <button
+                      key={opt.value}
+                      onClick={() => setTheme(opt.value)}
+                      style={{
+                        padding:      '9px 18px',
+                        borderRadius: 'var(--radius)',
+                        border:       theme === opt.value ? '2px solid var(--sage)' : '1.5px solid var(--line)',
+                        background:   theme === opt.value ? 'var(--surface-2)' : 'var(--canvas)',
+                        color:        theme === opt.value ? 'var(--ink)' : 'var(--ink-soft)',
+                        fontFamily:   'var(--font-body)',
+                        fontSize:     '.85rem',
+                        fontWeight:   theme === opt.value ? 600 : 400,
+                        cursor:       'pointer',
+                        transition:   'all .15s',
+                      }}
+                    >
+                      {opt.value === 'light' ? '☀ ' : opt.value === 'dark' ? '🌙 ' : '⚙ '}
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Language */}
+              <div>
+                <FieldLabel>{s.language}</FieldLabel>
+                <div style={{ fontSize: '.78rem', color: 'var(--ink-faint)', fontFamily: 'var(--font-body)', marginTop: 2, marginBottom: 10 }}>{s.languageDesc}</div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8, maxWidth: 360 }}>
+                  {LOCALES.map(l => {
+                    const meta = LOCALE_META[l]
+                    return (
+                      <button
+                        key={l}
+                        onClick={() => setLocale(l)}
+                        style={{
+                          display:      'flex',
+                          alignItems:   'center',
+                          gap:          10,
+                          padding:      '10px 14px',
+                          borderRadius: 'var(--radius)',
+                          border:       locale === l ? '2px solid var(--sage)' : '1.5px solid var(--line)',
+                          background:   locale === l ? 'var(--surface-2)' : 'var(--canvas)',
+                          color:        locale === l ? 'var(--ink)' : 'var(--ink-soft)',
+                          fontFamily:   'var(--font-body)',
+                          fontSize:     '.88rem',
+                          fontWeight:   locale === l ? 600 : 400,
+                          cursor:       'pointer',
+                          textAlign:    'left',
+                          transition:   'all .15s',
+                        }}
+                      >
+                        <span style={{ fontSize: '1.15rem', lineHeight: 1 }}>{meta.flag}</span>
+                        <span>{meta.label}</span>
+                        {locale === l && <span style={{ marginLeft: 'auto', color: 'var(--sage)', fontSize: '.75rem' }}>✓</span>}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {/* ── Account ──────────────────────────────────────────────── */}
         {section === 'account' && (
           <div>
-            <STitle>Account Settings</STitle>
+            <STitle>{s.account}</STitle>
             <Card>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: '.88rem', color: 'var(--ink-soft)', marginBottom: 20 }}>
-                Manage your password. For email or name changes, go to <strong>Profile</strong>.
+                {s.accountDesc}
               </div>
               <form onSubmit={changePassword} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {(['current', 'next', 'confirm'] as const).map(f => (
                   <label key={f} style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                     <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>
-                      {f === 'current' ? 'Current password' : f === 'next' ? 'New password' : 'Confirm new password'}
+                      {f === 'current' ? s.currentPw : f === 'next' ? s.newPw : s.confirmPw}
                     </span>
                     <input type="password" value={newPw[f]} onChange={e => setNewPw(p => ({ ...p, [f]: e.target.value }))}
                       style={{ padding: '10px 14px', borderRadius: 'var(--radius)', border: '1px solid var(--line)', background: 'var(--canvas)', fontFamily: 'var(--font-body)', fontSize: '.9rem', color: 'var(--ink)', outline: 'none' }} />
@@ -141,78 +197,82 @@ export default function SettingsPage() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 4 }}>
                   <button type="submit" disabled={pwStatus === 'saving'}
                     style={{ padding: '10px 22px', borderRadius: 'var(--radius)', background: 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.88rem', border: 'none', cursor: 'pointer' }}>
-                    {pwStatus === 'saving' ? 'Updating…' : 'Update password →'}
+                    {pwStatus === 'saving' ? s.updating : s.updatePw}
                   </button>
-                  {pwStatus === 'saved' && <span style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: 'var(--sage)', fontWeight: 600 }}>✓ Updated</span>}
-                  {pwStatus === 'error' && <span style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: 'var(--rose)' }}>Error — try again</span>}
+                  {pwStatus === 'saved' && <span style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: 'var(--sage)', fontWeight: 600 }}>{s.updated}</span>}
+                  {pwStatus === 'error' && <span style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: 'var(--rose)' }}>{c.error}</span>}
                 </div>
               </form>
             </Card>
           </div>
         )}
 
+        {/* ── Notifications ─────────────────────────────────────────── */}
         {section === 'notifications' && (
           <div>
-            <STitle>Notifications</STitle>
+            <STitle>{s.notifications}</STitle>
             <Card>
-              <Toggle label="Assessment reminders" desc="Weekly reminders to take a new assessment" value={prefs.emailAssessmentReminder} onChange={v => setPrefs(p => ({ ...p, emailAssessmentReminder: v }))} />
-              <Toggle label="Weekly wellness digest" desc="Summary of your progress every Sunday" value={prefs.emailWeeklyDigest} onChange={v => setPrefs(p => ({ ...p, emailWeeklyDigest: v }))} />
-              <Toggle label="Product updates" desc="New features and tradition additions" value={prefs.emailProductUpdates} onChange={v => setPrefs(p => ({ ...p, emailProductUpdates: v }))} />
+              <Toggle label={s.assessmentReminders} desc={s.assessmentRemindersDesc} value={prefs.emailAssessmentReminder} onChange={v => setPrefs(p => ({ ...p, emailAssessmentReminder: v }))} />
+              <Toggle label={s.weeklyDigest} desc={s.weeklyDigestDesc} value={prefs.emailWeeklyDigest} onChange={v => setPrefs(p => ({ ...p, emailWeeklyDigest: v }))} />
+              <Toggle label={s.productUpdates} desc={s.productUpdatesDesc} value={prefs.emailProductUpdates} onChange={v => setPrefs(p => ({ ...p, emailProductUpdates: v }))} />
             </Card>
           </div>
         )}
 
+        {/* ── Privacy ───────────────────────────────────────────────── */}
         {section === 'privacy' && (
           <div>
-            <STitle>Privacy</STitle>
+            <STitle>{s.privacy}</STitle>
             <Card>
-              <Toggle label="Share anonymous usage data" desc="Help us improve HOLOS with anonymised usage statistics. No personal health data is shared." value={prefs.shareAnonymousData} onChange={v => setPrefs(p => ({ ...p, shareAnonymousData: v }))} />
-              <Toggle label="AI Coach conversation history" desc="Allow the AI Coach to reference your previous conversations for continuity" value={prefs.allowCoachHistory} onChange={v => setPrefs(p => ({ ...p, allowCoachHistory: v }))} />
-              <Toggle label="Public profile" desc="Allow others to see your wellness level and tradition preference" value={prefs.publicProfile} onChange={v => setPrefs(p => ({ ...p, publicProfile: v }))} />
+              <Toggle label={s.shareAnonymous} desc={s.shareAnonymousDesc} value={prefs.shareAnonymousData} onChange={v => setPrefs(p => ({ ...p, shareAnonymousData: v }))} />
+              <Toggle label={s.coachHistory} desc={s.coachHistoryDesc} value={prefs.allowCoachHistory} onChange={v => setPrefs(p => ({ ...p, allowCoachHistory: v }))} />
+              <Toggle label={s.publicProfile} desc={s.publicProfileDesc} value={prefs.publicProfile} onChange={v => setPrefs(p => ({ ...p, publicProfile: v }))} />
             </Card>
           </div>
         )}
 
+        {/* ── Data & Export ─────────────────────────────────────────── */}
         {section === 'data' && (
           <div>
-            <STitle>Data & Export</STitle>
+            <STitle>{s.data}</STitle>
             <Card>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: '.88rem', color: 'var(--ink-soft)', marginBottom: 20, lineHeight: 1.65 }}>
-                Export all your wellness data — assessments, scores, journal entries, goals, and habits — in standard formats.
+                {s.exportDesc}
               </div>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 <button style={{ padding: '10px 20px', borderRadius: 'var(--radius)', border: '1.5px solid var(--line)', background: 'transparent', color: 'var(--ink)', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', cursor: 'pointer' }}>
-                  ↓ Export as JSON
+                  {s.exportJSON}
                 </button>
                 <button style={{ padding: '10px 20px', borderRadius: 'var(--radius)', border: '1.5px solid var(--line)', background: 'transparent', color: 'var(--ink)', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', cursor: 'pointer' }}>
-                  ↓ Export as CSV
+                  {s.exportCSV}
                 </button>
               </div>
               <div style={{ marginTop: 20, fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-faint)' }}>
-                Export generation takes a few seconds. A download link will appear when ready.
+                {s.exportNote}
               </div>
             </Card>
           </div>
         )}
 
+        {/* ── Danger Zone ───────────────────────────────────────────── */}
         {section === 'danger' && (
           <div>
-            <STitle>Danger Zone</STitle>
+            <STitle>{s.dangerZone}</STitle>
             <Card>
               <div style={{ border: '1.5px solid rgba(176,96,112,.3)', borderRadius: 'var(--radius-lg)', padding: '20px' }}>
-                <div style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', fontWeight: 600, color: 'var(--rose)', marginBottom: 8 }}>Sign out of all devices</div>
-                <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-soft)', marginBottom: 16 }}>Revoke all sessions. You will need to sign in again.</div>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', fontWeight: 600, color: 'var(--rose)', marginBottom: 8 }}>{s.signOutAll}</div>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-soft)', marginBottom: 16 }}>{s.signOutAllDesc}</div>
                 <button onClick={signOut} style={{ padding: '9px 18px', borderRadius: 'var(--radius)', background: 'transparent', border: '1.5px solid var(--rose)', color: 'var(--rose)', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', cursor: 'pointer' }}>
-                  Sign out →
+                  {s.signOutAllBtn}
                 </button>
               </div>
               <div style={{ border: '1.5px solid rgba(176,96,112,.3)', borderRadius: 'var(--radius-lg)', padding: '20px', marginTop: 12 }}>
-                <div style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', fontWeight: 600, color: 'var(--rose)', marginBottom: 8 }}>Delete my account</div>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', fontWeight: 600, color: 'var(--rose)', marginBottom: 8 }}>{s.deleteAccount}</div>
                 <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-soft)', marginBottom: 16 }}>
-                  Permanently delete your account and all associated data. This cannot be undone.
+                  {s.deleteAccountDesc}
                 </div>
                 <button onClick={deleteAccount} style={{ padding: '9px 18px', borderRadius: 'var(--radius)', background: 'var(--rose)', border: 'none', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', cursor: 'pointer' }}>
-                  Delete account
+                  {s.deleteBtn}
                 </button>
               </div>
             </Card>
@@ -231,6 +291,49 @@ function Card({ children }: { children: React.ReactNode }) {
   return (
     <div style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--radius-lg)', padding: '24px 28px' }}>
       {children}
+    </div>
+  )
+}
+
+function FieldLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', fontWeight: 600, color: 'var(--ink)', marginBottom: 4 }}>
+      {children}
+    </div>
+  )
+}
+
+function Toggle({ label, desc, value, onChange }: { label: string; desc?: string; value: boolean; onChange: (v: boolean) => void }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, padding: '14px 0', borderBottom: '1px solid var(--line)' }}>
+      <div>
+        <div style={{ fontFamily: 'var(--font-body)', fontSize: '.88rem', fontWeight: 600, color: 'var(--ink)' }}>{label}</div>
+        {desc && <div style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-faint)', marginTop: 2 }}>{desc}</div>}
+      </div>
+      <button onClick={() => onChange(!value)} aria-checked={value} role="switch"
+        style={{
+          width:        44,
+          height:       24,
+          borderRadius: 12,
+          border:       'none',
+          background:   value ? 'var(--sage)' : 'var(--line)',
+          cursor:       'pointer',
+          position:     'relative',
+          flexShrink:   0,
+          transition:   'background .2s',
+        }}>
+        <div style={{
+          width:      18,
+          height:     18,
+          borderRadius: '50%',
+          background: '#fff',
+          position:   'absolute',
+          top:        3,
+          left:       value ? 23 : 3,
+          transition: 'left .2s',
+          boxShadow:  '0 1px 3px rgba(0,0,0,.2)',
+        }} />
+      </button>
     </div>
   )
 }

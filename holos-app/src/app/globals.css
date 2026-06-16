@@ -306,3 +306,71 @@ p a, li a, td a, span a {
 details summary { cursor: pointer; user-select: none; }
 details summary::-webkit-details-marker { display: none; }
 details[open] summary span:last-child { transform: rotate(45deg); }
+
+/* ── RTL Support (Hebrew) ────────────────────────────────── */
+[dir="rtl"] {
+  text-align: right;
+}
+
+/* Flex rows flip direction */
+[dir="rtl"] nav,
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Inputs + textareas align right */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Nav items: margin/padding sides swap via logical properties */
+[dir="rtl"] a,
+[dir="rtl"] button {
+  /* Inherits text-align:right from ancestor; no override needed for most */
+}
+
+/* Icon + text pairs inside buttons/links stay sensible */
+[dir="rtl"] .icon-label {
+  flex-direction: row-reverse;
+}
+
+/* Dropdown menus open from correct edge */
+[dir="rtl"] [data-dropdown] {
+  left: 0;
+  right: auto;
+}
+
+/* Sidebar nav border indicator flips */
+[dir="rtl"] [data-active-nav] {
+  border-left: none;
+  border-right: 2px solid var(--sage);
+}
+
+/* Toggles / switches: mirror thumb direction */
+[dir="rtl"] [role="switch"] > div {
+  /* JS handles left/right offset — CSS mirrors the container */
+  transform: scaleX(-1);
+}
+
+/* List items indent from right */
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+/* Progress bars fill from right */
+[dir="rtl"] [role="progressbar"] {
+  direction: rtl;
+}
+
+/* Card / grid gap convention remains the same — no override needed */
+
+/* Nav logo margin: swap end/start */
+[dir="rtl"] .logo-link {
+  margin-right: 0;
+  margin-left: 32px;
+}

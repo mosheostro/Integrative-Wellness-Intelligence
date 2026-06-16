@@ -2,34 +2,39 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
-
-const NAV_LINKS = [
-  {
-    label: 'Platform',
-    href:  '#',
-    sub: [
-      { label: 'Dashboard',        href: '/dashboard',        desc: 'Your wellness overview'       },
-      { label: 'Assessment',       href: '/assessment',       desc: '9-dimension deep scan'        },
-      { label: 'AI Coach',         href: '/coach',            desc: 'Personalised AI guidance'     },
-      { label: 'Journal',          href: '/journal',          desc: 'Daily wellness journaling'    },
-      { label: 'Goals',            href: '/goals',            desc: 'Set & track wellness goals'   },
-      { label: 'Habits',           href: '/habits',           desc: 'Build lasting healthy habits' },
-      { label: 'Progress',         href: '/progress',         desc: 'Longitudinal tracking'        },
-      { label: 'Recommendations',  href: '/recommendations',  desc: 'Personalised action plans'    },
-      { label: 'Reports',          href: '/reports',          desc: 'Detailed wellness reports'    },
-    ],
-  },
-  { label: 'Methodologies', href: '/methodologies' },
-  { label: 'Knowledge',     href: '/knowledge'     },
-  { label: 'About',         href: '/about'         },
-  { label: 'Pricing',       href: '/pricing'       },
-]
+import { useLanguage } from '@/contexts/LanguageContext'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
 
 export default function SiteNav() {
-  const pathname  = usePathname()
+  const pathname   = usePathname()
   const [open,    setOpen]    = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [mega,    setMega]    = useState<string | null>(null)
+  const { strings } = useLanguage()
+  const n = strings.nav
+
+  const NAV_LINKS = [
+    {
+      label: n.platform,
+      href:  '#',
+      sub: [
+        { label: n.dashboard,       href: '/dashboard',       desc: '' },
+        { label: n.assess,          href: '/assessment',      desc: '' },
+        { label: n.coach,           href: '/coach',           desc: '' },
+        { label: n.journal,         href: '/journal',         desc: '' },
+        { label: n.goals,           href: '/goals',           desc: '' },
+        { label: n.habits,          href: '/habits',          desc: '' },
+        { label: n.progress,        href: '/progress',        desc: '' },
+        { label: n.actions,         href: '/recommendations', desc: '' },
+        { label: n.reports,         href: '/reports',         desc: '' },
+      ],
+    },
+    { label: n.methodologies, href: '/methodologies' },
+    { label: n.knowledge,     href: '/knowledge'     },
+    { label: n.about,         href: '/about'         },
+    { label: n.pricing,       href: '/pricing'       },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -113,7 +118,6 @@ export default function SiteNav() {
                     gap:          4,
                     transition:   'color .15s, background .15s',
                   }}
-                  onMouseLeave={() => {}}
                 >
                   {link.label}
                   <svg width="10" height="6" viewBox="0 0 10 6" fill="none"
@@ -144,9 +148,12 @@ export default function SiteNav() {
           ))}
         </div>
 
-        {/* CTAs */}
+        {/* CTAs + theme/language controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}
           className="site-nav-desktop">
+          <ThemeToggle size={30} />
+          <LanguageSwitcher />
+          <div style={{ width: 1, height: 18, background: 'var(--line)', margin: '0 4px' }} />
           <Link href="/auth/login"
             style={{
               padding:      '7px 16px',
@@ -158,7 +165,7 @@ export default function SiteNav() {
               textDecoration: 'none',
               transition:   'color .15s',
             }}>
-            Sign in
+            {n.signIn}
           </Link>
           <Link href="/auth/signup"
             style={{
@@ -173,7 +180,7 @@ export default function SiteNav() {
               transition:   'background .15s',
               letterSpacing: '-.01em',
             }}>
-            Get started
+            {n.getStarted}
           </Link>
         </div>
 
@@ -224,9 +231,9 @@ export default function SiteNav() {
       </nav>
 
       {/* Mega-menu dropdown */}
-      {mega === 'Platform' && (
+      {mega === n.platform && (
         <div
-          onMouseEnter={() => setMega('Platform')}
+          onMouseEnter={() => setMega(n.platform)}
           onMouseLeave={() => setMega(null)}
           style={{
             position:   'fixed',
@@ -267,11 +274,13 @@ export default function SiteNav() {
                 color:       'var(--ink)',
                 marginBottom: 2,
               }}>{item.label}</div>
-              <div style={{
-                fontFamily: 'var(--font-body)',
-                fontSize:   '.78rem',
-                color:      'var(--ink-faint)',
-              }}>{item.desc}</div>
+              {item.desc && (
+                <div style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize:   '.78rem',
+                  color:      'var(--ink-faint)',
+                }}>{item.desc}</div>
+              )}
             </Link>
           ))}
         </div>
@@ -335,7 +344,14 @@ export default function SiteNav() {
             )}
           </div>
         ))}
-        <div style={{ marginTop: 24, display: 'flex', flexDirection: 'column', gap: 12 }}>
+
+        {/* Mobile: theme + language */}
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 24 }}>
+          <ThemeToggle size={34} />
+          <LanguageSwitcher />
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <Link href="/auth/login"
             style={{
               display:      'block',
@@ -347,7 +363,7 @@ export default function SiteNav() {
               fontWeight:   600,
               color:        'var(--ink)',
               textDecoration: 'none',
-            }}>Sign in</Link>
+            }}>{n.signIn}</Link>
           <Link href="/auth/signup"
             style={{
               display:      'block',
@@ -359,7 +375,7 @@ export default function SiteNav() {
               fontWeight:   600,
               color:        '#fff',
               textDecoration: 'none',
-            }}>Get started free</Link>
+            }}>{n.getStartedFree}</Link>
         </div>
       </div>
 
