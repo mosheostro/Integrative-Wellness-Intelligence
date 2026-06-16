@@ -2,6 +2,7 @@ import type { NextConfig } from 'next'
 
 const config: NextConfig = {
   poweredByHeader: false,
+  serverExternalPackages: ['@anthropic-ai/sdk'],
   async redirects() {
     return [
       // Canonical route aliases

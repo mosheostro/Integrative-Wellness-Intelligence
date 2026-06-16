@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     'See how Holos compares to generic wellness apps, personal trainers, nutritionists, and traditional therapy. One integrated platform vs. siloed point solutions.',
 }
 
-type Row = { feature: string; holos: string | true; generic: string | false; pro: string | false }
+type Row = { feature: string; holos: string | boolean; generic: string | boolean; pro: string | boolean }
 
 const ROWS: Row[] = [
   { feature: '9-dimension wellness map', holos: true, generic: false, pro: false },

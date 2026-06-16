@@ -126,7 +126,7 @@ export async function POST(req: NextRequest) {
     }, { onConflict: 'user_id,snapshot_date' })
 
     // XP reward
-    await supabase.rpc('add_xp', { p_user_id: user.id, p_xp: 50 }).maybeSingle().catch(() => {})
+    try { await supabase.rpc('add_xp', { p_user_id: user.id, p_xp: 50 }) } catch { /* non-critical */ }
 
     return NextResponse.json({ assessmentId, result }, { status: 201 })
   } catch (err) {
