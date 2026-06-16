@@ -1,11 +1,14 @@
 import Link from 'next/link'
 import { NewsletterForm } from '@/components/ui/NewsletterForm'
+import { getServerStrings } from '@/lib/i18n/server'
 
 export const metadata = {
   title: 'Knowledge Center — Holos Integrative Wellness Intelligence',
   description: 'Articles, guides, and deep dives on integrative wellness, the nine dimensions, and the eight wisdom traditions.',
 }
 
+// Article titles, excerpts, and categories are editorial English content — not translated.
+// This mirrors the same architectural decision as methodologies bodies and science pillar bodies.
 const FEATURED = {
   id:       'what-is-integrative-wellness',
   category: 'Foundation',
@@ -29,25 +32,30 @@ const ARTICLES = [
 
 const CATEGORIES = ['All', 'Foundation', 'Assessment', 'Ayurveda', 'Daoist Medicine', 'Rambam', 'Tibetan Medicine', 'Avicenna', 'Sleep', 'Stress', 'Nutrition', 'Movement']
 
-export default function KnowledgePage() {
+export default async function KnowledgePage() {
+  const { strings } = await getServerStrings()
+  const k = strings.knowledge
+
   return (
     <div style={{ background: 'var(--canvas)' }}>
 
-      {/* ── Hero ── */}
+      {/* Hero */}
       <section style={{ padding: '96px 24px 64px', textAlign: 'center' }}>
         <div style={{ maxWidth: 640, margin: '0 auto' }}>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 20 }}>◈ Knowledge Center</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 20 }}>
+            ◈ {k.eyebrow}
+          </div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', fontWeight: 500, letterSpacing: '-.03em', lineHeight: 1.1, color: 'var(--ink)', margin: '0 0 20px' }}>
-            The deep curriculum behind{' '}
-            <em style={{ color: 'var(--sage)' }}>HOLOS.</em>
+            {k.heroTitle}{' '}
+            <em style={{ color: 'var(--sage)' }}>{k.heroTitleEm}</em>
           </h1>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--ink-soft)' }}>
-            Articles, guides, and deep dives on integrative wellness, the nine dimensions, and the eight wisdom traditions.
+            {k.heroSubtitle}
           </p>
         </div>
       </section>
 
-      {/* ── Category filters (decorative) ── */}
+      {/* Category filters (decorative) */}
       <section style={{ padding: '0 24px 40px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: 8 }}>
           {CATEGORIES.map((c, i) => (
@@ -68,7 +76,7 @@ export default function KnowledgePage() {
         </div>
       </section>
 
-      {/* ── Featured ── */}
+      {/* Featured */}
       <section style={{ padding: '0 24px 48px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Link href={`/knowledge/${FEATURED.id}`}
@@ -89,7 +97,7 @@ export default function KnowledgePage() {
             }}/>
             <div style={{ position: 'relative', zIndex: 1, maxWidth: 680 }}>
               <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 20 }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--sage)' }}>Featured</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--sage)' }}>{k.featuredLabel}</span>
                 <span style={{ width: 1, height: 12, background: 'rgba(255,255,255,.2)' }}/>
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.4)' }}>{FEATURED.category}</span>
               </div>
@@ -102,14 +110,14 @@ export default function KnowledgePage() {
               <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
                 <span style={{ fontFamily: 'var(--font-body)', fontSize: '.8rem', color: 'rgba(255,255,255,.4)' }}>{FEATURED.date}</span>
                 <span style={{ fontFamily: 'var(--font-body)', fontSize: '.8rem', color: 'rgba(255,255,255,.4)' }}>{FEATURED.readTime}</span>
-                <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-body)', fontSize: '.88rem', color: 'var(--sage)', fontWeight: 600 }}>Read article &#8594;</span>
+                <span style={{ marginLeft: 'auto', fontFamily: 'var(--font-body)', fontSize: '.88rem', color: 'var(--sage)', fontWeight: 600 }}>{k.readArticle}</span>
               </div>
             </div>
           </Link>
         </div>
       </section>
 
-      {/* ── Article grid ── */}
+      {/* Article grid */}
       <section style={{ padding: '0 24px 96px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
           {ARTICLES.map(a => (
@@ -128,21 +136,21 @@ export default function KnowledgePage() {
               <p style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-faint)', lineHeight: 1.6, margin: '0 0 16px' }}>{a.excerpt}</p>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontFamily: 'var(--font-body)', fontSize: '.75rem', color: 'var(--ink-faint)' }}>{a.date} · {a.readTime}</span>
-                <span style={{ fontFamily: 'var(--font-body)', fontSize: '.8rem', color: 'var(--sage)', fontWeight: 600 }}>Read &#8594;</span>
+                <span style={{ fontFamily: 'var(--font-body)', fontSize: '.8rem', color: 'var(--sage)', fontWeight: 600 }}>{k.read}</span>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* ── Newsletter ── */}
+      {/* Newsletter */}
       <section style={{ background: 'var(--canvas2)', padding: '80px 24px', textAlign: 'center' }}>
         <div style={{ maxWidth: 480, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.8rem', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: '0 0 12px' }}>
-            The Weekly Wellness Dispatch.
+            {k.newsletterTitle}
           </h2>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', color: 'var(--ink-soft)', margin: '0 0 28px', lineHeight: 1.65 }}>
-            One insight per week from the intersection of ancient wisdom and modern science. No spam. Unsubscribe anytime.
+            {k.newsletterBody}
           </p>
           <NewsletterForm />
         </div>

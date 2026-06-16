@@ -6,28 +6,29 @@ import type { AssessmentAnswer, Framework, Question, WellnessDimension } from '@
 import { FRAMEWORKS_LIST } from '@/frameworks'
 import { useWellnessEngine } from '@/hooks/useWellnessEngine'
 import { AnimatedScore, LiveScoreBar } from '@/components/ui/AnimatedScore'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 type Phase = 'framework' | 'questions' | 'submitting' | 'done'
-
-// ── Dimension display config ─────────────────────────────────
-const DIM_CONFIG: Record<WellnessDimension, { label: string; color: string; invert?: boolean }> = {
-  nutrition:    { label: 'Nutrition',  color: 'oklch(0.65 0.12 80)'  },
-  sleep:        { label: 'Sleep',      color: 'oklch(0.55 0.15 270)' },
-  recovery:     { label: 'Recovery',   color: 'oklch(0.55 0.12 155)' },
-  stress:       { label: 'Calm',       color: 'oklch(0.60 0.12 15)',  invert: true },
-  movement:     { label: 'Movement',   color: 'oklch(0.60 0.10 30)'  },
-  emotional:    { label: 'Emotional',  color: 'oklch(0.60 0.12 310)' },
-  life_balance: { label: 'Balance',    color: 'oklch(0.55 0.10 200)' },
-  purpose:      { label: 'Purpose',    color: 'oklch(0.60 0.12 45)'  },
-  energy:       { label: 'Energy',     color: 'oklch(0.55 0.12 155)' },
-}
 
 const ALL_DIMS: WellnessDimension[] = [
   'nutrition','sleep','recovery','stress','movement',
   'emotional','life_balance','purpose','energy'
 ]
 
-// ── Ambient background per composite score ───────────────────
+const DIM_COLORS: Record<WellnessDimension, string> = {
+  nutrition:    'oklch(0.65 0.12 80)',
+  sleep:        'oklch(0.55 0.15 270)',
+  recovery:     'oklch(0.55 0.12 155)',
+  stress:       'oklch(0.60 0.12 15)',
+  movement:     'oklch(0.60 0.10 30)',
+  emotional:    'oklch(0.60 0.12 310)',
+  life_balance: 'oklch(0.55 0.10 200)',
+  purpose:      'oklch(0.60 0.12 45)',
+  energy:       'oklch(0.55 0.12 155)',
+}
+
+const DIM_INVERTS: Partial<Record<WellnessDimension, boolean>> = { stress: true }
+
 function getAmbientGradient(composite: number): string {
   if (composite >= 75) return 'linear-gradient(160deg, oklch(0.97 0.03 155 / 0.4) 0%, var(--canvas) 50%, oklch(0.97 0.02 200 / 0.2) 100%)'
   if (composite >= 55) return 'linear-gradient(160deg, var(--canvas) 0%, oklch(0.97 0.02 200 / 0.15) 100%)'
@@ -37,23 +38,38 @@ function getAmbientGradient(composite: number): string {
 
 export default function AssessmentPage() {
   const router = useRouter()
-  const [phase, setPhase] = useState<Phase>('framework')
-  const [framework, setFramework] = useState<Framework>('swarga')
-  const [questions, setQuestions] = useState<Question[]>(getInitialQuestions())
-  const [qIndex, setQIndex] = useState(0)
-  const [answers, setAnswers] = useState<AssessmentAnswer[]>([])
-  const [selected, setSelected] = useState<number | null>(null)
+  const { strings } = useLanguage()
+  const s = strings.assessment
+  const dims = strings.dimensions
+
+  const [phase, setPhase]             = useState<Phase>('framework')
+  const [framework, setFramework]     = useState<Framework>('swarga')
+  const [questions, setQuestions]     = useState<Question[]>(getInitialQuestions())
+  const [qIndex, setQIndex]           = useState(0)
+  const [answers, setAnswers]         = useState<AssessmentAnswer[]>([])
+  const [selected, setSelected]       = useState<number | null>(null)
   const [answeredIds, setAnsweredIds] = useState<Set<string>>(new Set())
-  const [error, setError] = useState('')
+  const [error, setError]             = useState('')
   const [showLivePanel, setShowLivePanel] = useState(false)
 
-  // Live scoring engine
   const engine = useWellnessEngine(framework)
 
   const currentQ = questions[qIndex]
   const progress = questions.length > 0 ? Math.round(((qIndex) / questions.length) * 100) : 0
 
-  // Show live panel after first answer
+  // Dimension labels built from translated strings
+  const dimLabels: Record<WellnessDimension, string> = {
+    nutrition:    dims.nutrition,
+    sleep:        dims.sleep,
+    recovery:     dims.recovery,
+    stress:       dims.calm,
+    movement:     dims.movement,
+    emotional:    dims.emotional,
+    life_balance: dims.balance,
+    purpose:      dims.purpose,
+    energy:       dims.energy,
+  }
+
   useEffect(() => {
     if (answers.length >= 1) setShowLivePanel(true)
   }, [answers.length])
@@ -68,10 +84,8 @@ export default function AssessmentPage() {
     const newAnswers = [...answers, answer]
     const newAnsweredIds = new Set(answeredIds); newAnsweredIds.add(currentQ.id)
 
-    // Process answer through live engine (non-blocking)
     engine.processAnswer(answer, newAnswers, currentQ.options.length)
 
-    // Adaptive branching
     const followUps = getNextQuestions(currentQ.id, selected, newAnsweredIds)
     const nextQuestions = [...questions]
     if (followUps.length > 0) {
@@ -102,7 +116,7 @@ export default function AssessmentPage() {
       if (!res.ok) throw new Error(data.error)
       router.push(`/results/${data.assessmentId}`)
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : 'Something went wrong')
+      setError(e instanceof Error ? e.message : strings.common.error)
       setPhase('questions')
     }
   }
@@ -112,9 +126,9 @@ export default function AssessmentPage() {
     return (
       <div className="wrap section-pad" style={{ maxWidth: 860 }}>
         <div className="section-head">
-          <div className="eyebrow"><span style={{ color: 'var(--sage)' }}>◉</span> Step 1 of 2 — Choose your lens</div>
-          <h1 className="h1" style={{ marginTop: 12 }}>Which wisdom tradition<br />should interpret your results?</h1>
-          <p className="lede" style={{ marginTop: 12 }}>Each framework analyses the same answers differently. You can re-assess under a different tradition at any time.</p>
+          <div className="eyebrow"><span style={{ color: 'var(--sage)' }}>◉</span> {s.step1}</div>
+          <h1 className="h1" style={{ marginTop: 12 }}>{s.step1Title}</h1>
+          <p className="lede" style={{ marginTop: 12 }}>{s.step1Desc}</p>
         </div>
 
         <div className="grid-2" style={{ gap: 16, marginBottom: 40 }}>
@@ -142,7 +156,7 @@ export default function AssessmentPage() {
         </div>
 
         <button className="btn btn-primary btn-lg" onClick={() => { engine.reset(); setPhase('questions') }}>
-          Begin assessment <span>→</span>
+          {s.begin} <span>→</span>
         </button>
       </div>
     )
@@ -157,17 +171,16 @@ export default function AssessmentPage() {
         background: getAmbientGradient(engine.liveComposite),
         transition: 'background 1s ease',
       }}>
-        {/* Large animated composite */}
         <AnimatedScore
           value={engine.liveComposite}
           size="xl"
           color="var(--sage)"
-          label="Calculating your score"
+          label={s.calculating}
           duration={1200}
         />
         <div className="spinner" style={{ width: 28, height: 28, borderWidth: 2 }} />
         <p style={{ color: 'var(--ink-soft)', fontSize: '.9rem' }}>
-          Analysing your responses across {FRAMEWORKS_LIST.find(f => f.id === framework)?.label}…
+          {s.analysing} {FRAMEWORKS_LIST.find(f => f.id === framework)?.label}…
         </p>
       </div>
     )
@@ -183,12 +196,9 @@ export default function AssessmentPage() {
       transition: 'background 0.8s ease',
     }}>
       <div style={{
-        display: 'flex',
-        gap: 24,
-        padding: '80px 24px 40px',
-        maxWidth: 1100,
-        margin: '0 auto',
-        alignItems: 'flex-start',
+        display: 'flex', gap: 24,
+        padding: '80px 24px 40px', maxWidth: 1100,
+        margin: '0 auto', alignItems: 'flex-start',
       }}>
 
         {/* ── Main question column ── */}
@@ -197,7 +207,7 @@ export default function AssessmentPage() {
           <div style={{ marginBottom: 32 }}>
             <div className="eyebrow" style={{ marginBottom: 10 }}>
               <span style={{ color: 'var(--sage)' }}>◉</span>
-              {currentQ.section} · {qIndex + 1} of {questions.length}
+              {currentQ.section} · {qIndex + 1} {s.of} {questions.length}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
               <div className="progress-track" style={{ flex: 1, height: 3 }}>
@@ -248,7 +258,7 @@ export default function AssessmentPage() {
           {/* Controls */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div className="badge badge-sage">
-              <span>◆</span> Adaptive · your answers shape what follows
+              <span>◆</span> {s.adaptive}
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <button
@@ -256,14 +266,14 @@ export default function AssessmentPage() {
                 disabled={qIndex === 0}
                 onClick={() => { setQIndex(Math.max(0, qIndex - 1)); setSelected(null) }}
               >
-                Back
+                {s.back}
               </button>
               <button
                 className="btn btn-sage btn-sm"
                 disabled={selected === null}
                 onClick={handleNext}
               >
-                {qIndex === questions.length - 1 ? 'Complete' : 'Continue'} <span>→</span>
+                {qIndex === questions.length - 1 ? s.complete : s.continue} <span>→</span>
               </button>
             </div>
           </div>
@@ -271,22 +281,16 @@ export default function AssessmentPage() {
           {error && <p style={{ color: 'var(--rose)', marginTop: 16, textAlign: 'center' }}>{error}</p>}
         </div>
 
-        {/* ── Live score panel (right column, appears after first answer) ── */}
+        {/* ── Live score panel ── */}
         {showLivePanel && (
           <div style={{
-            width: 220,
-            flexShrink: 0,
-            position: 'sticky',
-            top: 88,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 0,
+            width: 220, flexShrink: 0, position: 'sticky', top: 88,
+            display: 'flex', flexDirection: 'column', gap: 0,
           }}>
             <div className="card" style={{ padding: '20px 18px' }}>
-              {/* Composite */}
               <div style={{ textAlign: 'center', marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid var(--line)' }}>
                 <div style={{ fontSize: '.65rem', fontFamily: 'var(--font-mono)', letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--ink-faint)', marginBottom: 8 }}>
-                  Live estimate
+                  {s.liveEstimate}
                 </div>
                 <AnimatedScore
                   value={engine.liveComposite}
@@ -297,26 +301,21 @@ export default function AssessmentPage() {
                 />
               </div>
 
-              {/* Dimension bars */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {ALL_DIMS.map(dim => {
-                  const cfg = DIM_CONFIG[dim]
-                  const val = engine.partialScores[dim]
-                  return (
-                    <LiveScoreBar
-                      key={dim}
-                      label={cfg.label}
-                      value={val}
-                      color={cfg.color}
-                      invert={cfg.invert}
-                    />
-                  )
-                })}
+                {ALL_DIMS.map(dim => (
+                  <LiveScoreBar
+                    key={dim}
+                    label={dimLabels[dim]}
+                    value={engine.partialScores[dim]}
+                    color={DIM_COLORS[dim]}
+                    invert={DIM_INVERTS[dim]}
+                  />
+                ))}
               </div>
 
               <div style={{ marginTop: 14, paddingTop: 12, borderTop: '1px solid var(--line)' }}>
                 <p style={{ fontSize: '.7rem', color: 'var(--ink-faint)', lineHeight: 1.5, margin: 0 }}>
-                  Final scores use all 6 scoring layers — this preview uses Layer 1 only.
+                  {s.livePreview}
                 </p>
               </div>
             </div>

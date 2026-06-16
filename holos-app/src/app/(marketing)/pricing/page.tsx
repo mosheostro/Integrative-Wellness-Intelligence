@@ -1,121 +1,111 @@
 import Link from 'next/link'
+import { getServerStrings } from '@/lib/i18n/server'
 
 export const metadata = {
   title: 'Pricing — Holos Integrative Wellness Intelligence',
   description: 'Start free. Upgrade when you are ready. No long-term contracts.',
 }
 
-const PLANS = [
-  {
-    name:    'Seeker',
-    price:   '$0',
-    period:  'forever free',
-    tagline: 'Begin your wellness intelligence journey',
-    color:   'var(--sage)',
-    features: [
-      { text: '1 assessment per month', included: true },
-      { text: 'Evidence-Based tradition', included: true },
-      { text: 'Basic wellness portrait (9 dimensions)', included: true },
-      { text: 'AI Coach (3 conversations/month)', included: true },
-      { text: 'Progress history (30 days)', included: true },
-      { text: 'All 8 wisdom traditions', included: false },
-      { text: 'Unlimited assessments', included: false },
-      { text: 'Journal, Goals & Habits', included: false },
-      { text: 'Detailed reports', included: false },
-      { text: 'Export & share', included: false },
-    ],
-    cta:       'Start free',
-    href:      '/auth/signup',
-    highlight: false,
-  },
-  {
-    name:    'Practitioner',
-    price:   '$39',
-    period:  '/month',
-    tagline: 'The complete multi-tradition wellness system',
-    color:   'var(--sage)',
-    features: [
-      { text: 'Unlimited assessments', included: true },
-      { text: 'All 8 wisdom traditions', included: true },
-      { text: 'Complete wellness portrait + trend analysis', included: true },
-      { text: 'AI Coach (unlimited)', included: true },
-      { text: 'Journal, Goals & Habits tracking', included: true },
-      { text: 'Detailed reports + PDF export', included: true },
-      { text: 'Progress history (lifetime)', included: true },
-      { text: 'Personalised recommendations', included: true },
-      { text: 'Priority email support', included: true },
-      { text: 'Client sharing (coming soon)', included: false },
-    ],
-    cta:       'Start 14-day free trial',
-    href:      '/auth/signup?plan=pro',
-    highlight: true,
-    badge:     'Most Popular',
-  },
-  {
-    name:    'Enterprise',
-    price:   'Custom',
-    period:  '',
-    tagline: 'For clinics, coaching practices, and wellness teams',
-    color:   'var(--indigo)',
-    features: [
-      { text: 'Everything in Practitioner', included: true },
-      { text: 'Multi-user workspace management', included: true },
-      { text: 'Client portal & practitioner dashboard', included: true },
-      { text: 'White-label options', included: true },
-      { text: 'Custom tradition weighting', included: true },
-      { text: 'API access', included: true },
-      { text: 'Dedicated customer success manager', included: true },
-      { text: 'Custom reporting & analytics', included: true },
-      { text: 'SSO / SAML integration', included: true },
-      { text: 'HIPAA-compliant data handling', included: true },
-    ],
-    cta:       'Contact us',
-    href:      '/contact',
-    highlight: false,
-  },
-]
+export default async function PricingPage() {
+  const { strings } = await getServerStrings()
+  const p = strings.pricing
 
-const FAQS = [
-  {
-    q: 'Is the free plan really free, forever?',
-    a: 'Yes. The Seeker plan is permanently free — no credit card required, no trial period. You get one assessment per month and three AI Coach conversations, indefinitely.',
-  },
-  {
-    q: 'What happens after my 14-day Practitioner trial?',
-    a: 'You are automatically moved to the Seeker (free) plan. No charge. If you want to continue with full Practitioner access, you can upgrade at any time from your account settings.',
-  },
-  {
-    q: 'Can I cancel anytime?',
-    a: 'Absolutely. There are no long-term contracts. Cancel from your account settings and you will retain Practitioner access until the end of your current billing period, then revert to the free Seeker plan.',
-  },
-  {
-    q: 'Do you offer annual billing?',
-    a: 'Yes — annual billing saves you 20% (equivalent to $31/month billed annually). Contact us or toggle the billing period in your account settings.',
-  },
-  {
-    q: 'Is my health data private and secure?',
-    a: 'Your data is encrypted at rest and in transit. It is never sold to third parties or used to train AI models. You own your data and can export or delete it at any time. See our Privacy Policy for full details.',
-  },
-  {
-    q: 'Can I use HOLOS as a wellness practitioner with my clients?',
-    a: 'The Enterprise plan is designed for exactly this. It includes a client portal, practitioner dashboard, and white-label options. Contact us to discuss your specific workflow.',
-  },
-]
+  const PLANS = [
+    {
+      name:      'Seeker',
+      price:     '$0',
+      period:    p.seekerPeriod,
+      tagline:   p.seekerTagline,
+      color:     'var(--sage)',
+      features: [
+        { text: p.seekerF1,  included: true  },
+        { text: p.seekerF2,  included: true  },
+        { text: p.seekerF3,  included: true  },
+        { text: p.seekerF4,  included: true  },
+        { text: p.seekerF5,  included: true  },
+        { text: p.seekerF6,  included: false },
+        { text: p.seekerF7,  included: false },
+        { text: p.seekerF8,  included: false },
+        { text: p.seekerF9,  included: false },
+        { text: p.seekerF10, included: false },
+      ],
+      cta:       p.seekerCta,
+      href:      '/auth/signup',
+      highlight: false,
+      badge:     null,
+    },
+    {
+      name:      'Practitioner',
+      price:     '$39',
+      period:    p.proPeriod,
+      tagline:   p.proTagline,
+      color:     'var(--sage)',
+      features: [
+        { text: p.proF1,  included: true  },
+        { text: p.proF2,  included: true  },
+        { text: p.proF3,  included: true  },
+        { text: p.proF4,  included: true  },
+        { text: p.proF5,  included: true  },
+        { text: p.proF6,  included: true  },
+        { text: p.proF7,  included: true  },
+        { text: p.proF8,  included: true  },
+        { text: p.proF9,  included: true  },
+        { text: p.proF10, included: false },
+      ],
+      cta:       p.proCta,
+      href:      '/auth/signup?plan=pro',
+      highlight: true,
+      badge:     p.proBadge,
+    },
+    {
+      name:      'Enterprise',
+      price:     'Custom',
+      period:    '',
+      tagline:   p.entTagline,
+      color:     'var(--indigo)',
+      features: [
+        { text: p.entF1,  included: true },
+        { text: p.entF2,  included: true },
+        { text: p.entF3,  included: true },
+        { text: p.entF4,  included: true },
+        { text: p.entF5,  included: true },
+        { text: p.entF6,  included: true },
+        { text: p.entF7,  included: true },
+        { text: p.entF8,  included: true },
+        { text: p.entF9,  included: true },
+        { text: p.entF10, included: true },
+      ],
+      cta:       p.entCta,
+      href:      '/contact',
+      highlight: false,
+      badge:     null,
+    },
+  ]
 
-export default function PricingPage() {
+  const FAQS = [
+    { q: p.faq1Q, a: p.faq1A },
+    { q: p.faq2Q, a: p.faq2A },
+    { q: p.faq3Q, a: p.faq3A },
+    { q: p.faq4Q, a: p.faq4A },
+    { q: p.faq5Q, a: p.faq5A },
+    { q: p.faq6Q, a: p.faq6A },
+  ]
+
   return (
     <div style={{ background: 'var(--canvas)' }}>
 
       {/* ── Hero ── */}
       <section style={{ padding: '96px 24px 80px', textAlign: 'center' }}>
         <div style={{ maxWidth: 640, margin: '0 auto' }}>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 20 }}>◈ Pricing</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 20 }}>
+            ◈ {p.eyebrow}
+          </div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.2rem, 5vw, 3.4rem)', fontWeight: 500, letterSpacing: '-.03em', lineHeight: 1.1, color: 'var(--ink)', margin: '0 0 20px' }}>
-            Start free.{' '}
-            <em style={{ color: 'var(--sage)' }}>Scale when you are ready.</em>
+            {p.titleA}{' '}
+            <em style={{ color: 'var(--sage)', fontStyle: 'italic' }}>{p.titleEm}</em>
           </h1>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--ink-soft)', margin: 0 }}>
-            No credit card required. No long-term contracts. 14-day Practitioner trial on signup.
+            {p.subtitle}
           </p>
         </div>
       </section>
@@ -125,29 +115,29 @@ export default function PricingPage() {
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }}>
           {PLANS.map(plan => (
             <div key={plan.name} style={{
-              background:   plan.highlight ? 'var(--ink)' : 'var(--surface)',
-              border:       plan.highlight ? '2px solid var(--sage)' : '1px solid var(--line)',
-              borderRadius: 'var(--radius-lg)',
-              padding:      '40px 32px',
-              position:     'relative',
-              display:      'flex',
-              flexDirection:'column',
+              background:    plan.highlight ? 'var(--ink)' : 'var(--surface)',
+              border:        plan.highlight ? '2px solid var(--sage)' : '1px solid var(--line)',
+              borderRadius:  'var(--radius-lg)',
+              padding:       '40px 32px',
+              position:      'relative',
+              display:       'flex',
+              flexDirection: 'column',
             }}>
               {plan.badge && (
                 <div style={{
-                  position:     'absolute',
-                  top:          -14,
-                  left:         '50%',
-                  transform:    'translateX(-50%)',
-                  background:   'var(--sage)',
-                  color:        '#fff',
-                  fontFamily:   'var(--font-mono)',
-                  fontSize:     '.65rem',
-                  textTransform:'uppercase',
-                  letterSpacing:'.1em',
-                  padding:      '5px 16px',
-                  borderRadius: 100,
-                  whiteSpace:   'nowrap',
+                  position:      'absolute',
+                  top:           -14,
+                  left:          '50%',
+                  transform:     'translateX(-50%)',
+                  background:    'var(--sage)',
+                  color:         '#fff',
+                  fontFamily:    'var(--font-mono)',
+                  fontSize:      '.65rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '.1em',
+                  padding:       '5px 16px',
+                  borderRadius:  100,
+                  whiteSpace:    'nowrap',
                 }}>
                   {plan.badge}
                 </div>
@@ -173,14 +163,14 @@ export default function PricingPage() {
               </p>
 
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 32 }}>
-                {plan.features.map(f => (
-                  <div key={f.text} style={{
-                    display:   'flex',
+                {plan.features.map((f, i) => (
+                  <div key={i} style={{
+                    display:    'flex',
                     alignItems: 'flex-start',
-                    gap:       10,
+                    gap:        10,
                     fontFamily: 'var(--font-body)',
-                    fontSize:  '.83rem',
-                    color:     f.included
+                    fontSize:   '.83rem',
+                    color:      f.included
                       ? (plan.highlight ? 'rgba(255,255,255,.75)' : 'var(--ink-soft)')
                       : (plan.highlight ? 'rgba(255,255,255,.2)' : 'var(--ink-faint)'),
                   }}>
@@ -194,16 +184,16 @@ export default function PricingPage() {
 
               <Link href={plan.href}
                 style={{
-                  display:      'block',
-                  textAlign:    'center',
-                  padding:      '13px 20px',
-                  borderRadius: 'var(--radius)',
-                  background:   plan.highlight ? 'var(--sage)' : 'transparent',
-                  border:       plan.highlight ? 'none' : '1.5px solid var(--line)',
-                  color:        plan.highlight ? '#fff' : 'var(--ink)',
-                  fontFamily:   'var(--font-body)',
-                  fontWeight:   600,
-                  fontSize:     '.9rem',
+                  display:        'block',
+                  textAlign:      'center',
+                  padding:        '13px 20px',
+                  borderRadius:   'var(--radius)',
+                  background:     plan.highlight ? 'var(--sage)' : 'transparent',
+                  border:         plan.highlight ? 'none' : '1.5px solid var(--line)',
+                  color:          plan.highlight ? '#fff' : 'var(--ink)',
+                  fontFamily:     'var(--font-body)',
+                  fontWeight:     600,
+                  fontSize:       '.9rem',
                   textDecoration: 'none',
                 }}>
                 {plan.cta}
@@ -217,14 +207,16 @@ export default function PricingPage() {
       <section style={{ background: 'var(--canvas2)', padding: '96px 24px' }}>
         <div style={{ maxWidth: 720, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 56 }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 12 }}>◉ FAQ</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 12 }}>
+              ◉ {p.faqEyebrow}
+            </div>
             <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
-              Common questions about pricing.
+              {p.faqTitle}
             </h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            {FAQS.map(f => (
-              <div key={f.q} style={{
+            {FAQS.map((f, i) => (
+              <div key={i} style={{
                 background:   'var(--surface)',
                 border:       '1px solid var(--line)',
                 borderRadius: 'var(--radius-lg)',
@@ -242,37 +234,37 @@ export default function PricingPage() {
       <section style={{ padding: '96px 24px', textAlign: 'center' }}>
         <div style={{ maxWidth: 560, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: '0 0 16px' }}>
-            Need something custom?
+            {p.ctaTitle}
           </h2>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '.95rem', color: 'var(--ink-soft)', margin: '0 0 36px', lineHeight: 1.65 }}>
-            HOLOS Enterprise is built for wellness clinics, coaching practices, and corporate wellness teams. Let&apos;s design a solution for your workflow.
+            {p.ctaBody}
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/contact"
               style={{
-                padding:      '13px 28px',
-                borderRadius: 'var(--radius)',
-                background:   'var(--sage)',
-                color:        '#fff',
-                fontFamily:   'var(--font-body)',
-                fontWeight:   600,
-                fontSize:     '.92rem',
+                padding:        '13px 28px',
+                borderRadius:   'var(--radius)',
+                background:     'var(--sage)',
+                color:          '#fff',
+                fontFamily:     'var(--font-body)',
+                fontWeight:     600,
+                fontSize:       '.92rem',
                 textDecoration: 'none',
               }}>
-              Talk to us &#8594;
+              {p.ctaCta1}
             </Link>
             <Link href="/auth/signup"
               style={{
-                padding:      '13px 24px',
-                borderRadius: 'var(--radius)',
-                border:       '1.5px solid var(--line)',
-                color:        'var(--ink)',
-                fontFamily:   'var(--font-body)',
-                fontWeight:   500,
-                fontSize:     '.92rem',
+                padding:        '13px 24px',
+                borderRadius:   'var(--radius)',
+                border:         '1.5px solid var(--line)',
+                color:          'var(--ink)',
+                fontFamily:     'var(--font-body)',
+                fontWeight:     500,
+                fontSize:       '.92rem',
                 textDecoration: 'none',
               }}>
-              Start free
+              {p.ctaCta2}
             </Link>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function SignupPage() {
   const [name, setName]         = useState('')
@@ -11,6 +12,8 @@ export default function SignupPage() {
   const [loading, setLoading]   = useState(false)
   const [error, setError]       = useState('')
   const router = useRouter()
+  const { strings } = useLanguage()
+  const s = strings.auth
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -34,32 +37,32 @@ export default function SignupPage() {
             <circle cx="16" cy="16" r="8" stroke="var(--gold-deep)" strokeWidth="1.4"/>
             <circle cx="16" cy="16" r="2.6" fill="var(--ink)"/>
           </svg>
-          <h1 className="h2" style={{ marginBottom:6 }}>Begin your journey</h1>
-          <p className="muted">Your integrative wellness intelligence awaits</p>
+          <h1 className="h2" style={{ marginBottom:6 }}>{s.createAccount}</h1>
+          <p className="muted">{s.createDesc}</p>
         </div>
 
         <form onSubmit={handleSubmit} style={{ display:'flex', flexDirection:'column', gap:16 }}>
           <div>
-            <label className="label">Full name</label>
+            <label className="label">{s.fullName}</label>
             <input className="input" type="text" value={name} onChange={e => setName(e.target.value)} required placeholder="Your name"/>
           </div>
           <div>
-            <label className="label">Email</label>
+            <label className="label">{s.email}</label>
             <input className="input" type="email" value={email} onChange={e => setEmail(e.target.value)} required placeholder="you@example.com"/>
           </div>
           <div>
-            <label className="label">Password</label>
+            <label className="label">{s.password}</label>
             <input className="input" type="password" value={password} onChange={e => setPassword(e.target.value)} required placeholder="8+ characters" minLength={8}/>
           </div>
           {error && <p style={{ color:'var(--rose)', fontSize:'.875rem' }}>{error}</p>}
           <button className="btn btn-primary" type="submit" disabled={loading} style={{ marginTop:4 }}>
-            {loading ? 'Creating account…' : 'Create free account'}
+            {loading ? s.creatingAccount : s.createBtn}
           </button>
         </form>
 
         <p style={{ textAlign:'center', marginTop:24, color:'var(--ink-soft)', fontSize:'.875rem' }}>
-          Already have an account?{' '}
-          <Link href="/auth/login" style={{ color:'var(--sage)', textDecoration:'none', fontWeight:500 }}>Sign in</Link>
+          {s.haveAccount}{' '}
+          <Link href="/auth/login" style={{ color:'var(--sage)', textDecoration:'none', fontWeight:500 }}>{s.signInLink}</Link>
         </p>
       </div>
     </div>

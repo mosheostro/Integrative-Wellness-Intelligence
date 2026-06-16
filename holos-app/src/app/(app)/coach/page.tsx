@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -9,12 +10,11 @@ interface Message {
 }
 
 export default function CoachPage() {
+  const { strings } = useLanguage()
+  const s = strings.coach
+
   const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: 'Shalom. I\'m your Holos AI coach — an integration of eight wisdom traditions with modern evidence-based science. I\'m here to help you understand your wellness landscape and take meaningful steps forward.\n\nWhat\'s on your mind today?',
-      timestamp: new Date(),
-    }
+    { role: 'assistant', content: s.initialMessage, timestamp: new Date() }
   ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -23,6 +23,16 @@ export default function CoachPage() {
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
+
+  // Sync initial message when locale changes
+  useEffect(() => {
+    setMessages(prev => {
+      if (prev.length === 1 && prev[0].role === 'assistant') {
+        return [{ role: 'assistant', content: s.initialMessage, timestamp: prev[0].timestamp }]
+      }
+      return prev
+    })
+  }, [s.initialMessage])
 
   const send = async () => {
     const text = input.trim()
@@ -52,6 +62,13 @@ export default function CoachPage() {
   }
 
   const STARTERS = [
+    strings.coach.title === 'Holos Coach'
+      ? 'What does my latest assessment reveal?'
+      : null,
+  ].filter(Boolean) as string[]
+
+  // Hardcoded starters per locale — translate only via t() if we add keys later
+  const starterKeys = [
     'What does my latest assessment reveal?',
     'How can I improve my sleep quality?',
     'Explain the Ayurvedic view of my state',
@@ -71,8 +88,8 @@ export default function CoachPage() {
             fontSize:20,
           }}>◈</div>
           <div>
-            <div style={{ fontWeight:600, color:'var(--ink)', fontFamily:'var(--font-serif)' }}>Holos Coach</div>
-            <div style={{ fontSize:12, color:'var(--ink-soft)', fontFamily:'var(--font-mono)' }}>8 wisdom traditions · evidence-based</div>
+            <div style={{ fontWeight:600, color:'var(--ink)', fontFamily:'var(--font-serif)' }}>{s.title}</div>
+            <div style={{ fontSize:12, color:'var(--ink-soft)', fontFamily:'var(--font-mono)' }}>{s.subtitle}</div>
           </div>
         </div>
       </div>
@@ -132,14 +149,14 @@ export default function CoachPage() {
       {messages.length === 1 && (
         <div style={{ padding:'0 16px 12px', flexShrink:0 }}>
           <div style={{ maxWidth:720, margin:'0 auto', display:'flex', flexWrap:'wrap', gap:8 }}>
-            {STARTERS.map(s => (
-              <button key={s} onClick={() => { setInput(s); setTimeout(send, 0) }}
+            {starterKeys.map(starter => (
+              <button key={starter} onClick={() => { setInput(starter); setTimeout(send, 0) }}
                 style={{
                   padding:'7px 14px', borderRadius:20, border:'1px solid var(--line)',
                   background:'var(--canvas2)', color:'var(--ink-soft)', fontSize:'.8rem',
                   cursor:'pointer', fontFamily:'inherit',
                 }}
-              >{s}</button>
+              >{starter}</button>
             ))}
           </div>
         </div>
@@ -152,7 +169,7 @@ export default function CoachPage() {
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send() } }}
-            placeholder="Ask anything about your wellness…"
+            placeholder={s.placeholder}
             rows={1}
             style={{
               flex:1, resize:'none', padding:'12px 16px',
@@ -168,7 +185,7 @@ export default function CoachPage() {
           >↑</button>
         </div>
         <div style={{ maxWidth:720, margin:'8px auto 0', textAlign:'center', fontSize:'.72rem', color:'var(--ink-faint)' }}>
-          AI coaching · not medical advice · always consult your physician
+          {s.disclaimer}
         </div>
       </div>
 

@@ -1,27 +1,31 @@
+'use client'
 import Link from 'next/link'
 import { FOUNDER } from '@/lib/founder'
+import { useLanguage } from '@/contexts/LanguageContext'
 
-const PLATFORM = [
-  { label: 'Dashboard',       href: '/dashboard'       },
-  { label: 'Assessment',      href: '/assessment'      },
-  { label: 'AI Coach',        href: '/coach'           },
-  { label: 'Progress',        href: '/progress'        },
-  { label: 'Journal',         href: '/journal'         },
-  { label: 'Goals',           href: '/goals'           },
-  { label: 'Habits',          href: '/habits'          },
-  { label: 'Recommendations', href: '/recommendations' },
-  { label: 'Reports',         href: '/reports'         },
-]
+// Nav links: labels come from translations — only hrefs are static
+const PLATFORM_LINKS = [
+  { key: 'dashboard',       href: '/dashboard'       },
+  { key: 'assess',          href: '/assessment'      },
+  { key: 'coach',           href: '/coach'           },
+  { key: 'progress',        href: '/progress'        },
+  { key: 'journal',         href: '/journal'         },
+  { key: 'goals',           href: '/goals'           },
+  { key: 'habits',          href: '/habits'          },
+  { key: 'recommendations', href: '/recommendations' },
+  { key: 'reports',         href: '/reports'         },
+] as const
 
-const COMPANY = [
-  { label: 'About',         href: '/about'         },
-  { label: 'Methodologies', href: '/methodologies' },
-  { label: 'Pricing',       href: '/pricing'       },
-  { label: 'Knowledge',     href: '/knowledge'     },
-  { label: 'FAQ',           href: '/faq'           },
-  { label: 'Contact',       href: '/contact'       },
-]
+const COMPANY_LINKS = [
+  { key: 'about',          href: '/about'         },
+  { key: 'methodologies',  href: '/methodologies' },
+  { key: 'pricing',        href: '/pricing'       },
+  { key: 'knowledge',      href: '/knowledge'     },
+  { key: 'faq',            href: '/faq'           },
+  { key: 'contact',        href: '/contact'       },
+] as const
 
+// Tradition names are proper nouns — not translated
 const TRADITIONS = [
   { label: 'Evidence-Based', href: '/methodologies#evidence-based' },
   { label: 'Rambam',         href: '/methodologies#rambam'         },
@@ -33,12 +37,18 @@ const TRADITIONS = [
   { label: 'Swarga',         href: '/methodologies#swarga'         },
 ]
 
-const LEGAL = [
-  { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Terms of Use',   href: '/terms'   },
-]
-
 export default function SiteFooter() {
+  const { strings } = useLanguage()
+  const nav = strings.nav
+  const f = strings.footer
+
+  // Map nav keys → translated labels
+  type NavKey = keyof typeof nav
+  const platformLabel = (key: string) => nav[key as NavKey] ?? key
+  const companyLabel  = (key: string) => nav[key as NavKey] ?? key
+
+  const year = new Date().getFullYear()
+
   return (
     <footer style={{
       background:   'var(--ink)',
@@ -63,7 +73,7 @@ export default function SiteFooter() {
               <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: '#fff', fontWeight: 500 }}>Holos</span>
             </Link>
             <p style={{ fontFamily: 'var(--font-body)', fontSize: '.8rem', lineHeight: 1.7, maxWidth: 200, margin: '0 0 20px' }}>
-              Integrative Wellness Intelligence. Nine dimensions. Eight traditions. One complete portrait of you.
+              {f.tagline}
             </p>
             <div style={{ display: 'flex', gap: 12 }}>
               {[
@@ -74,20 +84,20 @@ export default function SiteFooter() {
               ].map(s => (
                 <a key={s.label} href={s.href} target="_blank" rel="noopener"
                   style={{
-                    display:      'flex',
-                    alignItems:   'center',
+                    display:        'flex',
+                    alignItems:     'center',
                     justifyContent: 'center',
-                    width:        32,
-                    height:       32,
-                    borderRadius: '50%',
-                    background:   'rgba(255,255,255,.06)',
-                    color:        'rgba(255,255,255,.6)',
-                    fontFamily:   'var(--font-mono)',
-                    fontSize:     '.62rem',
-                    fontWeight:   700,
+                    width:          32,
+                    height:         32,
+                    borderRadius:   '50%',
+                    background:     'rgba(255,255,255,.06)',
+                    color:          'rgba(255,255,255,.6)',
+                    fontFamily:     'var(--font-mono)',
+                    fontSize:       '.62rem',
+                    fontWeight:     700,
                     textDecoration: 'none',
-                    transition:   'background .15s, color .15s',
-                    letterSpacing: '.05em',
+                    transition:     'background .15s, color .15s',
+                    letterSpacing:  '.05em',
                   }}>
                   {s.label}
                 </a>
@@ -97,55 +107,61 @@ export default function SiteFooter() {
 
           {/* Platform */}
           <div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.3)', marginBottom: 16 }}>Platform</div>
-            {PLATFORM.map(l => (
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.3)', marginBottom: 16 }}>
+              {f.platform}
+            </div>
+            {PLATFORM_LINKS.map(l => (
               <Link key={l.href} href={l.href}
                 style={{
-                  display:      'block',
-                  fontFamily:   'var(--font-body)',
-                  fontSize:     '.82rem',
-                  color:        'rgba(255,255,255,.5)',
+                  display:        'block',
+                  fontFamily:     'var(--font-body)',
+                  fontSize:       '.82rem',
+                  color:          'rgba(255,255,255,.5)',
                   textDecoration: 'none',
-                  padding:      '3px 0',
-                  transition:   'color .15s',
+                  padding:        '3px 0',
+                  transition:     'color .15s',
                 }}>
-                {l.label}
+                {platformLabel(l.key)}
               </Link>
             ))}
           </div>
 
           {/* Company */}
           <div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.3)', marginBottom: 16 }}>Company</div>
-            {COMPANY.map(l => (
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.3)', marginBottom: 16 }}>
+              {f.company}
+            </div>
+            {COMPANY_LINKS.map(l => (
               <Link key={l.href} href={l.href}
                 style={{
-                  display:      'block',
-                  fontFamily:   'var(--font-body)',
-                  fontSize:     '.82rem',
-                  color:        'rgba(255,255,255,.5)',
+                  display:        'block',
+                  fontFamily:     'var(--font-body)',
+                  fontSize:       '.82rem',
+                  color:          'rgba(255,255,255,.5)',
                   textDecoration: 'none',
-                  padding:      '3px 0',
-                  transition:   'color .15s',
+                  padding:        '3px 0',
+                  transition:     'color .15s',
                 }}>
-                {l.label}
+                {companyLabel(l.key)}
               </Link>
             ))}
           </div>
 
           {/* Traditions */}
           <div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.3)', marginBottom: 16 }}>Traditions</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.3)', marginBottom: 16 }}>
+              {f.traditions}
+            </div>
             {TRADITIONS.map(l => (
               <Link key={l.href} href={l.href}
                 style={{
-                  display:      'block',
-                  fontFamily:   'var(--font-body)',
-                  fontSize:     '.82rem',
-                  color:        'rgba(255,255,255,.5)',
+                  display:        'block',
+                  fontFamily:     'var(--font-body)',
+                  fontSize:       '.82rem',
+                  color:          'rgba(255,255,255,.5)',
                   textDecoration: 'none',
-                  padding:      '3px 0',
-                  transition:   'color .15s',
+                  padding:        '3px 0',
+                  transition:     'color .15s',
                 }}>
                 {l.label}
               </Link>
@@ -163,25 +179,32 @@ export default function SiteFooter() {
           padding:        '24px 0',
         }}>
           <div style={{ fontFamily: 'var(--font-body)', fontSize: '.75rem' }}>
-            &copy; {new Date().getFullYear()} Holos Integrative Wellness Intelligence. All rights reserved.
+            &copy; {year} Holos Integrative Wellness Intelligence. {f.allRights}
           </div>
           <div style={{ display: 'flex', gap: 24 }}>
-            {LEGAL.map(l => (
-              <Link key={l.href} href={l.href}
-                style={{
-                  fontFamily:   'var(--font-body)',
-                  fontSize:     '.75rem',
-                  color:        'rgba(255,255,255,.35)',
-                  textDecoration: 'none',
-                }}>
-                {l.label}
-              </Link>
-            ))}
+            <Link href="/privacy"
+              style={{
+                fontFamily:     'var(--font-body)',
+                fontSize:       '.75rem',
+                color:          'rgba(255,255,255,.35)',
+                textDecoration: 'none',
+              }}>
+              {f.privacyPolicy}
+            </Link>
+            <Link href="/terms"
+              style={{
+                fontFamily:     'var(--font-body)',
+                fontSize:       '.75rem',
+                color:          'rgba(255,255,255,.35)',
+                textDecoration: 'none',
+              }}>
+              {f.termsOfUse}
+            </Link>
             <a href={`mailto:${FOUNDER.email}`}
               style={{
-                fontFamily:   'var(--font-body)',
-                fontSize:     '.75rem',
-                color:        'rgba(255,255,255,.35)',
+                fontFamily:     'var(--font-body)',
+                fontSize:       '.75rem',
+                color:          'rgba(255,255,255,.35)',
                 textDecoration: 'none',
               }}>
               {FOUNDER.email}
@@ -190,7 +213,7 @@ export default function SiteFooter() {
         </div>
 
         <div style={{ padding: '16px 0 32px', fontSize: '.72rem', fontFamily: 'var(--font-body)', lineHeight: 1.6 }}>
-          Not medical advice. Holos is an educational wellness intelligence tool. Always consult a qualified healthcare professional before making health decisions.
+          {f.medical}
         </div>
       </div>
     </footer>

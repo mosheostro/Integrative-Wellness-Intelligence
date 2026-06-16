@@ -3,6 +3,7 @@ import { Suspense, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 function LoginForm() {
   const [email, setEmail] = useState('')
@@ -12,6 +13,8 @@ function LoginForm() {
   const router = useRouter()
   const params = useSearchParams()
   const next = params.get('next') || '/dashboard'
+  const { strings } = useLanguage()
+  const s = strings.auth
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -33,29 +36,29 @@ function LoginForm() {
             <circle cx="16" cy="16" r="8" stroke="var(--gold-deep)" strokeWidth="1.4"/>
             <circle cx="16" cy="16" r="2.6" fill="var(--ink)"/>
           </svg>
-          <h1 className="h2" style={{ marginBottom:6 }}>Welcome back</h1>
-          <p className="muted">Sign in to your Holos account</p>
+          <h1 className="h2" style={{ marginBottom:6 }}>{s.welcomeBack}</h1>
+          <p className="muted">{s.signInDesc}</p>
         </div>
 
         <form onSubmit={handleSubmit} style={{ display:'flex', flexDirection:'column', gap:16 }}>
           <div>
-            <label className="label">Email</label>
+            <label className="label">{s.email}</label>
             <input className="input" type="email" value={email} onChange={e => setEmail(e.target.value)} required placeholder="you@example.com"/>
           </div>
           <div>
-            <label className="label">Password</label>
+            <label className="label">{s.password}</label>
             <input className="input" type="password" value={password} onChange={e => setPassword(e.target.value)} required placeholder="••••••••"/>
           </div>
           {error && <p style={{ color:'var(--rose)', fontSize:'.875rem' }}>{error}</p>}
           <button className="btn btn-primary" type="submit" disabled={loading} style={{ marginTop:4 }}>
-            {loading ? 'Signing in…' : 'Sign in'}
+            {loading ? s.signingIn : s.signIn}
           </button>
         </form>
 
         <p style={{ textAlign:'center', marginTop:24, color:'var(--ink-soft)', fontSize:'.875rem' }}>
-          No account?{' '}
+          {s.noAccount}{' '}
           <Link href="/auth/signup" style={{ color:'var(--sage)', textDecoration:'none', fontWeight:500 }}>
-            Create one free
+            {s.createFree}
           </Link>
         </p>
       </div>

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { FOUNDER } from '@/lib/founder'
+import { getServerStrings } from '@/lib/i18n/server'
 
 export const metadata = {
   title: 'Terms of Service — Holos Integrative Wellness Intelligence',
@@ -8,17 +9,34 @@ export const metadata = {
 
 const LAST_UPDATED = 'June 1, 2025'
 
-export default function TermsPage() {
+export default async function TermsPage() {
+  const { strings } = await getServerStrings()
+  const l = strings.legal
+
   return (
     <div style={{ background: 'var(--canvas)' }}>
       <section style={{ padding: '80px 24px 96px' }}>
         <div style={{ maxWidth: 740, margin: '0 auto' }}>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 16 }}>◈ Legal</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 16 }}>
+            ◈ {l.eyebrow}
+          </div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: '0 0 12px' }}>
-            Terms of Service
+            {l.termsTitle}
           </h1>
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-faint)', marginBottom: 48 }}>
-            Last updated: {LAST_UPDATED}
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-faint)', marginBottom: 16 }}>
+            {l.lastUpdated} {LAST_UPDATED}
+          </div>
+          <div style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: '.82rem',
+            color: 'var(--ink-soft)',
+            background: 'var(--surface)',
+            border: '1px solid var(--line)',
+            borderRadius: 'var(--radius)',
+            padding: '10px 16px',
+            marginBottom: 40,
+          }}>
+            {l.termsNote}
           </div>
 
           <div style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', lineHeight: 1.85, color: 'var(--ink-soft)' }}>

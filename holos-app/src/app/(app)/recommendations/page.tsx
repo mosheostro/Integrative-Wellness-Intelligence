@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 type Rec = {
   id: string
@@ -25,7 +26,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 function ScoreBar({ label, value, color }: { label: string; value: number; color: string }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-      <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', color: 'var(--ink-faint)', width: 60, flexShrink: 0 }}>{label}</span>
+      <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', color: 'var(--ink-faint)', width: 70, flexShrink: 0 }}>{label}</span>
       <div style={{ flex: 1, height: 4, background: 'var(--line)', borderRadius: 2, overflow: 'hidden' }}>
         <div style={{ height: '100%', width: `${value}%`, background: color, borderRadius: 2 }} />
       </div>
@@ -35,6 +36,9 @@ function ScoreBar({ label, value, color }: { label: string; value: number; color
 }
 
 export default function RecommendationsPage() {
+  const { strings } = useLanguage()
+  const s = strings.recommendations
+
   const [recs, setRecs]       = useState<Rec[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter]   = useState<'all' | 'pending' | 'completed'>('pending')
@@ -65,52 +69,51 @@ export default function RecommendationsPage() {
     filter === 'completed' ? r.status === 'completed' : true
   )
 
+  const filterMap: Record<'pending' | 'completed' | 'all', string> = {
+    pending:   s.filterPending,
+    completed: s.filterCompleted,
+    all:       s.filterAll,
+  }
+
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: '32px 24px' }}>
       <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 8 }}>◈ Recommendations</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 8 }}>◈ {strings.nav.actions}</div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
-            Your Action Plan
+            {s.title}
           </h1>
         </div>
         <div style={{ display: 'flex', gap: 6 }}>
           {(['pending', 'completed', 'all'] as const).map(f => (
             <button key={f} onClick={() => setFilter(f)}
               style={{
-                padding:      '8px 16px',
-                borderRadius: 'var(--radius)',
-                border:       '1px solid var(--line)',
-                background:   filter === f ? 'var(--ink)' : 'var(--surface)',
-                color:        filter === f ? '#fff' : 'var(--ink-soft)',
-                fontFamily:   'var(--font-body)',
-                fontSize:     '.8rem',
-                fontWeight:   filter === f ? 600 : 400,
-                cursor:       'pointer',
-                textTransform:'capitalize',
+                padding: '8px 16px', borderRadius: 'var(--radius)', border: '1px solid var(--line)',
+                background: filter === f ? 'var(--ink)' : 'var(--surface)',
+                color: filter === f ? '#fff' : 'var(--ink-soft)',
+                fontFamily: 'var(--font-body)', fontSize: '.8rem',
+                fontWeight: filter === f ? 600 : 400, cursor: 'pointer',
               }}>
-              {f}
+              {filterMap[f]}
             </button>
           ))}
         </div>
       </div>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: 48, color: 'var(--ink-faint)', fontFamily: 'var(--font-body)' }}>Loading…</div>
+        <div style={{ textAlign: 'center', padding: 48, color: 'var(--ink-faint)', fontFamily: 'var(--font-body)' }}>{s.loading}</div>
       ) : visible.length === 0 ? (
         <div style={{ textAlign: 'center', padding: 64, background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--radius-lg)' }}>
           <div style={{ fontSize: '2rem', marginBottom: 12 }}>◈</div>
           <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'var(--ink)', marginBottom: 10 }}>
-            {recs.length === 0 ? 'No recommendations yet' : 'Nothing here'}
+            {recs.length === 0 ? s.noRecs : s.nothing}
           </div>
           <div style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: 'var(--ink-faint)', marginBottom: 24 }}>
-            {recs.length === 0
-              ? 'Complete an assessment to receive personalised action recommendations.'
-              : 'Switch to "All" to see all your recommendations.'}
+            {recs.length === 0 ? s.noRecsDesc : s.nothingDesc}
           </div>
           {recs.length === 0 && (
             <Link href="/assessment" style={{ padding: '10px 24px', borderRadius: 'var(--radius)', background: 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.88rem', textDecoration: 'none' }}>
-              Take assessment →
+              {s.takeAssessment}
             </Link>
           )}
         </div>
@@ -121,11 +124,9 @@ export default function RecommendationsPage() {
             const done = r.status === 'completed'
             return (
               <div key={r.id} style={{
-                background:   'var(--surface)',
-                border:       `1px solid ${done ? 'rgba(122,158,142,.3)' : 'var(--line)'}`,
-                borderRadius: 'var(--radius-lg)',
-                padding:      '24px 28px',
-                opacity:      done ? 0.7 : 1,
+                background: 'var(--surface)',
+                border: `1px solid ${done ? 'rgba(122,158,142,.3)' : 'var(--line)'}`,
+                borderRadius: 'var(--radius-lg)', padding: '24px 28px', opacity: done ? 0.7 : 1,
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, marginBottom: 14 }}>
                   <div style={{ flex: 1 }}>
@@ -146,13 +147,10 @@ export default function RecommendationsPage() {
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'flex-end', flexShrink: 0 }}>
                     <div style={{
-                      fontFamily:  'var(--font-mono)',
-                      fontSize:    '.75rem',
-                      fontWeight:  600,
-                      color:       r.priority_score >= 70 ? 'var(--rose)' : r.priority_score >= 40 ? 'var(--gold)' : 'var(--sage)',
-                      background:  r.priority_score >= 70 ? 'rgba(176,96,112,.1)' : r.priority_score >= 40 ? 'rgba(196,165,90,.1)' : 'rgba(122,158,142,.1)',
-                      padding:     '4px 10px',
-                      borderRadius:100,
+                      fontFamily: 'var(--font-mono)', fontSize: '.75rem', fontWeight: 600,
+                      color: r.priority_score >= 70 ? 'var(--rose)' : r.priority_score >= 40 ? 'var(--gold)' : 'var(--sage)',
+                      background: r.priority_score >= 70 ? 'rgba(176,96,112,.1)' : r.priority_score >= 40 ? 'rgba(196,165,90,.1)' : 'rgba(122,158,142,.1)',
+                      padding: '4px 10px', borderRadius: 100,
                     }}>
                       P{Math.round(r.priority_score)}
                     </div>
@@ -160,25 +158,25 @@ export default function RecommendationsPage() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 16 }}>
-                  <ScoreBar label="Impact"     value={Math.round(r.impact_score)} color="var(--sage)" />
-                  <ScoreBar label="Difficulty" value={Math.round(r.difficulty_score)} color="var(--rose)" />
+                  <ScoreBar label={s.impact}     value={Math.round(r.impact_score)}     color="var(--sage)" />
+                  <ScoreBar label={s.difficulty} value={Math.round(r.difficulty_score)} color="var(--rose)" />
                 </div>
 
                 {!done && (
                   <div style={{ display: 'flex', gap: 8 }}>
                     <button onClick={() => markDone(r.id)}
                       style={{ padding: '8px 16px', borderRadius: 'var(--radius)', background: 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.8rem', border: 'none', cursor: 'pointer' }}>
-                      ✓ Mark done
+                      {s.markDone}
                     </button>
                     <button onClick={() => dismiss(r.id)}
                       style={{ padding: '8px 14px', borderRadius: 'var(--radius)', border: '1px solid var(--line)', background: 'transparent', color: 'var(--ink-faint)', fontFamily: 'var(--font-body)', fontSize: '.8rem', cursor: 'pointer' }}>
-                      Dismiss
+                      {s.dismiss}
                     </button>
                   </div>
                 )}
                 {done && (
                   <div style={{ fontFamily: 'var(--font-body)', fontSize: '.8rem', color: 'var(--sage)', fontWeight: 600 }}>
-                    ✓ Completed
+                    {s.completedLabel}
                   </div>
                 )}
               </div>

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { getServerStrings } from '@/lib/i18n/server'
 
 export const metadata: Metadata = {
   title: 'The Science — Holos Integrative Wellness Intelligence',
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     'How Holos translates peer-reviewed research and six wisdom traditions into a personalised wellness system. Evidence-based, tradition-informed.',
 }
 
+// Pillar names and bodies are scholarly/medical content — kept in English.
 const PILLARS = [
   {
     number: '01',
@@ -40,6 +42,7 @@ const PILLARS = [
   },
 ]
 
+// Academic citations — kept in English
 const REFS = [
   { text: 'Irwin & Cole (2011). Reciprocal regulation of the neural and innate immune systems.', journal: 'Nature Reviews Immunology' },
   { text: 'Roenneberg & Merrow (2016). The circadian clock and human health.', journal: 'Current Biology' },
@@ -49,7 +52,10 @@ const REFS = [
   { text: 'Jacka et al. (2017). A randomised controlled trial of dietary improvement for adults with major depression.', journal: 'BMC Medicine' },
 ]
 
-export default function SciencePage() {
+export default async function SciencePage() {
+  const { strings } = await getServerStrings()
+  const s = strings.science
+
   return (
     <main style={{ paddingTop: 68 }}>
 
@@ -75,7 +81,7 @@ export default function SciencePage() {
             textTransform: 'uppercase',
             marginBottom: 24,
           }}>
-            ◈ Evidence & Tradition
+            ◈ {s.eyebrow}
           </div>
           <h1 style={{
             fontFamily: 'var(--font-serif)',
@@ -85,7 +91,7 @@ export default function SciencePage() {
             lineHeight: 1.18,
             marginBottom: 20,
           }}>
-            Ancient wisdom.<br /><em>Modern evidence.</em>
+            {s.heroTitle}<br /><em>{s.heroTitleEm}</em>
           </h1>
           <p style={{
             fontSize: '1.05rem',
@@ -94,9 +100,7 @@ export default function SciencePage() {
             maxWidth: 540,
             margin: '0 auto',
           }}>
-            Holos is not wellness theatre. Every recommendation traces back to
-            peer-reviewed research or centuries of reproducible tradition —
-            and we show you the source.
+            {s.heroSubtitle}
           </p>
         </div>
       </section>
@@ -110,7 +114,7 @@ export default function SciencePage() {
           color: 'var(--ink)',
           marginBottom: 48,
         }}>
-          Six scientific pillars
+          {s.pillarsTitle}
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
           {PILLARS.map((p, i) => (
@@ -148,7 +152,7 @@ export default function SciencePage() {
         </div>
       </section>
 
-      {/* The Rambam synthesis callout */}
+      {/* Rambam synthesis callout */}
       <section style={{
         background: 'linear-gradient(135deg, oklch(0.96 0.02 155 / 0.5), oklch(0.96 0.02 270 / 0.3))',
         border: '1px solid var(--line)',
@@ -166,7 +170,7 @@ export default function SciencePage() {
           textTransform: 'uppercase',
           color: 'var(--sage-deep)',
           marginBottom: 16,
-        }}>The Rambam Synthesis</p>
+        }}>{s.rambamEyebrow}</p>
         <h2 style={{
           fontFamily: 'var(--font-serif)',
           fontSize: 'clamp(1.3rem, 2.5vw, 1.8rem)',
@@ -175,8 +179,7 @@ export default function SciencePage() {
           marginBottom: 16,
           lineHeight: 1.3,
         }}>
-          Maimonides described eight health regimens in the 12th century.<br />
-          Modern medicine validated them all.
+          {s.rambamTitle}
         </h2>
         <p style={{
           color: 'var(--ink-soft)',
@@ -184,10 +187,7 @@ export default function SciencePage() {
           maxWidth: 620,
           marginBottom: 24,
         }}>
-          Sleep, movement, diet, emotional regulation, social connection, meaningful work,
-          spiritual practice, and environment. The Rambam's framework maps almost exactly onto
-          contemporary functional medicine and psychoneuroimmunology. Holos uses this as a
-          unifying lens across all six traditions.
+          {s.rambamBody}
         </p>
         <Link href="/knowledge/rambam-modern-wellness" style={{
           fontSize: '.9rem',
@@ -195,7 +195,7 @@ export default function SciencePage() {
           fontWeight: 600,
           textDecoration: 'none',
         }}>
-          Read: Rambam's regimens and modern wellness →
+          {s.rambamCta}
         </Link>
       </section>
 
@@ -207,12 +207,8 @@ export default function SciencePage() {
           fontWeight: 500,
           color: 'var(--ink)',
           marginBottom: 24,
-        }}>Key references</h2>
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 12,
-        }}>
+        }}>{s.refsTitle}</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {REFS.map((r, i) => (
             <div key={i} style={{
               display: 'flex',
@@ -237,8 +233,8 @@ export default function SciencePage() {
           ))}
         </div>
         <p style={{ fontSize: '.82rem', color: 'var(--ink-faint)', marginTop: 20, lineHeight: 1.6 }}>
-          * Full bibliography and clinical advisory notes available to verified practitioners on request.{' '}
-          <Link href="/contact" style={{ color: 'var(--sage-deep)' }}>Contact us</Link>.
+          {s.refsFooter}{' '}
+          <Link href="/contact" style={{ color: 'var(--sage-deep)' }}>{s.refsFooterCta}</Link>.
         </p>
       </section>
 
@@ -257,10 +253,10 @@ export default function SciencePage() {
             color: 'var(--ink)',
             marginBottom: 16,
           }}>
-            Science-backed. Wisdom-informed.
+            {s.ctaTitle}
           </h2>
           <p style={{ color: 'var(--ink-soft)', lineHeight: 1.7, marginBottom: 28 }}>
-            See how the research translates into your personal wellness protocol.
+            {s.ctaBody}
           </p>
           <Link href="/assessment" style={{
             display: 'inline-block',
@@ -272,7 +268,7 @@ export default function SciencePage() {
             fontWeight: 600,
             textDecoration: 'none',
           }}>
-            Start your assessment →
+            {s.ctaCta}
           </Link>
         </div>
       </section>

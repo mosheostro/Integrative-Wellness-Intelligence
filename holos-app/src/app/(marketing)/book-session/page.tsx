@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import type { Metadata } from 'next'
 import { FOUNDER } from '@/lib/founder'
+import { getServerStrings } from '@/lib/i18n/server'
 
 export const metadata: Metadata = {
   title: 'Book a Session — Holos Integrative Wellness Intelligence',
@@ -8,40 +8,43 @@ export const metadata: Metadata = {
     'Book a 1:1 integrative wellness session with Moshe Ostrovsky. Explore your wellness profile, set your priorities, and get a personalised protocol.',
 }
 
-const SESSION_TYPES = [
-  {
-    title: 'Wellness Discovery Session',
-    duration: '60 min',
-    price: 'Complimentary',
-    tag: 'First session',
-    desc: 'A deep-dive conversation to map your current wellness landscape — symptoms, goals, lifestyle, and tradition resonance. You\'ll leave with clarity on your top three priorities and a sample protocol.',
-    cta: 'Book free session',
-    href: FOUNDER.calendly,
-    highlight: false,
-  },
-  {
-    title: 'Integrative Wellness Review',
-    duration: '90 min',
-    price: '$180',
-    tag: 'Most popular',
-    desc: 'Full 9-dimension assessment review with Moshe. Includes Ayurvedic constitution analysis, chronotype mapping, and a 30-day personalised protocol with weekly check-ins in the Holos platform.',
-    cta: 'Book session',
-    href: FOUNDER.calendly,
-    highlight: true,
-  },
-  {
-    title: 'Practitioner Partnership Call',
-    duration: '45 min',
-    price: 'Free',
-    tag: 'For professionals',
-    desc: 'For health coaches, nutritionists, therapists, and integrative practitioners interested in using Holos with clients. Learn how to onboard clients, read reports, and co-create protocols.',
-    cta: 'Book call',
-    href: FOUNDER.calendly,
-    highlight: false,
-  },
-]
+export default async function BookSessionPage() {
+  const { strings } = await getServerStrings()
+  const b = strings.bookSession
 
-export default function BookSessionPage() {
+  const SESSION_TYPES = [
+    {
+      title:     b.s1Title,
+      duration:  b.s1Duration,
+      price:     b.s1Price,
+      tag:       b.s1Tag,
+      desc:      b.s1Desc,
+      cta:       b.s1Cta,
+      href:      FOUNDER.calendly,
+      highlight: false,
+    },
+    {
+      title:     b.s2Title,
+      duration:  b.s2Duration,
+      price:     b.s2Price,
+      tag:       b.s2Tag,
+      desc:      b.s2Desc,
+      cta:       b.s2Cta,
+      href:      FOUNDER.calendly,
+      highlight: true,
+    },
+    {
+      title:     b.s3Title,
+      duration:  b.s3Duration,
+      price:     'Free',
+      tag:       b.s3Tag,
+      desc:      b.s3Desc,
+      cta:       b.s3Cta,
+      href:      FOUNDER.calendly,
+      highlight: false,
+    },
+  ]
+
   return (
     <main style={{ paddingTop: 68 }}>
 
@@ -63,6 +66,9 @@ export default function BookSessionPage() {
             margin: '0 auto 20px',
             fontSize: '1.6rem',
           }}>◈</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 12 }}>
+            {b.eyebrow}
+          </div>
           <h1 style={{
             fontFamily: 'var(--font-serif)',
             fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
@@ -71,7 +77,7 @@ export default function BookSessionPage() {
             lineHeight: 1.2,
             marginBottom: 16,
           }}>
-            Book a session with Moshe
+            {b.heroTitle}
           </h1>
           <p style={{
             fontSize: '1.05rem',
@@ -79,7 +85,7 @@ export default function BookSessionPage() {
             lineHeight: 1.75,
             marginBottom: 12,
           }}>
-            {FOUNDER.credentials}
+            {FOUNDER.credentials.join(' · ')}
           </p>
           <p style={{
             fontSize: '.95rem',
@@ -88,8 +94,7 @@ export default function BookSessionPage() {
             maxWidth: 520,
             margin: '0 auto',
           }}>
-            Personalised 1:1 sessions that blend evidence-based coaching with the wisdom
-            traditions your profile resonates most with.
+            {b.heroSubtitle}
           </p>
         </div>
       </section>
@@ -165,12 +170,11 @@ export default function BookSessionPage() {
                   borderRadius: 'var(--radius)',
                   background: s.highlight ? 'var(--gold)' : 'transparent',
                   border: s.highlight ? 'none' : '1.5px solid var(--line)',
-                  color: s.highlight ? 'var(--ink)' : 'var(--ink)',
+                  color: 'var(--ink)',
                   fontFamily: 'var(--font-body)',
                   fontWeight: 600,
                   fontSize: '.9rem',
                   textDecoration: 'none',
-                  transition: 'opacity .15s',
                 }}
               >
                 {s.cta} →
@@ -199,9 +203,9 @@ export default function BookSessionPage() {
             fontWeight: 500,
             color: 'var(--ink)',
             marginBottom: 8,
-          }}>Prefer to reach out directly?</h2>
+          }}>{b.altTitle}</h2>
           <p style={{ color: 'var(--ink-soft)', fontSize: '.9rem', lineHeight: 1.65, marginBottom: 28 }}>
-            Send a message via WhatsApp or Telegram and Moshe will reply within one business day.
+            {b.altBody}
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a

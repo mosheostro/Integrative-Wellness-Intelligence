@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
-import { PlatformFeatureGrid } from '@/components/ui/PlatformFeatureGrid'
+import { PlatformFeatureGrid, buildFeatures } from '@/components/ui/PlatformFeatureGrid'
+import { getServerStrings } from '@/lib/i18n/server'
 
 export const metadata: Metadata = {
   title: 'Platform — Holos Integrative Wellness Intelligence',
@@ -8,16 +9,19 @@ export const metadata: Metadata = {
     'Explore every tool in the Holos platform: AI coach, 9-dimension assessment, daily journal, habits, goals, reports, and more — all in one adaptive wellness intelligence layer.',
 }
 
-const TRADITIONS = [
-  { name: 'Ayurveda', tag: 'Dosha-aware personalisation' },
-  { name: 'TCM', tag: 'Qi balance & meridian patterns' },
-  { name: 'Stoicism', tag: 'Mindset resilience protocols' },
-  { name: 'Kabbalah', tag: 'Purpose & meaning mapping' },
-  { name: 'Chronobiology', tag: 'Circadian-optimised scheduling' },
-  { name: 'Functional Medicine', tag: 'Root-cause analysis' },
-]
+export default async function PlatformPage() {
+  const { strings } = await getServerStrings()
+  const p = strings.platform
 
-export default function PlatformPage() {
+  const TRADITIONS = [
+    { name: 'Ayurveda',            tag: p.tradTagAyurveda   },
+    { name: 'TCM',                 tag: p.tradTagTCM        },
+    { name: 'Stoicism',            tag: p.tradTagStoicism   },
+    { name: 'Kabbalah',            tag: p.tradTagKabbalah   },
+    { name: 'Chronobiology',       tag: p.tradTagChrono     },
+    { name: 'Functional Medicine', tag: p.tradTagFunctional },
+  ]
+
   return (
     <main style={{ paddingTop: 68 }}>
 
@@ -43,7 +47,7 @@ export default function PlatformPage() {
             textTransform: 'uppercase',
             marginBottom: 24,
           }}>
-            ◈ The Holos Platform
+            ◈ {p.eyebrow}
           </div>
           <h1 style={{
             fontFamily: 'var(--font-serif)',
@@ -53,8 +57,8 @@ export default function PlatformPage() {
             lineHeight: 1.18,
             marginBottom: 20,
           }}>
-            Every tool your wellness journey needs,<br />
-            <em>woven into one intelligent layer</em>
+            {p.heroTitle}<br />
+            <em>{p.heroTitleEm}</em>
           </h1>
           <p style={{
             fontSize: '1.1rem',
@@ -63,8 +67,7 @@ export default function PlatformPage() {
             maxWidth: 560,
             margin: '0 auto 36px',
           }}>
-            Holos unites assessment, AI coaching, habit science, and six wisdom traditions
-            into a single adaptive platform that knows you — and grows with you.
+            {p.heroSubtitle}
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/assessment" style={{
@@ -78,7 +81,7 @@ export default function PlatformPage() {
               textDecoration: 'none',
               fontSize: '.95rem',
             }}>
-              Start your assessment →
+              {p.heroCta1}
             </Link>
             <Link href="/demo-dashboard" style={{
               display: 'inline-block',
@@ -91,7 +94,7 @@ export default function PlatformPage() {
               textDecoration: 'none',
               fontSize: '.95rem',
             }}>
-              See a live demo
+              {p.heroCta2}
             </Link>
           </div>
         </div>
@@ -107,9 +110,9 @@ export default function PlatformPage() {
           textAlign: 'center',
           marginBottom: 48,
         }}>
-          Eight tools. One coherent picture.
+          {p.featTitle}
         </h2>
-        <PlatformFeatureGrid />
+        <PlatformFeatureGrid features={buildFeatures(p)} />
       </section>
 
       {/* Traditions */}
@@ -126,7 +129,7 @@ export default function PlatformPage() {
             color: 'var(--sage)',
             marginBottom: 16,
           }}>
-            Wisdom traditions powering the platform
+            {p.tradEyebrow}
           </p>
           <h2 style={{
             fontFamily: 'var(--font-serif)',
@@ -135,7 +138,7 @@ export default function PlatformPage() {
             color: 'var(--canvas)',
             marginBottom: 48,
           }}>
-            Six frameworks. One synthesis.
+            {p.tradTitle}
           </h2>
           <div style={{
             display: 'grid',
@@ -177,7 +180,7 @@ export default function PlatformPage() {
               textDecoration: 'none',
               fontSize: '.95rem',
             }}>
-              Explore the methodologies →
+              {p.tradCta}
             </Link>
           </div>
         </div>
@@ -193,14 +196,14 @@ export default function PlatformPage() {
             color: 'var(--ink)',
             marginBottom: 16,
           }}>
-            Ready to begin?
+            {p.ctaTitle}
           </h2>
           <p style={{
             color: 'var(--ink-soft)',
             lineHeight: 1.7,
             marginBottom: 32,
           }}>
-            Start with a free assessment and see your complete wellness profile in minutes.
+            {p.ctaBody}
           </p>
           <Link href="/assessment" style={{
             display: 'inline-block',
@@ -213,7 +216,7 @@ export default function PlatformPage() {
             textDecoration: 'none',
             fontSize: '1rem',
           }}>
-            Take the free assessment →
+            {p.ctaCta}
           </Link>
         </div>
       </section>

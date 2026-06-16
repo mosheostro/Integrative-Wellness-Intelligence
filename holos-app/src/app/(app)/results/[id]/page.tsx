@@ -7,6 +7,7 @@ import { WellnessOrb } from '@/components/ui/WellnessOrb'
 import type { DimensionScores, WellnessState, Recommendation } from '@/lib/types'
 import { getStateDef } from '@/engine/state-machine'
 import { FRAMEWORK_REGISTRY } from '@/frameworks'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface ResultData {
   assessment: { framework: string; wellness_state: WellnessState; composite_score: number }
@@ -19,10 +20,6 @@ interface ResultData {
   recommendations: (Recommendation & { id: string; status: string })[]
 }
 
-const DIMENSION_LABELS: Record<string, string> = {
-  nutrition:'Nutrition', sleep:'Sleep', recovery:'Recovery', stress:'Stress',
-  movement:'Movement', emotional:'Emotional', life_balance:'Life Balance', purpose:'Purpose', energy:'Energy',
-}
 const DIM_COLORS: Record<string, string> = {
   nutrition:'--gold-deep', sleep:'--indigo', recovery:'--sage', stress:'--rose',
   movement:'--clay', emotional:'--sage', life_balance:'--gold', purpose:'--indigo', energy:'--sage',
@@ -30,16 +27,20 @@ const DIM_COLORS: Record<string, string> = {
 
 export default function ResultsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
-  const [data, setData] = useState<ResultData | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+  const { strings } = useLanguage()
+  const s = strings.results
+  const dims = strings.dimensions
+
+  const [data, setData]         = useState<ResultData | null>(null)
+  const [loading, setLoading]   = useState(true)
+  const [error, setError]       = useState('')
   const [activeTab, setActiveTab] = useState<'overview'|'framework'|'recommendations'>('overview')
 
   useEffect(() => {
     fetch(`/api/results/${id}`)
       .then(r => r.json())
       .then(setData)
-      .catch(() => setError('Failed to load results'))
+      .catch(() => setError(strings.common.error))
       .finally(() => setLoading(false))
   }, [id])
 
@@ -48,15 +49,33 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
       <div className="spinner" style={{ width:40, height:40, borderWidth:3 }} />
     </div>
   )
-  if (error || !data) return <div className="wrap section-pad"><p style={{ color:'var(--rose)' }}>{error || 'Results not found'}</p></div>
+  if (error || !data) return (
+    <div className="wrap section-pad">
+      <p style={{ color:'var(--rose)' }}>{error || strings.common.error}</p>
+    </div>
+  )
 
   const { assessment, scores, fwResult, recommendations } = data
   const stateDef = getStateDef(assessment.wellness_state)
   const fw = FRAMEWORK_REGISTRY[assessment.framework as keyof typeof FRAMEWORK_REGISTRY]
 
-  const dims = ['nutrition','sleep','recovery','stress','movement','emotional','life_balance','purpose','energy'] as const
-  const radarAxes  = ['Body','Sleep','Recovery','Stress','Movement','Emotional','Balance','Purpose','Energy']
-  const radarVals  = dims.map(d => d === 'stress' ? 100 - scores[d] : scores[d])
+  const dimKeys = ['nutrition','sleep','recovery','stress','movement','emotional','life_balance','purpose','energy'] as const
+
+  // Translated dimension labels (stress → calm)
+  const dimLabels: Record<string, string> = {
+    nutrition: dims.nutrition, sleep: dims.sleep, recovery: dims.recovery,
+    stress: dims.calm, movement: dims.movement, emotional: dims.emotional,
+    life_balance: dims.balance, purpose: dims.purpose, energy: dims.energy,
+  }
+
+  const radarAxes = [dims.nutrition, dims.sleep, dims.recovery, dims.calm, dims.movement, dims.emotional, dims.balance, dims.purpose, dims.energy]
+  const radarVals = dimKeys.map(d => d === 'stress' ? 100 - scores[d] : scores[d])
+
+  const tabLabels: Record<'overview' | 'framework' | 'recommendations', string> = {
+    overview:        s.overview,
+    framework:       s.framework,
+    recommendations: s.recommendations,
+  }
 
   return (
     <div className="wrap" style={{ paddingTop:40, paddingBottom:80 }}>
@@ -70,14 +89,14 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
           </div>
           <h1 className="h1" style={{ marginBottom:12 }}>
             Your wellness ecosystem<br/>
-            <span className="serif-it">{stateDef.label === 'BALANCED' ? 'is in balance.' : `needs attention.`}</span>
+            <span className="serif-it">{stateDef.label === 'BALANCED' ? s.inBalance : s.needsAttention}</span>
           </h1>
           <p className="lede" style={{ marginBottom:20 }}>{stateDef.description}</p>
           <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
             <span className="state-pill" style={{ background:`rgba(var(--sage-rgb,122,158,142),.15)`, color:`var(${stateDef.color})` }}>
               {stateDef.emoji} {stateDef.label}
             </span>
-            <span className="badge">Score: {assessment.composite_score}/100</span>
+            <span className="badge">{s.score} {assessment.composite_score}/100</span>
           </div>
         </div>
       </div>
@@ -89,8 +108,8 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
             padding:'10px 20px', fontWeight: activeTab===tab ? 600 : 400,
             color: activeTab===tab ? 'var(--ink)' : 'var(--ink-soft)',
             borderBottom: activeTab===tab ? '2px solid var(--sage)' : '2px solid transparent',
-            background:'transparent', cursor:'pointer', fontSize:'.9rem', textTransform:'capitalize',
-          }}>{tab}</button>
+            background:'transparent', cursor:'pointer', fontSize:'.9rem',
+          }}>{tabLabels[tab]}</button>
         ))}
       </div>
 
@@ -98,23 +117,20 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
       {activeTab === 'overview' && (
         <div>
           <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:32, marginBottom:40 }}>
-            {/* Radar */}
             <div className="card">
-              <div className="eyebrow" style={{ marginBottom:16 }}>◎ Wellness Radar</div>
+              <div className="eyebrow" style={{ marginBottom:16 }}>◎ {s.wellnessRadar}</div>
               <RadarChart axes={radarAxes} values={radarVals} size={280} />
             </div>
 
-            {/* Dimension scores */}
             <div className="card">
-              <div className="eyebrow" style={{ marginBottom:20 }}>◈ Dimension Scores</div>
+              <div className="eyebrow" style={{ marginBottom:20 }}>◈ {s.dimensionScores}</div>
               <div style={{ display:'flex', flexDirection:'column', gap:14 }}>
-                {dims.map(dim => {
+                {dimKeys.map(dim => {
                   const val = dim === 'stress' ? 100 - scores[dim] : scores[dim]
-                  const label = dim === 'stress' ? 'Calm' : DIMENSION_LABELS[dim]
                   return (
                     <div key={dim}>
                       <div style={{ display:'flex', justifyContent:'space-between', marginBottom:5 }}>
-                        <span style={{ fontSize:'.8125rem', color:'var(--ink-soft)' }}>{label}</span>
+                        <span style={{ fontSize:'.8125rem', color:'var(--ink-soft)' }}>{dimLabels[dim]}</span>
                         <span style={{ fontFamily:'var(--font-mono)', fontSize:12, color:'var(--ink)', fontWeight:600 }}>{val}</span>
                       </div>
                       <div className="progress-track" style={{ height:6 }}>
@@ -127,17 +143,16 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
             </div>
           </div>
 
-          {/* Score rings grid */}
           <div className="card">
-            <div className="eyebrow" style={{ marginBottom:24 }}>◆ Dimension Rings</div>
+            <div className="eyebrow" style={{ marginBottom:24 }}>◆ {s.dimensionRings}</div>
             <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(100px, 1fr))', gap:24 }}>
-              {dims.slice(0,6).map(dim => (
+              {dimKeys.slice(0,6).map(dim => (
                 <ScoreRing
                   key={dim}
                   value={dim === 'stress' ? 100 - scores[dim] : scores[dim]}
                   color={DIM_COLORS[dim]}
                   size={80}
-                  label={dim === 'stress' ? 'Calm' : DIMENSION_LABELS[dim]}
+                  label={dimLabels[dim]}
                 />
               ))}
             </div>
@@ -149,16 +164,15 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
       {activeTab === 'framework' && (
         <div>
           <div className="card" style={{ marginBottom:24 }}>
-            <div className="eyebrow" style={{ marginBottom:16 }}>{fw?.icon} {fw?.label} Interpretation</div>
+            <div className="eyebrow" style={{ marginBottom:16 }}>{fw?.icon} {fw?.label} {s.interpretation}</div>
             <p style={{ lineHeight:1.8, color:'var(--ink-soft)' }}>{fwResult.narrative}</p>
           </div>
 
-          {/* Dosha if available */}
           {fwResult.dosha_vata != null && (
             <div className="card" style={{ marginBottom:24 }}>
-              <div className="eyebrow" style={{ marginBottom:16 }}>◎ Dosha Balance</div>
+              <div className="eyebrow" style={{ marginBottom:16 }}>◎ {s.doshaBalance}</div>
               <div style={{ marginBottom:8 }}>
-                <strong style={{ fontFamily:'var(--font-serif)' }}>Dominant: {fwResult.dominant_dosha}</strong>
+                <strong style={{ fontFamily:'var(--font-serif)' }}>{s.dominant} {fwResult.dominant_dosha}</strong>
               </div>
               {[
                 { label:'Vata', val:fwResult.dosha_vata, color:'--indigo' },
@@ -178,10 +192,9 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
             </div>
           )}
 
-          {/* Elements if available */}
           {fwResult.element_wood != null && (
             <div className="card">
-              <div className="eyebrow" style={{ marginBottom:16 }}>◎ Five Elements</div>
+              <div className="eyebrow" style={{ marginBottom:16 }}>◎ {s.fiveElements}</div>
               {[
                 { label:'Wood', val:fwResult.element_wood, color:'--sage' },
                 { label:'Fire', val:fwResult.element_fire, color:'--clay' },
@@ -208,7 +221,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
       {activeTab === 'recommendations' && (
         <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
           {recommendations.length === 0 && (
-            <p className="muted">No recommendations available. Retake your assessment to generate a fresh plan.</p>
+            <p className="muted">{s.noRecs}</p>
           )}
           {recommendations.map((rec, i) => (
             <div key={rec.id} className="card card-hover" style={{ borderLeft:`3px solid var(--sage)` }}>
@@ -220,15 +233,15 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                   </h3>
                 </div>
                 <div style={{ textAlign:'right', flexShrink:0 }}>
-                  <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'var(--ink-faint)' }}>Impact</div>
+                  <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'var(--ink-faint)' }}>{s.impact}</div>
                   <div style={{ fontFamily:'var(--font-mono)', fontSize:16, fontWeight:600, color:'var(--sage)' }}>{rec.impact_score}</div>
                 </div>
               </div>
               <p style={{ color:'var(--ink-soft)', fontSize:'.9rem', lineHeight:1.7 }}>{rec.description}</p>
               {rec.evidence_level && (
                 <div style={{ marginTop:12 }}>
-                  <span className="badge">{rec.evidence_level} evidence</span>
-                  {rec.time_minutes && <span className="badge" style={{ marginLeft:6 }}>{rec.time_minutes} min</span>}
+                  <span className="badge">{rec.evidence_level} {s.evidence}</span>
+                  {rec.time_minutes && <span className="badge" style={{ marginLeft:6 }}>{rec.time_minutes} {s.min}</span>}
                 </div>
               )}
             </div>
@@ -238,8 +251,8 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
 
       {/* CTA */}
       <div style={{ marginTop:48, display:'flex', gap:12 }}>
-        <a href="/coach" className="btn btn-primary">Talk to your AI coach →</a>
-        <a href="/assessment" className="btn btn-ghost">Reassess under a different framework</a>
+        <a href="/coach" className="btn btn-primary">{s.talkCoach}</a>
+        <a href="/assessment" className="btn btn-ghost">{s.reassess}</a>
       </div>
     </div>
   )
