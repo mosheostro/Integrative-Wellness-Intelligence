@@ -19,7 +19,6 @@ export default function CoachPage() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
-  const supabase = createClient()
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -34,7 +33,7 @@ export default function CoachPage() {
     setLoading(true)
 
     try {
-      const { data: { session } } = await supabase.auth.getSession()
+      const { data: { session } } = await createClient().auth.getSession()
       const res = await fetch('/api/coach', {
         method: 'POST',
         headers: {
