@@ -197,3 +197,12 @@ export default function SiteFooter() {
                 fontSize:       '.75rem',
                 color:          'rgba(255,255,255,.35)',
                 textDecoration: 'none',
+              }}>
+              {f.termsOfService}
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}

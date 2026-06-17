@@ -57,4 +57,19 @@ function LoginForm() {
 
         <p style={{ textAlign:'center', marginTop:24, color:'var(--ink-soft)', fontSize:'.875rem' }}>
           {s.noAccount}{' '}
-          <Link href="/auth/signup" style={{ color:'var(--sage)', textDecoration:'none', fo
+          <Link href="/auth/signup" style={{ color:'var(--sage)', textDecoration:'none', fontWeight:500 }}>
+            {s.createFree}
+          </Link>
+        </p>
+      </div>
+    </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
+  )
+}

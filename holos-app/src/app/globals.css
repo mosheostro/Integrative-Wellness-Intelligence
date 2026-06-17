@@ -293,4 +293,128 @@ p a, li a, td a, span a {
 /* ── Selection ────────────────────────────────────────────── */
 ::selection { background: rgba(122,158,142,.25); color: var(--ink); }
 
-/* ── Dark mode system preference (auto) ────────�
+/* ── Dark mode system preference (auto) ──────────────────── */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --canvas:          #16181F;
+    --canvas2:         #1E2029;
+    --surface:         #252832;
+    --surface-2:       #2E3140;
+    --line:            #383B4D;
+    --ink:             #EDE9E0;
+    --ink-soft:        #B8B4A8;
+    --ink-faint:       #9698AA; /* was #7A7A8A → now 6.22:1 on canvas ✓ */
+    --gold-text:       #C4A030; /* light gold for dark surfaces (7.11:1 on canvas ✓) */
+    --bg-warm:         #1A1C24;
+    --nav-bg:          rgba(22,24,31,.80);
+    --nav-bg-scrolled: rgba(22,24,31,.96);
+  }
+}
+
+/* ── details/summary reset ───────────────────────────────── */
+details summary { cursor: pointer; user-select: none; }
+details summary::-webkit-details-marker { display: none; }
+details[open] summary span:last-child { transform: rotate(45deg); }
+
+/* ── RTL Support (Hebrew) ────────────────────────────────── */
+[dir="rtl"] {
+  text-align: right;
+}
+
+/* Flex rows flip direction */
+[dir="rtl"] nav,
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Inputs + textareas align right */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Nav items: margin/padding sides swap via logical properties */
+[dir="rtl"] a,
+[dir="rtl"] button {
+  /* Inherits text-align:right from ancestor; no override needed for most */
+}
+
+/* Icon + text pairs inside buttons/links stay sensible */
+[dir="rtl"] .icon-label {
+  flex-direction: row-reverse;
+}
+
+/* Dropdown menus open from correct edge */
+[dir="rtl"] [data-dropdown] {
+  left: 0;
+  right: auto;
+}
+
+/* Sidebar nav border indicator flips */
+[dir="rtl"] [data-active-nav] {
+  border-left: none;
+  border-right: 2px solid var(--sage);
+}
+
+/* Toggles / switches: mirror thumb direction */
+[dir="rtl"] [role="switch"] > div {
+  /* JS handles left/right offset — CSS mirrors the container */
+  transform: scaleX(-1);
+}
+
+/* List items indent from right */
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+/* Progress bars fill from right */
+[dir="rtl"] [role="progressbar"] {
+  direction: rtl;
+}
+
+/* Card / grid gap convention remains the same — no override needed */
+
+/* Nav logo margin: swap end/start */
+[dir="rtl"] .logo-link {
+  margin-right: 0;
+  margin-left: 32px;
+}
+
+/* ── Mobile nav: bottom tab bar spacing ──────────────────── */
+/* App pages need bottom padding to clear the mobile tab bar */
+@media (max-width: 767px) {
+  .app-main {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* RTL: scroll-to-top button flips to left side */
+[dir="rtl"] .scroll-to-top {
+  right: auto;
+  left: clamp(16px, 4vw, 32px);
+}
+
+/* ── Mobile viewport fixes ────────────────────────────────── */
+/* Prevent content from being obscured under iOS notch / dynamic island */
+@supports (padding-top: env(safe-area-inset-top)) {
+  body {
+    padding-left:  env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+}
+
+/* Disable tap highlight on interactive elements */
+a, button, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent horizontal overflow on mobile */
+@media (max-width: 767px) {
+  html, body {
+    overflow-x: hidden;
+  }
+}

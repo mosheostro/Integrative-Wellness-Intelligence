@@ -77,4 +77,21 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const isRTL = RTL_LOCALES.includes(locale)
   const strings = TRANSLATIONS[locale]
-  const t = useCallback((key: string) => getTranslation(locale, key), [lo
+  const t = useCallback((key: string) => getTranslation(locale, key), [locale])
+
+  return (
+    <LanguageContext.Provider value={{
+      locale, t, strings, setLocale, isRTL, dir: isRTL ? 'rtl' : 'ltr',
+    }}>
+      {children}
+    </LanguageContext.Provider>
+  )
+}
+
+export function useLanguage() {
+  return useContext(LanguageContext)
+}
+
+// Re-export for convenience
+export type { Locale }
+export { LOCALE_META, RTL_LOCALES }
