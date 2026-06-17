@@ -89,7 +89,7 @@ export default function JournalPage() {
   return (
     <div style={{ maxWidth: 820, margin: '0 auto', padding: '32px 24px' }}>
       <BackButton href="/dashboard" style={{ marginBottom: 24 }} />
-      {/* Header */}
+      {/* Header */
       <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◈ {strings.nav.journal}</div>
@@ -223,4 +223,23 @@ export default function JournalPage() {
                     </span>
                   )}
                 </div>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', lineHeight: 1.75, color: 'var(--ink-soft)', margin: 0, whiteSpace: '
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', lineHeight: 1.75, color: 'var(--ink-soft)', margin: 0, whiteSpace: 'pre-wrap' }}>
+                  {entry.content}
+                </p>
+                {entry.dimension_tags.length > 0 && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 12 }}>
+                    {entry.dimension_tags.map(tag => (
+                      <span key={tag} style={{ padding: '3px 10px', borderRadius: 100, background: 'var(--line)', color: 'var(--ink-faint)', fontFamily: 'var(--font-body)', fontSize: '.72rem' }}>
+                        {dimLabel(tag)}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}

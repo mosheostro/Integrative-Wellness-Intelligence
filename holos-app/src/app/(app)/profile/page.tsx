@@ -160,4 +160,13 @@ export default function ProfilePage() {
         <div style={{ marginTop: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
           <button type="submit" disabled={saving}
             style={{ padding: '11px 24px', borderRadius: 'var(--radius)', background: saving ? 'var(--line)' : 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.9rem', border: 'none', cursor: saving ? 'wait' : 'pointer' }}>
-            {saving ? s
+            {saving ? s.saving : s.saveProfile}
+          </button>
+          {saved && (
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: 'var(--sage-deep)', fontWeight: 600 }}>{s.saved}</span>
+          )}
+        </div>
+      </form>
+    </div>
+  )
+}

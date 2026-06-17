@@ -189,4 +189,17 @@ export default async function ProgressPage() {
                       <div style={{ fontWeight: 500, fontSize: '.875rem', color: 'var(--ink)' }}>
                         {(a.wellness_state ?? 'UNKNOWN').replace(/_/g, ' ')}
                       </div>
-                      <div style
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.75rem', color: 'var(--ink-faint)' }}>
+                        {new Date(a.completed_at).toLocaleDateString(dateLocale, { month: 'short', day: 'numeric', year: 'numeric' })} · {a.framework}
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  )
+}

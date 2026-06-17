@@ -79,7 +79,7 @@ export default function GoalsPage() {
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: '32px 24px' }}>
       <BackButton href="/dashboard" style={{ marginBottom: 24 }} />
-      {/* Header */}
+      {/* Header */
       <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◆ {strings.nav.goals}</div>
@@ -188,4 +188,18 @@ function GoalCard({ goal, onProgress, target, dateLocale, dimLabel }: {
           <div style={{ display: 'flex', gap: 4 }}>
             {[25, 50, 75, 100].map(p => (
               <button key={p} onClick={() => onProgress(goal.id, p)}
-                style={{ padding: '3px 8px', borderRadius: 4, border: '1px solid var(--line)', background: goal.progress >= p ? 'var(--sage-deep)' : 'transparent', 
+                style={{ padding: '3px 8px', borderRadius: 4, border: '1px solid var(--line)', background: goal.progress >= p ? 'var(--sage-deep)' : 'transparent', color: goal.progress >= p ? '#fff' : 'var(--ink-soft)', fontFamily: 'var(--font-mono)', fontSize: '.72rem', cursor: 'pointer' }}>
+                  {p}%
+                </button>
+            ))}
+          </div>
+        )}
+        {goal.target_date && (
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', color: 'var(--ink-faint)', marginTop: 8 }}>
+            {target}: {new Date(goal.target_date).toLocaleDateString(dateLocale, { month: 'short', day: 'numeric', year: 'numeric' })}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}

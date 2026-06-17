@@ -73,7 +73,7 @@ export default async function ReportsPage() {
   return (
     <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 24px' }}>
       <BackButton href="/dashboard" style={{ marginBottom: 24 }} />
-      {/* Header */}
+      {/* Header */
       <div style={{ marginBottom: 40 }}>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◎ {nav.reports}</div>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
@@ -175,4 +175,15 @@ export default async function ReportsPage() {
 
           {/* Actions */}
           <div style={{ display: 'flex', gap: 12 }}>
-            <Link href="/assessment" style={{ padding: '11px 24px', borderRadius: 'var(--radius)', background: 'var(--s
+            <Link href="/assessment" style={{ padding: '11px 24px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.9rem', textDecoration: 'none' }}>
+              {s.newAssessment}
+            </Link>
+            <Link href="/progress" style={{ padding: '11px 24px', borderRadius: 'var(--radius)', border: '1.5px solid var(--line)', color: 'var(--ink)', fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '.9rem', textDecoration: 'none' }}>
+              {s.viewProgress}
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}

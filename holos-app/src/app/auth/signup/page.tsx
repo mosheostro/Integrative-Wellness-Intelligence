@@ -62,4 +62,9 @@ export default function SignupPage() {
 
         <p style={{ textAlign:'center', marginTop:24, color:'var(--ink-soft)', fontSize:'.875rem' }}>
           {s.haveAccount}{' '}
-          <Link href="/auth/login" style={{ color:'var(--sage)', textDecoration:'none', fo
+          <Link href="/auth/login" style={{ color:'var(--sage)', textDecoration:'none', fontWeight:500 }}>{s.signInLink}</Link>
+        </p>
+      </div>
+    </div>
+  )
+}
