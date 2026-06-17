@@ -97,21 +97,4 @@ export default async function TermsPage() {
               <p>These Terms are governed by the laws of the State of Israel, without regard to conflict of law provisions.</p>
             </T>
 
-            <T title="13. Contact">
-              <p>Questions about these Terms? Email us at <a href={`mailto:${FOUNDER.email}`} style={{ color: 'var(--sage-deep)' }}>{FOUNDER.email}</a>.</p>
-            </T>
-          </div>
-        </div>
-      </section>
-    </div>
-  )
-}
-
-function T({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div style={{ marginBottom: 28, paddingBottom: 28, borderBottom: '1px solid var(--line)' }}>
-      <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 600, color: 'var(--ink)', marginBottom: 10 }}>{title}</h2>
-      {children}
-    </div>
-  )
-}
+            <T tit

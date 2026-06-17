@@ -285,7 +285,7 @@ export default function AssessmentPage() {
                     color: isSelected ? 'var(--ink)' : 'var(--ink-soft)',
                     fontWeight: isSelected ? 500 : 400, lineHeight: 1.4,
                   }}>
-                    {opt}
+                    {opt.text}
                   </span>
                 </button>
               )
@@ -385,5 +385,4 @@ export default function AssessmentPage() {
         )}
       </div>
     </div>
-  )
-}
+ 
