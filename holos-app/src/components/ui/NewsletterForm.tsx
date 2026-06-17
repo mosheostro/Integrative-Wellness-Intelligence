@@ -1,11 +1,16 @@
 'use client'
 
-export function NewsletterForm() {
+interface Props {
+  submitLabel?: string
+  placeholder?: string
+}
+
+export function NewsletterForm({ submitLabel = 'Subscribe →', placeholder = 'your@email.com' }: Props) {
   return (
     <form onSubmit={e => e.preventDefault()} style={{ display: 'flex', gap: 8, maxWidth: 400, margin: '0 auto' }}>
       <input
         type="email"
-        placeholder="your@email.com"
+        placeholder={placeholder}
         style={{
           flex:         1,
           padding:      '11px 16px',
@@ -31,7 +36,7 @@ export function NewsletterForm() {
           cursor:       'pointer',
           whiteSpace:   'nowrap',
         }}>
-        Subscribe &#8594;
+        {submitLabel}
       </button>
     </form>
   )

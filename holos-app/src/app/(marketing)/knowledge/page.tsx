@@ -152,7 +152,7 @@ export default async function KnowledgePage() {
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', color: 'var(--ink-soft)', margin: '0 0 28px', lineHeight: 1.65 }}>
             {k.newsletterBody}
           </p>
-          <NewsletterForm />
+          <NewsletterForm submitLabel={k.newsletterSubmit} placeholder={k.newsletterPlaceholder} />
         </div>
       </section>
     </div>

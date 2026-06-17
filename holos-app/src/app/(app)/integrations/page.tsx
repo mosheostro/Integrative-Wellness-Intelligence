@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { getServerStrings } from '@/lib/i18n/server'
 
 export const metadata: Metadata = {
   title: 'Integrations — Holos Integrative Wellness Intelligence',
@@ -7,59 +8,76 @@ export const metadata: Metadata = {
     'Connect Holos with your wearables, health apps, and calendar. Apple Health, Oura, Garmin, Google Fit, Whoop, and more.',
 }
 
+// catKey is the lookup key into ig.cat1–cat5; status is English key for color lookup
 const INTEGRATIONS = [
   {
-    category: 'Wearables & Health Data',
+    catKey: 'cat1',
     items: [
-      { name: 'Apple Health', desc: 'Steps, sleep, HRV, heart rate, workouts', status: 'Available' },
-      { name: 'Oura Ring', desc: 'Readiness score, sleep stages, HRV, activity', status: 'Available' },
-      { name: 'Garmin Connect', desc: 'Activity, sleep, stress score, body battery', status: 'Available' },
-      { name: 'Whoop', desc: 'Recovery, strain, sleep performance', status: 'Beta' },
-      { name: 'Fitbit / Google Fit', desc: 'Steps, sleep, heart rate, active minutes', status: 'Available' },
-      { name: 'Samsung Health', desc: 'Activity, sleep, stress tracking', status: 'Coming soon' },
+      { name: 'Apple Health',       desc: 'Steps, sleep, HRV, heart rate, workouts',         status: 'Available'    },
+      { name: 'Oura Ring',          desc: 'Readiness score, sleep stages, HRV, activity',     status: 'Available'    },
+      { name: 'Garmin Connect',     desc: 'Activity, sleep, stress score, body battery',       status: 'Available'    },
+      { name: 'Whoop',              desc: 'Recovery, strain, sleep performance',               status: 'Beta'         },
+      { name: 'Fitbit / Google Fit',desc: 'Steps, sleep, heart rate, active minutes',          status: 'Available'    },
+      { name: 'Samsung Health',     desc: 'Activity, sleep, stress tracking',                  status: 'Coming soon'  },
     ],
   },
   {
-    category: 'Nutrition & Food',
+    catKey: 'cat2',
     items: [
-      { name: 'Cronometer', desc: 'Detailed macro and micronutrient tracking', status: 'Available' },
-      { name: 'MyFitnessPal', desc: 'Food diary and calorie tracking', status: 'Beta' },
-      { name: 'Lifesum', desc: 'Meal plans and nutritional insights', status: 'Coming soon' },
+      { name: 'Cronometer',   desc: 'Detailed macro and micronutrient tracking',  status: 'Available'   },
+      { name: 'MyFitnessPal', desc: 'Food diary and calorie tracking',             status: 'Beta'        },
+      { name: 'Lifesum',      desc: 'Meal plans and nutritional insights',         status: 'Coming soon' },
     ],
   },
   {
-    category: 'Calendar & Scheduling',
+    catKey: 'cat3',
     items: [
       { name: 'Google Calendar', desc: 'Sync habits and sessions to your calendar', status: 'Available' },
-      { name: 'Apple Calendar', desc: 'Push wellness blocks to iCal', status: 'Available' },
-      { name: 'Calendly', desc: 'Book practitioner sessions directly in Holos', status: 'Available' },
+      { name: 'Apple Calendar',  desc: 'Push wellness blocks to iCal',              status: 'Available' },
+      { name: 'Calendly',        desc: 'Book practitioner sessions directly in Holos', status: 'Available' },
     ],
   },
   {
-    category: 'Mental Health & Mindfulness',
+    catKey: 'cat4',
     items: [
-      { name: 'Headspace', desc: 'Sync meditation minutes and streaks', status: 'Beta' },
-      { name: 'Calm', desc: 'Import sleep stories and meditation sessions', status: 'Coming soon' },
-      { name: 'Insight Timer', desc: 'Connect meditation practice data', status: 'Coming soon' },
+      { name: 'Headspace',    desc: 'Sync meditation minutes and streaks',              status: 'Beta'        },
+      { name: 'Calm',         desc: 'Import sleep stories and meditation sessions',     status: 'Coming soon' },
+      { name: 'Insight Timer', desc: 'Connect meditation practice data',               status: 'Coming soon' },
     ],
   },
   {
-    category: 'Lab & Biomarker Data',
+    catKey: 'cat5',
     items: [
-      { name: 'Function Health', desc: 'Import 100+ biomarker panel results', status: 'Beta' },
-      { name: 'Levels', desc: 'Continuous glucose monitoring insights', status: 'Coming soon' },
-      { name: 'Viome', desc: 'Gut microbiome and precision nutrition data', status: 'Coming soon' },
+      { name: 'Function Health', desc: 'Import 100+ biomarker panel results',          status: 'Beta'        },
+      { name: 'Levels',          desc: 'Continuous glucose monitoring insights',        status: 'Coming soon' },
+      { name: 'Viome',           desc: 'Gut microbiome and precision nutrition data',   status: 'Coming soon' },
     ],
   },
 ]
 
 const STATUS_STYLES: Record<string, { bg: string; color: string }> = {
-  Available: { bg: 'oklch(0.96 0.04 155 / 0.6)', color: 'var(--sage-deep)' },
-  Beta: { bg: 'oklch(0.96 0.06 60 / 0.5)', color: 'oklch(0.45 0.1 60)' },
-  'Coming soon': { bg: 'var(--canvas2)', color: 'var(--ink-faint)' },
+  Available:     { bg: 'oklch(0.96 0.04 155 / 0.6)', color: 'var(--sage-deep)' },
+  Beta:          { bg: 'oklch(0.96 0.06 60 / 0.5)',  color: 'oklch(0.45 0.1 60)' },
+  'Coming soon': { bg: 'var(--canvas2)',               color: 'var(--ink-faint)' },
 }
 
-export default function IntegrationsPage() {
+export default async function IntegrationsPage() {
+  const { strings } = await getServerStrings()
+  const ig = strings.integrations
+
+  // Map English status keys → localised display labels
+  const STATUS_LABEL: Record<string, string> = {
+    Available:     ig.statusAvailable,
+    Beta:          ig.statusBeta,
+    'Coming soon': ig.statusSoon,
+  }
+
+  // Map catKey → localised category name
+  const CAT_LABELS: Record<string, string> = {
+    cat1: ig.cat1, cat2: ig.cat2, cat3: ig.cat3,
+    cat4: ig.cat4, cat5: ig.cat5,
+  }
+
   return (
     <main style={{ paddingTop: 68 }}>
 
@@ -85,7 +103,7 @@ export default function IntegrationsPage() {
             textTransform: 'uppercase',
             marginBottom: 24,
           }}>
-            ◈ Connect your data
+            ◈ {ig.eyebrow}
           </div>
           <h1 style={{
             fontFamily: 'var(--font-serif)',
@@ -95,7 +113,7 @@ export default function IntegrationsPage() {
             lineHeight: 1.2,
             marginBottom: 16,
           }}>
-            Your health data,<br /><em>all in one place</em>
+            {ig.heroTitle}<br /><em>{ig.heroTitleEm}</em>
           </h1>
           <p style={{
             fontSize: '1rem',
@@ -104,9 +122,7 @@ export default function IntegrationsPage() {
             maxWidth: 500,
             margin: '0 auto 32px',
           }}>
-            Holos connects with your wearables, nutrition apps, calendar, and lab
-            results to build the most complete picture of your wellness — without
-            manual data entry.
+            {ig.heroSubtitle}
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/auth/signup" style={{
@@ -120,7 +136,7 @@ export default function IntegrationsPage() {
               textDecoration: 'none',
               fontSize: '.95rem',
             }}>
-              Connect your apps →
+              {ig.ctaCta}
             </Link>
             <Link href="/contact" style={{
               display: 'inline-block',
@@ -133,7 +149,7 @@ export default function IntegrationsPage() {
               textDecoration: 'none',
               fontSize: '.95rem',
             }}>
-              Request an integration
+              {ig.ctaCta2}
             </Link>
           </div>
         </div>
@@ -143,7 +159,7 @@ export default function IntegrationsPage() {
       <section style={{ padding: '64px 24px 80px', maxWidth: 1000, margin: '0 auto' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
           {INTEGRATIONS.map(cat => (
-            <div key={cat.category}>
+            <div key={cat.catKey}>
               <h2 style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: '1.15rem',
@@ -153,7 +169,7 @@ export default function IntegrationsPage() {
                 paddingBottom: 12,
                 borderBottom: '1px solid var(--line)',
               }}>
-                {cat.category}
+                {CAT_LABELS[cat.catKey]}
               </h2>
               <div style={{
                 display: 'grid',
@@ -188,7 +204,7 @@ export default function IntegrationsPage() {
                           fontFamily: 'var(--font-mono)',
                           letterSpacing: '.04em',
                           whiteSpace: 'nowrap',
-                        }}>{item.status}</span>
+                        }}>{STATUS_LABEL[item.status]}</span>
                       </div>
                       <p style={{ fontSize: '.83rem', color: 'var(--ink-soft)', lineHeight: 1.6 }}>{item.desc}</p>
                     </div>
@@ -214,11 +230,10 @@ export default function IntegrationsPage() {
             color: 'var(--canvas)',
             marginBottom: 16,
           }}>
-            Building something for practitioners?
+            {ig.apiTitle}
           </h2>
           <p style={{ color: 'rgba(255,255,255,.65)', lineHeight: 1.75, marginBottom: 32 }}>
-            The Holos API lets you embed wellness scoring, tradition analysis, and AI coaching
-            directly in your own clinical or coaching platform.
+            {ig.apiBody}
           </p>
           <Link href="/contact" style={{
             display: 'inline-block',
@@ -231,7 +246,7 @@ export default function IntegrationsPage() {
             textDecoration: 'none',
             fontSize: '.95rem',
           }}>
-            Talk to us about the API →
+            {ig.apiCta}
           </Link>
         </div>
       </section>

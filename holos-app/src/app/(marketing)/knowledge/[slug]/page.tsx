@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getServerStrings } from '@/lib/i18n/server'
 
 const ARTICLES: Record<string, {
   title: string; category: string; readTime: string; date: string; author: string;
@@ -123,15 +124,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
+  const [{ slug }, { strings }] = await Promise.all([params, getServerStrings()])
+  const k = strings.knowledge
+
   const article = ARTICLES[slug] ?? {
-    title: 'Article Not Found',
+    title: k.articleNotFound,
     category: 'Knowledge',
     readTime: '—',
     date: '—',
     author: 'HOLOS',
-    intro: "This article hasn't been published yet.",
-    body: ["We're continuously expanding the HOLOS Knowledge Center. Check back soon, or explore other articles below."]
+    intro: k.articleNotFoundBody,
+    body: [k.articleNotFoundMore]
   }
 
   const catColor = CAT_COLORS[article.category] ?? '#7A9E8E'
@@ -151,7 +154,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               color: 'rgba(237,233,224,.6)', fontSize: '0.85rem',
               fontFamily: 'var(--font-body)', textDecoration: 'none',
             }}>
-              ← Knowledge Center
+              {k.articleBack}
             </Link>
             <span style={{ color: 'rgba(237,233,224,.3)' }}>·</span>
             <span style={{
@@ -209,10 +212,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             fontFamily: 'var(--font-body)', fontSize: '0.85rem',
             color: 'var(--ink-soft, #5A5F78)', lineHeight: 1.6, margin: 0,
           }}>
-            <strong style={{ color: 'var(--sage, #7A9E8E)' }}>Wellness information, not medical advice.</strong>{' '}
-            This article is for educational purposes. HOLOS content does not constitute medical diagnosis,
-            treatment, or advice. Consult a qualified healthcare professional before making changes to your
-            health regimen.
+            <strong style={{ color: 'var(--sage, #7A9E8E)' }}>{k.articleDisclaimer}</strong>{' '}
+            {k.articleDisclaimerBody}
           </p>
         </div>
       </article>
@@ -228,7 +229,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             fontFamily: 'var(--font-serif)', fontSize: '1.5rem',
             fontWeight: 500, color: 'var(--ink, #2B2F45)',
             marginBottom: 32, letterSpacing: '-0.02em',
-          }}>More from the Knowledge Center</h2>
+          }}>{k.articleMore}</h2>
 
           <div style={{
             display: 'grid',
@@ -267,7 +268,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               fontFamily: 'var(--font-body)', fontSize: '0.95rem',
               color: 'var(--sage, #7A9E8E)', textDecoration: 'none', fontWeight: 500,
             }}>
-              View all articles →
+              {k.articleViewAll}
             </Link>
           </div>
         </section>
@@ -282,12 +283,12 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <h2 style={{
           fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.5rem,3vw,2.2rem)',
           color: '#EDE9E0', fontWeight: 500, marginBottom: 16,
-        }}>Apply this knowledge to your own wellness</h2>
+        }}>{k.articleCtaTitle}</h2>
         <p style={{
           fontFamily: 'var(--font-body)', color: 'rgba(237,233,224,.7)',
           fontSize: '1.05rem', marginBottom: 32, maxWidth: 500, margin: '0 auto 32px',
         }}>
-          Your HOLOS assessment translates research and tradition into a personalised action plan — specific to your body, constitution, and life.
+          {k.articleCtaBody}
         </p>
         <Link href="/auth/signup" style={{
           display: 'inline-block',
@@ -295,7 +296,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           padding: '14px 32px', borderRadius: 50, fontFamily: 'var(--font-body)',
           fontSize: '1rem', fontWeight: 600, textDecoration: 'none', letterSpacing: '0.01em',
         }}>
-          Begin your assessment →
+          {k.articleCtaCta}
         </Link>
       </section>
     </div>

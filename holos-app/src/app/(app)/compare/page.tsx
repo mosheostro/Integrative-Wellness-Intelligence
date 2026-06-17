@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { getServerStrings } from '@/lib/i18n/server'
 
 export const metadata: Metadata = {
   title: 'Compare Approaches — Holos Integrative Wellness Intelligence',
@@ -8,21 +9,6 @@ export const metadata: Metadata = {
 }
 
 type Row = { feature: string; holos: string | boolean; generic: string | boolean; pro: string | boolean }
-
-const ROWS: Row[] = [
-  { feature: '9-dimension wellness map', holos: true, generic: false, pro: false },
-  { feature: 'Ayurvedic constitution analysis', holos: true, generic: false, pro: false },
-  { feature: 'Chronotype-aware scheduling', holos: true, generic: false, pro: false },
-  { feature: 'AI coach available 24 / 7', holos: true, generic: false, pro: false },
-  { feature: 'Six tradition synthesis', holos: true, generic: false, pro: false },
-  { feature: 'Daily journal with AI insights', holos: true, generic: 'Basic logging', pro: false },
-  { feature: 'Longitudinal progress tracking', holos: true, generic: 'Step count only', pro: 'Manual notes' },
-  { feature: 'Personalised nutrition protocols', holos: true, generic: 'Generic plans', pro: 'Specialised only' },
-  { feature: 'Practitioner-shareable reports', holos: true, generic: false, pro: false },
-  { feature: 'Evidence-referenced guidance', holos: true, generic: false, pro: 'Varies' },
-  { feature: 'Available on demand', holos: true, generic: true, pro: false },
-  { feature: 'Monthly cost', holos: 'From $29 / mo', generic: '$0–15 / mo', pro: '$200–500 / mo' },
-]
 
 function Cell({ value }: { value: string | boolean }) {
   if (value === true) return (
@@ -34,7 +20,31 @@ function Cell({ value }: { value: string | boolean }) {
   return <span style={{ fontSize: '.85rem', color: 'var(--ink-soft)' }}>{value as string}</span>
 }
 
-export default function ComparePage() {
+export default async function ComparePage() {
+  const { strings } = await getServerStrings()
+  const c = strings.compare
+
+  const ROWS: Row[] = [
+    { feature: c.f1,  holos: true,        generic: false,        pro: false       },
+    { feature: c.f2,  holos: true,        generic: false,        pro: false       },
+    { feature: c.f3,  holos: true,        generic: false,        pro: false       },
+    { feature: c.f4,  holos: true,        generic: false,        pro: false       },
+    { feature: c.f5,  holos: true,        generic: false,        pro: false       },
+    { feature: c.f6,  holos: true,        generic: c.f6Generic,  pro: false       },
+    { feature: c.f7,  holos: true,        generic: c.f7Generic,  pro: c.f7Pro     },
+    { feature: c.f8,  holos: true,        generic: c.f8Generic,  pro: c.f8Pro     },
+    { feature: c.f9,  holos: true,        generic: false,        pro: false       },
+    { feature: c.f10, holos: true,        generic: false,        pro: c.f10Pro    },
+    { feature: c.f11, holos: true,        generic: true,         pro: false       },
+    { feature: c.f12, holos: c.f12Holos,  generic: c.f12Generic, pro: c.f12Pro    },
+  ]
+
+  const DIFFS = [
+    { icon: '◈', title: c.d1Title, body: c.d1Body },
+    { icon: '◎', title: c.d2Title, body: c.d2Body },
+    { icon: '◆', title: c.d3Title, body: c.d3Body },
+  ]
+
   return (
     <main style={{ paddingTop: 68 }}>
 
@@ -60,7 +70,7 @@ export default function ComparePage() {
             textTransform: 'uppercase',
             marginBottom: 24,
           }}>
-            ◈ Holos vs. the alternatives
+            ◈ {c.eyebrow}
           </div>
           <h1 style={{
             fontFamily: 'var(--font-serif)',
@@ -70,7 +80,7 @@ export default function ComparePage() {
             lineHeight: 1.2,
             marginBottom: 16,
           }}>
-            Why Holos, not another<br />wellness app?
+            {c.heroTitle}
           </h1>
           <p style={{
             fontSize: '1rem',
@@ -79,9 +89,7 @@ export default function ComparePage() {
             maxWidth: 520,
             margin: '0 auto',
           }}>
-            Generic apps track steps. Human coaches cost $300/hour.
-            Holos does what neither can: synthesise your whole person — body, mind,
-            energy, purpose — in one intelligent, always-on system.
+            {c.heroSubtitle}
           </p>
         </div>
       </section>
@@ -101,11 +109,11 @@ export default function ComparePage() {
                 color: 'var(--ink-faint)',
                 borderBottom: '2px solid var(--line)',
                 minWidth: 220,
-              }}>Feature</th>
+              }}>{c.colFeature}</th>
               {[
-                { label: 'Holos', highlight: true },
-                { label: 'Generic app', highlight: false },
-                { label: 'Human professional', highlight: false },
+                { label: c.colHolos,   highlight: true  },
+                { label: c.colGeneric, highlight: false },
+                { label: c.colPro,     highlight: false },
               ].map(col => (
                 <th key={col.label} style={{
                   textAlign: 'center',
@@ -172,26 +180,10 @@ export default function ComparePage() {
             textAlign: 'center',
             marginBottom: 48,
           }}>
-            Three things only Holos does
+            {c.diffTitle}
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 20 }}>
-            {[
-              {
-                icon: '◈',
-                title: 'Tradition synthesis',
-                body: 'No single tradition has the full picture. Holos maps you across Ayurveda, TCM, Stoicism, Kabbalah, Chronobiology, and Functional Medicine simultaneously.',
-              },
-              {
-                icon: '◎',
-                title: '9-dimension scoring',
-                body: 'Most apps track one axis. Holos tracks nine — and shows you which dimensions are causally linked to your biggest pain point.',
-              },
-              {
-                icon: '◆',
-                title: 'Adaptive intelligence',
-                body: 'Your profile evolves as you log, journal, and complete habits. The AI coach recalibrates recommendations every week based on your actual data.',
-              },
-            ].map(d => (
+            {DIFFS.map(d => (
               <div key={d.title} style={{
                 background: 'rgba(255,255,255,.05)',
                 border: '1px solid rgba(255,255,255,.1)',
@@ -222,9 +214,9 @@ export default function ComparePage() {
             fontWeight: 500,
             color: 'var(--ink)',
             marginBottom: 16,
-          }}>Start your free assessment</h2>
+          }}>{c.ctaTitle}</h2>
           <p style={{ color: 'var(--ink-soft)', lineHeight: 1.7, marginBottom: 28 }}>
-            14-day free trial. No credit card required. Cancel any time.
+            {c.ctaBody}
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/auth/signup" style={{
@@ -238,7 +230,7 @@ export default function ComparePage() {
               textDecoration: 'none',
               fontSize: '.95rem',
             }}>
-              Get started free →
+              {c.ctaCta}
             </Link>
             <Link href="/pricing" style={{
               display: 'inline-block',
@@ -251,7 +243,7 @@ export default function ComparePage() {
               textDecoration: 'none',
               fontSize: '.95rem',
             }}>
-              See pricing
+              {c.ctaCta2}
             </Link>
           </div>
         </div>
