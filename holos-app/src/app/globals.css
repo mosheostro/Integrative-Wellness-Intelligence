@@ -294,15 +294,17 @@ p a, li a, td a, span a {
 /* ── Dark mode system preference (auto) ──────────────────── */
 @media (prefers-color-scheme: dark) {
   html:not([data-theme="light"]) {
-    --canvas:     #16181F;
-    --canvas2:    #1E2029;
-    --surface:    #252832;
-    --surface-2:  #2E3140;
-    --line:       #383B4D;
-    --ink:        #EDE9E0;
-    --ink-soft:   #B8B4A8;
-    --ink-faint:  #7A7A8A;
-    --bg-warm:    #1A1C24;
+    --canvas:          #16181F;
+    --canvas2:         #1E2029;
+    --surface:         #252832;
+    --surface-2:       #2E3140;
+    --line:            #383B4D;
+    --ink:             #EDE9E0;
+    --ink-soft:        #B8B4A8;
+    --ink-faint:       #7A7A8A;
+    --bg-warm:         #1A1C24;
+    --nav-bg:          rgba(22,24,31,.80);
+    --nav-bg-scrolled: rgba(22,24,31,.96);
   }
 }
 
@@ -377,4 +379,39 @@ details[open] summary span:last-child { transform: rotate(45deg); }
 [dir="rtl"] .logo-link {
   margin-right: 0;
   margin-left: 32px;
+}
+
+/* ── Mobile nav: bottom tab bar spacing ──────────────────── */
+/* App pages need bottom padding to clear the mobile tab bar */
+@media (max-width: 767px) {
+  .app-main {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* RTL: scroll-to-top button flips to left side */
+[dir="rtl"] .scroll-to-top {
+  right: auto;
+  left: clamp(16px, 4vw, 32px);
+}
+
+/* ── Mobile viewport fixes ────────────────────────────────── */
+/* Prevent content from being obscured under iOS notch / dynamic island */
+@supports (padding-top: env(safe-area-inset-top)) {
+  body {
+    padding-left:  env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+}
+
+/* Disable tap highlight on interactive elements */
+a, button, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent horizontal overflow on mobile */
+@media (max-width: 767px) {
+  html, body {
+    overflow-x: hidden;
+  }
 }
