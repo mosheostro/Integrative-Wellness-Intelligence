@@ -481,3 +481,15 @@ section { position: relative; }
   .price-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .phone { position: relative; right: auto; bottom: auto; margin: 24px auto 0; }
+}
+@media (max-width: 720px) {
+  .nav-links { display: none; }
+  .menu-toggle { display: grid; }
+  .cols-3, .cols-4, .cols-2 { grid-template-columns: 1fr; }
+  .price-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .problem-row { grid-template-columns: 1fr; gap: 8px; }
+  .problem-row .stat { margin-top: 8px; }
+  .ring-grid { grid-template-columns: repeat(3,1fr); }
+  .hero-meta { gap: 20px; }
+}

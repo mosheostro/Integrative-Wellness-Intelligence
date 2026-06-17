@@ -196,4 +196,17 @@ export default function HabitsPage() {
                   <div style={{ fontFamily: 'var(--font-body)', fontSize: '.75rem', color: 'var(--ink-faint)', marginTop: 2 }}>
                     {dimLabel(h.dimension)} · {h.frequency}
                   </div>
-                </div
+                </div>
+                {h.streak > 0 && (
+                  <div style={{ flexShrink: 0 }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', color: 'var(--gold)', fontWeight: 600 }}>🔥 {h.streak}</span>
+                  </div>
+                )}
+              </button>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}

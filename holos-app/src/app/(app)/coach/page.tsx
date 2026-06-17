@@ -184,4 +184,8 @@ export default function CoachPage() {
             style={{ padding:'0 20px', borderRadius:14, alignSelf:'stretch' }}
           >↑</button>
         </div>
-      </d
+      </div>
+      <style>{`@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }`}</style>
+    </div>
+  )
+}

@@ -273,4 +273,13 @@ export default function ContactPage() {
               <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', color: 'var(--ink)', marginBottom: 4 }}>{FOUNDER.name}</div>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-faint)', marginBottom: 16 }}>{FOUNDER.title}</div>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-soft)', fontStyle: 'italic', lineHeight: 1.6 }}>
+                &ldquo;{c.founderQuote}&rdquo;
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
             
