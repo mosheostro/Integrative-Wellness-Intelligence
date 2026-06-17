@@ -251,9 +251,4 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
 
       {/* CTA */}
       <div style={{ marginTop:48, display:'flex', gap:12 }}>
-        <a href="/coach" className="btn btn-primary">{s.talkCoach}</a>
-        <a href="/assessment" className="btn btn-ghost">{s.reassess}</a>
-      </div>
-    </div>
-  )
-}
+        <a href="/coach" c
