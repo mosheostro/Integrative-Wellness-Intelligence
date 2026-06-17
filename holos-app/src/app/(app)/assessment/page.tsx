@@ -202,4 +202,188 @@ export default function AssessmentPage() {
       }}>
 
         {/* ── Main question column ── */}
-     
+        <div style={{ flex: 1, minWidth: 0 }}>
+
+          {/* Progress bar */}
+          <div style={{ marginBottom: 28 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+              <span style={{
+                fontFamily: 'var(--font-mono)', fontSize: '.68rem',
+                textTransform: 'uppercase', letterSpacing: '.1em', color: 'var(--ink-faint)',
+              }}>
+                {s.question} {qIndex + 1} {s.of} {questions.length}
+              </span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', color: 'var(--ink-faint)' }}>
+                {progress}%
+              </span>
+            </div>
+            <div style={{ height: 4, background: 'var(--line)', borderRadius: 2, overflow: 'hidden' }}>
+              <div style={{
+                height: '100%',
+                width: `${progress}%`,
+                background: DIM_COLORS[currentQ.dimension] ?? 'var(--sage-deep)',
+                borderRadius: 2,
+                transition: 'width .4s ease',
+              }} />
+            </div>
+          </div>
+
+          {/* Dimension badge */}
+          <div style={{ marginBottom: 20 }}>
+            <span style={{
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              padding: '4px 12px', borderRadius: 100,
+              background: (DIM_COLORS[currentQ.dimension] ?? 'var(--sage)') + '22',
+              color: DIM_COLORS[currentQ.dimension] ?? 'var(--sage-deep)',
+              fontFamily: 'var(--font-mono)', fontSize: '.68rem',
+              textTransform: 'uppercase', letterSpacing: '.1em',
+            }}>
+              ◉ {dimLabels[currentQ.dimension]}
+            </span>
+          </div>
+
+          {/* Question text */}
+          <h2 style={{
+            fontFamily: 'var(--font-serif)',
+            fontSize: 'clamp(1.25rem, 2.5vw, 1.6rem)',
+            fontWeight: 500, letterSpacing: '-.02em',
+            color: 'var(--ink)', lineHeight: 1.35, marginBottom: 32,
+          }}>
+            {currentQ.text}
+          </h2>
+
+          {/* Options */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 32 }}>
+            {currentQ.options.map((opt, i) => {
+              const isSelected = selected === i
+              const key = ['A', 'B', 'C', 'D', 'E'][i]
+              return (
+                <button
+                  key={i}
+                  onClick={() => setSelected(i)}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 14,
+                    padding: '14px 18px', borderRadius: 'var(--radius-lg)',
+                    border: `1.5px solid ${isSelected ? 'var(--sage-deep)' : 'var(--line)'}`,
+                    background: isSelected ? 'oklch(0.96 0.03 155 / 0.35)' : 'var(--surface)',
+                    cursor: 'pointer', textAlign: 'left',
+                    transition: 'all .15s', width: '100%',
+                  }}
+                >
+                  <span style={{
+                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                    width: 28, height: 28, borderRadius: 6, flexShrink: 0,
+                    fontFamily: 'var(--font-mono)', fontSize: '.72rem', fontWeight: 600,
+                    background: isSelected ? 'var(--sage-deep)' : 'var(--line)',
+                    color: isSelected ? '#fff' : 'var(--ink-soft)',
+                    transition: 'all .15s',
+                  }}>
+                    {key}
+                  </span>
+                  <span style={{
+                    fontFamily: 'var(--font-body)', fontSize: '.92rem',
+                    color: isSelected ? 'var(--ink)' : 'var(--ink-soft)',
+                    fontWeight: isSelected ? 500 : 400, lineHeight: 1.4,
+                  }}>
+                    {opt}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Error */}
+          {error && (
+            <div style={{
+              marginBottom: 16, padding: '12px 16px', borderRadius: 'var(--radius)',
+              background: 'oklch(0.97 0.03 15 / 0.5)',
+              border: '1px solid oklch(0.70 0.10 15)',
+              color: 'oklch(0.40 0.10 15)',
+              fontFamily: 'var(--font-body)', fontSize: '.88rem',
+            }}>
+              {error}
+            </div>
+          )}
+
+          {/* Continue / Submit */}
+          <button
+            onClick={handleNext}
+            disabled={selected === null}
+            style={{
+              padding: '12px 28px', borderRadius: 'var(--radius)',
+              background: selected !== null ? 'var(--sage-deep)' : 'var(--line)',
+              color: '#fff', fontFamily: 'var(--font-body)',
+              fontWeight: 600, fontSize: '.92rem',
+              border: 'none',
+              cursor: selected !== null ? 'pointer' : 'default',
+              transition: 'background .15s',
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+            }}
+          >
+            {qIndex < questions.length - 1 ? s.continue : s.complete}
+            <span aria-hidden>→</span>
+          </button>
+        </div>
+
+        {/* ── Live score panel (appears after first answer) ── */}
+        {showLivePanel && (
+          <div
+            className="site-nav-desktop"
+            style={{
+              width: 240, flexShrink: 0,
+              background: 'var(--surface)', border: '1px solid var(--line)',
+              borderRadius: 'var(--radius-lg)', padding: '24px 20px',
+              position: 'sticky', top: 88,
+            }}
+          >
+            <div style={{ textAlign: 'center', marginBottom: 20 }}>
+              <AnimatedScore
+                value={engine.liveComposite}
+                size="lg"
+                color="var(--sage-deep)"
+                label={s.liveEstimate}
+                duration={600}
+              />
+            </div>
+
+            <div style={{
+              fontFamily: 'var(--font-mono)', fontSize: '.62rem',
+              textTransform: 'uppercase', letterSpacing: '.1em',
+              color: 'var(--ink-faint)', marginBottom: 14, textAlign: 'center',
+            }}>
+              {s.livePreview}
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {ALL_DIMS.map(dim => {
+                const rawScore = engine.partialScores[dim]
+                if (rawScore === undefined) return null
+                return (
+                  <LiveScoreBar
+                    key={dim}
+                    label={dimLabels[dim]}
+                    value={Math.round(rawScore)}
+                    color={DIM_COLORS[dim]}
+                    invert={DIM_INVERTS[dim] ?? false}
+                  />
+                )
+              })}
+            </div>
+
+            {engine.lastComment && (
+              <div style={{
+                marginTop: 16, padding: '10px 12px',
+                background: 'var(--canvas2)', borderRadius: 'var(--radius)',
+                fontFamily: 'var(--font-body)', fontSize: '.78rem',
+                color: 'var(--ink-soft)', lineHeight: 1.5,
+                fontStyle: 'italic',
+              }}>
+                {engine.lastComment}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}

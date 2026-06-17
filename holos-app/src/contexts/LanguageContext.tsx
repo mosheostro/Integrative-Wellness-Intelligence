@@ -1,5 +1,6 @@
 'use client'
 import { createContext, useContext, useEffect, useState, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   type Locale,
   type Translations,
@@ -48,6 +49,7 @@ function writeLocale(locale: Locale) {
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('en')
+  const router = useRouter()
 
   // Sync html lang + dir
   const applyLocale = useCallback((l: Locale) => {
@@ -65,27 +67,14 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const setLocale = useCallback((l: Locale) => {
     setLocaleState(l)
-    writeLocale(l)
+    writeLocale(l)      // writes cookie FIRST so router.refresh() sees new locale
     applyLocale(l)
-  }, [applyLocale])
+    // Re-fetch all Server Components in the current route so pages using
+    // getServerStrings() re-render with the new locale cookie immediately —
+    // without a full page reload.
+    router.refresh()
+  }, [applyLocale, router])
 
   const isRTL = RTL_LOCALES.includes(locale)
   const strings = TRANSLATIONS[locale]
-  const t = useCallback((key: string) => getTranslation(locale, key), [locale])
-
-  return (
-    <LanguageContext.Provider value={{
-      locale, t, strings, setLocale, isRTL, dir: isRTL ? 'rtl' : 'ltr',
-    }}>
-      {children}
-    </LanguageContext.Provider>
-  )
-}
-
-export function useLanguage() {
-  return useContext(LanguageContext)
-}
-
-// Re-export for convenience
-export type { Locale }
-export { LOCALE_META, RTL_LOCALES }
+  const t = useCallback((key: string) => getTranslation(locale, key), [lo

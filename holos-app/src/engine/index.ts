@@ -64,17 +64,4 @@ export function runEngine(
   )
 
   return {
-    scores,
-    state: wellnessState,
-    stateLabel: stateDef.label,
-    stateDescription: stateDef.description,
-    triggeredRules: evalResult.triggeredRules,
-    priorityCategories: evalResult.priorityCategories,
-    recommendations,
-    frameworkResult,
-  }
-}
-
-// Re-export layered result for callers that want the full detail
-export { computeMultiLayerScores } from './multi-layer-engine'
-export type { LayeredScoreResult, BehavioralProfile } from './multi-layer-engine'
+    sc

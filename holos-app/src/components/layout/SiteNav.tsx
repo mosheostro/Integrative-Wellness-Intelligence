@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
@@ -13,6 +13,23 @@ export default function SiteNav() {
   const [mega,    setMega]    = useState<string | null>(null)
   const { strings } = useLanguage()
   const n = strings.nav
+
+  // ── Hover-intent timer — prevents dropdown disappearing during
+  //    cursor transit from trigger → panel (they are sibling DOM nodes) ──
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const scheduleClose = useCallback(() => {
+    closeTimer.current = setTimeout(() => setMega(null), 120)
+  }, [])
+
+  const cancelClose = useCallback(() => {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+  }, [])
+
+  const openMenu = useCallback((label: string) => {
+    cancelClose()
+    setMega(label)
+  }, [cancelClose])
 
   const NAV_LINKS = [
     {
@@ -44,6 +61,13 @@ export default function SiteNav() {
 
   useEffect(() => { setOpen(false); setMega(null) }, [pathname])
 
+  // ESC closes mega menu
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMega(null) }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [])
+
   const isActive = (href: string) =>
     href !== '#' && (pathname === href || pathname.startsWith(href + '/'))
 
@@ -68,7 +92,7 @@ export default function SiteNav() {
           WebkitBackdropFilter: 'blur(18px)',
           boxShadow:       scrolled ? '0 1px 0 var(--line)' : 'none',
         }}
-        onMouseLeave={() => setMega(null)}
+        onMouseLeave={scheduleClose}
       >
         {/* Logo */}
         <Link
@@ -101,7 +125,8 @@ export default function SiteNav() {
             <div key={link.label} style={{ position: 'relative' }}>
               {link.sub ? (
                 <button
-                  onMouseEnter={() => setMega(link.label)}
+                  onMouseEnter={() => openMenu(link.label)}
+                  onFocus={() => openMenu(link.label)}
                   onClick={() => setMega(mega === link.label ? null : link.label)}
                   style={{
                     background:   'none',
@@ -233,8 +258,8 @@ export default function SiteNav() {
       {/* Mega-menu dropdown */}
       {mega === n.platform && (
         <div
-          onMouseEnter={() => setMega(n.platform)}
-          onMouseLeave={() => setMega(null)}
+          onMouseEnter={cancelClose}
+          onMouseLeave={scheduleClose}
           style={{
             position:   'fixed',
             top:        68,
@@ -349,27 +374,4 @@ export default function SiteNav() {
         <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 24 }}>
           <ThemeToggle size={34} />
           <LanguageSwitcher />
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <Link href="/auth/login"
-            style={{
-              display:      'block',
-              textAlign:    'center',
-              padding:      '12px 24px',
-              borderRadius: 'var(--radius)',
-              border:       '1.5px solid var(--line)',
-              fontFamily:   'var(--font-body)',
-              fontWeight:   600,
-              color:        'var(--ink)',
-              textDecoration: 'none',
-            }}>{n.signIn}</Link>
-          <Link href="/auth/signup"
-            style={{
-              display:      'block',
-              textAlign:    'center',
-              padding:      '12px 24px',
-              borderRadius: 'var(--radius)',
-              background:   'var(--sage-deep)',
-              fontFamily:   'var(--font-body)',
-       
+        </d

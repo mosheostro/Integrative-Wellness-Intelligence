@@ -184,4 +184,4 @@ export default function CoachPage() {
             style={{ padding:'0 20px', borderRadius:14, alignSelf:'stretch' }}
           >↑</button>
         </div>
-        <
+      </d
