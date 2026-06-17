@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 }
 
 const DIMENSIONS = [
-  { name: 'Body', score: 78, color: 'var(--sage)', icon: '⬡' },
+  { name: 'Body', score: 78, color: 'var(--sage-deep)', icon: '⬡' },
   { name: 'Energy', score: 64, color: 'var(--gold)', icon: '◈' },
   { name: 'Mind', score: 82, color: 'var(--indigo)', icon: '◎' },
   { name: 'Emotions', score: 71, color: 'var(--rose)', icon: '◉' },
@@ -198,7 +198,7 @@ export default function DemoDashboardPage() {
                       height: 20,
                       borderRadius: '50%',
                       border: `2px solid ${h.done ? 'var(--sage)' : 'var(--line)'}`,
-                      background: h.done ? 'var(--sage)' : 'transparent',
+                      background: h.done ? 'var(--sage-deep)' : 'transparent',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -232,7 +232,7 @@ export default function DemoDashboardPage() {
               {[
                 { name: 'Ayurveda (Pitta)', pct: 42, color: 'var(--clay)' },
                 { name: 'Chronobiology', pct: 28, color: 'var(--indigo)' },
-                { name: 'Stoic philosophy', pct: 18, color: 'var(--sage)' },
+                { name: 'Stoic philosophy', pct: 18, color: 'var(--sage-deep)' },
                 { name: 'Functional Medicine', pct: 12, color: 'var(--gold)' },
               ].map(t => (
                 <div key={t.name} style={{ marginBottom: 12 }}>
@@ -252,7 +252,7 @@ export default function DemoDashboardPage() {
               display: 'block',
               textAlign: 'center',
               padding: '14px',
-              background: 'var(--sage)',
+              background: 'var(--sage-deep)',
               color: '#fff',
               borderRadius: 'var(--radius)',
               fontFamily: 'var(--font-body)',

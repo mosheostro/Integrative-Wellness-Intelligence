@@ -63,7 +63,7 @@ export default async function ProgressPage() {
     <div className="wrap" style={{ paddingTop: 32, paddingBottom: 80 }}>
       <div style={{ marginBottom: 36 }}>
         <div className="eyebrow" style={{ marginBottom: 8 }}>
-          <span style={{ color: 'var(--sage)' }}>&#9675;</span> {nav.progress}
+          <span style={{ color: 'var(--sage-deep)' }}>&#9675;</span> {nav.progress}
         </div>
         <h1 className="h1">{s.yourJourney}</h1>
       </div>
@@ -80,7 +80,7 @@ export default async function ProgressPage() {
           {/* Summary cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(160px,1fr))', gap: 16, marginBottom: 32 }}>
             <div className="card" style={{ textAlign: 'center', padding: '20px 16px' }}>
-              <div style={{ fontSize: 32, fontFamily: 'var(--font-serif)', fontWeight: 500, color: 'var(--sage)', marginBottom: 6 }}>
+              <div style={{ fontSize: 32, fontFamily: 'var(--font-serif)', fontWeight: 500, color: 'var(--sage-deep)', marginBottom: 6 }}>
                 {(latest?.composite as number) ?? '—'}
               </div>
               <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '.08em' }}>
@@ -181,7 +181,7 @@ export default async function ProgressPage() {
                   }}>
                     <div style={{
                       width: 44, height: 44, borderRadius: 10, flexShrink: 0,
-                      background: (a.composite_score ?? 0) >= 70 ? 'var(--sage)' : (a.composite_score ?? 0) >= 50 ? 'var(--gold)' : 'var(--rose)',
+                      background: (a.composite_score ?? 0) >= 70 ? 'var(--sage-deep)' : (a.composite_score ?? 0) >= 50 ? 'var(--gold)' : 'var(--rose)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 14, color: '#fff',
                     }}>{a.composite_score ?? '?'}</div>
@@ -189,18 +189,4 @@ export default async function ProgressPage() {
                       <div style={{ fontWeight: 500, fontSize: '.875rem', color: 'var(--ink)' }}>
                         {(a.wellness_state ?? 'UNKNOWN').replace(/_/g, ' ')}
                       </div>
-                      <div style={{ fontSize: '.75rem', color: 'var(--ink-faint)', marginTop: 2 }}>
-                        {a.framework} &middot; {new Date(a.completed_at).toLocaleDateString(dateLocale, { month: 'short', day: 'numeric', year: 'numeric' })}
-                      </div>
-                    </div>
-                    <div style={{ color: 'var(--sage)', fontSize: 18 }}>&#8594;</div>
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
-        </>
-      )}
-    </div>
-  )
-}
+                      <div style

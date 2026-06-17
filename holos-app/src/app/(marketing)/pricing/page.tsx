@@ -97,12 +97,12 @@ export default async function PricingPage() {
       {/* ── Hero ── */}
       <section style={{ padding: '96px 24px 80px', textAlign: 'center' }}>
         <div style={{ maxWidth: 640, margin: '0 auto' }}>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 20 }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 20 }}>
             ◈ {p.eyebrow}
           </div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.2rem, 5vw, 3.4rem)', fontWeight: 500, letterSpacing: '-.03em', lineHeight: 1.1, color: 'var(--ink)', margin: '0 0 20px' }}>
             {p.titleA}{' '}
-            <em style={{ color: 'var(--sage)', fontStyle: 'italic' }}>{p.titleEm}</em>
+            <em style={{ color: 'var(--sage-deep)', fontStyle: 'italic' }}>{p.titleEm}</em>
           </h1>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--ink-soft)', margin: 0 }}>
             {p.subtitle}
@@ -129,7 +129,7 @@ export default async function PricingPage() {
                   top:           -14,
                   left:          '50%',
                   transform:     'translateX(-50%)',
-                  background:    'var(--sage)',
+                  background:    'var(--sage-deep)',
                   color:         '#fff',
                   fontFamily:    'var(--font-mono)',
                   fontSize:      '.65rem',
@@ -174,7 +174,7 @@ export default async function PricingPage() {
                       ? (plan.highlight ? 'rgba(255,255,255,.75)' : 'var(--ink-soft)')
                       : (plan.highlight ? 'rgba(255,255,255,.2)' : 'var(--ink-faint)'),
                   }}>
-                    <span style={{ flexShrink: 0, marginTop: 1, color: f.included ? 'var(--sage)' : 'var(--line)' }}>
+                    <span style={{ flexShrink: 0, marginTop: 1, color: f.included ? 'var(--sage-deep)' : 'var(--line)' }}>
                       {f.included ? '✓' : '✕'}
                     </span>
                     <span style={{ textDecoration: f.included ? 'none' : 'line-through' }}>{f.text}</span>
@@ -188,7 +188,7 @@ export default async function PricingPage() {
                   textAlign:      'center',
                   padding:        '13px 20px',
                   borderRadius:   'var(--radius)',
-                  background:     plan.highlight ? 'var(--sage)' : 'transparent',
+                  background:     plan.highlight ? 'var(--sage-deep)' : 'transparent',
                   border:         plan.highlight ? 'none' : '1.5px solid var(--line)',
                   color:          plan.highlight ? '#fff' : 'var(--ink)',
                   fontFamily:     'var(--font-body)',
@@ -207,7 +207,7 @@ export default async function PricingPage() {
       <section style={{ background: 'var(--canvas2)', padding: '96px 24px' }}>
         <div style={{ maxWidth: 720, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 56 }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 12 }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 12 }}>
               ◉ {p.faqEyebrow}
             </div>
             <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
@@ -244,7 +244,7 @@ export default async function PricingPage() {
               style={{
                 padding:        '13px 28px',
                 borderRadius:   'var(--radius)',
-                background:     'var(--sage)',
+                background:     'var(--sage-deep)',
                 color:          '#fff',
                 fontFamily:     'var(--font-body)',
                 fontWeight:     600,
@@ -272,3 +272,4 @@ export default async function PricingPage() {
     </div>
   )
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 

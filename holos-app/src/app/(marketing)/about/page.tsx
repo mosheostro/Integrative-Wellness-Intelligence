@@ -35,7 +35,7 @@ export default async function AboutPage() {
           pointerEvents: 'none',
         }}/>
         <div style={{ position: 'relative', zIndex: 1, maxWidth: 720, margin: '0 auto' }}>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 20 }}>◈ {a.eyebrow}</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 20 }}>◈ {a.eyebrow}</div>
           <h1 style={{
             fontFamily:    'var(--font-serif)',
             fontSize:      'clamp(2.2rem, 5vw, 3.6rem)',
@@ -46,7 +46,7 @@ export default async function AboutPage() {
             margin:        '0 0 24px',
           }}>
             {a.heroTitleA}{' '}
-            <em style={{ color: 'var(--sage)', fontStyle: 'italic' }}>{a.heroTitleEm}</em>
+            <em style={{ color: 'var(--sage-deep)', fontStyle: 'italic' }}>{a.heroTitleEm}</em>
           </h1>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--ink-soft)', maxWidth: 560, margin: '0 auto' }}>
             {FOUNDER.name}{a.heroSubtitle}
@@ -86,19 +86,19 @@ export default async function AboutPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
               <a href={`mailto:${FOUNDER.email}`}
                 style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-body)', fontSize: '.83rem', color: 'var(--ink-soft)', textDecoration: 'none' }}>
-                <span style={{ color: 'var(--sage)', width: 16 }}>✉</span> {FOUNDER.email}
+                <span style={{ color: 'var(--sage-deep)', width: 16 }}>✉</span> {FOUNDER.email}
               </a>
               <a href={FOUNDER.whatsapp} target="_blank" rel="noopener"
                 style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-body)', fontSize: '.83rem', color: 'var(--ink-soft)', textDecoration: 'none' }}>
-                <span style={{ color: 'var(--sage)', width: 16 }}>◎</span> WhatsApp
+                <span style={{ color: 'var(--sage-deep)', width: 16 }}>◎</span> WhatsApp
               </a>
               <a href={FOUNDER.telegram} target="_blank" rel="noopener"
                 style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-body)', fontSize: '.83rem', color: 'var(--ink-soft)', textDecoration: 'none' }}>
-                <span style={{ color: 'var(--sage)', width: 16 }}>◉</span> Telegram
+                <span style={{ color: 'var(--sage-deep)', width: 16 }}>◉</span> Telegram
               </a>
               <a href={FOUNDER.linkedin} target="_blank" rel="noopener"
                 style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-body)', fontSize: '.83rem', color: 'var(--ink-soft)', textDecoration: 'none' }}>
-                <span style={{ color: 'var(--sage)', width: 16 }}>◆</span> LinkedIn
+                <span style={{ color: 'var(--sage-deep)', width: 16 }}>◆</span> LinkedIn
               </a>
             </div>
 
@@ -107,7 +107,7 @@ export default async function AboutPage() {
                 display:        'block',
                 padding:        '12px 20px',
                 borderRadius:   'var(--radius)',
-                background:     'var(--sage)',
+                background:     'var(--sage-deep)',
                 color:          '#fff',
                 fontFamily:     'var(--font-body)',
                 fontWeight:     600,
@@ -124,7 +124,7 @@ export default async function AboutPage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {FOUNDER.credentials.map((cred: string) => (
                   <div key={cred} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-soft)' }}>
-                    <span style={{ color: 'var(--sage)', flexShrink: 0, marginTop: 2 }}>✓</span>
+                    <span style={{ color: 'var(--sage-deep)', flexShrink: 0, marginTop: 2 }}>✓</span>
                     {cred}
                   </div>
                 ))}
@@ -164,7 +164,7 @@ export default async function AboutPage() {
 
             {/* Expertise areas */}
             <div style={{ marginTop: 36 }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 16 }}>{a.expertiseLabel}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 16 }}>{a.expertiseLabel}</div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
                 {FOUNDER.expertise.map((e: string) => (
                   <div key={e} style={{
@@ -179,7 +179,7 @@ export default async function AboutPage() {
                     alignItems:   'center',
                     gap:          8,
                   }}>
-                    <span style={{ color: 'var(--sage)', fontSize: '.65rem' }}>◈</span>
+                    <span style={{ color: 'var(--sage-deep)', fontSize: '.65rem' }}>◈</span>
                     {e}
                   </div>
                 ))}
@@ -193,7 +193,7 @@ export default async function AboutPage() {
       <section style={{ background: 'var(--canvas2)', padding: '96px 24px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 64 }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 12 }}>◉ {a.philosophyEyebrow}</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 12 }}>◉ {a.philosophyEyebrow}</div>
             <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
               {a.philosophyTitle}
             </h2>
@@ -206,7 +206,7 @@ export default async function AboutPage() {
                 borderRadius: 'var(--radius-lg)',
                 padding:      '32px 28px',
               }}>
-                <div style={{ fontSize: '1.4rem', color: 'var(--sage)', marginBottom: 16 }}>{p.icon}</div>
+                <div style={{ fontSize: '1.4rem', color: 'var(--sage-deep)', marginBottom: 16 }}>{p.icon}</div>
                 <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 500, color: 'var(--ink)', margin: '0 0 10px' }}>{p.title}</h3>
                 <p style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: 'var(--ink-soft)', lineHeight: 1.7, margin: 0 }}>{p.body}</p>
               </div>
@@ -232,7 +232,7 @@ export default async function AboutPage() {
                 gap:            8,
                 padding:        '14px 32px',
                 borderRadius:   'var(--radius)',
-                background:     'var(--sage)',
+                background:     'var(--sage-deep)',
                 color:          '#fff',
                 fontFamily:     'var(--font-body)',
                 fontWeight:     600,
@@ -263,3 +263,4 @@ export default async function AboutPage() {
     </div>
   )
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

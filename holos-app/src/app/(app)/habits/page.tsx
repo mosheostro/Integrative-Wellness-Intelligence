@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { LOCALE_META } from '@/lib/i18n/translations'
+import { BackButton } from '@/components/ui/BackButton'
 
 type Habit = { id: string; title: string; dimension: string; frequency: string; streak: number; completed_today: boolean }
 
@@ -81,17 +82,18 @@ export default function HabitsPage() {
 
   return (
     <div style={{ maxWidth: 860, margin: '0 auto', padding: '32px 24px' }}>
-      {/* Header */}
+      <BackButton href="/dashboard" style={{ marginBottom: 24 }} />
+      {/* Header */
       <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 8 }}>◉ {strings.nav.habits}</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◉ {strings.nav.habits}</div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
             {s.title}
           </h1>
           <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-faint)', marginTop: 6 }}>{today}</div>
         </div>
         {!adding && (
-          <button onClick={() => setAdding(true)} style={{ padding: '10px 20px', borderRadius: 'var(--radius)', background: 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', border: 'none', cursor: 'pointer' }}>
+          <button onClick={() => setAdding(true)} style={{ padding: '10px 20px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', border: 'none', cursor: 'pointer' }}>
             {s.addHabit}
           </button>
         )}
@@ -102,13 +104,13 @@ export default function HabitsPage() {
         <div style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--radius-lg)', padding: '20px 24px', marginBottom: 28 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
             <span style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', fontWeight: 600, color: 'var(--ink)' }}>{s.todayProgress}</span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.82rem', color: 'var(--sage)' }}>{doneCount}/{habits.length}</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.82rem', color: 'var(--sage-deep)' }}>{doneCount}/{habits.length}</span>
           </div>
           <div style={{ height: 8, background: 'var(--line)', borderRadius: 4, overflow: 'hidden' }}>
             <div style={{ height: '100%', width: habits.length ? `${(doneCount / habits.length) * 100}%` : '0%', background: 'var(--sage)', borderRadius: 4, transition: 'width .4s' }} />
           </div>
           {doneCount === habits.length && habits.length > 0 && (
-            <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--sage)', marginTop: 8, fontWeight: 600 }}>
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--sage-deep)', marginTop: 8, fontWeight: 600 }}>
               {s.allCompleted}
             </div>
           )}
@@ -138,7 +140,7 @@ export default function HabitsPage() {
             </label>
           </div>
           <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
-            <button type="submit" disabled={saving} style={{ padding: '10px 22px', borderRadius: 'var(--radius)', background: 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', border: 'none', cursor: 'pointer' }}>
+            <button type="submit" disabled={saving} style={{ padding: '10px 22px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', border: 'none', cursor: 'pointer' }}>
               {saving ? s.saving : s.addBtn}
             </button>
             <button type="button" onClick={() => setAdding(false)} style={{ padding: '10px 18px', borderRadius: 'var(--radius)', border: '1px solid var(--line)', background: 'transparent', color: 'var(--ink-soft)', fontFamily: 'var(--font-body)', fontSize: '.85rem', cursor: 'pointer' }}>
@@ -156,7 +158,7 @@ export default function HabitsPage() {
           <div style={{ fontSize: '2rem', marginBottom: 12 }}>◉</div>
           <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'var(--ink)', marginBottom: 8 }}>{s.noHabits}</div>
           <div style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: 'var(--ink-faint)', marginBottom: 20 }}>{s.noHabitsDesc}</div>
-          <button onClick={() => setAdding(true)} style={{ padding: '10px 20px', borderRadius: 'var(--radius)', background: 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', border: 'none', cursor: 'pointer' }}>
+          <button onClick={() => setAdding(true)} style={{ padding: '10px 20px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', border: 'none', cursor: 'pointer' }}>
             {s.addFirst}
           </button>
         </div>
@@ -176,7 +178,7 @@ export default function HabitsPage() {
                 <div style={{
                   width: 32, height: 32, borderRadius: '50%',
                   border: `2px solid ${h.completed_today ? 'var(--sage)' : 'var(--line)'}`,
-                  background: h.completed_today ? 'var(--sage)' : 'transparent',
+                  background: h.completed_today ? 'var(--sage-deep)' : 'transparent',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: '#fff', fontSize: '.75rem', flexShrink: 0, transition: 'all .2s',
                 }}>
@@ -194,17 +196,4 @@ export default function HabitsPage() {
                   <div style={{ fontFamily: 'var(--font-body)', fontSize: '.75rem', color: 'var(--ink-faint)', marginTop: 2 }}>
                     {dimLabel(h.dimension)} · {h.frequency}
                   </div>
-                </div>
-                {h.streak > 0 && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontFamily: 'var(--font-mono)', fontSize: '.75rem', color, flexShrink: 0 }}>
-                    🔥 {h.streak}
-                  </div>
-                )}
-              </button>
-            )
-          })}
-        </div>
-      )}
-    </div>
-  )
-}
+                </div

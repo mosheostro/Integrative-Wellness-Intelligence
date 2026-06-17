@@ -27,7 +27,7 @@ export function NewsletterForm({ submitLabel = 'Subscribe →', placeholder = 'y
         style={{
           padding:      '11px 20px',
           borderRadius: 'var(--radius)',
-          background:   'var(--sage)',
+          background:   'var(--sage-deep)',
           color:        '#fff',
           fontFamily:   'var(--font-body)',
           fontWeight:   600,

@@ -128,7 +128,7 @@ export default async function IntegrationsPage() {
             <Link href="/auth/signup" style={{
               display: 'inline-block',
               padding: '12px 28px',
-              background: 'var(--sage)',
+              background: 'var(--sage-deep)',
               color: '#fff',
               borderRadius: 'var(--radius)',
               fontFamily: 'var(--font-body)',
@@ -235,22 +235,4 @@ export default async function IntegrationsPage() {
           <p style={{ color: 'rgba(255,255,255,.65)', lineHeight: 1.75, marginBottom: 32 }}>
             {ig.apiBody}
           </p>
-          <Link href="/contact" style={{
-            display: 'inline-block',
-            padding: '12px 28px',
-            border: '1.5px solid rgba(255,255,255,.25)',
-            color: 'var(--canvas)',
-            borderRadius: 'var(--radius)',
-            fontFamily: 'var(--font-body)',
-            fontWeight: 500,
-            textDecoration: 'none',
-            fontSize: '.95rem',
-          }}>
-            {ig.apiCta}
-          </Link>
-        </div>
-      </section>
-
-    </main>
-  )
-}
+          <Link href=

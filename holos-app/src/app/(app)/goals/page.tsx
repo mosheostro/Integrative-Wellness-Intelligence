@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { LOCALE_META } from '@/lib/i18n/translations'
+import { BackButton } from '@/components/ui/BackButton'
 
 type Goal = { id: string; title: string; description: string; dimension: string; target_date: string | null; status: string; progress: number }
 
@@ -77,17 +78,18 @@ export default function GoalsPage() {
 
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: '32px 24px' }}>
-      {/* Header */}
+      <BackButton href="/dashboard" style={{ marginBottom: 24 }} />
+      {/* Header */
       <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 8 }}>◆ {strings.nav.goals}</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◆ {strings.nav.goals}</div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
             {s.title}
           </h1>
         </div>
         {!adding && (
           <button onClick={() => setAdding(true)}
-            style={{ padding: '10px 20px', borderRadius: 'var(--radius)', background: 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', border: 'none', cursor: 'pointer' }}>
+            style={{ padding: '10px 20px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', border: 'none', cursor: 'pointer' }}>
             {s.addGoal}
           </button>
         )}
@@ -118,7 +120,7 @@ export default function GoalsPage() {
             </label>
           </div>
           <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
-            <button type="submit" disabled={saving} style={{ padding: '10px 22px', borderRadius: 'var(--radius)', background: 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.88rem', border: 'none', cursor: 'pointer' }}>
+            <button type="submit" disabled={saving} style={{ padding: '10px 22px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.88rem', border: 'none', cursor: 'pointer' }}>
               {saving ? s.saving : s.addBtn}
             </button>
             <button type="button" onClick={() => setAdding(false)} style={{ padding: '10px 18px', borderRadius: 'var(--radius)', border: '1px solid var(--line)', background: 'transparent', color: 'var(--ink-soft)', fontFamily: 'var(--font-body)', fontSize: '.88rem', cursor: 'pointer' }}>
@@ -174,7 +176,7 @@ function GoalCard({ goal, onProgress, target, dateLocale, dimLabel }: {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6, flexShrink: 0 }}>
           <StatusBadge status={goal.status} />
-          <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', color: 'var(--sage)', background: 'rgba(122,158,142,.1)', padding: '2px 8px', borderRadius: 100 }}>{dimLabel(goal.dimension)}</span>
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', color: 'var(--sage-deep)', background: 'rgba(122,158,142,.1)', padding: '2px 8px', borderRadius: 100 }}>{dimLabel(goal.dimension)}</span>
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -186,18 +188,4 @@ function GoalCard({ goal, onProgress, target, dateLocale, dimLabel }: {
           <div style={{ display: 'flex', gap: 4 }}>
             {[25, 50, 75, 100].map(p => (
               <button key={p} onClick={() => onProgress(goal.id, p)}
-                style={{ padding: '3px 8px', borderRadius: 4, border: '1px solid var(--line)', background: goal.progress >= p ? 'var(--sage)' : 'transparent', color: goal.progress >= p ? '#fff' : 'var(--ink-faint)', fontFamily: 'var(--font-mono)', fontSize: '.65rem', cursor: 'pointer' }}>
-                {p}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-      {goal.target_date && (
-        <div style={{ marginTop: 8, fontFamily: 'var(--font-body)', fontSize: '.75rem', color: 'var(--ink-faint)' }}>
-          {target} {new Date(goal.target_date).toLocaleDateString(dateLocale, { month: 'long', day: 'numeric', year: 'numeric' })}
-        </div>
-      )}
-    </div>
-  )
-}
+                style={{ padding: '3px 8px', borderRadius: 4, border: '1px solid var(--line)', background: goal.progress >= p ? 'var(--sage-deep)' : 'transparent', c

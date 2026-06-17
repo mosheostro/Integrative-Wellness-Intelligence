@@ -37,7 +37,7 @@ export default async function AdminPage() {
     .limit(20)
 
   const STATS: Stat[] = [
-    { label: 'Total Users',         value: userCount ?? 0,      icon: '◈', color: 'var(--sage)'   },
+    { label: 'Total Users',         value: userCount ?? 0,      icon: '◈', color: 'var(--sage-deep)'   },
     { label: 'Total Assessments',   value: assessmentCount ?? 0, icon: '◉', color: 'var(--indigo)' },
     { label: 'Assessments (24h)',   value: todayCount ?? 0,     icon: '◆', color: 'var(--gold)'   },
   ]

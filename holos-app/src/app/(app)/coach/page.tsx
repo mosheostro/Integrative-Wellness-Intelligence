@@ -116,7 +116,7 @@ export default function CoachPage() {
                 maxWidth:'75%',
                 padding:'14px 18px',
                 borderRadius: msg.role === 'user' ? '18px 18px 4px 18px' : '4px 18px 18px 18px',
-                background: msg.role === 'user' ? 'var(--sage)' : 'var(--surface)',
+                background: msg.role === 'user' ? 'var(--sage-deep)' : 'var(--surface)',
                 color: msg.role === 'user' ? '#fff' : 'var(--ink)',
                 fontSize:'.9rem',
                 lineHeight: 1.65,
@@ -184,14 +184,4 @@ export default function CoachPage() {
             style={{ padding:'0 20px', borderRadius:14, alignSelf:'stretch' }}
           >↑</button>
         </div>
-        <div style={{ maxWidth:720, margin:'8px auto 0', textAlign:'center', fontSize:'.72rem', color:'var(--ink-faint)' }}>
-          {s.disclaimer}
-        </div>
-      </div>
-
-      <style>{`
-        @keyframes pulse { 0%,80%,100%{opacity:.3;transform:scale(.8)} 40%{opacity:1;transform:scale(1)} }
-      `}</style>
-    </div>
-  )
-}
+        <

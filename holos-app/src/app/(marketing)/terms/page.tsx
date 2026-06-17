@@ -17,7 +17,7 @@ export default async function TermsPage() {
     <div style={{ background: 'var(--canvas)' }}>
       <section style={{ padding: '80px 24px 96px' }}>
         <div style={{ maxWidth: 740, margin: '0 auto' }}>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 16 }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 16 }}>
             ◈ {l.eyebrow}
           </div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: '0 0 12px' }}>
@@ -55,7 +55,7 @@ export default async function TermsPage() {
             </T>
 
             <T title="4. Your Account">
-              <p>You are responsible for maintaining the confidentiality of your account credentials. You are responsible for all activity that occurs under your account. Notify us immediately at <a href={`mailto:${FOUNDER.email}`} style={{ color: 'var(--sage)' }}>{FOUNDER.email}</a> if you suspect unauthorised access.</p>
+              <p>You are responsible for maintaining the confidentiality of your account credentials. You are responsible for all activity that occurs under your account. Notify us immediately at <a href={`mailto:${FOUNDER.email}`} style={{ color: 'var(--sage-deep)' }}>{FOUNDER.email}</a> if you suspect unauthorised access.</p>
             </T>
 
             <T title="5. Acceptable Use">
@@ -70,11 +70,11 @@ export default async function TermsPage() {
             </T>
 
             <T title="6. Subscriptions and Billing">
-              <p>The Seeker (free) plan is provided at no cost. Paid plans (Practitioner, Enterprise) are billed via Stripe. Prices are listed at <Link href="/pricing" style={{ color: 'var(--sage)' }}>/pricing</Link>. You may cancel anytime from your account settings; cancellation takes effect at the end of the current billing period. We offer a 30-day money-back guarantee on all paid plans.</p>
+              <p>The Seeker (free) plan is provided at no cost. Paid plans (Practitioner, Enterprise) are billed via Stripe. Prices are listed at <Link href="/pricing" style={{ color: 'var(--sage-deep)' }}>/pricing</Link>. You may cancel anytime from your account settings; cancellation takes effect at the end of the current billing period. We offer a 30-day money-back guarantee on all paid plans.</p>
             </T>
 
             <T title="7. Your Data">
-              <p>You own your wellness data. By using HOLOS, you grant us a limited licence to process your data solely for the purpose of providing the Service. We will never sell your data. See our <Link href="/privacy" style={{ color: 'var(--sage)' }}>Privacy Policy</Link> for full details.</p>
+              <p>You own your wellness data. By using HOLOS, you grant us a limited licence to process your data solely for the purpose of providing the Service. We will never sell your data. See our <Link href="/privacy" style={{ color: 'var(--sage-deep)' }}>Privacy Policy</Link> for full details.</p>
             </T>
 
             <T title="8. Intellectual Property">
@@ -97,22 +97,4 @@ export default async function TermsPage() {
               <p>These Terms are governed by the laws of the State of Israel, without regard to conflict of law provisions.</p>
             </T>
 
-            <T title="13. Contact">
-              <p>Questions about these Terms: <a href={`mailto:${FOUNDER.email}`} style={{ color: 'var(--sage)' }}>{FOUNDER.email}</a></p>
-            </T>
-
-          </div>
-        </div>
-      </section>
-    </div>
-  )
-}
-
-function T({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div style={{ marginBottom: 40 }}>
-      <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', fontWeight: 500, color: 'var(--ink)', margin: '0 0 12px' }}>{title}</h2>
-      {children}
-    </div>
-  )
-}
+            <T tit

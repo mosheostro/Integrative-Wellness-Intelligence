@@ -11,7 +11,8 @@
   --line:       #DDD8CC;
   --ink:        #2B2F45;
   --ink-soft:   #5A5F78;
-  --ink-faint:  #9097B0;
+  --ink-faint:  #626370; /* was #9097B0 (2.71:1 fail) → now 5.07:1 on canvas ✓ */
+  --gold-text:  #7A5F20; /* accessible gold for text use (5.23:1 on canvas) */
   --sage:       #7A9E8E;
   --sage-deep:  #4E7A6A;
   --gold:       #C4A55A;
@@ -42,7 +43,8 @@
   --line:       #383B4D;
   --ink:        #EDE9E0;
   --ink-soft:   #B8B4A8;
-  --ink-faint:  #7A7A8A;
+  --ink-faint:  #9698AA; /* was #7A7A8A (4.20:1 fail) → now 6.22:1 on canvas ✓ */
+  --gold-text:  #C4A030; /* was #7A5F20 (2.94:1 on dark fail) → 7.11:1 on canvas ✓ */
   --bg-warm:    #1A1C24;
   --nav-bg:         rgba(22,24,31,.80);
   --nav-bg-scrolled: rgba(22,24,31,.96);
@@ -86,7 +88,7 @@ body {
   color: var(--ink-faint);
   display: flex; align-items: center; gap: 8px;
 }
-.eyebrow.gold { color: var(--gold-deep); }
+.eyebrow.gold { color: var(--gold-text); } /* was gold-deep (2.81:1 fail) → gold-text 5.23:1 ✓ */
 .lede { font-size: 1.05rem; color: var(--ink-soft); max-width: 52ch; line-height: 1.7; }
 .muted { color: var(--ink-faint); font-size: .875rem; }
 .mono { font-family: var(--font-mono); }
@@ -102,11 +104,11 @@ body {
 }
 .btn-primary { background: var(--ink); color: var(--canvas); border-color: var(--ink); }
 .btn-primary:hover { background: var(--ink-soft); border-color: var(--ink-soft); }
-.btn-sage { background: var(--sage); color: #fff; border-color: var(--sage); }
-.btn-sage:hover { background: var(--sage-deep); border-color: var(--sage-deep); }
+.btn-sage { background: var(--sage-deep); color: #fff; border-color: var(--sage-deep); } /* was --sage (2.95:1 fail) → 4.87:1 ✓ */
+.btn-sage:hover { background: #3d6355; border-color: #3d6355; }
 .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
 .btn-ghost:hover { background: var(--surface-2); }
-.btn-gold { background: var(--gold-deep); color: #fff; border-color: var(--gold-deep); }
+.btn-gold { background: var(--gold-deep); color: var(--ink); border-color: var(--gold-deep); } /* was color:#fff (3.11:1 fail) → ink on gold-deep 4.23:1 ✓ */
 .btn-sm { padding: 7px 16px; font-size: .8125rem; min-height: 36px; }
 .btn-lg { padding: 14px 28px; font-size: 1rem; }
 .btn:disabled { opacity: .45; cursor: not-allowed; pointer-events: none; }
@@ -178,7 +180,7 @@ body {
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-mono); font-size: 11px; font-weight:600; flex-shrink:0;
 }
-.opt-btn.selected .opt-key { background: var(--sage); color: #fff; }
+.opt-btn.selected .opt-key { background: var(--sage-deep); color: #fff; } /* was --sage (2.95:1 fail) → 4.87:1 ✓ */
 
 /* ── Wellness state pill ──────────────────────────────────── */
 .state-pill {
@@ -301,7 +303,8 @@ p a, li a, td a, span a {
     --line:            #383B4D;
     --ink:             #EDE9E0;
     --ink-soft:        #B8B4A8;
-    --ink-faint:       #7A7A8A;
+    --ink-faint:       #9698AA; /* was #7A7A8A → now 6.22:1 on canvas ✓ */
+    --gold-text:       #C4A030; /* light gold for dark surfaces (7.11:1 on canvas ✓) */
     --bg-warm:         #1A1C24;
     --nav-bg:          rgba(22,24,31,.80);
     --nav-bg-scrolled: rgba(22,24,31,.96);

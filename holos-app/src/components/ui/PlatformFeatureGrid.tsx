@@ -42,7 +42,7 @@ export function PlatformFeatureGrid({ features }: Props) {
               ;(e.currentTarget as HTMLDivElement).style.transform = 'none'
             }}
           >
-            <div style={{ fontSize: '1.4rem', color: 'var(--sage)', marginBottom: 12 }}>{f.icon}</div>
+            <div style={{ fontSize: '1.4rem', color: 'var(--sage-deep)', marginBottom: 12 }}>{f.icon}</div>
             <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', fontWeight: 500, color: 'var(--ink)', marginBottom: 10 }}>{f.title}</h3>
             <p style={{ fontSize: '.88rem', color: 'var(--ink-soft)', lineHeight: 1.65, marginBottom: 16 }}>{f.desc}</p>
             <span style={{ fontSize: '.82rem', color: 'var(--sage-deep)', fontWeight: 600 }}>{f.cta} →</span>

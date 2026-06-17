@@ -126,7 +126,7 @@ export default function AssessmentPage() {
     return (
       <div className="wrap section-pad" style={{ maxWidth: 860 }}>
         <div className="section-head">
-          <div className="eyebrow"><span style={{ color: 'var(--sage)' }}>◉</span> {s.step1}</div>
+          <div className="eyebrow"><span style={{ color: 'var(--sage-deep)' }}>◉</span> {s.step1}</div>
           <h1 className="h1" style={{ marginTop: 12 }}>{s.step1Title}</h1>
           <p className="lede" style={{ marginTop: 12 }}>{s.step1Desc}</p>
         </div>
@@ -149,7 +149,7 @@ export default function AssessmentPage() {
                 <div style={{ fontSize: '.8rem', color: 'var(--ink-soft)', lineHeight: 1.5 }}>{fw.origin}</div>
               </div>
               {framework === fw.id && (
-                <span style={{ marginLeft: 'auto', color: 'var(--sage)', fontSize: 18, flexShrink: 0 }}>✓</span>
+                <span style={{ marginLeft: 'auto', color: 'var(--sage-deep)', fontSize: 18, flexShrink: 0 }}>✓</span>
               )}
             </button>
           ))}
@@ -202,126 +202,4 @@ export default function AssessmentPage() {
       }}>
 
         {/* ── Main question column ── */}
-        <div style={{ flex: 1, minWidth: 0 }}>
-          {/* Progress */}
-          <div style={{ marginBottom: 32 }}>
-            <div className="eyebrow" style={{ marginBottom: 10 }}>
-              <span style={{ color: 'var(--sage)' }}>◉</span>
-              {currentQ.section} · {qIndex + 1} {s.of} {questions.length}
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-              <div className="progress-track" style={{ flex: 1, height: 3 }}>
-                <div className="progress-fill" style={{ width: `${progress}%`, background: 'var(--sage)', transition: 'width 0.3s ease' }} />
-              </div>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--ink-faint)', minWidth: 30 }}>
-                {progress}%
-              </span>
-            </div>
-          </div>
-
-          {/* Question card */}
-          <div className="card" style={{ padding: '32px', marginBottom: 24 }}>
-            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', lineHeight: 1.35, marginBottom: 28, color: 'var(--ink)' }}>
-              {currentQ.text}
-            </h2>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {currentQ.options.map((opt) => (
-                <button
-                  key={opt.index}
-                  className={`opt-btn${selected === opt.index ? ' selected' : ''}`}
-                  onClick={() => setSelected(opt.index)}
-                >
-                  <span className="opt-key">{String.fromCharCode(65 + opt.index)}</span>
-                  <span>{opt.text}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Live comment from engine */}
-          {engine.lastComment && selected !== null && (
-            <div style={{
-              padding: '12px 16px',
-              background: 'oklch(0.96 0.03 155 / 0.35)',
-              borderLeft: '3px solid var(--sage)',
-              borderRadius: '0 8px 8px 0',
-              marginBottom: 20,
-              animation: 'fadeIn 0.3s ease',
-            }}>
-              <p style={{ fontSize: '.83rem', color: 'var(--ink-soft)', lineHeight: 1.6, margin: 0 }}>
-                {engine.lastComment}
-              </p>
-            </div>
-          )}
-
-          {/* Controls */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div className="badge badge-sage">
-              <span>◆</span> {s.adaptive}
-            </div>
-            <div style={{ display: 'flex', gap: 10 }}>
-              <button
-                className="btn btn-ghost btn-sm"
-                disabled={qIndex === 0}
-                onClick={() => { setQIndex(Math.max(0, qIndex - 1)); setSelected(null) }}
-              >
-                {s.back}
-              </button>
-              <button
-                className="btn btn-sage btn-sm"
-                disabled={selected === null}
-                onClick={handleNext}
-              >
-                {qIndex === questions.length - 1 ? s.complete : s.continue} <span>→</span>
-              </button>
-            </div>
-          </div>
-
-          {error && <p style={{ color: 'var(--rose)', marginTop: 16, textAlign: 'center' }}>{error}</p>}
-        </div>
-
-        {/* ── Live score panel ── */}
-        {showLivePanel && (
-          <div style={{
-            width: 220, flexShrink: 0, position: 'sticky', top: 88,
-            display: 'flex', flexDirection: 'column', gap: 0,
-          }}>
-            <div className="card" style={{ padding: '20px 18px' }}>
-              <div style={{ textAlign: 'center', marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid var(--line)' }}>
-                <div style={{ fontSize: '.65rem', fontFamily: 'var(--font-mono)', letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--ink-faint)', marginBottom: 8 }}>
-                  {s.liveEstimate}
-                </div>
-                <AnimatedScore
-                  value={engine.liveComposite}
-                  size="lg"
-                  color="var(--sage)"
-                  suffix="/100"
-                  duration={400}
-                />
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {ALL_DIMS.map(dim => (
-                  <LiveScoreBar
-                    key={dim}
-                    label={dimLabels[dim]}
-                    value={engine.partialScores[dim]}
-                    color={DIM_COLORS[dim]}
-                    invert={DIM_INVERTS[dim]}
-                  />
-                ))}
-              </div>
-
-              <div style={{ marginTop: 14, paddingTop: 12, borderTop: '1px solid var(--line)' }}>
-                <p style={{ fontSize: '.7rem', color: 'var(--ink-faint)', lineHeight: 1.5, margin: 0 }}>
-                  {s.livePreview}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  )
-}
+     

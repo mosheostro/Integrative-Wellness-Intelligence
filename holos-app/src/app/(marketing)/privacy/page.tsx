@@ -16,7 +16,7 @@ export default async function PrivacyPage() {
     <div style={{ background: 'var(--canvas)' }}>
       <section style={{ padding: '80px 24px 96px' }}>
         <div style={{ maxWidth: 740, margin: '0 auto' }}>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 16 }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 16 }}>
             ◈ {l.eyebrow}
           </div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: '0 0 12px' }}>
@@ -40,7 +40,7 @@ export default async function PrivacyPage() {
 
           <div style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', lineHeight: 1.85, color: 'var(--ink-soft)' }}>
             <Section title="1. Who We Are">
-              <p>HOLOS Integrative Wellness Intelligence (&ldquo;HOLOS,&rdquo; &ldquo;we,&rdquo; &ldquo;us&rdquo;) is operated by {FOUNDER.name}. Our contact email is <a href={`mailto:${FOUNDER.email}`} style={{ color: 'var(--sage)' }}>{FOUNDER.email}</a>.</p>
+              <p>HOLOS Integrative Wellness Intelligence (&ldquo;HOLOS,&rdquo; &ldquo;we,&rdquo; &ldquo;us&rdquo;) is operated by {FOUNDER.name}. Our contact email is <a href={`mailto:${FOUNDER.email}`} style={{ color: 'var(--sage-deep)' }}>{FOUNDER.email}</a>.</p>
             </Section>
 
             <Section title="2. Data We Collect">
@@ -94,7 +94,7 @@ export default async function PrivacyPage() {
                 <li><strong>Objection:</strong> Object to processing based on legitimate interests.</li>
                 <li><strong>Restriction:</strong> Request that we restrict processing your data.</li>
               </ul>
-              <p style={{ marginTop: 16 }}>To exercise any of these rights, email <a href={`mailto:${FOUNDER.email}`} style={{ color: 'var(--sage)' }}>{FOUNDER.email}</a>. We respond within 30 days.</p>
+              <p style={{ marginTop: 16 }}>To exercise any of these rights, email <a href={`mailto:${FOUNDER.email}`} style={{ color: 'var(--sage-deep)' }}>{FOUNDER.email}</a>. We respond within 30 days.</p>
             </Section>
 
             <Section title="8. Cookies">
@@ -109,21 +109,4 @@ export default async function PrivacyPage() {
               <p>We will notify you of material changes to this policy by email and by posting a notice on the platform at least 30 days before the changes take effect.</p>
             </Section>
 
-            <Section title="11. Contact">
-              <p>Privacy questions: <a href={`mailto:${FOUNDER.email}`} style={{ color: 'var(--sage)' }}>{FOUNDER.email}</a></p>
-            </Section>
-          </div>
-        </div>
-      </section>
-    </div>
-  )
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div style={{ marginBottom: 40 }}>
-      <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', fontWeight: 500, color: 'var(--ink)', margin: '0 0 12px' }}>{title}</h2>
-      {children}
-    </div>
-  )
-}
+            <Sectio

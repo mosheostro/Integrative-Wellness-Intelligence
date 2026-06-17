@@ -100,7 +100,7 @@ export default async function DashboardPage() {
       <div style={{ marginBottom: 40, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
           <div className="eyebrow" style={{ marginBottom: 8 }}>
-            <span style={{ color: 'var(--sage)' }}>&#9672;</span> {s.title}
+            <span style={{ color: 'var(--sage-deep)' }}>&#9672;</span> {s.title}
           </div>
           <h1 className="h1">{s.greeting}, {firstName}.</h1>
           {!hasData && (
@@ -206,14 +206,14 @@ export default async function DashboardPage() {
             <div className="card" style={{ marginBottom: 24 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
                 <div className="eyebrow">&#9672; {s.priorityActions}</div>
-                <a href={'/results/' + latestAssessment?.id} style={{ color: 'var(--sage)', fontSize: '.8125rem', textDecoration: 'none' }}>
+                <a href={'/results/' + latestAssessment?.id} style={{ color: 'var(--sage-deep)', fontSize: '.8125rem', textDecoration: 'none' }}>
                   {s.seeAll}
                 </a>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {(latestRecs as { id: string; impact_score: number; title: string; category: string }[]).map((rec) => (
                   <div key={rec.id} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '12px 16px', background: 'var(--canvas2)', borderRadius: 10 }}>
-                    <div style={{ width: 36, height: 36, borderRadius: 8, background: 'var(--sage)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 600, flexShrink: 0 }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 8, background: 'var(--sage-deep)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 600, flexShrink: 0 }}>
                       {rec.impact_score}
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
@@ -263,3 +263,4 @@ export default async function DashboardPage() {
     </div>
   )
 }
+                                                                                                                                                                                                                                                                                                                                   

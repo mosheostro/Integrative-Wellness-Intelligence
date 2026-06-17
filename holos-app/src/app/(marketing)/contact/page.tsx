@@ -55,7 +55,7 @@ export default function ContactPage() {
       {/* ── Hero ── */}
       <section style={{ padding: '96px 24px 64px', textAlign: 'center' }}>
         <div style={{ maxWidth: 640, margin: '0 auto' }}>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 20 }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 20 }}>
             ◈ {c.eyebrow}
           </div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', fontWeight: 500, letterSpacing: '-.03em', lineHeight: 1.1, color: 'var(--ink)', margin: '0 0 20px' }}>
@@ -207,7 +207,7 @@ export default function ContactPage() {
                   style={{
                     padding:      '13px 24px',
                     borderRadius: 'var(--radius)',
-                    background:   status === 'sending' ? 'var(--line)' : 'var(--sage)',
+                    background:   status === 'sending' ? 'var(--line)' : 'var(--sage-deep)',
                     color:        '#fff',
                     fontFamily:   'var(--font-body)',
                     fontWeight:   600,
@@ -273,12 +273,4 @@ export default function ContactPage() {
               <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', color: 'var(--ink)', marginBottom: 4 }}>{FOUNDER.name}</div>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-faint)', marginBottom: 16 }}>{FOUNDER.title}</div>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-soft)', fontStyle: 'italic', lineHeight: 1.6 }}>
-                &ldquo;{c.founderQuote}&rdquo;
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  )
-}
+            

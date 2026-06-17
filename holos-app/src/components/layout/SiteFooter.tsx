@@ -69,7 +69,7 @@ export default function SiteFooter() {
           {/* Brand */}
           <div>
             <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, textDecoration: 'none', marginBottom: 16 }}>
-              <span style={{ color: 'var(--sage)', fontSize: '1.2rem' }}>◈</span>
+              <span style={{ color: 'var(--sage-deep)', fontSize: '1.2rem' }}>◈</span>
               <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: '#fff', fontWeight: 500 }}>Holos</span>
             </Link>
             <p style={{ fontFamily: 'var(--font-body)', fontSize: '.8rem', lineHeight: 1.7, maxWidth: 200, margin: '0 0 20px' }}>
@@ -197,25 +197,3 @@ export default function SiteFooter() {
                 fontSize:       '.75rem',
                 color:          'rgba(255,255,255,.35)',
                 textDecoration: 'none',
-              }}>
-              {f.termsOfUse}
-            </Link>
-            <a href={`mailto:${FOUNDER.email}`}
-              style={{
-                fontFamily:     'var(--font-body)',
-                fontSize:       '.75rem',
-                color:          'rgba(255,255,255,.35)',
-                textDecoration: 'none',
-              }}>
-              {FOUNDER.email}
-            </a>
-          </div>
-        </div>
-
-        <div style={{ padding: '16px 0 32px', fontSize: '.72rem', fontFamily: 'var(--font-body)', lineHeight: 1.6 }}>
-          {f.medical}
-        </div>
-      </div>
-    </footer>
-  )
-}

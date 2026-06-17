@@ -76,7 +76,7 @@ export default async function SciencePage() {
             padding: '6px 16px',
             fontSize: '.78rem',
             fontFamily: 'var(--font-mono)',
-            color: 'var(--sage)',
+            color: 'var(--sage-deep)',
             letterSpacing: '.06em',
             textTransform: 'uppercase',
             marginBottom: 24,
@@ -261,7 +261,7 @@ export default async function SciencePage() {
           <Link href="/assessment" style={{
             display: 'inline-block',
             padding: '12px 28px',
-            background: 'var(--sage)',
+            background: 'var(--sage-deep)',
             color: '#fff',
             borderRadius: 'var(--radius)',
             fontFamily: 'var(--font-body)',
@@ -276,3 +276,4 @@ export default async function SciencePage() {
     </main>
   )
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      

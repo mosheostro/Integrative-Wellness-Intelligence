@@ -90,7 +90,7 @@ export function LanguageSwitcher() {
                 <span style={{ fontSize: '1.1rem', lineHeight: 1 }}>{meta.flag}</span>
                 {meta.label}
                 {l === locale && (
-                  <span style={{ marginLeft: 'auto', color: 'var(--sage)', fontSize: '.75rem' }}>✓</span>
+                  <span style={{ marginLeft: 'auto', color: 'var(--sage-deep)', fontSize: '.75rem' }}>✓</span>
                 )}
               </button>
             )

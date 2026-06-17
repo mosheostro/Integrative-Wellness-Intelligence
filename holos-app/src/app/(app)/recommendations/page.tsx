@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { BackButton } from '@/components/ui/BackButton'
 
 type Rec = {
   id: string
@@ -77,9 +78,10 @@ export default function RecommendationsPage() {
 
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', padding: '32px 24px' }}>
+      <BackButton href="/dashboard" style={{ marginBottom: 24 }} />
       <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 8 }}>◈ {strings.nav.actions}</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◈ {strings.nav.actions}</div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
             {s.title}
           </h1>
@@ -112,7 +114,7 @@ export default function RecommendationsPage() {
             {recs.length === 0 ? s.noRecsDesc : s.nothingDesc}
           </div>
           {recs.length === 0 && (
-            <Link href="/assessment" style={{ padding: '10px 24px', borderRadius: 'var(--radius)', background: 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.88rem', textDecoration: 'none' }}>
+            <Link href="/assessment" style={{ padding: '10px 24px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.88rem', textDecoration: 'none' }}>
               {s.takeAssessment}
             </Link>
           )}
@@ -165,7 +167,7 @@ export default function RecommendationsPage() {
                 {!done && (
                   <div style={{ display: 'flex', gap: 8 }}>
                     <button onClick={() => markDone(r.id)}
-                      style={{ padding: '8px 16px', borderRadius: 'var(--radius)', background: 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.8rem', border: 'none', cursor: 'pointer' }}>
+                      style={{ padding: '8px 16px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.8rem', border: 'none', cursor: 'pointer' }}>
                       {s.markDone}
                     </button>
                     <button onClick={() => dismiss(r.id)}
@@ -175,7 +177,7 @@ export default function RecommendationsPage() {
                   </div>
                 )}
                 {done && (
-                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '.8rem', color: 'var(--sage)', fontWeight: 600 }}>
+                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '.8rem', color: 'var(--sage-deep)', fontWeight: 600 }}>
                     {s.completedLabel}
                   </div>
                 )}
@@ -187,3 +189,4 @@ export default function RecommendationsPage() {
     </div>
   )
 }
+                                                                                             

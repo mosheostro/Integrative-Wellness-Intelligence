@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic'
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { getServerStrings } from '@/lib/i18n/server'
+import { BackButton } from '@/components/ui/BackButton'
 
 const DIMENSION_KEYS = ['nutrition','sleep','recovery','stress','movement','emotional','life_balance','purpose','energy']
 
@@ -71,9 +72,10 @@ export default async function ReportsPage() {
 
   return (
     <div style={{ maxWidth: 960, margin: '0 auto', padding: '32px 24px' }}>
-      {/* Header */}
+      <BackButton href="/dashboard" style={{ marginBottom: 24 }} />
+      {/* Header */
       <div style={{ marginBottom: 40 }}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 8 }}>◎ {nav.reports}</div>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◎ {nav.reports}</div>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
           {s.title}
         </h1>
@@ -86,7 +88,7 @@ export default async function ReportsPage() {
           <div style={{ fontFamily: 'var(--font-body)', fontSize: '.88rem', color: 'var(--ink-soft)', marginBottom: 28, maxWidth: 380, margin: '0 auto 28px' }}>
             {s.noDataDesc}
           </div>
-          <Link href="/assessment" style={{ padding: '12px 28px', borderRadius: 'var(--radius)', background: 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.9rem', textDecoration: 'none' }}>
+          <Link href="/assessment" style={{ padding: '12px 28px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.9rem', textDecoration: 'none' }}>
             {s.takeFirst}
           </Link>
         </div>
@@ -162,7 +164,7 @@ export default async function ReportsPage() {
                     <span style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: 'var(--ink)' }}>
                       {new Date(a.completed_at).toLocaleDateString(dateLocale, { month: 'short', day: 'numeric', year: 'numeric' })}
                     </span>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--sage)', background: 'rgba(122,158,142,.1)', padding: '2px 10px', borderRadius: 100 }}>{a.framework}</span>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--sage-deep)', background: 'rgba(122,158,142,.1)', padding: '2px 10px', borderRadius: 100 }}>{a.framework}</span>
                     <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-soft)' }}>{a.wellness_state}</span>
                     <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.85rem', fontWeight: 600, color: 'var(--ink)' }}>{a.composite_score}</span>
                   </Link>
@@ -173,15 +175,4 @@ export default async function ReportsPage() {
 
           {/* Actions */}
           <div style={{ display: 'flex', gap: 12 }}>
-            <Link href="/assessment" style={{ padding: '11px 24px', borderRadius: 'var(--radius)', background: 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.88rem', textDecoration: 'none' }}>
-              {s.newAssessment}
-            </Link>
-            <Link href="/recommendations" style={{ padding: '11px 24px', borderRadius: 'var(--radius)', border: '1.5px solid var(--line)', color: 'var(--ink)', fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '.88rem', textDecoration: 'none' }}>
-              {s.viewActionPlan}
-            </Link>
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
+            <Link href="/assessment" style={{ padding: '11px 24px', borderRadius: 'var(--radius)', background: 'var(--sa

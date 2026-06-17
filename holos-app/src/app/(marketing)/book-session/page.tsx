@@ -66,7 +66,7 @@ export default async function BookSessionPage() {
             margin: '0 auto 20px',
             fontSize: '1.6rem',
           }}>◈</div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 12 }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 12 }}>
             {b.eyebrow}
           </div>
           <h1 style={{
@@ -264,3 +264,4 @@ export default async function BookSessionPage() {
     </main>
   )
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                           

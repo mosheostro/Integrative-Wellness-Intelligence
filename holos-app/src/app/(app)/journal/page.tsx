@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { LOCALE_META } from '@/lib/i18n/translations'
+import { BackButton } from '@/components/ui/BackButton'
 
 type Entry = { id: string; created_at: string; content: string; mood: number | null; dimension_tags: string[] }
 
@@ -19,7 +20,7 @@ export default function JournalPage() {
     { v: 1, label: s.moodStruggling, color: 'var(--rose)' },
     { v: 2, label: s.moodLow,        color: 'var(--clay)' },
     { v: 3, label: s.moodOkay,       color: 'var(--gold)' },
-    { v: 4, label: s.moodGood,       color: 'var(--sage)' },
+    { v: 4, label: s.moodGood,       color: 'var(--sage-deep)' },
     { v: 5, label: s.moodThriving,   color: 'var(--indigo)' },
   ]
 
@@ -87,10 +88,11 @@ export default function JournalPage() {
 
   return (
     <div style={{ maxWidth: 820, margin: '0 auto', padding: '32px 24px' }}>
-      {/* Header */}
+      <BackButton href="/dashboard" style={{ marginBottom: 24 }} />
+      {/* Header */
       <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 8 }}>◈ {strings.nav.journal}</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◈ {strings.nav.journal}</div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
             {s.title}
           </h1>
@@ -187,7 +189,7 @@ export default function JournalPage() {
           <button onClick={save} disabled={!draft.trim() || saving}
             style={{
               alignSelf: 'flex-start', padding: '12px 28px', borderRadius: 'var(--radius)',
-              background: !draft.trim() || saving ? 'var(--line)' : 'var(--sage)',
+              background: !draft.trim() || saving ? 'var(--line)' : 'var(--sage-deep)',
               color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.9rem',
               border: 'none', cursor: !draft.trim() || saving ? 'not-allowed' : 'pointer',
             }}>
@@ -204,7 +206,7 @@ export default function JournalPage() {
             <div style={{ textAlign: 'center', padding: 64, background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--radius-lg)' }}>
               <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'var(--ink)', marginBottom: 8 }}>{s.noEntries}</div>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: 'var(--ink-faint)', marginBottom: 20 }}>{s.noEntriesDesc}</div>
-              <button onClick={() => setView('write')} style={{ padding: '10px 20px', borderRadius: 'var(--radius)', background: 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', border: 'none', cursor: 'pointer' }}>
+              <button onClick={() => setView('write')} style={{ padding: '10px 20px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', border: 'none', cursor: 'pointer' }}>
                 {s.writeFirst}
               </button>
             </div>
@@ -221,23 +223,4 @@ export default function JournalPage() {
                     </span>
                   )}
                 </div>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', lineHeight: 1.75, color: 'var(--ink-soft)', margin: 0, whiteSpace: 'pre-wrap' }}>
-                  {entry.content}
-                </p>
-                {entry.dimension_tags?.length > 0 && (
-                  <div style={{ marginTop: 12, display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                    {entry.dimension_tags.map(tag => (
-                      <span key={tag} style={{ padding: '2px 10px', borderRadius: 100, background: 'rgba(122,158,142,.1)', color: 'var(--sage)', fontFamily: 'var(--font-body)', fontSize: '.72rem' }}>
-                        {dimLabel(tag)}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )
-          })}
-        </div>
-      )}
-    </div>
-  )
-}
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', lineHeight: 1.75, color: 'var(--ink-soft)', margin: 0, whiteSpace: 'p

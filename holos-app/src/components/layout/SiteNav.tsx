@@ -82,7 +82,7 @@ export default function SiteNav() {
             marginRight: 32,
           }}
         >
-          <span style={{ color: 'var(--sage)', fontSize: '1.25rem', lineHeight: 1 }}>◈</span>
+          <span style={{ color: 'var(--sage-deep)', fontSize: '1.25rem', lineHeight: 1 }}>◈</span>
           <span style={{
             fontFamily:  'var(--font-serif)',
             fontSize:    '1.15rem',
@@ -171,7 +171,7 @@ export default function SiteNav() {
             style={{
               padding:      '8px 20px',
               borderRadius: 'var(--radius)',
-              background:   'var(--sage)',
+              background:   'var(--sage-deep)',
               color:        '#fff',
               fontFamily:   'var(--font-body)',
               fontSize:     '.85rem',
@@ -370,23 +370,6 @@ export default function SiteNav() {
               textAlign:    'center',
               padding:      '12px 24px',
               borderRadius: 'var(--radius)',
-              background:   'var(--sage)',
+              background:   'var(--sage-deep)',
               fontFamily:   'var(--font-body)',
-              fontWeight:   600,
-              color:        '#fff',
-              textDecoration: 'none',
-            }}>{n.getStartedFree}</Link>
-        </div>
-      </div>
-
-      <style>{`
-        @media (min-width: 768px) {
-          .site-nav-mobile { display: none !important; }
-        }
-        @media (max-width: 767px) {
-          .site-nav-desktop { display: none !important; }
-        }
-      `}</style>
-    </>
-  )
-}
+       

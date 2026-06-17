@@ -7,23 +7,23 @@ import { getServerStrings } from '@/lib/i18n/server'
 const STATS_VALUES = ['9', '8', '50+', '15+']
 
 const DIM_META = [
-  { key: 'nutrition',    color: 'var(--sage)',   icon: '◉', descKey: 'dimDescNutrition' },
+  { key: 'nutrition',    color: 'var(--sage-deep)',   icon: '◉', descKey: 'dimDescNutrition' },
   { key: 'sleep',        color: 'var(--indigo)', icon: '◎', descKey: 'dimDescSleep'     },
   { key: 'recovery',     color: 'var(--clay)',   icon: '◆', descKey: 'dimDescRecovery'  },
   { key: 'stress',       color: 'var(--rose)',   icon: '◈', descKey: 'dimDescStress'    },
   { key: 'movement',     color: 'var(--gold)',   icon: '◉', descKey: 'dimDescMovement'  },
   { key: 'emotional',    color: 'var(--indigo)', icon: '◎', descKey: 'dimDescEmotional' },
-  { key: 'life_balance', color: 'var(--sage)',   icon: '◆', descKey: 'dimDescBalance'   },
+  { key: 'life_balance', color: 'var(--sage-deep)',   icon: '◆', descKey: 'dimDescBalance'   },
   { key: 'purpose',      color: 'var(--gold)',   icon: '◈', descKey: 'dimDescPurpose'   },
   { key: 'energy',       color: 'var(--clay)',   icon: '◉', descKey: 'dimDescEnergy'    },
 ] as const
 
 const TRAD_META = [
-  { icon: '⚗', name: 'Evidence-Based', id: 'evidence-based', color: 'var(--sage)',   descKey: 'tradDescEvidence'   },
+  { icon: '⚗', name: 'Evidence-Based', id: 'evidence-based', color: 'var(--sage-deep)',   descKey: 'tradDescEvidence'   },
   { icon: '☽', name: 'Rambam',         id: 'rambam',         color: 'var(--indigo)', descKey: 'tradDescRambam'     },
   { icon: '♾', name: 'Hippocrates',    id: 'hippocrates',    color: 'var(--clay)',   descKey: 'tradDescHippocrates'},
   { icon: '◈', name: 'Avicenna',       id: 'avicenna',       color: 'var(--gold)',   descKey: 'tradDescAvicenna'   },
-  { icon: '🌿', name: 'Ayurveda',      id: 'ayurveda',       color: 'var(--sage)',   descKey: 'tradDescAyurveda'   },
+  { icon: '🌿', name: 'Ayurveda',      id: 'ayurveda',       color: 'var(--sage-deep)',   descKey: 'tradDescAyurveda'   },
   { icon: '☯', name: 'Daoist',         id: 'daoist',         color: 'var(--indigo)', descKey: 'tradDescDaoist'     },
   { icon: '❋', name: 'Tibetan',        id: 'tibetan',        color: 'var(--clay)',   descKey: 'tradDescTibetan'    },
   { icon: '✦', name: 'Swarga',         id: 'swarga',         color: 'var(--gold)',   descKey: 'tradDescSwarga'     },
@@ -138,7 +138,7 @@ export default async function HomePage() {
               padding:      '6px 16px',
               marginBottom: 32,
             }}>
-              <span style={{ color: 'var(--sage)', fontSize: '.9rem' }}>◈</span>
+              <span style={{ color: 'var(--sage-deep)', fontSize: '.9rem' }}>◈</span>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)' }}>
                 {h.heroEyebrow}
               </span>
@@ -155,7 +155,7 @@ export default async function HomePage() {
               margin:        '0 0 28px',
             }}>
               {h.heroTitle}{' '}
-              <em style={{ color: 'var(--sage)', fontStyle: 'italic' }}>{h.heroTitleEm}</em>
+              <em style={{ color: 'var(--sage-deep)', fontStyle: 'italic' }}>{h.heroTitleEm}</em>
             </h1>
 
             <p style={{
@@ -178,7 +178,7 @@ export default async function HomePage() {
                   gap:            8,
                   padding:        '14px 32px',
                   borderRadius:   'var(--radius)',
-                  background:     'var(--sage)',
+                  background:     'var(--sage-deep)',
                   color:          '#fff',
                   fontFamily:     'var(--font-body)',
                   fontWeight:     600,
@@ -235,7 +235,7 @@ export default async function HomePage() {
         <section style={{ background: 'var(--canvas2)', padding: '96px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 64 }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 12 }}>◎ {h.howEyebrow}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 12 }}>◎ {h.howEyebrow}</div>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
                 {h.howTitle}
               </h2>
@@ -259,7 +259,7 @@ export default async function HomePage() {
                     marginBottom:  20,
                     letterSpacing: '-.02em',
                   }}>{step.n}</div>
-                  <div style={{ fontSize: '1.4rem', marginBottom: 12, color: 'var(--sage)' }}>{step.icon}</div>
+                  <div style={{ fontSize: '1.4rem', marginBottom: 12, color: 'var(--sage-deep)' }}>{step.icon}</div>
                   <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', fontWeight: 500, color: 'var(--ink)', margin: '0 0 10px' }}>
                     {step.title}
                   </h3>
@@ -271,7 +271,7 @@ export default async function HomePage() {
             </div>
             <div style={{ textAlign: 'center', marginTop: 40 }}>
               <Link href="/auth/signup"
-                style={{ fontFamily: 'var(--font-body)', fontSize: '.9rem', fontWeight: 600, color: 'var(--sage)', textDecoration: 'none' }}>
+                style={{ fontFamily: 'var(--font-body)', fontSize: '.9rem', fontWeight: 600, color: 'var(--sage-deep)', textDecoration: 'none' }}>
                 {h.howCta}
               </Link>
             </div>
@@ -282,7 +282,7 @@ export default async function HomePage() {
         <section style={{ padding: '96px 24px' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 64 }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 12 }}>◆ {h.dimsEyebrow}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 12 }}>◆ {h.dimsEyebrow}</div>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: '0 0 16px' }}>
                 {h.dimsTitle}
               </h2>
@@ -320,7 +320,7 @@ export default async function HomePage() {
         <section style={{ background: 'var(--canvas2)', padding: '96px 24px' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 64 }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 12 }}>◆ {h.tradEyebrow}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 12 }}>◆ {h.tradEyebrow}</div>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: '0 0 16px' }}>
                 {h.tradTitle}
               </h2>
@@ -352,7 +352,7 @@ export default async function HomePage() {
             </div>
             <div style={{ textAlign: 'center', marginTop: 40 }}>
               <Link href="/methodologies"
-                style={{ fontFamily: 'var(--font-body)', fontSize: '.9rem', fontWeight: 600, color: 'var(--sage)', textDecoration: 'none' }}>
+                style={{ fontFamily: 'var(--font-body)', fontSize: '.9rem', fontWeight: 600, color: 'var(--sage-deep)', textDecoration: 'none' }}>
                 {h.tradCta}
               </Link>
             </div>
@@ -363,10 +363,10 @@ export default async function HomePage() {
         <section style={{ padding: '96px 24px' }}>
           <div style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 64, alignItems: 'center' }}>
             <div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 16 }}>◆ {h.founderEyebrow}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 16 }}>◆ {h.founderEyebrow}</div>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: '0 0 20px' }}>
                 {h.founderTitleA}{' '}
-                <em style={{ color: 'var(--sage)' }}>{h.founderTitleEm}</em>
+                <em style={{ color: 'var(--sage-deep)' }}>{h.founderTitleEm}</em>
               </h2>
               <p style={{ fontFamily: 'var(--font-body)', fontSize: '.95rem', lineHeight: 1.75, color: 'var(--ink-soft)', margin: '0 0 24px' }}>
                 {h.founderBody}
@@ -430,7 +430,7 @@ export default async function HomePage() {
                     fontSize:   '.8rem',
                     color:      'var(--ink-soft)',
                   }}>
-                    <span style={{ color: 'var(--sage)', fontSize: '.7rem' }}>✓</span>
+                    <span style={{ color: 'var(--sage-deep)', fontSize: '.7rem' }}>✓</span>
                     {cred}
                   </div>
                 ))}
@@ -441,7 +441,7 @@ export default async function HomePage() {
                   marginTop:      28,
                   padding:        '10px 20px',
                   borderRadius:   'var(--radius)',
-                  background:     'var(--sage)',
+                  background:     'var(--sage-deep)',
                   color:          '#fff',
                   fontFamily:     'var(--font-body)',
                   fontWeight:     600,
@@ -459,7 +459,7 @@ export default async function HomePage() {
         <section style={{ background: 'var(--canvas2)', padding: '96px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 64 }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 12 }}>◆ {h.pricingEyebrow}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 12 }}>◆ {h.pricingEyebrow}</div>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: '0 0 12px' }}>
                 {h.pricingTitle}
               </h2>
@@ -483,7 +483,7 @@ export default async function HomePage() {
                       top:           -12,
                       left:          '50%',
                       transform:     'translateX(-50%)',
-                      background:    'var(--sage)',
+                      background:    'var(--sage-deep)',
                       color:         '#fff',
                       fontFamily:    'var(--font-mono)',
                       fontSize:      '.65rem',
@@ -512,7 +512,7 @@ export default async function HomePage() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 28 }}>
                     {plan.features.map((f, i) => (
                       <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontFamily: 'var(--font-body)', fontSize: '.83rem', color: plan.highlight ? 'rgba(255,255,255,.7)' : 'var(--ink-soft)' }}>
-                        <span style={{ color: 'var(--sage)', flexShrink: 0, marginTop: 1 }}>✓</span>
+                        <span style={{ color: 'var(--sage-deep)', flexShrink: 0, marginTop: 1 }}>✓</span>
                         {f}
                       </div>
                     ))}
@@ -523,7 +523,7 @@ export default async function HomePage() {
                       textAlign:      'center',
                       padding:        '12px 20px',
                       borderRadius:   'var(--radius)',
-                      background:     plan.highlight ? 'var(--sage)' : 'transparent',
+                      background:     plan.highlight ? 'var(--sage-deep)' : 'transparent',
                       border:         plan.highlight ? 'none' : '1.5px solid var(--line)',
                       color:          plan.highlight ? '#fff' : 'var(--ink)',
                       fontFamily:     'var(--font-body)',
@@ -554,10 +554,10 @@ export default async function HomePage() {
             pointerEvents: 'none',
           }}/>
           <div style={{ position: 'relative', zIndex: 1, maxWidth: 640, margin: '0 auto' }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 20 }}>◆ {h.ctaEyebrow}</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 20 }}>◆ {h.ctaEyebrow}</div>
             <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: '0 0 20px', lineHeight: 1.1 }}>
               {h.ctaTitle}{' '}
-              <em style={{ color: 'var(--sage)' }}>{h.ctaTitleEm}</em>
+              <em style={{ color: 'var(--sage-deep)' }}>{h.ctaTitleEm}</em>
             </h2>
             <p style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', color: 'var(--ink-soft)', margin: '0 auto 44px', maxWidth: 440, lineHeight: 1.65 }}>
               {h.ctaSubtitle}
@@ -570,7 +570,7 @@ export default async function HomePage() {
                   gap:            8,
                   padding:        '14px 32px',
                   borderRadius:   'var(--radius)',
-                  background:     'var(--sage)',
+                  background:     'var(--sage-deep)',
                   color:          '#fff',
                   fontFamily:     'var(--font-body)',
                   fontWeight:     600,
@@ -604,3 +604,4 @@ export default async function HomePage() {
     </>
   )
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              

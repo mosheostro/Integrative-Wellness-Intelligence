@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { BackButton } from '@/components/ui/BackButton'
 
 type Profile = {
   id: string
@@ -88,8 +89,9 @@ export default function ProfilePage() {
 
   return (
     <div style={{ maxWidth: 720, margin: '0 auto', padding: '32px 24px' }}>
+      <BackButton href="/dashboard" style={{ marginBottom: 24 }} />
       <div style={{ marginBottom: 36 }}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage)', marginBottom: 8 }}>◈ {strings.nav.profile}</div>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◈ {strings.nav.profile}</div>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
           {s.title}
         </h1>
@@ -157,14 +159,5 @@ export default function ProfilePage() {
 
         <div style={{ marginTop: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
           <button type="submit" disabled={saving}
-            style={{ padding: '11px 24px', borderRadius: 'var(--radius)', background: saving ? 'var(--line)' : 'var(--sage)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.9rem', border: 'none', cursor: saving ? 'wait' : 'pointer' }}>
-            {saving ? s.saving : s.saveChanges}
-          </button>
-          {saved && (
-            <span style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: 'var(--sage)', fontWeight: 600 }}>{s.saved}</span>
-          )}
-        </div>
-      </form>
-    </div>
-  )
-}
+            style={{ padding: '11px 24px', borderRadius: 'var(--radius)', background: saving ? 'var(--line)' : 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.9rem', border: 'none', cursor: saving ? 'wait' : 'pointer' }}>
+            {saving ? s
