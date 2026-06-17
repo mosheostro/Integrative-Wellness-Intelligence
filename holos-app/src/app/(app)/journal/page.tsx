@@ -89,7 +89,7 @@ export default function JournalPage() {
   return (
     <div style={{ maxWidth: 820, margin: '0 auto', padding: '32px 24px' }}>
       <BackButton href="/dashboard" style={{ marginBottom: 24 }} />
-      {/* Header */
+      {/* Header */}
       <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◈ {strings.nav.journal}</div>
