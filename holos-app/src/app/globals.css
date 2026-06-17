@@ -20,6 +20,8 @@
   --clay:       #B07A60;
   --rose:       #B06070;
   --bg-warm:    #F5F0E8;
+  --nav-bg:         rgba(250,247,242,.70);
+  --nav-bg-scrolled: rgba(250,247,242,.94);
 
   --font-serif: 'Spectral', Georgia, serif;
   --font-body:  'Hanken Grotesk', system-ui, sans-serif;
@@ -42,6 +44,8 @@
   --ink-soft:   #B8B4A8;
   --ink-faint:  #7A7A8A;
   --bg-warm:    #1A1C24;
+  --nav-bg:         rgba(22,24,31,.80);
+  --nav-bg-scrolled: rgba(22,24,31,.96);
 }
 
 /* ── Base ─────────────────────────────────────────────────── */

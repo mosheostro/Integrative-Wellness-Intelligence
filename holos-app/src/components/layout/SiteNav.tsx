@@ -62,8 +62,8 @@ export default function SiteNav() {
           padding:         '0 24px',
           transition:      'background .25s, box-shadow .25s',
           background:      scrolled
-            ? 'rgba(250,247,242,.94)'
-            : 'rgba(250,247,242,.70)',
+            ? 'var(--nav-bg-scrolled)'
+            : 'var(--nav-bg)',
           backdropFilter:  'blur(18px)',
           WebkitBackdropFilter: 'blur(18px)',
           boxShadow:       scrolled ? '0 1px 0 var(--line)' : 'none',

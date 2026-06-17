@@ -1,114 +1,41 @@
 import Link from 'next/link'
 import { getServerStrings } from '@/lib/i18n/server'
+import { getMethodologiesBodies, type ContentKey } from '@/lib/i18n/methodologies-bodies'
 
 export const metadata = {
   title: 'Methodologies — Holos Integrative Wellness Intelligence',
   description: 'Explore the eight wisdom traditions that power HOLOS: Evidence-Based Medicine, Rambam, Hippocrates, Avicenna, Ayurveda, Daoist, Tibetan, and Swarga synthesis.',
 }
 
-// Tradition names are proper nouns — not translated.
-// Bodies and pillar tags are scholarly/technical content in English.
+// Tradition names and era/origin labels are proper nouns — not translated.
+// Body texts and pillars are translated via getMethodologiesBodies().
 const TRADITIONS_META = [
-  {
-    id:      'evidence-based',
-    icon:    '⚗',
-    name:    'Evidence-Based Medicine',
-    color:   'var(--sage)',
-    era:     'Modern · 20th–21st century',
-    origin:  'Global',
-    taglineKey: 'tEvidenceTagline' as const,
-    body:    `Evidence-Based Medicine (EBM) integrates the best available clinical research with individual patient circumstances and values. HOLOS uses EBM as its calibration layer — every dimension score is anchored in peer-reviewed biomarker research, epidemiological data, and clinical guidelines.\n\nIn HOLOS, EBM provides the measurable targets: optimal HRV ranges, sleep architecture percentages, macro ratios, VO₂ max benchmarks. It is the language that translates traditional insights into actionable numbers.`,
-    pillars: ['Randomised controlled trials', 'Systematic reviews & meta-analyses', 'Biomarker optimisation', 'Personalised risk stratification'],
-  },
-  {
-    id:      'rambam',
-    icon:    '☽',
-    name:    'Rambam',
-    color:   'var(--indigo)',
-    era:     '12th century · 1138–1204 CE',
-    origin:  'Córdoba & Cairo',
-    taglineKey: 'tRambamTagline' as const,
-    body:    `Rabbi Moses ben Maimon — known as Rambam (or Maimonides) — was simultaneously the greatest Jewish philosopher, the court physician of Saladin, and one of the most systematic medical thinkers in history. His "Regimen of Health" synthesised Galenic medicine, Islamic medicine, and Jewish law into a preventive wellness system eight centuries before preventive medicine existed.\n\nRambam's genius was prescriptive precision: specific sleep hours, dietary sequencing, emotional regulation practices, and a proto-psychosomatic understanding of how thoughts affect physical health. HOLOS uses the Rambam framework for users seeking a Jewish-ethical or historical Mediterranean lens on their wellness data.`,
-    pillars: ['Preventive regimen (Hanhagat HaBriut)', 'Dietary sequencing and seasonal eating', 'Psychosomatic health (mind-body unity)', 'Sleep and rest as medical intervention'],
-  },
-  {
-    id:      'hippocrates',
-    icon:    '♾',
-    name:    'Hippocratic Medicine',
-    color:   'var(--clay)',
-    era:     '5th century BCE',
-    origin:  'Ancient Greece',
-    taglineKey: 'tHippocratesTagline' as const,
-    body:    `The Hippocratic tradition, codified in 460 BCE, established the foundational premise of Western medicine: that disease has natural causes and that the body has innate healing capacity. The four humours — blood, phlegm, yellow bile, black bile — were its diagnostic language, mapping to temperaments, seasons, and organ systems.\n\nWhat makes Hippocrates enduringly relevant is not the humours themselves but the framework: the clinician as observer of the whole patient in their environment, and health as dynamic balance rather than the absence of symptoms. HOLOS's nine-dimension model is a direct descendant of this insight.`,
-    pillars: ['Four humours and constitutional types', 'Seasonal and environmental health', 'Diet and lifestyle as primary medicine', 'Vis medicatrix naturae (healing power of nature)'],
-  },
-  {
-    id:      'avicenna',
-    icon:    '◈',
-    name:    'Avicenna',
-    color:   'var(--gold)',
-    era:     '10th–11th century · 980–1037 CE',
-    origin:  'Persia',
-    taglineKey: 'tAvicennaTagline' as const,
-    body:    `Ibn Sina (Avicenna) wrote the Canon of Medicine in 1025 CE — a 14-volume encyclopaedia that remained the standard medical textbook in Europe and the Islamic world for six centuries. He synthesised Hippocratic, Galenic, and Aristotelian medicine with original insights in pharmacology, psychiatry, and preventive health.\n\nAvicenna's contribution to HOLOS is his concept of "Mizaj" — individual temperament — which becomes a precision personalisation layer. His six essential principles of health (air, food & drink, sleep & waking, movement & rest, evacuation & retention, mental states) map almost perfectly onto the nine HOLOS dimensions.`,
-    pillars: ['Mizaj — individual temperamental constitution', 'Six essential principles of health', 'Polypharmacy and botanical medicine', 'Mental health as medical discipline'],
-  },
-  {
-    id:      'ayurveda',
-    icon:    '🌿',
-    name:    'Ayurveda',
-    color:   'var(--sage)',
-    era:     '3000 BCE – present',
-    origin:  'Indian subcontinent',
-    taglineKey: 'tAyurvedaTagline' as const,
-    body:    `Ayurveda — the "knowledge of life" — is the oldest continuously practised medical system on Earth. Its central insight is that every individual has a unique constitutional type (Prakriti) composed of three doshas: Vata (air + space), Pitta (fire + water), and Kapha (earth + water). Disease arises when these doshas fall out of their individual balance.\n\nWhat makes Ayurveda extraordinary for HOLOS is its precision personalisation. The same food, sleep schedule, or exercise that heals one person can harm another — because their Prakriti differs. HOLOS uses dosha analysis to transform generic recommendations into constitution-specific guidance.`,
-    pillars: ['Prakriti — constitutional typing (Vata/Pitta/Kapha)', 'Dinacharya — daily routine as medicine', 'Ritucharya — seasonal adaptation', 'Agni — digestive fire and metabolism'],
-  },
-  {
-    id:      'daoist',
-    icon:    '☯',
-    name:    'Daoist Medicine',
-    color:   'var(--indigo)',
-    era:     '5th century BCE – present',
-    origin:  'China',
-    taglineKey: 'tDaoistTagline' as const,
-    body:    `Daoist medical philosophy — the foundation of Traditional Chinese Medicine — sees the body as a microcosm of nature, governed by the same forces that move seasons and stars. Qi (vital energy) flows through meridian channels. The five elements (wood, fire, earth, metal, water) map to organ systems, emotions, seasons, and flavours. Health is the smooth, abundant flow of Qi; disease is its stagnation, deficiency, or excess.\n\nHOLOS applies the Daoist framework to reveal the energetic dimension of health that purely biochemical models miss.`,
-    pillars: ['Qi cultivation and circulation', 'Five-element constitutional analysis', 'Yin-Yang balance across seasons', 'Meridian and organ-system relationships'],
-  },
-  {
-    id:      'tibetan',
-    icon:    '❋',
-    name:    'Tibetan Medicine',
-    color:   'var(--clay)',
-    era:     '7th century CE – present',
-    origin:  'Tibet & Himalayan region',
-    taglineKey: 'tTibetanTagline' as const,
-    body:    `Tibetan medicine (Sowa Rigpa — "the science of healing") developed in the Himalayas over 1,400 years, synthesising Ayurvedic, Chinese, and Greek medicine with Buddhist philosophy. Its three humours — Lung (wind/air), Tripa (bile/fire), and Beken (phlegm/water-earth) — closely parallel Ayurvedic doshas but with a uniquely Tibetan psychological and spiritual dimension.\n\nWhat distinguishes Tibetan medicine in HOLOS is its sophisticated model of the mind-body relationship. The "Three Poisons" — ignorance, attachment, and aversion — are understood as the root causes of all physical disease.`,
-    pillars: ['Three nyépa (Lung, Tripa, Beken) constitution', 'Urine analysis and pulse diagnostics', 'Mind-body-spirit integration', 'Spiritual root causes of disease (Three Poisons)'],
-  },
-  {
-    id:      'swarga',
-    icon:    '✦',
-    name:    'Swarga Synthesis',
-    color:   'var(--gold)',
-    era:     '2024 CE',
-    origin:  'HOLOS',
-    taglineKey: 'tSwargaTagline' as const,
-    body:    `Swarga is the HOLOS synthesis framework — named after the Sanskrit concept of the bridge between earth and the divine. When you choose Swarga, HOLOS applies all eight wisdom frameworks simultaneously to your answers, weighs them by their relevance to each dimension, and synthesises a composite portrait that no single tradition could produce alone.\n\nSwarga is the recommendation for users who want the most complete possible view of their wellness. It is also the default recommendation for users new to integrative health who don't yet have a tradition affinity.`,
-    pillars: ['Multi-tradition composite scoring', 'Cross-tradition agreement detection', 'Highest-confidence recommendation surfacing', 'AI coaching across all eight frameworks'],
-  },
+  { id: 'evidence-based', contentKey: 'evidence' as ContentKey, icon: '⚗', name: 'Evidence-Based Medicine', color: 'var(--sage)',   era: 'Modern · 20th–21st century',     origin: 'Global',                taglineKey: 'tEvidenceTagline'   as const },
+  { id: 'rambam',         contentKey: 'rambam'   as ContentKey, icon: '☽', name: 'Rambam',                 color: 'var(--indigo)', era: '12th century · 1138–1204 CE',    origin: 'Córdoba & Cairo',        taglineKey: 'tRambamTagline'     as const },
+  { id: 'hippocrates',    contentKey: 'hippocrates' as ContentKey, icon: '♾', name: 'Hippocratic Medicine',color: 'var(--clay)',   era: '5th century BCE',                 origin: 'Ancient Greece',         taglineKey: 'tHippocratesTagline' as const },
+  { id: 'avicenna',       contentKey: 'avicenna' as ContentKey, icon: '◈', name: 'Avicenna',               color: 'var(--gold)',   era: '10th–11th century · 980–1037 CE', origin: 'Persia',                 taglineKey: 'tAvicennaTagline'   as const },
+  { id: 'ayurveda',       contentKey: 'ayurveda' as ContentKey, icon: '🌿', name: 'Ayurveda',              color: 'var(--sage)',   era: '3000 BCE – present',              origin: 'Indian subcontinent',    taglineKey: 'tAyurvedaTagline'   as const },
+  { id: 'daoist',         contentKey: 'daoist'   as ContentKey, icon: '☯', name: 'Daoist Medicine',        color: 'var(--indigo)', era: '5th century BCE – present',       origin: 'China',                  taglineKey: 'tDaoistTagline'     as const },
+  { id: 'tibetan',        contentKey: 'tibetan'  as ContentKey, icon: '❋', name: 'Tibetan Medicine',       color: 'var(--clay)',   era: '7th century CE – present',        origin: 'Tibet & Himalayan region', taglineKey: 'tTibetanTagline'  as const },
+  { id: 'swarga',         contentKey: 'swarga'   as ContentKey, icon: '✦', name: 'Swarga Synthesis',       color: 'var(--gold)',   era: '2024 CE',                         origin: 'HOLOS',                  taglineKey: 'tSwargaTagline'     as const },
 ]
 
 type MetaKey = 'tEvidenceTagline' | 'tRambamTagline' | 'tHippocratesTagline' | 'tAvicennaTagline' | 'tAyurvedaTagline' | 'tDaoistTagline' | 'tTibetanTagline' | 'tSwargaTagline'
 
 export default async function MethodologiesPage() {
-  const { strings } = await getServerStrings()
+  const { strings, locale } = await getServerStrings()
   const m = strings.methodologies
+  const bodies = getMethodologiesBodies(locale)
 
-  const TRADITIONS = TRADITIONS_META.map(t => ({
-    ...t,
-    tagline: m[t.taglineKey as MetaKey],
-  }))
+  const TRADITIONS = TRADITIONS_META.map(t => {
+    const content = bodies[t.contentKey]
+    return {
+      ...t,
+      tagline: m[t.taglineKey as MetaKey],
+      body:    content.body,
+      pillars: content.pillars,
+    }
+  })
 
   return (
     <div style={{ background: 'var(--canvas)' }}>
