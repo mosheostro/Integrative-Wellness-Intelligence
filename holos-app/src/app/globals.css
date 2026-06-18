@@ -1,0 +1,420 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Holos Design Tokens ─────────────────────────────────── */
+:root {
+  --canvas:     #FAF7F2;
+  --canvas2:    #F3EFE7;
+  --surface:    #FFFFFF;
+  --surface-2:  #EDE9E0;
+  --line:       #DDD8CC;
+  --ink:        #2B2F45;
+  --ink-soft:   #5A5F78;
+  --ink-faint:  #626370; /* was #9097B0 (2.71:1 fail) → now 5.07:1 on canvas ✓ */
+  --gold-text:  #7A5F20; /* accessible gold for text use (5.23:1 on canvas) */
+  --sage:       #7A9E8E;
+  --sage-deep:  #4E7A6A;
+  --gold:       #C4A55A;
+  --gold-deep:  #B08D4A;
+  --indigo:     #6B6FA8;
+  --clay:       #B07A60;
+  --rose:       #B06070;
+  --bg-warm:    #F5F0E8;
+  --nav-bg:         rgba(250,247,242,.70);
+  --nav-bg-scrolled: rgba(250,247,242,.94);
+
+  --font-serif: 'Spectral', Georgia, serif;
+  --font-body:  'Hanken Grotesk', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+
+  --radius:     8px;
+  --radius-lg:  16px;
+  --shadow-sm:  0 1px 3px rgba(43,47,69,.08);
+  --shadow-md:  0 4px 16px rgba(43,47,69,.12);
+  --shadow-lg:  0 12px 40px rgba(43,47,69,.16);
+}
+
+[data-theme="dark"] {
+  --canvas:     #16181F;
+  --canvas2:    #1E2029;
+  --surface:    #252832;
+  --surface-2:  #2E3140;
+  --line:       #383B4D;
+  --ink:        #EDE9E0;
+  --ink-soft:   #B8B4A8;
+  --ink-faint:  #9698AA; /* was #7A7A8A (4.20:1 fail) → now 6.22:1 on canvas ✓ */
+  --gold-text:  #C4A030; /* was #7A5F20 (2.94:1 on dark fail) → 7.11:1 on canvas ✓ */
+  --bg-warm:    #1A1C24;
+  --nav-bg:         rgba(22,24,31,.80);
+  --nav-bg-scrolled: rgba(22,24,31,.96);
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  background: var(--canvas);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100dvh;
+}
+
+/* ── Typography ───────────────────────────────────────────── */
+.display {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+.h1 { font-family: var(--font-serif); font-size: clamp(1.8rem,4vw,3rem); font-weight:500; line-height:1.15; }
+.h2 { font-family: var(--font-serif); font-size: clamp(1.5rem,3vw,2.4rem); font-weight:500; line-height:1.2; }
+.h3 { font-family: var(--font-serif); font-size: 1.2rem; font-weight:500; }
+.serif-it { font-style: italic; color: var(--sage); }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex; align-items: center; gap: 8px;
+}
+.eyebrow.gold { color: var(--gold-text); } /* was gold-deep (2.81:1 fail) → gold-text 5.23:1 ✓ */
+.lede { font-size: 1.05rem; color: var(--ink-soft); max-width: 52ch; line-height: 1.7; }
+.muted { color: var(--ink-faint); font-size: .875rem; }
+.mono { font-family: var(--font-mono); }
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-body); font-weight: 500; font-size: .875rem;
+  padding: 10px 20px; border-radius: var(--radius);
+  border: 1.5px solid transparent; cursor: pointer;
+  transition: all .18s ease; text-decoration: none;
+  min-height: 44px; white-space: nowrap;
+}
+.btn-primary { background: var(--ink); color: var(--canvas); border-color: var(--ink); }
+.btn-primary:hover { background: var(--ink-soft); border-color: var(--ink-soft); }
+.btn-sage { background: var(--sage-deep); color: #fff; border-color: var(--sage-deep); } /* was --sage (2.95:1 fail) → 4.87:1 ✓ */
+.btn-sage:hover { background: #3d6355; border-color: #3d6355; }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-ghost:hover { background: var(--surface-2); }
+.btn-gold { background: var(--gold-deep); color: var(--ink); border-color: var(--gold-deep); } /* was color:#fff (3.11:1 fail) → ink on gold-deep 4.23:1 ✓ */
+.btn-sm { padding: 7px 16px; font-size: .8125rem; min-height: 36px; }
+.btn-lg { padding: 14px 28px; font-size: 1rem; }
+.btn:disabled { opacity: .45; cursor: not-allowed; pointer-events: none; }
+
+/* ── Cards ────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+.card-hover { transition: box-shadow .2s, transform .2s; }
+.card-hover:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.glass {
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius-lg);
+}
+
+/* ── Form inputs ──────────────────────────────────────────── */
+.input {
+  display: block; width: 100%;
+  font-family: var(--font-body); font-size: .9375rem;
+  padding: 10px 14px;
+  background: var(--surface); color: var(--ink);
+  border: 1.5px solid var(--line); border-radius: var(--radius);
+  outline: none; transition: border-color .15s;
+  min-height: 44px;
+}
+.input:focus { border-color: var(--sage); }
+.label { font-size: .8125rem; font-weight: 500; color: var(--ink-soft); margin-bottom: 5px; display: block; }
+
+/* ── Badges / chips ───────────────────────────────────────── */
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  padding: 3px 10px; border-radius: 20px;
+  background: var(--surface-2); color: var(--ink-soft);
+}
+.badge-sage { background: rgba(122,158,142,.15); color: var(--sage-deep); }
+.badge-gold { background: rgba(196,165,90,.15); color: var(--gold-deep); }
+.badge-indigo { background: rgba(107,111,168,.15); color: var(--indigo); }
+.dot { width:7px; height:7px; border-radius:50%; background:currentColor; flex-shrink:0; }
+
+/* ── Score rings (SVG wrappers) ───────────────────────────── */
+.ring-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.ring-item { text-align: center; }
+.ring-label { font-size: 11px; color: var(--ink-faint); margin-top: 4px; font-family: var(--font-mono); }
+
+/* ── Progress bars ────────────────────────────────────────── */
+.progress-track { flex: 1; height: 4px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+.progress-fill  { height: 100%; background: var(--sage); border-radius: 4px; transition: width .6s cubic-bezier(.2,.8,.2,1); }
+
+/* ── Assessment option buttons ────────────────────────────── */
+.opt-btn {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; padding: 14px 16px; text-align: left;
+  border: 1.5px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); color: var(--ink);
+  cursor: pointer; transition: all .15s; font-size: .9375rem;
+}
+.opt-btn:hover { border-color: var(--sage); background: rgba(122,158,142,.06); }
+.opt-btn.selected { border-color: var(--sage); background: rgba(122,158,142,.12); }
+.opt-key {
+  width: 28px; height: 28px; border-radius: 6px;
+  background: var(--surface-2); color: var(--ink-faint);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 11px; font-weight:600; flex-shrink:0;
+}
+.opt-btn.selected .opt-key { background: var(--sage-deep); color: #fff; } /* was --sage (2.95:1 fail) → 4.87:1 ✓ */
+
+/* ── Wellness state pill ──────────────────────────────────── */
+.state-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 30px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase;
+}
+
+/* ── Layout helpers ───────────────────────────────────────── */
+.wrap { max-width: 1160px; margin-inline: auto; padding-inline: clamp(20px, 5vw, 60px); }
+.section-pad { padding-block: clamp(64px, 10vw, 120px); }
+.section-head { margin-bottom: clamp(40px, 6vw, 72px); }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+
+/* ── Mesh background ──────────────────────────────────────── */
+.mesh-bg {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(122,158,142,.08) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 50% at 80% 90%, rgba(196,165,90,.06) 0%, transparent 60%);
+}
+
+/* ── Spinner ──────────────────────────────────────────────── */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner {
+  width:20px; height:20px; border-radius:50%;
+  border: 2px solid var(--line); border-top-color: var(--sage);
+  animation: spin .7s linear infinite;
+}
+
+/* ── Divider ──────────────────────────────────────────────── */
+.divider { border: 0; height: 1px; background: var(--line); }
+
+/* ── Accessibility ────────────────────────────────────────── */
+/* Skip to main content */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 16px;
+  padding: 8px 20px;
+  background: var(--ink);
+  color: var(--canvas);
+  font-family: var(--font-body);
+  font-size: .85rem;
+  font-weight: 600;
+  border-radius: 0 0 var(--radius) var(--radius);
+  z-index: 9999;
+  transition: top .15s;
+  text-decoration: none;
+}
+.skip-link:focus { top: 0; }
+
+/* Focus-visible — keyboard only, never on mouse */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2.5px solid var(--sage);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Ensure interactive elements have 44px touch targets */
+button, a, [role="button"], [role="link"] {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Exception for inline text links */
+p a, li a, td a, span a {
+  min-height: unset;
+  display: inline;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode */
+@media (forced-colors: active) {
+  :root {
+    --sage:    ButtonText;
+    --ink:     CanvasText;
+    --line:    ButtonBorder;
+    --surface: Canvas;
+    --canvas:  Canvas;
+  }
+}
+
+/* ── Print ────────────────────────────────────────────────── */
+@media print {
+  nav, .AppNav, footer { display: none !important; }
+  body { background: #fff; color: #000; }
+  a::after { content: ' (' attr(href) ')'; font-size: .8em; color: #666; }
+}
+
+/* ── Scrollbar styling ────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-faint); }
+
+/* ── Selection ────────────────────────────────────────────── */
+::selection { background: rgba(122,158,142,.25); color: var(--ink); }
+
+/* ── Dark mode system preference (auto) ──────────────────── */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --canvas:          #16181F;
+    --canvas2:         #1E2029;
+    --surface:         #252832;
+    --surface-2:       #2E3140;
+    --line:            #383B4D;
+    --ink:             #EDE9E0;
+    --ink-soft:        #B8B4A8;
+    --ink-faint:       #9698AA; /* was #7A7A8A → now 6.22:1 on canvas ✓ */
+    --gold-text:       #C4A030; /* light gold for dark surfaces (7.11:1 on canvas ✓) */
+    --bg-warm:         #1A1C24;
+    --nav-bg:          rgba(22,24,31,.80);
+    --nav-bg-scrolled: rgba(22,24,31,.96);
+  }
+}
+
+/* ── details/summary reset ───────────────────────────────── */
+details summary { cursor: pointer; user-select: none; }
+details summary::-webkit-details-marker { display: none; }
+details[open] summary span:last-child { transform: rotate(45deg); }
+
+/* ── RTL Support (Hebrew) ────────────────────────────────── */
+[dir="rtl"] {
+  text-align: right;
+}
+
+/* Flex rows flip direction */
+[dir="rtl"] nav,
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Inputs + textareas align right */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Nav items: margin/padding sides swap via logical properties */
+[dir="rtl"] a,
+[dir="rtl"] button {
+  /* Inherits text-align:right from ancestor; no override needed for most */
+}
+
+/* Icon + text pairs inside buttons/links stay sensible */
+[dir="rtl"] .icon-label {
+  flex-direction: row-reverse;
+}
+
+/* Dropdown menus open from correct edge */
+[dir="rtl"] [data-dropdown] {
+  left: 0;
+  right: auto;
+}
+
+/* Sidebar nav border indicator flips */
+[dir="rtl"] [data-active-nav] {
+  border-left: none;
+  border-right: 2px solid var(--sage);
+}
+
+/* Toggles / switches: mirror thumb direction */
+[dir="rtl"] [role="switch"] > div {
+  /* JS handles left/right offset — CSS mirrors the container */
+  transform: scaleX(-1);
+}
+
+/* List items indent from right */
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+/* Progress bars fill from right */
+[dir="rtl"] [role="progressbar"] {
+  direction: rtl;
+}
+
+/* Card / grid gap convention remains the same — no override needed */
+
+/* Nav logo margin: swap end/start */
+[dir="rtl"] .logo-link {
+  margin-right: 0;
+  margin-left: 32px;
+}
+
+/* ── Mobile nav: bottom tab bar spacing ──────────────────── */
+/* App pages need bottom padding to clear the mobile tab bar */
+@media (max-width: 767px) {
+  .app-main {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* RTL: scroll-to-top button flips to left side */
+[dir="rtl"] .scroll-to-top {
+  right: auto;
+  left: clamp(16px, 4vw, 32px);
+}
+
+/* ── Mobile viewport fixes ────────────────────────────────── */
+/* Prevent content from being obscured under iOS notch / dynamic island */
+@supports (padding-top: env(safe-area-inset-top)) {
+  body {
+    padding-left:  env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+}
+
+/* Disable tap highlight on interactive elements */
+a, button, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent horizontal overflow on mobile */
+@media (max-width: 767px) {
+  html, body {
+    overflow-x: hidden;
+  }
+}

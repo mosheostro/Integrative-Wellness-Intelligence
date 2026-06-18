@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Holos — Integrative Wellness Intelligence</title>
+<meta name="description" content="Holos unites modern science and the world's wisdom traditions into one AI wellness intelligence. Assess, understand, and balance your whole self." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%237a9e8e' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23b08d4a' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%232b2f45'/%3E%3C/svg%3E" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<link rel="stylesheet" href="holos.css" />
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <a class="brand" href="#top" aria-label="Holos home">
+    <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <circle cx="16" cy="16" r="14.5" stroke="var(--sage)" stroke-width="1.4"/>
+      <circle cx="16" cy="16" r="8" stroke="var(--gold-deep)" stroke-width="1.4"/>
+      <circle cx="16" cy="16" r="2.6" fill="var(--ink)"/>
+      <path d="M16 1.5V30.5M1.5 16H30.5" stroke="var(--line)" stroke-width="1"/>
+    </svg>
+    Holos
+  </a>
+  <div class="nav-links">
+    <a href="#methodology">Methodology</a>
+    <a href="#frameworks">Traditions</a>
+    <a href="#platform">Platform</a>
+    <a href="#science">Science</a>
+    <a href="#pricing">Pricing</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-wrap">
+      <button class="icon-btn" data-lang-toggle aria-label="Language" style="width:auto;padding:0 13px;gap:7px;font-family:var(--mono);font-size:12px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+        <span data-lang-label>EN</span>
+      </button>
+      <div class="lang-menu">
+        <button data-lang="en" class="active">English <span class="rtl-tag">LTR</span></button>
+        <button data-lang="he">עברית · Hebrew <span class="rtl-tag">RTL</span></button>
+        <button data-lang="ar">العربية · Arabic <span class="rtl-tag">RTL</span></button>
+        <button data-lang="ru">Русский <span class="rtl-tag">LTR</span></button>
+        <button data-lang="es">Español <span class="rtl-tag">LTR</span></button>
+        <button data-lang="fr">Français <span class="rtl-tag">LTR</span></button>
+        <button data-lang="de">Deutsch <span class="rtl-tag">LTR</span></button>
+      </div>
+    </div>
+    <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    </button>
+    <a href="#pricing" class="btn btn-primary btn-sm">Start free</a>
+    <button class="icon-btn menu-toggle" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<span id="top"></span>
+
+<!-- ============ HERO ============ -->
+<header class="hero section-pad wrap" data-screen-label="Hero">
+  <div class="geo-bg" aria-hidden="true">
+    <svg class="spin-slow" width="640" height="640" viewBox="0 0 640 640" style="top:-180px;right:-200px;" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.35">
+      <circle cx="320" cy="320" r="120"/><circle cx="320" cy="200" r="120"/><circle cx="320" cy="440" r="120"/>
+      <circle cx="216" cy="260" r="120"/><circle cx="424" cy="260" r="120"/><circle cx="216" cy="380" r="120"/><circle cx="424" cy="380" r="120"/>
+    </svg>
+  </div>
+  <div class="hero-grid" style="position:relative;z-index:1;">
+    <div class="hero-text">
+      <div class="hero-eyebrow eyebrow"><span class="idx">◆</span> Integrative Wellness Intelligence</div>
+      <h1 class="display">The whole of you,<br/><span class="serif-it">finally seen.</span></h1>
+      <p class="lede">Holos unites modern science with six of humanity's great wisdom traditions into one adaptive intelligence — so your wellness reflects body, energy, mind, and meaning. Not just your steps.</p>
+      <div class="hero-cta">
+        <a href="#assessment" class="btn btn-primary btn-lg">Take the assessment <span class="arrow">→</span></a>
+        <a href="#platform" class="btn btn-ghost btn-lg">See the platform</a>
+      </div>
+      <div class="hero-meta">
+        <div class="m"><b>6+1</b><span>Wisdom traditions</span></div>
+        <div class="m"><b>11</b><span>Balance dimensions</span></div>
+        <div class="m"><b>40k+</b><span>On the waitlist</span></div>
+      </div>
+    </div>
+    <div class="hero-visual device-stack reveal">
+      <div class="laptop">
+        <div class="laptop-bar"><span class="tl"></span><span class="tl"></span><span class="tl"></span><span class="url">app.holos.health / dashboard</span></div>
+        <div style="padding:22px;background:var(--bg-warm);">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;">
+            <div>
+              <div class="eyebrow" style="margin-bottom:6px;"><span class="idx">●</span> Integral Balance</div>
+              <div class="score-big">82<small style="font-size:18px;color:var(--ink-faint);font-family:var(--sans);">/100</small></div>
+            </div>
+            <div class="chip"><span class="dot" style="background:var(--gold)"></span> Swarga Mode</div>
+          </div>
+          <div class="viz-card" style="box-shadow:none;padding:14px;">
+            <div data-axes='["Body","Energy","Emotion","Mind","Bonds","Purpose"]' data-vals='[78,64,80,88,72,90]'></div>
+          </div>
+          <div class="ring-grid" style="margin-top:14px;">
+            <div class="ring-item"><div data-val="76" data-color="--sage"></div><div class="lab">Recovery</div></div>
+            <div class="ring-item"><div data-val="84" data-color="--gold"></div><div class="lab">Sleep</div></div>
+            <div class="ring-item"><div data-val="69" data-color="--indigo"></div><div class="lab">Nutrition</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="phone-screen" style="aspect-ratio:9/19;">
+          <div class="phone-notch"></div>
+          <div style="padding:26px 14px 14px;">
+            <div class="eyebrow" style="font-size:9px;margin-bottom:10px;"><span class="idx">●</span> Today</div>
+            <div style="font-family:var(--serif);font-size:19px;line-height:1.1;margin-bottom:14px;">Morning ritual,<br/>tuned to Vata.</div>
+            <div data-val="72" data-color="--sage" style="width:70px;margin:0 auto 12px;"></div>
+            <div class="chip" style="font-size:9px;justify-content:center;width:100%;">Warm water · 6 min breath</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="logo-row reveal" style="margin-top:clamp(56px,8vw,110px);justify-content:space-between;opacity:0.85;">
+    <span class="eyebrow" style="flex:1 1 100%;margin-bottom:6px;">Grounded in peer-reviewed science</span>
+    <span class="logo-ph">Stanford Med</span>
+    <span class="logo-ph">Nature Metabolism</span>
+    <span class="logo-ph">NIH</span>
+    <span class="logo-ph">The Lancet</span>
+    <span class="logo-ph">Cell Press</span>
+  </div>
+</header>
+
+<!-- ============ PROBLEM ============ -->
+<section class="section-pad wrap" id="problem" data-screen-label="Problem">
+  <div class="section-head reveal">
+    <div class="eyebrow"><span class="idx">01</span> The problem</div>
+    <h2 class="h2">Wellness got measured.<br/>It never got <span class="serif-it">understood.</span></h2>
+    <p class="lede">Rings and scores tell you <em>what</em> happened. They rarely tell you why — or what to do as a whole person living a whole life.</p>
+  </div>
+  <div class="problem-list reveal">
+    <div class="problem-row">
+      <span class="num">01</span>
+      <div><h3>Fragmented by design</h3><p>Sleep in one app, food in another, stress nowhere. No single view sees the person.</p></div>
+      <span class="stat">7 apps</span>
+    </div>
+    <div class="problem-row">
+      <span class="num">02</span>
+      <div><h3>Data without wisdom</h3><p>Modern tracking is brilliant at measurement and blind to meaning, rhythm, and purpose.</p></div>
+      <span class="stat">0 context</span>
+    </div>
+    <div class="problem-row">
+      <span class="num">03</span>
+      <div><h3>One-size protocols</h3><p>Generic advice ignores constitution, season, and life stage — the things every tradition knew mattered.</p></div>
+      <span class="stat">1 plan</span>
+    </div>
+    <div class="problem-row">
+      <span class="num">04</span>
+      <div><h3>Burnout, not balance</h3><p>Optimization culture turns health into another job. People want to feel whole, not score higher.</p></div>
+      <span class="stat">61%</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider wrap" style="border:0;height:1px;background:var(--line);" />
+
+<!-- ============ SOLUTION / METHODOLOGY ============ -->
+<section class="section-pad wrap" id="methodology" data-screen-label="Methodology">
+  <div class="section-head reveal">
+    <div class="eyebrow"><span class="idx">02</span> The methodology</div>
+    <h2 class="h2">One intelligence.<br/>Many ways of knowing.</h2>
+    <p class="lede">Holos reads your data through a modern evidence engine, then translates it across the traditions that have studied human flourishing for millennia. You choose the lens. The science stays constant.</p>
+  </div>
+  <div class="cols-4 reveal">
+    <div class="card pillar card-hover">
+      <svg class="icon-ring" viewBox="0 0 46 46" fill="none" stroke="var(--sage)" stroke-width="1.5"><circle cx="23" cy="23" r="20"/><path d="M14 23l6 6 12-13"/></svg>
+      <h3>Measure</h3>
+      <p>Wearables, labs, and a 10-part assessment feed one continuous signal of your whole state.</p>
+    </div>
+    <div class="card pillar card-hover">
+      <svg class="icon-ring" viewBox="0 0 46 46" fill="none" stroke="var(--indigo)" stroke-width="1.5"><circle cx="23" cy="23" r="20"/><circle cx="23" cy="23" r="9"/><path d="M23 3v8M23 35v8M3 23h8M35 23h8"/></svg>
+      <h3>Interpret</h3>
+      <p>An evidence model scores six domains, then maps them to the framework you choose to explore.</p>
+    </div>
+    <div class="card pillar card-hover">
+      <svg class="icon-ring" viewBox="0 0 46 46" fill="none" stroke="var(--gold-deep)" stroke-width="1.5"><circle cx="23" cy="23" r="20"/><path d="M23 9c6 6 6 22 0 28-6-6-6-22 0-28ZM9 23h28"/></svg>
+      <h3>Balance</h3>
+      <p>Recommendations adapt to your constitution, your season, and the life you're actually living.</p>
+    </div>
+    <div class="card pillar card-hover">
+      <svg class="icon-ring" viewBox="0 0 46 46" fill="none" stroke="var(--clay)" stroke-width="1.5"><circle cx="23" cy="23" r="20"/><path d="M16 26c2 3 12 3 14 0M17 18h.01M29 18h.01"/></svg>
+      <h3>Sustain</h3>
+      <p>A wise, practical AI coach turns insight into small daily rituals you'll actually keep.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FRAMEWORKS ============ -->
+<section class="section-pad" id="frameworks" style="background:var(--bg-warm);" data-screen-label="Frameworks">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow gold"><span class="idx">03</span> Wisdom traditions</div>
+      <h2 class="h2">Seven lenses on a single you.</h2>
+      <p class="lede">Switch frameworks instantly and watch the same biometrics re-read through a different inheritance of knowledge. Compare side by side — science always in the footnotes.</p>
+    </div>
+
+    <div class="fw-tabs reveal">
+      <button class="fw-tab flagship active" data-fw="swarga"><span class="star">✦</span> Swarga Integral</button>
+      <button class="fw-tab" data-fw="evidence">Evidence-Based</button>
+      <button class="fw-tab" data-fw="ayurveda">Ayurveda</button>
+      <button class="fw-tab" data-fw="daoist">Daoist</button>
+      <button class="fw-tab" data-fw="rambam">Rambam</button>
+      <button class="fw-tab" data-fw="hippocratic">Hippocratic</button>
+      <button class="fw-tab" data-fw="avicenna">Avicenna</button>
+      <button class="fw-tab" data-fw="tibetan">Tibetan</button>
+    </div>
+
+    <!-- SWARGA -->
+    <div class="fw-panel active" data-fw-panel="swarga">
+      <div class="fw-layout">
+        <div class="fw-content">
+          <div class="label"><span class="origin" style="color:var(--gold-deep)">✦ Flagship · Proprietary</span></div>
+          <h3>Swarga Integral Wellness System</h3>
+          <p>Our synthesis. Eleven dimensions span the physical, energetic, emotional, mental, relational, and existential — fused with dosha, five-element, and life-balance models into one living portrait.</p>
+          <div class="fw-tags">
+            <span class="chip">Physical Body</span><span class="chip">Vital Energy</span><span class="chip">Emotional Balance</span><span class="chip">Mental Clarity</span><span class="chip">Relationships</span><span class="chip">Purpose</span><span class="chip">Environment</span><span class="chip">Three Doshas</span><span class="chip">Five Elements</span>
+          </div>
+          <a href="#assessment" class="btn btn-gold" style="margin-top:24px;">Explore Swarga mode <span class="arrow">→</span></a>
+        </div>
+        <div class="viz-card reveal">
+          <div class="viz-head"><span class="t">Integral Balance Wheel</span><span class="chip"><span class="dot" style="background:var(--gold)"></span>11 dims</span></div>
+          <div data-axes='["Body","Energy","Emotion","Mind","Bonds","Purpose","Place","Habit"]' data-vals='[78,66,82,88,74,90,70,80]'></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EVIDENCE -->
+    <div class="fw-panel" data-fw-panel="evidence">
+      <div class="fw-layout">
+        <div class="fw-content">
+          <div class="label"><span class="origin">Modern · Peer-reviewed</span></div>
+          <h3>Evidence-Based Nutrition</h3>
+          <p>The scientific backbone. Five pillars distilled from metabolic, sleep, and exercise research — the constant that every other lens is reconciled against.</p>
+          <div class="fw-tags"><span class="chip">Lifestyle</span><span class="chip">Sleep</span><span class="chip">Recovery</span><span class="chip">Movement</span><span class="chip">Nutrition</span></div>
+        </div>
+        <div class="viz-card reveal">
+          <div class="viz-head"><span class="t">Five-Pillar Scores</span><span class="chip"><span class="dot" style="background:var(--indigo)"></span>RCT-weighted</span></div>
+          <div data-bars='[{"t":"Sleep","v":84,"c":"--indigo"},{"t":"Recovery","v":76,"c":"--sage"},{"t":"Movement","v":68,"c":"--gold"},{"t":"Nutrition","v":71,"c":"--clay"},{"t":"Lifestyle","v":80,"c":"--sky"}]'></div>
+          <div class="viz-head" style="margin:18px 0 6px;"><span class="t">90-day trend</span></div>
+          <div data-trend='[58,60,57,63,66,64,70,72,71,76,79,82]'></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AYURVEDA -->
+    <div class="fw-panel" data-fw-panel="ayurveda">
+      <div class="fw-layout">
+        <div class="fw-content">
+          <div class="label"><span class="origin">Ancient India · ~1500 BCE</span></div>
+          <h3>Ayurveda · The Three Doshas</h3>
+          <p>Your constitution read as Vata, Pitta, and Kapha — air, fire, and earth. Holos surfaces your dominant dosha and tunes routine, food, and rhythm to rebalance it through the seasons.</p>
+          <div class="fw-tags"><span class="chip">Vata</span><span class="chip">Pitta</span><span class="chip">Kapha</span><span class="chip">Daily routine</span><span class="chip">Seasonal diet</span></div>
+        </div>
+        <div class="viz-card reveal">
+          <div class="viz-head"><span class="t">Dosha Constitution</span><span class="chip">Vata-dominant</span></div>
+          <div data-bars='[{"t":"Vata","v":52,"c":"--sky"},{"t":"Pitta","v":31,"c":"--clay"},{"t":"Kapha","v":17,"c":"--sage"}]'></div>
+          <div class="legend"><div class="li"><span class="sw" style="background:var(--sky)"></span>Air + Ether</div><div class="li"><span class="sw" style="background:var(--clay)"></span>Fire + Water</div><div class="li"><span class="sw" style="background:var(--sage)"></span>Earth + Water</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAOIST -->
+    <div class="fw-panel" data-fw-panel="daoist">
+      <div class="fw-layout">
+        <div class="fw-content">
+          <div class="label"><span class="origin">Ancient China · ~400 BCE</span></div>
+          <h3>Daoist Wellness · Five Elements</h3>
+          <p>Balance as flow. Holos maps your state across Wood, Fire, Earth, Metal, and Water, reads your Yin–Yang tilt, and adapts guidance to the turning of the season.</p>
+          <div class="fw-tags"><span class="chip">Yin–Yang</span><span class="chip">Five Elements</span><span class="chip">Seasonal flow</span><span class="chip">Qi balance</span></div>
+        </div>
+        <div class="viz-card reveal" style="text-align:center;">
+          <div class="viz-head"><span class="t">Five-Element Cycle</span><span class="chip">Yin 54 · Yang 46</span></div>
+          <div data-elements='[{"t":"Wood","v":72,"c":"--sage"},{"t":"Fire","v":58,"c":"--clay"},{"t":"Earth","v":80,"c":"--gold"},{"t":"Metal","v":64,"c":"--ink-faint"},{"t":"Water","v":70,"c":"--sky"}]' style="max-width:260px;margin:0 auto;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RAMBAM -->
+    <div class="fw-panel" data-fw-panel="rambam">
+      <div class="fw-layout">
+        <div class="fw-content">
+          <div class="label"><span class="origin">Maimonides · Córdoba, 1138–1204</span></div>
+          <h3>Rambam · The Art of Moderation</h3>
+          <p>An educational lens drawn from Maimonides' medical writings: moderation, sound digestion, daily movement, and the prevention of illness before it begins — the mind and body kept in harmony.</p>
+          <div class="fw-tags"><span class="chip">Moderation</span><span class="chip">Digestion</span><span class="chip">Movement</span><span class="chip">Prevention</span><span class="chip">Daily rhythm</span><span class="chip">Mind–body</span></div>
+        </div>
+        <div class="viz-card reveal">
+          <div class="viz-head"><span class="t">Principles of Balance</span><span class="chip">Educational</span></div>
+          <div data-axes='["Moderation","Digestion","Movement","Prevention","Rhythm","Harmony"]' data-vals='[74,68,80,72,66,78]'></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIPPOCRATIC -->
+    <div class="fw-panel" data-fw-panel="hippocratic">
+      <div class="fw-layout">
+        <div class="fw-content">
+          <div class="label"><span class="origin">Ancient Greece · ~400 BCE</span></div>
+          <h3>Hippocratic Approach</h3>
+          <p>"Let food be thy medicine." The original preventive philosophy — balance, environment, and lifestyle as the foundations of lasting health.</p>
+          <div class="fw-tags"><span class="chip">Balance</span><span class="chip">Prevention</span><span class="chip">Environment</span><span class="chip">Lifestyle</span></div>
+        </div>
+        <div class="viz-card reveal">
+          <div class="viz-head"><span class="t">Four Foundations</span><span class="chip">Preventive</span></div>
+          <div data-bars='[{"t":"Balance","v":78,"c":"--sage"},{"t":"Prevent","v":70,"c":"--gold"},{"t":"Environ","v":64,"c":"--sky"},{"t":"Lifestyle","v":82,"c":"--indigo"}]'></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AVICENNA -->
+    <div class="fw-panel" data-fw-panel="avicenna">
+      <div class="fw-layout">
+        <div class="fw-content">
+          <div class="label"><span class="origin">Ibn Sina · Persia, 980–1037</span></div>
+          <h3>Avicenna · The Canon of Habit</h3>
+          <p>From <em>The Canon of Medicine</em>: your constitution shaped by daily habit and environment. Holos reads temperament and tunes the controllable rhythms of your day.</p>
+          <div class="fw-tags"><span class="chip">Constitution</span><span class="chip">Daily habits</span><span class="chip">Environment</span><span class="chip">Optimization</span></div>
+        </div>
+        <div class="viz-card reveal">
+          <div class="viz-head"><span class="t">Temperament Profile</span><span class="chip">Sanguine-warm</span></div>
+          <div data-axes='["Constitution","Habit","Environment","Rest","Activity","Diet"]' data-vals='[70,82,60,74,78,68]'></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIBETAN -->
+    <div class="fw-panel" data-fw-panel="tibetan">
+      <div class="fw-layout">
+        <div class="fw-content">
+          <div class="label"><span class="origin">Tibetan Sowa Rigpa · ~8th c.</span></div>
+          <h3>Tibetan Wellness · Three Humors</h3>
+          <p>Presented respectfully and educationally: the balance of Wind (rLung), Bile (mKhris-pa), and Phlegm (Bad-kan) as a window into energy, metabolism, and steadiness.</p>
+          <div class="fw-tags"><span class="chip">Wind · rLung</span><span class="chip">Bile · mKhris-pa</span><span class="chip">Phlegm · Bad-kan</span></div>
+        </div>
+        <div class="viz-card reveal">
+          <div class="viz-head"><span class="t">Three-Humor Balance</span><span class="chip">Wind-led</span></div>
+          <div data-bars='[{"t":"Wind","v":48,"c":"--sky"},{"t":"Bile","v":33,"c":"--clay"},{"t":"Phlegm","v":19,"c":"--sage"}]'></div>
+          <div class="legend"><div class="li"><span class="sw" style="background:var(--sky)"></span>Movement · breath</div><div class="li"><span class="sw" style="background:var(--clay)"></span>Heat · metabolism</div><div class="li"><span class="sw" style="background:var(--sage)"></span>Structure · calm</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ASSESSMENT PREVIEW ============ -->
+<section class="section-pad wrap" id="assessment" data-screen-label="Assessment">
+  <div class="section-head reveal">
+    <div class="eyebrow"><span class="idx">04</span> The assessment</div>
+    <h2 class="h2">Ten minutes. <span class="serif-it">A whole portrait.</span></h2>
+    <p class="lede">Ten gentle sections — from nutrition and sleep to purpose and relationships — that feel less like a medical form and more like being truly asked about your life.</p>
+  </div>
+  <div class="assess-card reveal">
+    <div class="assess-top">
+      <div class="eyebrow"><span class="idx">●</span> Section 07 / 10 · Emotional Wellbeing</div>
+      <div style="display:flex;align-items:center;gap:14px;"><div class="progress-track"><div class="progress-fill" style="width:68%"></div></div><span class="faint" style="font-family:var(--mono);font-size:12px;">68%</span></div>
+    </div>
+    <div class="assess-body">
+      <div class="assess-q">When the day overwhelms you, how do you most often respond?</div>
+      <div class="opt-grid">
+        <button class="opt sel"><span class="key">A</span> I pause and breathe — I've built a way back to center</button>
+        <button class="opt"><span class="key">B</span> I push through and deal with it later</button>
+        <button class="opt"><span class="key">C</span> I reach out to someone I trust</button>
+        <button class="opt"><span class="key">D</span> I tend to absorb it quietly and carry on</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:14px;flex-wrap:wrap;">
+        <span class="chip"><span class="dot"></span> Adaptive · your answers reshape what comes next</span>
+        <div style="display:flex;gap:10px;"><button class="btn btn-ghost btn-sm">Back</button><button class="btn btn-primary btn-sm">Continue <span class="arrow">→</span></button></div>
+      </div>
+    </div>
+  </div>
+  <div class="cols-3 reveal" style="margin-top:28px;">
+    <div class="card card-pad"><div class="eyebrow" style="margin-bottom:10px;"><span class="idx">10</span> Sections</div><p class="muted" style="font-size:14.5px;">Profile · Nutrition · Sleep · Stress · Energy · Activity · Emotion · Purpose · Relationships · Balance.</p></div>
+    <div class="card card-pad"><div class="eyebrow" style="margin-bottom:10px;"><span class="idx">∞</span> Adaptive</div><p class="muted" style="font-size:14.5px;">No two assessments are the same — each answer branches the path the way a good practitioner would.</p></div>
+    <div class="card card-pad"><div class="eyebrow" style="margin-bottom:10px;"><span class="idx">↻</span> Living</div><p class="muted" style="font-size:14.5px;">Re-check in monthly. Your portrait breathes with the seasons of your life, not a one-time snapshot.</p></div>
+  </div>
+</section>
+
+<!-- ============ PLATFORM / RESULTS ============ -->
+<section class="section-pad" id="platform" style="background:var(--bg-warm);" data-screen-label="Platform">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow gold"><span class="idx">05</span> The results experience</div>
+      <h2 class="h2">Results that feel like<br/><span class="serif-it">being understood.</span></h2>
+      <p class="lede">Six scores, a living balance wheel, and visualizations drawn from every tradition — rendered with the restraint of a fine instrument, not a dashboard.</p>
+    </div>
+    <div class="cols-4 reveal" style="margin-bottom:28px;">
+      <div class="viz-card" style="text-align:center;"><div class="viz-head" style="justify-content:center;"><span class="t">Wellness</span></div><div data-val="82" data-color="--sage" style="max-width:120px;margin:0 auto;"></div></div>
+      <div class="viz-card" style="text-align:center;"><div class="viz-head" style="justify-content:center;"><span class="t">Energy</span></div><div data-val="74" data-color="--gold" style="max-width:120px;margin:0 auto;"></div></div>
+      <div class="viz-card" style="text-align:center;"><div class="viz-head" style="justify-content:center;"><span class="t">Recovery</span></div><div data-val="69" data-color="--indigo" style="max-width:120px;margin:0 auto;"></div></div>
+      <div class="viz-card" style="text-align:center;"><div class="viz-head" style="justify-content:center;"><span class="t">Lifestyle</span></div><div data-val="88" data-color="--clay" style="max-width:120px;margin:0 auto;"></div></div>
+    </div>
+    <div class="fw-layout reveal" style="align-items:stretch;">
+      <div class="viz-card">
+        <div class="viz-head"><span class="t">Life Balance Wheel</span><span class="chip"><span class="dot" style="background:var(--gold)"></span> Integral 82</span></div>
+        <div data-axes='["Body","Energy","Emotion","Mind","Bonds","Purpose","Place","Habit"]' data-vals='[80,68,84,90,76,92,72,82]' style="max-width:320px;margin:0 auto;"></div>
+        <div class="legend"><div class="li"><span class="sw" style="background:var(--sage)"></span>Your portrait</div><div class="li"><span class="sw" style="background:var(--gold)"></span>Seasonal target</div></div>
+      </div>
+      <div class="viz-card">
+        <div class="viz-head"><span class="t">Energy trend · 12 weeks</span><span class="chip" style="color:var(--sage-deep)">▲ +18%</span></div>
+        <div data-trend='[52,55,53,58,57,62,60,66,69,68,72,78]'></div>
+        <div class="divider" style="margin:18px 0;"></div>
+        <div class="viz-head" style="margin-bottom:14px;"><span class="t">Five-Element flow</span></div>
+        <div data-elements='[{"t":"Wood","v":74,"c":"--sage"},{"t":"Fire","v":60,"c":"--clay"},{"t":"Earth","v":82,"c":"--gold"},{"t":"Metal","v":66,"c":"--ink-faint"},{"t":"Water","v":71,"c":"--sky"}]' style="max-width:220px;margin:0 auto;"></div>
+      </div>
+    </div>
+    <!-- screenshots row -->
+    <div class="cols-3 reveal" style="margin-top:28px;">
+      <div class="viz-card">
+        <div class="viz-head"><span class="t">Daily plan view</span><span class="chip"><span class="dot"></span> Today</span></div>
+        <div data-val="72" data-color="--sage" style="max-width:96px;margin:0 auto 14px;"></div>
+        <div class="chip" style="width:100%;justify-content:center;">Warm water · 6 min breath</div>
+      </div>
+      <div class="viz-card">
+        <div class="viz-head"><span class="t">Tradition compare</span><span class="chip">Vata-dominant</span></div>
+        <div data-bars='[{"t":"Vata","v":52,"c":"--sky"},{"t":"Pitta","v":31,"c":"--clay"},{"t":"Kapha","v":17,"c":"--sage"}]'></div>
+      </div>
+      <div class="viz-card">
+        <div class="viz-head"><span class="t">Habit streaks</span><span class="chip" style="color:var(--sage-deep)">▲ +18%</span></div>
+        <div data-trend='[40,52,48,60,58,66,72,70,78,82,80,88]'></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AI COACH ============ -->
+<section class="section-pad wrap" id="coach" data-screen-label="AI Coach">
+  <div class="fw-layout">
+    <div class="fw-content reveal">
+      <div class="eyebrow"><span class="idx">06</span> The AI coach</div>
+      <h2 class="h2" style="margin:18px 0;">A guide that's read<br/>every tradition.</h2>
+      <p class="lede">Wise, practical, supportive, and evidence-aware. It explains your results, compares what each tradition would suggest, and turns it into habits sized for your real life.</p>
+      <div class="fw-tags" style="margin-top:8px;"><span class="chip">Explains results</span><span class="chip">Compares traditions</span><span class="chip">Builds habits</span><span class="chip">Plans your week</span></div>
+    </div>
+    <div class="card card-pad reveal" style="background:var(--surface);">
+      <div class="chat">
+        <div class="bubble user">My energy keeps crashing at 3pm. What do I do?</div>
+        <div class="bubble ai">
+          <div class="who"><span class="dot"></span> Holos · integrative coach</div>
+          Three lenses agree on the cause, and they're complementary. Your <strong>Vata</strong> runs high in the afternoon, your <strong>glucose</strong> data shows a post-lunch dip, and your <strong>Fire element</strong> is depleted. Start here:
+        </div>
+        <div class="bubble ai" style="max-width:88%;">
+          <div class="who"><span class="dot" style="background:var(--gold)"></span> One small ritual</div>
+          A warm, protein-forward lunch and a 5-minute walk at 1:30. Grounding for Vata, steady glucose, and it rekindles Fire. Want me to add it to today's plan?
+        </div>
+        <div class="bubble ai" style="background:transparent;border:none;box-shadow:none;padding:4px 0;"><span class="typing"><i></i><i></i><i></i></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOUNDER ============ -->
+<section class="section-pad wrap" id="founder" data-screen-label="Founder">
+  <div class="founder">
+    <div class="art founder-photo reveal" role="img" aria-label="Founder portrait">
+      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="400" height="500" fill="var(--bg-warm)"/>
+        <g fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.45">
+          <circle cx="200" cy="190" r="150"/><circle cx="200" cy="120" r="150"/><circle cx="138" cy="155" r="150"/><circle cx="262" cy="155" r="150"/>
+        </g>
+        <circle cx="200" cy="205" r="118" fill="none" stroke="var(--gold-deep)" stroke-width="1.6" opacity="0.8"/>
+        <g fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M158 158c0-26 19-44 42-44s42 18 42 44c0 18-6 34-14 44 10 4 18 10 18 20"/>
+          <path d="M158 158c0 18 6 34 14 44-10 4-18 10-18 20"/>
+          <path d="M96 408c8-78 50-118 104-118s96 40 104 118"/>
+          <path d="M168 232c10 10 22 15 32 15s22-5 32-15"/>
+        </g>
+        <g fill="var(--sage)">
+          <circle cx="200" cy="60" r="4"/><circle cx="86" cy="205" r="3"/><circle cx="314" cy="205" r="3"/>
+        </g>
+        <path d="M60 448h280" stroke="var(--line)" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="reveal">
+      <div class="eyebrow gold"><span class="idx">07</span> Founder &amp; clinical lead</div>
+      <blockquote>"I spent twenty years watching people optimize their bodies and lose themselves. Holos is the practice I always wanted to give them — science that finally makes room for the soul."</blockquote>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div>
+          <div style="font-family:var(--serif);font-size:21px;">Moshe Halevi</div>
+          <div class="faint" style="font-size:14px;">Founder · Integrative Nutrition &amp; Wellness</div>
+        </div>
+      </div>
+      <div class="cred-grid">
+        <div class="cred"><div class="v">20+</div><div class="k">Years in practice</div></div>
+        <div class="cred"><div class="v">6</div><div class="k">Traditions studied</div></div>
+        <div class="cred"><div class="v">9k+</div><div class="k">Clients guided</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section-pad" style="background:var(--bg-warm);" data-screen-label="Testimonials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="idx">08</span> Lived with it</div>
+      <h2 class="h2">The first wellness app<br/>that felt human.</h2>
+    </div>
+    <div class="cols-3 reveal">
+      <div class="card quote-card card-hover">
+        <div class="stars">★★★★★</div>
+        <blockquote>"It connected my sleep, my stress, and my sense of purpose in a way no coach ever has. I finally understand my own rhythm."</blockquote>
+        <div class="by"><div class="avatar-art" aria-hidden="true"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--surface-2)"/><circle cx="22" cy="17" r="7.5" fill="none" stroke="var(--sage)" stroke-width="2"/><path d="M8 38c2.5-9 8-13 14-13s11.5 4 14 13" fill="none" stroke="var(--sage)" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="22" r="19" fill="none" stroke="var(--sage)" stroke-width="1.2" opacity="0.45"/></svg></div><div><div class="n">Dr. Lena Ostroff</div><div class="r">Physician · Tel Aviv</div></div></div>
+      </div>
+      <div class="card quote-card card-hover">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The Swarga wheel is the first health visual I've ever wanted to frame. And the advice is genuinely doable."</blockquote>
+        <div class="by"><div class="avatar-art" aria-hidden="true"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--surface-2)"/><circle cx="22" cy="17" r="7.5" fill="none" stroke="var(--gold-deep)" stroke-width="2"/><path d="M8 38c2.5-9 8-13 14-13s11.5 4 14 13" fill="none" stroke="var(--gold-deep)" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="22" r="19" fill="none" stroke="var(--gold-deep)" stroke-width="1.2" opacity="0.45"/></svg></div><div><div class="n">Marcus Reyes</div><div class="r">Founder · Berlin</div></div></div>
+      </div>
+      <div class="card quote-card card-hover">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Comparing the Ayurvedic and evidence-based views side by side changed how I eat. Respectful, never preachy."</blockquote>
+        <div class="by"><div class="avatar-art" aria-hidden="true"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--surface-2)"/><circle cx="22" cy="17" r="7.5" fill="none" stroke="var(--clay)" stroke-width="2"/><path d="M8 38c2.5-9 8-13 14-13s11.5 4 14 13" fill="none" stroke="var(--clay)" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="22" r="19" fill="none" stroke="var(--clay)" stroke-width="1.2" opacity="0.45"/></svg></div><div><div class="n">Priya Nair</div><div class="r">Yoga therapist · Lisbon</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCIENCE ============ -->
+<section class="section-pad wrap" id="science" data-screen-label="Science">
+  <div class="cols-2" style="align-items:center;gap:clamp(28px,5vw,72px);">
+    <div class="reveal">
+      <div class="eyebrow"><span class="idx">09</span> Scientific foundation</div>
+      <h2 class="h2" style="margin:18px 0;">Ancient lenses.<br/>Modern rigor.</h2>
+      <p class="lede">Every recommendation traces back to peer-reviewed evidence. Traditions are offered as <em>educational frameworks</em> for reflection — never as medical claims — and labeled as such throughout.</p>
+      <div class="cols-2" style="margin-top:28px;gap:14px;">
+        <div class="card card-pad"><div class="score-big" style="font-size:34px;">1,200+</div><div class="faint" style="font-size:13px;margin-top:4px;">Studies in the evidence base</div></div>
+        <div class="card card-pad"><div class="score-big" style="font-size:34px;">RCT</div><div class="faint" style="font-size:13px;margin-top:4px;">Weighted scoring model</div></div>
+      </div>
+    </div>
+    <div class="card card-pad reveal">
+      <div class="eyebrow" style="margin-bottom:18px;"><span class="idx">●</span> Advisory board</div>
+      <div class="eg" style="gap:0;">
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);"><div class="avatar-art" aria-hidden="true"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--surface-2)"/><circle cx="22" cy="17" r="7.5" fill="none" stroke="var(--indigo)" stroke-width="2"/><path d="M8 38c2.5-9 8-13 14-13s11.5 4 14 13" fill="none" stroke="var(--indigo)" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="22" r="19" fill="none" stroke="var(--indigo)" stroke-width="1.2" opacity="0.45"/></svg></div><div><div style="font-weight:600;font-size:14.5px;">Prof. A. Sharma, MD</div><div class="faint" style="font-size:13px;">Metabolic medicine</div></div></div>
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);"><div class="avatar-art" aria-hidden="true"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--surface-2)"/><circle cx="22" cy="17" r="7.5" fill="none" stroke="var(--sky)" stroke-width="2"/><path d="M8 38c2.5-9 8-13 14-13s11.5 4 14 13" fill="none" stroke="var(--sky)" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="22" r="19" fill="none" stroke="var(--sky)" stroke-width="1.2" opacity="0.45"/></svg></div><div><div style="font-weight:600;font-size:14.5px;">Dr. R. Cohen, PhD</div><div class="faint" style="font-size:13px;">Sleep &amp; circadian science</div></div></div>
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 0;"><div class="avatar-art" aria-hidden="true"><svg viewBox="0 0 44 44"><rect width="44" height="44" fill="var(--surface-2)"/><circle cx="22" cy="17" r="7.5" fill="none" stroke="var(--gold)" stroke-width="2"/><path d="M8 38c2.5-9 8-13 14-13s11.5 4 14 13" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="22" r="19" fill="none" stroke="var(--gold)" stroke-width="1.2" opacity="0.45"/></svg></div><div><div style="font-weight:600;font-size:14.5px;">Dr. M. Tenzin</div><div class="faint" style="font-size:13px;">Traditional medicine ethics</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="section-pad" id="pricing" style="background:var(--bg-warm);" data-screen-label="Pricing">
+  <div class="wrap-wide">
+    <div class="section-head reveal" style="margin-inline:auto;text-align:center;">
+      <div class="eyebrow" style="justify-content:center;"><span class="idx">10</span> Plans</div>
+      <h2 class="h2">Start whole. Grow from there.</h2>
+    </div>
+    <div class="price-grid reveal">
+      <div class="card price-card">
+        <span class="tier">Free</span>
+        <div class="amt">$0</div>
+        <p class="desc">The assessment and your core balance portrait.</p>
+        <a href="#" class="btn btn-ghost btn-sm">Get started</a>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> Full assessment</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> 6 wellness scores</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> One tradition lens</li>
+        </ul>
+      </div>
+      <div class="card price-card feature">
+        <span class="tag">Most loved</span>
+        <span class="tier">Premium</span>
+        <div class="amt">$19<small>/mo</small></div>
+        <p class="desc">Every tradition, the AI coach, and Swarga mode.</p>
+        <a href="#" class="btn btn-gold btn-sm">Start 14-day trial</a>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> All 7 traditions + Swarga</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> AI integrative coach</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> Wearable + lab sync</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> Daily adaptive plans</li>
+        </ul>
+      </div>
+      <div class="card price-card">
+        <span class="tier">Practitioner</span>
+        <div class="amt">$59<small>/mo</small></div>
+        <p class="desc">For coaches managing a roster of clients.</p>
+        <a href="#" class="btn btn-ghost btn-sm">Start trial</a>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> Up to 25 clients</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> Client dashboards</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> Protocol builder</li>
+        </ul>
+      </div>
+      <div class="card price-card">
+        <span class="tier">Clinic</span>
+        <div class="amt">$249<small>/mo</small></div>
+        <p class="desc">Multi-practitioner teams and care groups.</p>
+        <a href="#" class="btn btn-ghost btn-sm">Contact sales</a>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> Unlimited clients</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> Team roles + audit</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> HIPAA-ready</li>
+        </ul>
+      </div>
+      <div class="card price-card">
+        <span class="tier">Corporate</span>
+        <div class="amt">Custom</div>
+        <p class="desc">Whole-org wellbeing at scale.</p>
+        <a href="#" class="btn btn-ghost btn-sm">Talk to us</a>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> SSO + admin</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> Aggregate insights</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg> Dedicated success</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section-pad wrap" data-screen-label="FAQ" style="max-width:880px;">
+  <div class="section-head reveal" style="text-align:center;margin-inline:auto;">
+    <div class="eyebrow" style="justify-content:center;"><span class="idx">11</span> Questions</div>
+    <h2 class="h2">Good to know.</h2>
+  </div>
+  <div class="reveal">
+    <div class="faq-item open">
+      <button class="faq-q"><h3>Is Holos a medical product?</h3><span class="pm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+      <div class="faq-a"><p>No. Holos is a wellness and education platform. Our recommendations are grounded in peer-reviewed science, and the wisdom traditions are offered as educational frameworks for self-reflection — not diagnosis or treatment. Always consult a clinician for medical concerns.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><h3>How are the ancient traditions handled respectfully?</h3><span class="pm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+      <div class="faq-a"><p>Each tradition is presented educationally, with its origin and context, and reviewed by advisors versed in that practice. We never claim clinical efficacy for traditional frameworks — they're lenses for understanding, always shown alongside the evidence base.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><h3>What is Swarga Integral mode?</h3><span class="pm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+      <div class="faq-a"><p>Swarga is our proprietary synthesis — eleven dimensions that fuse physical, energetic, emotional, mental, relational, and existential wellbeing with dosha and five-element models into one living portrait. It's the flagship lens, available on Premium and above.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><h3>Which languages and themes are supported?</h3><span class="pm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+      <div class="faq-a"><p>Seven languages including full right-to-left support for Hebrew and Arabic, with RTL-aware navigation and dashboards. Five visual themes — Modern Clinical, Holistic Wellness, Ancient Wisdom, Executive Premium, and Dark — all share one design system. Try the light/dark toggle in the nav.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><h3>Can I cancel anytime?</h3><span class="pm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+      <div class="faq-a"><p>Yes — monthly plans cancel in one tap, no questions asked. Your portrait and history stay exportable, and the Free tier remains yours forever.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="section-pad wrap" data-screen-label="Final CTA">
+  <div class="cta-band reveal">
+    <div class="geo-bg" aria-hidden="true" style="opacity:0.25;">
+      <svg class="spin-slow" width="520" height="520" viewBox="0 0 520 520" style="top:-140px;left:-120px;" fill="none" stroke="var(--gold)" stroke-width="0.8">
+        <circle cx="260" cy="260" r="100"/><circle cx="260" cy="160" r="100"/><circle cx="260" cy="360" r="100"/><circle cx="173" cy="210" r="100"/><circle cx="347" cy="210" r="100"/>
+      </svg>
+    </div>
+    <div style="position:relative;z-index:1;">
+      <div class="eyebrow" style="justify-content:center;color:var(--gold);margin-bottom:20px;"><span class="idx" style="color:var(--gold)">✦</span> Begin</div>
+      <h2 class="h2">Meet the whole of you.</h2>
+      <p class="lede" style="max-width:42ch;margin:20px auto 32px;">Take the assessment free. In ten minutes, see yourself the way every great tradition — and the latest science — would.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="#assessment" class="btn btn-gold btn-lg">Take the assessment <span class="arrow">→</span></a>
+        <a href="#" class="btn btn-ghost btn-lg" style="border-color:oklch(0.7 0.01 85 / 0.4);color:var(--bg);">Book a demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer wrap">
+  <div class="footer-grid">
+    <div>
+      <a class="brand" href="#top" style="margin-bottom:16px;">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14.5" stroke="var(--sage)" stroke-width="1.4"/><circle cx="16" cy="16" r="8" stroke="var(--gold-deep)" stroke-width="1.4"/><circle cx="16" cy="16" r="2.6" fill="var(--ink)"/></svg>
+        Holos
+      </a>
+      <p class="muted" style="font-size:14px;max-width:30ch;">Integrative wellness intelligence. Modern science, ancient wisdom, one whole you.</p>
+    </div>
+    <div><h4>Platform</h4><ul><li><a href="#methodology">Methodology</a></li><li><a href="#frameworks">Traditions</a></li><li><a href="#assessment">Assessment</a></li><li><a href="#coach">AI coach</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="#founder">About</a></li><li><a href="#science">Science</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul></div>
+    <div><h4>Resources</h4><ul><li><a href="#">Journal</a></li><li><a href="#">Help center</a></li><li><a href="#">For practitioners</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+    <div><h4>Legal</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Medical disclaimer</a></li><li><a href="#">Accessibility</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span data-year>2026</span> Holos Health, Inc. — placeholder identity, ready for your brand.</span>
+    <span style="font-family:var(--mono);font-size:11px;">Not a medical device · Wellness &amp; education only</span>
+  </div>
+</footer>
+
+<script src="holos-i18n.js"></script>
+<script src="holos.js"></script>
+</body>
+</html>
