@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import SiteNav from '@/components/layout/SiteNav'
 import SiteFooter from '@/components/layout/SiteFooter'
+import { ScrollToTop } from '@/components/ui/ScrollToTop'
 import { FOUNDER } from '@/lib/founder'
 import { getServerStrings } from '@/lib/i18n/server'
 
@@ -23,7 +24,7 @@ const TRAD_META = [
   { icon: '☽', name: 'Rambam',         id: 'rambam',         color: 'var(--indigo)', descKey: 'tradDescRambam'     },
   { icon: '♾', name: 'Hippocrates',    id: 'hippocrates',    color: 'var(--clay)',   descKey: 'tradDescHippocrates'},
   { icon: '◈', name: 'Avicenna',       id: 'avicenna',       color: 'var(--gold)',   descKey: 'tradDescAvicenna'   },
-  { icon: '🌿', name: 'Ayurveda',      id: 'ayurveda',       color: 'var(--sage-deep)',   descKey: 'tradDescAyurveda'   },
+  { icon: '\U0001f33f', name: 'Ayurveda',   id: 'ayurveda',       color: 'var(--sage-deep)',   descKey: 'tradDescAyurveda'   },
   { icon: '☯', name: 'Daoist',         id: 'daoist',         color: 'var(--indigo)', descKey: 'tradDescDaoist'     },
   { icon: '❋', name: 'Tibetan',        id: 'tibetan',        color: 'var(--clay)',   descKey: 'tradDescTibetan'    },
   { icon: '✦', name: 'Swarga',         id: 'swarga',         color: 'var(--gold)',   descKey: 'tradDescSwarga'     },
@@ -107,7 +108,7 @@ export default async function HomePage() {
       <SiteNav />
       <main style={{ background: 'var(--canvas)' }}>
 
-        {/* ── Hero ───────────────────────────────────────────── */}
+        {/* Hero */}
         <section style={{
           minHeight:      '92vh',
           display:        'flex',
@@ -127,7 +128,6 @@ export default async function HomePage() {
           }}/>
 
           <div style={{ position: 'relative', zIndex: 1, maxWidth: 760, margin: '0 auto' }}>
-            {/* Eyebrow */}
             <div style={{
               display:      'inline-flex',
               alignItems:   'center',
@@ -144,7 +144,6 @@ export default async function HomePage() {
               </span>
             </div>
 
-            {/* Headline */}
             <h1 style={{
               fontFamily:    'var(--font-serif)',
               fontSize:      'clamp(2.6rem, 6vw, 4.8rem)',
@@ -169,7 +168,6 @@ export default async function HomePage() {
               {h.heroSubtitle}
             </p>
 
-            {/* CTAs */}
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link href="/auth/signup"
                 style={{
@@ -207,7 +205,6 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            {/* Trust bar */}
             <div style={{ marginTop: 56, display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '0 40px' }}>
               {STATS.map(s => (
                 <div key={s.value} style={{ textAlign: 'center', padding: '8px 0' }}>
@@ -231,7 +228,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ── How it works ─────────────────────────────────── */}
+        {/* How it works */}
         <section style={{ background: 'var(--canvas2)', padding: '96px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 64 }}>
@@ -278,7 +275,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ── 9 Dimensions ─────────────────────────────────── */}
+        {/* 9 Dimensions */}
         <section style={{ padding: '96px 24px' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 64 }}>
@@ -316,7 +313,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ── 8 Traditions ─────────────────────────────────── */}
+        {/* 8 Traditions */}
         <section style={{ background: 'var(--canvas2)', padding: '96px 24px' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 64 }}>
@@ -359,7 +356,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ── Founder ──────────────────────────────────────── */}
+        {/* Founder */}
         <section style={{ padding: '96px 24px' }}>
           <div style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 64, alignItems: 'center' }}>
             <div>
@@ -455,7 +452,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ── Pricing Preview ───────────────────────────────── */}
+        {/* Pricing Preview */}
         <section style={{ background: 'var(--canvas2)', padding: '96px 24px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 64 }}>
@@ -545,21 +542,49 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ── Final CTA ─────────────────────────────────────── */}
-        <section style={{ padding: '96px 24px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+        {/* Final CTA */}
+        <section style={{
+          padding:    'clamp(72px, 10vw, 120px) 24px',
+          textAlign:  'center',
+          position:   'relative',
+          overflow:   'hidden',
+          background: 'var(--ink)',
+        }}>
           <div aria-hidden style={{
             position:      'absolute',
             inset:         0,
-            background:    'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(122,158,142,.10) 0%, transparent 70%)',
+            background:    'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(122,158,142,.12) 0%, transparent 70%)',
             pointerEvents: 'none',
           }}/>
           <div style={{ position: 'relative', zIndex: 1, maxWidth: 640, margin: '0 auto' }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 20 }}>◆ {h.ctaEyebrow}</div>
-            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: '0 0 20px', lineHeight: 1.1 }}>
+            <div style={{
+              fontFamily:    'var(--font-mono)',
+              fontSize:      '.72rem',
+              textTransform: 'uppercase',
+              letterSpacing: '.14em',
+              color:         'var(--sage)',
+              marginBottom:  20,
+            }}>◆ {h.ctaEyebrow}</div>
+            <h2 style={{
+              fontFamily:    'var(--font-serif)',
+              fontSize:      'clamp(2rem, 5vw, 3.2rem)',
+              fontWeight:    500,
+              letterSpacing: '-.02em',
+              color:         '#fff',
+              margin:        '0 0 20px',
+              lineHeight:    1.1,
+            }}>
               {h.ctaTitle}{' '}
-              <em style={{ color: 'var(--sage-deep)' }}>{h.ctaTitleEm}</em>
+              <em style={{ color: 'var(--sage)', fontStyle: 'italic' }}>{h.ctaTitleEm}</em>
             </h2>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', color: 'var(--ink-soft)', margin: '0 auto 44px', maxWidth: 440, lineHeight: 1.65 }}>
+            <p style={{
+              fontFamily: 'var(--font-body)',
+              fontSize:   '1rem',
+              color:      'rgba(255,255,255,.62)',
+              margin:     '0 auto 44px',
+              maxWidth:   440,
+              lineHeight: 1.65,
+            }}>
               {h.ctaSubtitle}
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -586,8 +611,8 @@ export default async function HomePage() {
                   gap:            8,
                   padding:        '14px 24px',
                   borderRadius:   'var(--radius)',
-                  border:         '1.5px solid var(--line)',
-                  color:          'var(--ink)',
+                  border:         '1.5px solid rgba(255,255,255,.2)',
+                  color:          'rgba(255,255,255,.85)',
                   fontFamily:     'var(--font-body)',
                   fontWeight:     500,
                   fontSize:       '.95rem',
@@ -601,6 +626,7 @@ export default async function HomePage() {
 
       </main>
       <SiteFooter />
+      <ScrollToTop />
     </>
   )
 }

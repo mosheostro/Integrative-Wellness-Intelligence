@@ -28,6 +28,26 @@ function LoginForm() {
   return (
     <div style={{ minHeight:'100dvh', display:'flex', alignItems:'center', justifyContent:'center', background:'var(--canvas)', padding:24 }}>
       <div className="mesh-bg" />
+      {/* Back to home */}
+      <Link href="/" style={{
+        position:       'fixed',
+        top:            20,
+        left:           20,
+        display:        'inline-flex',
+        alignItems:     'center',
+        gap:            6,
+        fontFamily:     'var(--font-body)',
+        fontSize:       '.82rem',
+        color:          'var(--ink-soft)',
+        textDecoration: 'none',
+        padding:        '6px 12px',
+        borderRadius:   8,
+        background:     'rgba(0,0,0,.04)',
+        transition:     'background .15s, color .15s',
+        zIndex:         10,
+      }}>
+        ← Home
+      </Link>
       <div style={{ width:'100%', maxWidth:400 }}>
         {/* Logo */}
         <div style={{ textAlign:'center', marginBottom:40 }}>
