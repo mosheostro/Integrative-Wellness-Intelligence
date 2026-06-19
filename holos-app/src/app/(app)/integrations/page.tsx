@@ -235,4 +235,21 @@ export default async function IntegrationsPage() {
           <p style={{ color: 'rgba(255,255,255,.65)', lineHeight: 1.75, marginBottom: 32 }}>
             {ig.apiBody}
           </p>
-          <Link href=
+          <Link href="/contact" style={{
+            display:        'inline-block',
+            padding:        '12px 28px',
+            background:     'var(--sage)',
+            color:          '#FAF7F2',
+            borderRadius:   'var(--radius)',
+            fontFamily:     'var(--font-body)',
+            fontWeight:     600,
+            textDecoration: 'none',
+            fontSize:       '.95rem',
+          }}>
+            {ig.apiCta}
+          </Link>
+        </div>
+      </section>
+    </main>
+  )
+}
