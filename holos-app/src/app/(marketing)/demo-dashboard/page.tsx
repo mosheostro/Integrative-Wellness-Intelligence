@@ -34,7 +34,7 @@ export default function DemoDashboardPage() {
 
       {/* Banner */}
       <div style={{
-        background: 'var(--ink)',
+        background: 'var(--ink-stable)',
         padding: '10px 24px',
         textAlign: 'center',
         display: 'flex',
@@ -140,7 +140,7 @@ export default function DemoDashboardPage() {
 
             {/* AI Coach insight */}
             <div style={{
-              background: 'linear-gradient(135deg, var(--ink) 0%, oklch(0.25 0.04 270) 100%)',
+              background: 'linear-gradient(135deg, var(--ink-stable) 0%, oklch(0.25 0.04 270) 100%)',
               border: '1px solid rgba(255,255,255,.08)',
               borderRadius: 'var(--radius-lg)',
               padding: '28px',

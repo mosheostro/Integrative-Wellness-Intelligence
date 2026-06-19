@@ -61,7 +61,7 @@ export default async function SciencePage() {
 
       {/* Hero */}
       <section style={{
-        background: 'var(--ink)',
+        background: 'var(--ink-stable)',
         padding: '80px 24px 72px',
         textAlign: 'center',
       }}>

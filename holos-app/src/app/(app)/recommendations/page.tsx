@@ -91,7 +91,7 @@ export default function RecommendationsPage() {
             <button key={f} onClick={() => setFilter(f)}
               style={{
                 padding: '8px 16px', borderRadius: 'var(--radius)', border: '1px solid var(--line)',
-                background: filter === f ? 'var(--ink)' : 'var(--surface)',
+                background: filter === f ? 'var(--ink-stable)' : 'var(--surface)',
                 color: filter === f ? '#fff' : 'var(--ink-soft)',
                 fontFamily: 'var(--font-body)', fontSize: '.8rem',
                 fontWeight: filter === f ? 600 : 400, cursor: 'pointer',

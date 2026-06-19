@@ -115,7 +115,7 @@ export default async function PricingPage() {
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }}>
           {PLANS.map(plan => (
             <div key={plan.name} style={{
-              background:    plan.highlight ? 'var(--ink)' : 'var(--surface)',
+              background:    plan.highlight ? 'var(--ink-stable)' : 'var(--surface)',
               border:        plan.highlight ? '2px solid var(--sage)' : '1px solid var(--line)',
               borderRadius:  'var(--radius-lg)',
               padding:       '40px 32px',
@@ -143,7 +143,7 @@ export default async function PricingPage() {
                 </div>
               )}
 
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.7rem', textTransform: 'uppercase', letterSpacing: '.12em', color: plan.highlight ? 'rgba(255,255,255,.4)' : 'var(--ink-faint)', marginBottom: 16 }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.7rem', textTransform: 'uppercase', letterSpacing: '.12em', color: plan.highlight ? 'rgba(255,255,255,.65)' : 'var(--ink-faint)', marginBottom: 16 }}>
                 {plan.name}
               </div>
 
@@ -152,13 +152,13 @@ export default async function PricingPage() {
                   {plan.price}
                 </span>
                 {plan.period && (
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: plan.highlight ? 'rgba(255,255,255,.4)' : 'var(--ink-faint)' }}>
+                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: plan.highlight ? 'rgba(255,255,255,.65)' : 'var(--ink-faint)' }}>
                     {plan.period}
                   </span>
                 )}
               </div>
 
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: plan.highlight ? 'rgba(255,255,255,.55)' : 'var(--ink-soft)', margin: '0 0 28px', lineHeight: 1.5 }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: plan.highlight ? 'rgba(255,255,255,.8)' : 'var(--ink-soft)', margin: '0 0 28px', lineHeight: 1.5 }}>
                 {plan.tagline}
               </p>
 

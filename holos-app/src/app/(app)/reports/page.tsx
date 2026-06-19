@@ -97,7 +97,7 @@ export default async function ReportsPage() {
 
           {/* Composite score card */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
-            <div style={{ background: 'var(--ink)', borderRadius: 'var(--radius-lg)', padding: '28px 24px', gridColumn: '1 / 2' }}>
+            <div style={{ background: 'var(--ink-stable)', borderRadius: 'var(--radius-lg)', padding: '28px 24px', gridColumn: '1 / 2' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.4)', marginBottom: 12 }}>
                 {s.compositeScore}
               </div>

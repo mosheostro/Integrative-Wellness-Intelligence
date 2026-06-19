@@ -51,8 +51,8 @@ export default function SiteFooter() {
 
   return (
     <footer style={{
-      background:   'var(--ink)',
-      color:        'rgba(255,255,255,.55)',
+      background:   'var(--ink-stable)',
+      color:        'rgba(255,255,255,.7)',
       paddingTop:   72,
     }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px' }}>
@@ -107,7 +107,7 @@ export default function SiteFooter() {
 
           {/* Platform */}
           <div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.3)', marginBottom: 16 }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.55)', marginBottom: 16 }}>
               {f.platform}
             </div>
             {PLATFORM_LINKS.map(l => (
@@ -116,7 +116,7 @@ export default function SiteFooter() {
                   display:        'block',
                   fontFamily:     'var(--font-body)',
                   fontSize:       '.82rem',
-                  color:          'rgba(255,255,255,.5)',
+                  color:          'rgba(255,255,255,.7)',
                   textDecoration: 'none',
                   padding:        '3px 0',
                   transition:     'color .15s',
@@ -128,7 +128,7 @@ export default function SiteFooter() {
 
           {/* Company */}
           <div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.3)', marginBottom: 16 }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.55)', marginBottom: 16 }}>
               {f.company}
             </div>
             {COMPANY_LINKS.map(l => (
@@ -137,7 +137,7 @@ export default function SiteFooter() {
                   display:        'block',
                   fontFamily:     'var(--font-body)',
                   fontSize:       '.82rem',
-                  color:          'rgba(255,255,255,.5)',
+                  color:          'rgba(255,255,255,.7)',
                   textDecoration: 'none',
                   padding:        '3px 0',
                   transition:     'color .15s',
@@ -149,7 +149,7 @@ export default function SiteFooter() {
 
           {/* Traditions */}
           <div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.3)', marginBottom: 16 }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.55)', marginBottom: 16 }}>
               {f.traditions}
             </div>
             {TRADITIONS.map(l => (
@@ -158,7 +158,7 @@ export default function SiteFooter() {
                   display:        'block',
                   fontFamily:     'var(--font-body)',
                   fontSize:       '.82rem',
-                  color:          'rgba(255,255,255,.5)',
+                  color:          'rgba(255,255,255,.7)',
                   textDecoration: 'none',
                   padding:        '3px 0',
                   transition:     'color .15s',
@@ -186,7 +186,7 @@ export default function SiteFooter() {
               style={{
                 fontFamily:     'var(--font-body)',
                 fontSize:       '.75rem',
-                color:          'rgba(255,255,255,.35)',
+                color:          'rgba(255,255,255,.55)',
                 textDecoration: 'none',
               }}>
               {f.privacyPolicy}
@@ -195,7 +195,7 @@ export default function SiteFooter() {
               style={{
                 fontFamily:     'var(--font-body)',
                 fontSize:       '.75rem',
-                color:          'rgba(255,255,255,.35)',
+                color:          'rgba(255,255,255,.55)',
                 textDecoration: 'none',
               }}>
               {f.termsOfService}

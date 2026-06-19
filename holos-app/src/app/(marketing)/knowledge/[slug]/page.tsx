@@ -1,15 +1,16 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getServerStrings } from '@/lib/i18n/server'
+import { SLUG_META } from '@/lib/i18n/knowledge-articles'
+import type { Locale } from '@/lib/i18n/knowledge-articles'
 
+// Article body text remains in English (long-form professional translation pending).
+// Title, category, intro, date, and readTime are fully localised via SLUG_META.
 const ARTICLES: Record<string, {
-  title: string; category: string; readTime: string; date: string; author: string;
-  intro: string; body: string[]
+  author: string; body: string[]
 }> = {
   'integrative-wellness-science': {
-    title: 'The Science Behind Integrative Wellness',
-    category: 'Research', readTime: '8 min read', date: 'May 2025', author: 'Moshe Ostrovsky',
-    intro: 'Modern research is confirming what ancient traditions have long understood: the human organism is an integrated whole, not a collection of independent parts.',
+    author: 'Moshe Ostrovsky',
     body: [
       'Integrative wellness is not an alternative to evidence-based medicine — it is its logical extension. Systems biology, psychoneuroimmunology, and chronobiology all point toward the same conclusion: the body operates as a unified intelligence, and treating it in isolation produces fragmented results.',
       'A landmark 2023 meta-analysis in the Annals of Internal Medicine reviewed 187 studies on mind-body interventions and found that multi-modal approaches outperformed single-modality treatments by 34% on primary outcomes — not because any individual component was stronger, but because their interactions compounded.',
@@ -19,9 +20,7 @@ const ARTICLES: Record<string, {
     ]
   },
   'sleep-recovery-ancient': {
-    title: 'Sleep & Recovery: What Ancient Wisdom Gets Right',
-    category: 'Sleep', readTime: '6 min read', date: 'April 2025', author: 'Moshe Ostrovsky',
-    intro: 'Before sleep trackers and polysomnography, ancient physicians built sophisticated frameworks for rest and recovery — frameworks that modern chronobiology is now validating in remarkable detail.',
+    author: 'Moshe Ostrovsky',
     body: [
       'The Tibetan medical system describes sleep as a time when the wind-humour (lung) settles and the subtle channels of the body undergo repair. This maps with striking precision onto the glymphatic hypothesis: during deep sleep, cerebrospinal fluid flushes metabolic waste from the brain at 60% greater volume than during waking.',
       'Ayurveda prescribes sleeping before 10pm and rising before 6am — the Kapha time of night, when the earth-water element supports deep anabolic restoration. Chronobiological research confirms that circadian alignment improves slow-wave sleep duration by 20–30%, regardless of total sleep time.',
@@ -31,9 +30,7 @@ const ARTICLES: Record<string, {
     ]
   },
   'nutrition-frameworks': {
-    title: 'Nutrition Across 8 Frameworks: A Comparative Guide',
-    category: 'Nutrition', readTime: '10 min read', date: 'March 2025', author: 'Moshe Ostrovsky',
-    intro: 'Every major wellness tradition has a nutritional philosophy. Rather than choosing between them, HOLOS identifies which framework\'s dietary principles align with your constitutional type.',
+    author: 'Moshe Ostrovsky',
     body: [
       'The question "what should I eat?" has a different answer depending on which tradition you ask — but the answers share more structure than they first appear. All eight frameworks identify food not merely as macronutrient fuel, but as a vehicle for constitutional balance, seasonal adaptation, and metabolic individuality.',
       'Evidence-Based: The strongest consensus supports a predominantly whole-food, plant-rich diet with adequate protein (1.2–2g/kg lean mass), omega-3 fats, and polyphenol diversity. Processed food displacement accounts for most chronic disease risk reduction in large cohort studies.',
@@ -43,9 +40,7 @@ const ARTICLES: Record<string, {
     ]
   },
   'stress-resilience-traditions': {
-    title: 'Stress Resilience: Lessons from Five Millennia',
-    category: 'Stress', readTime: '7 min read', date: 'February 2025', author: 'Moshe Ostrovsky',
-    intro: 'Stress is not a modern invention. Every wisdom tradition developed sophisticated tools for building resilience — tools now corroborated by stress physiology and psychoneuroimmunology.',
+    author: 'Moshe Ostrovsky',
     body: [
       'The HPA axis produces cortisol in response to perceived threat — a response tuned for acute danger, not chronic low-grade stressors. Extended HPA activation suppresses immune function, impairs memory, disrupts circadian rhythm, and accelerates cellular aging via telomere shortening.',
       'Ayurveda calls it Vata aggravation: the wind-air element becomes excessive, destabilizing the nervous system. The remedy is grounding: abhyanga oil massage, warm heavy foods, slow movement, ashwagandha. Modern research shows ashwagandha root reduces cortisol by 27.9% in RCTs.',
@@ -55,9 +50,7 @@ const ARTICLES: Record<string, {
     ]
   },
   'movement-medicine': {
-    title: 'Movement as Medicine: The Cross-Traditional Consensus',
-    category: 'Movement', readTime: '5 min read', date: 'January 2025', author: 'Moshe Ostrovsky',
-    intro: 'No tradition in the HOLOS framework recommends sedentary living. Movement is universally prescribed as medicine — but the dose, type, and timing differ by constitution, season, and current health state.',
+    author: 'Moshe Ostrovsky',
     body: [
       'A 2022 meta-analysis found that physical activity reduces all-cause mortality risk by 30–35%, cardiovascular events by 40%, depression incidence by 33%, and cognitive decline by 38%. These effects hold across age groups and require no equipment or facility.',
       'But movement is not monolithic. Ayurveda distinguishes brmhana (strengthening) from langhana (lightening) movement modalities — prescribed based on dosha, season, and energy state. A Vata-dominant person benefits from slow, rhythmic, grounding movement — not high-intensity interval training, which further depletes the nervous system.',
@@ -67,9 +60,7 @@ const ARTICLES: Record<string, {
     ]
   },
   'emotional-intelligence-holos': {
-    title: 'Emotional Intelligence in the HOLOS Framework',
-    category: 'Emotional Health', readTime: '6 min read', date: 'December 2024', author: 'Moshe Ostrovsky',
-    intro: 'Emotional intelligence is not a soft skill — it is a measurable physiological capacity with direct implications for immune function, cardiovascular health, and cognitive performance.',
+    author: 'Moshe Ostrovsky',
     body: [
       'The polyvagal theory provides a physiological basis for what traditions have long observed: the state of the nervous system — specifically vagal tone — determines our capacity for social engagement, learning, creativity, and physical healing.',
       'Ayurveda identifies sattva (mental clarity and equanimity) as the goal of all wellness practices — achieved not by suppressing emotion, but by purifying the mind of rajas (agitation) and tamas (inertia) through yoga, meditation, wholesome food, and nature exposure.',
@@ -79,9 +70,7 @@ const ARTICLES: Record<string, {
     ]
   },
   'purpose-longevity': {
-    title: 'Purpose & Longevity: What the Research Actually Shows',
-    category: 'Purpose', readTime: '5 min read', date: 'November 2024', author: 'Moshe Ostrovsky',
-    intro: 'Having a reason to get up in the morning is not a philosophical luxury — it is a measurable biological variable that predicts mortality, resilience, and health behaviour across decades.',
+    author: 'Moshe Ostrovsky',
     body: [
       'The Rush Memory and Aging Project followed 1,500 older adults for seven years and found that those with a high sense of purpose had 2.5× lower all-cause mortality risk — independent of physical health, depression status, or socioeconomic factors. Purpose predicted survival more strongly than smoking cessation.',
       'The mechanism: purpose organizes attention, inhibits rumination, and activates the behavioural approach system. People with clear purpose sleep better, exercise more consistently, seek medical care proactively, and recover faster from illness. Purpose is not the outcome of wellness — it is a driver of it.',
@@ -90,9 +79,7 @@ const ARTICLES: Record<string, {
     ]
   },
   'rambam-modern-wellness': {
-    title: 'Maimonides: The 12th-Century Physician Ahead of His Time',
-    category: 'Traditions', readTime: '7 min read', date: 'October 2024', author: 'Moshe Ostrovsky',
-    intro: 'Rabbi Moses ben Maimon (1138–1204) was the court physician to the Sultan of Egypt and a philosopher who synthesized Aristotle with Torah. His medical writings anticipate modern preventive medicine with unsettling precision.',
+    author: 'Moshe Ostrovsky',
     body: [
       'Maimonides wrote the Regimen of Health for the Sultan\'s son — who suffered from depression and constipation. The prescriptions are remarkably contemporary: moderate daily exercise, regular sleep schedule, emotional management, bowel regularity, and the avoidance of overeating.',
       'His "eight chapters" on mental health anticipate cognitive-behavioural therapy: the soul has appetites and reason must regulate them; character is formed by habit; negative emotional states are modified by practising their opposites.',
@@ -103,49 +90,94 @@ const ARTICLES: Record<string, {
 }
 
 const CAT_COLORS: Record<string, string> = {
-  'Research': '#6B6FA8',
-  'Sleep': '#7A9E8E',
-  'Nutrition': '#B07A60',
-  'Stress': '#B06070',
-  'Movement': '#C4A55A',
+  'Research':         '#6B6FA8',
+  'Исследования':     '#6B6FA8',
+  'מחקר':            '#6B6FA8',
+  'Forschung':        '#6B6FA8',
+  'Sleep':            '#7A9E8E',
+  'Сон':              '#7A9E8E',
+  'שינה':            '#7A9E8E',
+  'Schlaf':           '#7A9E8E',
+  'Nutrition':        '#B07A60',
+  'Питание':          '#B07A60',
+  'תזונה':           '#B07A60',
+  'Ernährung':        '#B07A60',
+  'Stress':           '#B06070',
+  'Стресс':           '#B06070',
+  'לחץ':             '#B06070',
+  'Movement':         '#C4A55A',
+  'Движение':         '#C4A55A',
+  'תנועה':           '#C4A55A',
+  'Bewegung':         '#C4A55A',
   'Emotional Health': '#9B7BB0',
-  'Purpose': '#7A9E8E',
-  'Traditions': '#C4A55A',
+  'Эмоциональное здоровье': '#9B7BB0',
+  'בריאות רגשית':   '#9B7BB0',
+  'Emotionale Gesundheit': '#9B7BB0',
+  'Purpose':          '#7A9E8E',
+  'Цель':             '#7A9E8E',
+  'מטרה':            '#7A9E8E',
+  'Zweck':            '#7A9E8E',
+  'Traditions':       '#C4A55A',
+  'Традиции':         '#C4A55A',
+  'מסורות':          '#C4A55A',
+  'Traditionen':      '#C4A55A',
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  const article = ARTICLES[slug]
-  if (!article) return { title: 'Article Not Found — Holos' }
+  const { locale } = await getServerStrings()
+  const meta = (SLUG_META[locale as Locale] ?? SLUG_META.en)[slug] ?? SLUG_META.en[slug]
+  if (!meta) return { title: 'Article Not Found — Holos' }
   return {
-    title: `${article.title} — Holos Knowledge Center`,
-    description: article.intro,
+    title: `${meta.title} — Holos Knowledge Center`,
+    description: meta.intro,
   }
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const [{ slug }, { strings }] = await Promise.all([params, getServerStrings()])
+  const [{ slug }, { strings, locale }] = await Promise.all([params, getServerStrings()])
   const k = strings.knowledge
 
-  const article = ARTICLES[slug] ?? {
-    title: k.articleNotFound,
+  const localeKey = locale as Locale
+  const localeMeta = SLUG_META[localeKey] ?? SLUG_META.en
+  const meta = localeMeta[slug] ?? SLUG_META.en[slug]
+  const body = ARTICLES[slug]
+
+  const article = meta && body ? {
+    title:    meta.title,
+    category: meta.category,
+    intro:    meta.intro,
+    date:     meta.date,
+    readTime: meta.readTime,
+    author:   body.author,
+    body:     body.body,
+  } : {
+    title:    k.articleNotFound,
     category: 'Knowledge',
     readTime: '—',
-    date: '—',
-    author: 'HOLOS',
-    intro: k.articleNotFoundBody,
-    body: [k.articleNotFoundMore]
+    date:     '—',
+    author:   'HOLOS',
+    intro:    k.articleNotFoundBody,
+    body:     [k.articleNotFoundMore],
   }
 
   const catColor = CAT_COLORS[article.category] ?? '#7A9E8E'
-  const otherArticles = Object.entries(ARTICLES).filter(([s]) => s !== slug).slice(0, 3)
+
+  // Other articles — show localized titles from SLUG_META
+  const otherArticles = Object.keys(ARTICLES)
+    .filter(s => s !== slug)
+    .slice(0, 3)
+    .map(s => ({
+      slug: s,
+      ...(localeMeta[s] ?? SLUG_META.en[s]),
+    }))
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--canvas, #FAF7F2)' }}>
 
-      {/* Hero */}
+      {/* Hero — uses ink-stable so it stays dark in both light and dark mode */}
       <section style={{
-        background: 'var(--ink, #2B2F45)', color: '#EDE9E0',
+        background: 'var(--ink-stable, #2B2F45)', color: '#EDE9E0',
         padding: 'clamp(60px,10vw,100px) clamp(20px,6vw,80px) clamp(40px,6vw,60px)',
       }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
@@ -218,7 +250,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </div>
       </article>
 
-      {/* More articles */}
+      {/* More articles — localized titles */}
       {otherArticles.length > 0 && (
         <section style={{
           borderTop: '1px solid var(--line, #DDD8CC)',
@@ -236,8 +268,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
             gap: 24,
           }}>
-            {otherArticles.map(([s, a]) => (
-              <Link key={s} href={`/knowledge/${s}`} style={{ textDecoration: 'none' }}>
+            {otherArticles.map(a => (
+              <Link key={a.slug} href={`/knowledge/${a.slug}`} style={{ textDecoration: 'none' }}>
                 <div style={{
                   background: 'var(--surface, #FFFFFF)',
                   border: '1px solid var(--line, #DDD8CC)',
@@ -274,9 +306,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </section>
       )}
 
-      {/* CTA */}
+      {/* CTA — uses ink-stable so it stays dark in both light and dark mode */}
       <section style={{
-        background: 'var(--ink, #2B2F45)',
+        background: 'var(--ink-stable, #2B2F45)',
         padding: 'clamp(40px,6vw,80px) clamp(20px,6vw,80px)',
         textAlign: 'center',
       }}>

@@ -468,7 +468,7 @@ export default async function HomePage() {
               {PRICING_PREVIEW.map(plan => (
                 <div key={plan.name}
                   style={{
-                    background:   plan.highlight ? 'var(--ink)' : 'var(--surface)',
+                    background:   plan.highlight ? 'var(--ink-stable)' : 'var(--surface)',
                     border:       plan.highlight ? '2px solid var(--sage)' : '1px solid var(--line)',
                     borderRadius: 'var(--radius-lg)',
                     padding:      '36px 28px',
@@ -548,7 +548,7 @@ export default async function HomePage() {
           textAlign:  'center',
           position:   'relative',
           overflow:   'hidden',
-          background: 'var(--ink)',
+          background: 'var(--ink-stable)',
         }}>
           <div aria-hidden style={{
             position:      'absolute',

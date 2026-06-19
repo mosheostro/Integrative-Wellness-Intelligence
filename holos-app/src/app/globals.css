@@ -10,6 +10,7 @@
   --surface-2:  #EDE9E0;
   --line:       #DDD8CC;
   --ink:        #2B2F45;
+  --ink-stable: #2B2F45; /* never overridden in dark mode — use for always-dark cards/sections */
   --ink-soft:   #5A5F78;
   --ink-faint:  #626370; /* was #9097B0 (2.71:1 fail) → now 5.07:1 on canvas ✓ */
   --gold-text:  #7A5F20; /* accessible gold for text use (5.23:1 on canvas) */

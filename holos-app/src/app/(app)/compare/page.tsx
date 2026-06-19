@@ -168,7 +168,7 @@ export default async function ComparePage() {
 
       {/* Key differentiators */}
       <section style={{
-        background: 'var(--ink)',
+        background: 'var(--ink-stable)',
         padding: '72px 24px',
       }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>

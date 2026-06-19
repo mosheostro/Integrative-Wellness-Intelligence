@@ -109,7 +109,7 @@ export default async function BookSessionPage() {
         }}>
           {SESSION_TYPES.map(s => (
             <div key={s.title} style={{
-              background: s.highlight ? 'var(--ink)' : 'var(--surface)',
+              background: s.highlight ? 'var(--ink-stable)' : 'var(--surface)',
               border: s.highlight ? 'none' : '1px solid var(--line)',
               borderRadius: 'var(--radius-lg)',
               padding: '32px 28px',

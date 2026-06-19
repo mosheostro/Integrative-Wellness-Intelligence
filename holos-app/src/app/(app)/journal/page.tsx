@@ -101,7 +101,7 @@ export default function JournalPage() {
           <button onClick={() => setView('write')}
             style={{
               padding: '8px 18px', borderRadius: 'var(--radius)', border: '1px solid var(--line)',
-              background: view === 'write' ? 'var(--ink)' : 'var(--surface)',
+              background: view === 'write' ? 'var(--ink-stable)' : 'var(--surface)',
               color: view === 'write' ? '#fff' : 'var(--ink-soft)',
               fontFamily: 'var(--font-body)', fontSize: '.82rem', fontWeight: view === 'write' ? 600 : 400, cursor: 'pointer',
             }}>
@@ -110,7 +110,7 @@ export default function JournalPage() {
           <button onClick={() => setView('history')}
             style={{
               padding: '8px 18px', borderRadius: 'var(--radius)', border: '1px solid var(--line)',
-              background: view === 'history' ? 'var(--ink)' : 'var(--surface)',
+              background: view === 'history' ? 'var(--ink-stable)' : 'var(--surface)',
               color: view === 'history' ? '#fff' : 'var(--ink-soft)',
               fontFamily: 'var(--font-body)', fontSize: '.82rem', fontWeight: view === 'history' ? 600 : 400, cursor: 'pointer',
             }}>
@@ -223,23 +223,4 @@ export default function JournalPage() {
                     </span>
                   )}
                 </div>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', lineHeight: 1.75, color: 'var(--ink-soft)', margin: 0, whiteSpace: 'pre-wrap' }}>
-                  {entry.content}
-                </p>
-                {entry.dimension_tags.length > 0 && (
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 12 }}>
-                    {entry.dimension_tags.map(tag => (
-                      <span key={tag} style={{ padding: '3px 10px', borderRadius: 100, background: 'var(--line)', color: 'var(--ink-faint)', fontFamily: 'var(--font-body)', fontSize: '.72rem' }}>
-                        {dimLabel(tag)}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )
-          })}
-        </div>
-      )}
-    </div>
-  )
-}
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', lineHeight: 1.75, color: 'var(--ink-soft)', margin: 0, whiteSpace: '

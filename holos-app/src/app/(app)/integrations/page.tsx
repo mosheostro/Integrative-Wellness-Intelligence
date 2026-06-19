@@ -218,7 +218,7 @@ export default async function IntegrationsPage() {
 
       {/* Practitioner API callout */}
       <section style={{
-        background: 'var(--ink)',
+        background: 'var(--ink-stable)',
         padding: '64px 24px',
         textAlign: 'center',
       }}>
@@ -235,24 +235,4 @@ export default async function IntegrationsPage() {
           <p style={{ color: 'rgba(255,255,255,.65)', lineHeight: 1.75, marginBottom: 32 }}>
             {ig.apiBody}
           </p>
-          <Link href="/auth/signup"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              padding: '12px 28px',
-              borderRadius: 'var(--radius)',
-              background: '#fff',
-              color: 'var(--ink)',
-              fontFamily: 'var(--font-body)',
-              fontWeight: 600,
-              fontSize: '.92rem',
-              textDecoration: 'none',
-            }}>
-            {ig.apiCta}
-          </Link>
-        </div>
-      </section>
-    </main>
-  )
-}
+          <Link href=
