@@ -34,8 +34,10 @@ export default function CoachPage() {
     })
   }, [s.initialMessage])
 
-  const send = async () => {
-    const text = input.trim()
+  // textOverride bypasses the stale-closure issue with starter buttons:
+  // calling send(starter) directly is safe, unlike setInput()+setTimeout(send)
+  const send = async (textOverride?: string) => {
+    const text = (textOverride !== undefined ? textOverride : input).trim()
     if (!text || loading) return
     setInput('')
     const userMsg: Message = { role: 'user', content: text, timestamp: new Date() }
@@ -64,7 +66,7 @@ export default function CoachPage() {
   const starterKeys = [s.starter1, s.starter2, s.starter3, s.starter4]
 
   return (
-    <div className="coach-page" style={{ display:'flex', flexDirection:'column', height:'calc(100dvh - 60px)', background:'var(--canvas)' }}>
+    <div className="coach-page" style={{ display:'flex', flexDirection:'column', position:'fixed', top:60, left:0, right:0, bottom:0, background:'var(--canvas)' }}>
 
       {/* Header */}
       <div style={{ padding:'20px 24px 16px', borderBottom:'1px solid var(--line)', background:'var(--canvas)', flexShrink:0 }}>
@@ -138,7 +140,7 @@ export default function CoachPage() {
         <div style={{ padding:'0 16px 12px', flexShrink:0 }}>
           <div style={{ maxWidth:720, margin:'0 auto', display:'flex', flexWrap:'wrap', gap:8 }}>
             {starterKeys.map(starter => (
-              <button key={starter} onClick={() => { setInput(starter); setTimeout(send, 0) }}
+              <button key={starter} onClick={() => send(starter)}
                 style={{
                   padding:'7px 14px', borderRadius:20, border:'1px solid var(--line)',
                   background:'var(--canvas2)', color:'var(--ink-soft)', fontSize:'.8rem',
@@ -176,7 +178,7 @@ export default function CoachPage() {
       <style>{`
         @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
         @media (max-width: 767px) {
-          .coach-page { height: calc(100dvh - 60px - 56px - env(safe-area-inset-bottom, 0px)) !important; }
+          .coach-page { bottom: calc(56px + env(safe-area-inset-bottom, 0px)) !important; }
         }
       `}</style>
     </div>

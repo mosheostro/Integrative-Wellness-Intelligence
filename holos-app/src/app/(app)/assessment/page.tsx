@@ -2,6 +2,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { getInitialQuestions, getNextQuestions } from '@/data/questions/bank'
+import { getLocalizedQuestion } from '@/data/questions/bank.i18n'
 import type { AssessmentAnswer, Framework, Question, WellnessDimension } from '@/lib/types'
 import { FRAMEWORKS_LIST } from '@/frameworks'
 import { useWellnessEngine } from '@/hooks/useWellnessEngine'
@@ -38,7 +39,7 @@ function getAmbientGradient(composite: number): string {
 
 export default function AssessmentPage() {
   const router = useRouter()
-  const { strings } = useLanguage()
+  const { strings, locale } = useLanguage()
   const s = strings.assessment
   const dims = strings.dimensions
 
@@ -242,55 +243,68 @@ export default function AssessmentPage() {
             </span>
           </div>
 
-          {/* Question text */}
-          <h2 style={{
-            fontFamily: 'var(--font-serif)',
-            fontSize: 'clamp(1.25rem, 2.5vw, 1.6rem)',
-            fontWeight: 500, letterSpacing: '-.02em',
-            color: 'var(--ink)', lineHeight: 1.35, marginBottom: 32,
-          }}>
-            {currentQ.text}
-          </h2>
+          {/* Question text — localized */}
+          {(() => {
+            const locQ = getLocalizedQuestion(
+              currentQ.id,
+              currentQ.options.map(o => o.text),
+              currentQ.text,
+              locale,
+            )
+            return (
+              <>
+                <h2 style={{
+                  fontFamily: 'var(--font-serif)',
+                  fontSize: 'clamp(1.25rem, 2.5vw, 1.6rem)',
+                  fontWeight: 500, letterSpacing: '-.02em',
+                  color: 'var(--ink)', lineHeight: 1.35, marginBottom: 32,
+                }}>
+                  {locQ.text}
+                </h2>
 
-          {/* Options */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 32 }}>
-            {currentQ.options.map((opt, i) => {
-              const isSelected = selected === i
-              const key = ['A', 'B', 'C', 'D', 'E'][i]
-              return (
-                <button
-                  key={i}
-                  onClick={() => setSelected(i)}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: 14,
-                    padding: '14px 18px', borderRadius: 'var(--radius-lg)',
-                    border: `1.5px solid ${isSelected ? 'var(--sage-deep)' : 'var(--line)'}`,
-                    background: isSelected ? 'oklch(0.96 0.03 155 / 0.35)' : 'var(--surface)',
-                    cursor: 'pointer', textAlign: 'left',
-                    transition: 'all .15s', width: '100%',
-                  }}
-                >
-                  <span style={{
-                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                    width: 28, height: 28, borderRadius: 6, flexShrink: 0,
-                    fontFamily: 'var(--font-mono)', fontSize: '.72rem', fontWeight: 600,
-                    background: isSelected ? 'var(--sage-deep)' : 'var(--line)',
-                    color: isSelected ? '#fff' : 'var(--ink-soft)',
-                    transition: 'all .15s',
-                  }}>
-                    {key}
-                  </span>
-                  <span style={{
-                    fontFamily: 'var(--font-body)', fontSize: '.92rem',
-                    color: isSelected ? 'var(--ink)' : 'var(--ink-soft)',
-                    fontWeight: isSelected ? 500 : 400, lineHeight: 1.4,
-                  }}>
-                    {opt.text}
-                  </span>
-                </button>
-              )
-            })}
-          </div>
+                {/* Options */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 32 }}>
+                  {currentQ.options.map((opt, i) => {
+                    const isSelected = selected === i
+                    const key = ['A', 'B', 'C', 'D', 'E'][i]
+                    const optLabel = locQ.options[i] ?? opt.text
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => setSelected(i)}
+                        style={{
+                          display: 'flex', alignItems: 'center', gap: 14,
+                          padding: '14px 18px', borderRadius: 'var(--radius-lg)',
+                          border: `1.5px solid ${isSelected ? 'var(--sage-deep)' : 'var(--line)'}`,
+                          background: isSelected ? 'oklch(0.96 0.03 155 / 0.35)' : 'var(--surface)',
+                          cursor: 'pointer', textAlign: 'left',
+                          transition: 'all .15s', width: '100%',
+                        }}
+                      >
+                        <span style={{
+                          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                          width: 28, height: 28, borderRadius: 6, flexShrink: 0,
+                          fontFamily: 'var(--font-mono)', fontSize: '.72rem', fontWeight: 600,
+                          background: isSelected ? 'var(--sage-deep)' : 'var(--line)',
+                          color: isSelected ? '#fff' : 'var(--ink-soft)',
+                          transition: 'all .15s',
+                        }}>
+                          {key}
+                        </span>
+                        <span style={{
+                          fontFamily: 'var(--font-body)', fontSize: '.92rem',
+                          color: isSelected ? 'var(--ink)' : 'var(--ink-soft)',
+                          fontWeight: isSelected ? 500 : 400, lineHeight: 1.4,
+                        }}>
+                          {optLabel}
+                        </span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </>
+            )
+          })()}
 
           {/* Error */}
           {error && (
