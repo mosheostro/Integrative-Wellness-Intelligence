@@ -60,7 +60,7 @@ export const FRAMEWORK_I18N: Record<string, Record<string, FrameworkLocale>> = {
     de: {
       label: 'Rambam-Medizin',
       origin: 'Mittelalterliche jüdische Medizin',
-      description: 'Maimonides' medizinische Philosophie: Prävention durch Lebensführung, Gleichgewicht der sechs Nicht-Naturalia — Luft, Essen & Trinken, Bewegung & Ruhe, Schlaf & Wachen, Gemütszustände und Ausscheidungen.',
+      description: "Maimonides' medizinische Philosophie: Prävention durch Lebensführung, Gleichgewicht der sechs Nicht-Naturalia — Luft, Essen & Trinken, Bewegung & Ruhe, Schlaf & Wachen, Gemütszustände und Ausscheidungen.",
     },
   },
 
