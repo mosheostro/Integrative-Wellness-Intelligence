@@ -44,10 +44,13 @@ export default function CoachPage() {
     setMessages(prev => [...prev, userMsg])
     setLoading(true)
 
+    const abort = new AbortController()
+    const timer = setTimeout(() => abort.abort(), 25000)
     try {
       const { data: { session } } = await createClient().auth.getSession()
       const res = await fetch('/api/coach', {
         method: 'POST',
+        signal: abort.signal,
         headers: {
           'Content-Type': 'application/json',
           ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {})
@@ -55,10 +58,13 @@ export default function CoachPage() {
         body: JSON.stringify({ message: text, history: messages.map(m => ({ role: m.role, content: m.content })) }),
       })
       const data = await res.json()
-      setMessages(prev => [...prev, { role: 'assistant', content: data.response, timestamp: new Date() }])
-    } catch {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'I\'m having trouble connecting right now. Please try again in a moment.', timestamp: new Date() }])
+      if (!res.ok) throw new Error(data.error ?? 'Request failed')
+      setMessages(prev => [...prev, { role: 'assistant', content: data.reply, timestamp: new Date() }])
+    } catch (err) {
+      const isTimeout = err instanceof Error && err.name === 'AbortError'
+      setMessages(prev => [...prev, { role: 'assistant', content: isTimeout ? 'Response took too long. Please try again.' : 'I\'m having trouble connecting right now. Please try again in a moment.', timestamp: new Date() }])
     } finally {
+      clearTimeout(timer)
       setLoading(false)
     }
   }

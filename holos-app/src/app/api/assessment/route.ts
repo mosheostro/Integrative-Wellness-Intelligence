@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/service'
 import { runEngine } from '@/engine'
 import { z } from 'zod'
 import type { Framework } from '@/lib/types'
+
+function clamp(v: number) { return Math.max(0, Math.min(100, Math.round(v))) }
 
 const AnswerSchema = z.object({
   questionId:  z.string(),
@@ -30,29 +33,36 @@ export async function POST(req: NextRequest) {
     // Run the engine
     const result = runEngine(answers as Parameters<typeof runEngine>[0], framework as Framework)
 
+    // Use service-role client for writes (bypasses RLS; falls back to user client if key not set)
+    const db = createServiceClient() ?? supabase
+
     // Persist assessment
-    const { data: assessment, error: aErr } = await supabase
+    const { data: assessment, error: aErr } = await db
       .from('assessments')
       .insert({
         user_id: user.id,
         framework,
         status: 'completed',
         wellness_state: result.state,
-        composite_score: result.scores.composite,
+        composite_score: clamp(result.scores.composite),
         completed_at: new Date().toISOString(),
       })
       .select('id')
       .single()
 
     if (aErr || !assessment) {
-      console.error('Assessment insert error:', aErr)
-      return NextResponse.json({ error: 'Failed to save assessment' }, { status: 500 })
+      console.error('Assessment insert error:', JSON.stringify(aErr))
+      return NextResponse.json({
+        error: 'Failed to save assessment',
+        details: aErr?.message,
+        code: aErr?.code,
+      }, { status: 500 })
     }
 
     const assessmentId = assessment.id
 
     // Persist answers
-    await supabase.from('answers').insert(
+    await db.from('answers').insert(
       answers.map((a: { questionId: string; optionIndex: number | number[]; dimension: string }) => ({
         assessment_id: assessmentId,
         question_id:   a.questionId,
@@ -64,7 +74,7 @@ export async function POST(req: NextRequest) {
     )
 
     // Persist dimension scores
-    await supabase.from('dimension_scores').insert({
+    await db.from('dimension_scores').insert({
       assessment_id: assessmentId,
       user_id: user.id,
       framework,
@@ -73,7 +83,7 @@ export async function POST(req: NextRequest) {
 
     // Persist framework result
     const fr = result.frameworkResult
-    await supabase.from('framework_results').insert({
+    await db.from('framework_results').insert({
       assessment_id: assessmentId,
       framework,
       dosha_vata:   fr.dosha?.vata,
@@ -92,7 +102,7 @@ export async function POST(req: NextRequest) {
     // Issue top recommendations
     const recs = result.recommendations.slice(0, 8)
     if (recs.length) {
-      await supabase.from('issued_recommendations').insert(
+      await db.from('issued_recommendations').insert(
         recs.map(r => ({
           user_id: user.id,
           assessment_id: assessmentId,
@@ -109,7 +119,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Progress snapshot
-    await supabase.from('progress_snapshots').upsert({
+    await db.from('progress_snapshots').upsert({
       user_id: user.id,
       snapshot_date: new Date().toISOString().split('T')[0],
       composite: result.scores.composite,
@@ -126,7 +136,7 @@ export async function POST(req: NextRequest) {
     }, { onConflict: 'user_id,snapshot_date' })
 
     // XP reward
-    try { await supabase.rpc('add_xp', { p_user_id: user.id, p_xp: 50 }) } catch { /* non-critical */ }
+    try { await db.rpc('add_xp', { p_user_id: user.id, p_xp: 50 }) } catch { /* non-critical */ }
 
     return NextResponse.json({ assessmentId, result }, { status: 201 })
   } catch (err) {

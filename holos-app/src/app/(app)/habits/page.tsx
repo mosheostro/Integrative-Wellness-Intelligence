@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { LOCALE_META } from '@/lib/i18n/translations'
@@ -41,12 +41,15 @@ export default function HabitsPage() {
     return key.charAt(0).toUpperCase() + key.slice(1)
   }
 
-  const [habits, setHabits]   = useState<Habit[]>([])
-  const [loading, setLoading] = useState(true)
-  const [form, setForm]       = useState(EMPTY_FORM)
-  const [adding, setAdding]   = useState(false)
-  const [saving, setSaving]   = useState(false)
-  const sb = createClient()
+  const [habits, setHabits]     = useState<Habit[]>([])
+  const [loading, setLoading]   = useState(true)
+  const [form, setForm]         = useState(EMPTY_FORM)
+  const [adding, setAdding]     = useState(false)
+  const [saving, setSaving]     = useState(false)
+  const [saveError, setSaveError] = useState('')
+
+  const sbRef = useRef(createClient())
+  const sb = sbRef.current
 
   useEffect(() => {
     sb.from('habits')
@@ -59,14 +62,22 @@ export default function HabitsPage() {
     e.preventDefault()
     if (!form.title.trim()) return
     setSaving(true)
-    const { data: { user } } = await sb.auth.getUser()
-    const { data, error } = await sb.from('habits').insert({
-      user_id: user!.id, title: form.title.trim(),
-      dimension: form.dimension, frequency: form.frequency,
-      streak: 0, completed_today: false,
-    }).select('id, title, dimension, frequency, streak, completed_today').single()
-    if (!error && data) { setHabits(h => [...h, data as Habit]); setForm(EMPTY_FORM); setAdding(false) }
-    setSaving(false)
+    setSaveError('')
+    try {
+      const { data: { user } } = await sb.auth.getUser()
+      if (!user) { setSaveError('Not signed in. Please refresh.'); return }
+      const { data, error } = await sb.from('habits').insert({
+        user_id: user.id, title: form.title.trim(),
+        dimension: form.dimension, frequency: form.frequency,
+        streak: 0, completed_today: false,
+      }).select('id, title, dimension, frequency, streak, completed_today').single()
+      if (error) { setSaveError(error.message); return }
+      if (data) { setHabits(h => [...h, data as Habit]); setForm(EMPTY_FORM); setAdding(false) }
+    } catch (e: unknown) {
+      setSaveError(e instanceof Error ? e.message : 'Save failed')
+    } finally {
+      setSaving(false)
+    }
   }
 
   async function toggleHabit(habit: Habit) {
@@ -139,6 +150,11 @@ export default function HabitsPage() {
               </select>
             </label>
           </div>
+          {saveError && (
+            <div style={{ marginTop: 12, padding: '10px 14px', borderRadius: 'var(--radius)', background: 'oklch(0.97 0.03 15 / 0.5)', border: '1px solid oklch(0.70 0.10 15)', color: 'oklch(0.40 0.10 15)', fontFamily: 'var(--font-body)', fontSize: '.85rem' }}>
+              {saveError}
+            </div>
+          )}
           <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
             <button type="submit" disabled={saving} style={{ padding: '10px 22px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.85rem', border: 'none', cursor: 'pointer' }}>
               {saving ? s.saving : s.addBtn}

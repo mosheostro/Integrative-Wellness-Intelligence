@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { LOCALE_META } from '@/lib/i18n/translations'
@@ -46,9 +46,11 @@ export default function JournalPage() {
   const [tags, setTags]           = useState<string[]>([])
   const [saving, setSaving]       = useState(false)
   const [loading, setLoading]     = useState(true)
+  const [saveError, setSaveError] = useState('')
   const [view, setView]           = useState<'write' | 'history'>('write')
 
-  const sb = createClient()
+  const sbRef = useRef(createClient())
+  const sb = sbRef.current
 
   useEffect(() => {
     sb.from('journal_entries')
@@ -64,21 +66,29 @@ export default function JournalPage() {
   async function save() {
     if (!draft.trim()) return
     setSaving(true)
-    const { data: { user } } = await sb.auth.getUser()
-    const { data, error } = await sb.from('journal_entries').insert({
-      user_id:        user!.id,
-      content:        draft.trim(),
-      mood,
-      dimension_tags: tags,
-    }).select('id, created_at, content, mood, dimension_tags').single()
-    if (!error && data) {
-      setEntries(e => [data as Entry, ...e])
-      setDraft('')
-      setMood(3)
-      setTags([])
-      setView('history')
+    setSaveError('')
+    try {
+      const { data: { user } } = await sb.auth.getUser()
+      if (!user) { setSaveError('Not signed in. Please refresh and try again.'); return }
+      const { data, error } = await sb.from('journal_entries').insert({
+        user_id:        user.id,
+        content:        draft.trim(),
+        mood,
+        dimension_tags: tags,
+      }).select('id, created_at, content, mood, dimension_tags').single()
+      if (error) { setSaveError(error.message); return }
+      if (data) {
+        setEntries(e => [data as Entry, ...e])
+        setDraft('')
+        setMood(3)
+        setTags([])
+        setView('history')
+      }
+    } catch (e: unknown) {
+      setSaveError(e instanceof Error ? e.message : 'Save failed')
+    } finally {
+      setSaving(false)
     }
-    setSaving(false)
   }
 
   const dateLabel = (iso: string) => {
@@ -184,6 +194,13 @@ export default function JournalPage() {
               })}
             </div>
           </div>
+
+          {/* Save error */}
+          {saveError && (
+            <div style={{ padding: '10px 14px', borderRadius: 'var(--radius)', background: 'oklch(0.97 0.03 15 / 0.5)', border: '1px solid oklch(0.70 0.10 15)', color: 'oklch(0.40 0.10 15)', fontFamily: 'var(--font-body)', fontSize: '.85rem' }}>
+              {saveError}
+            </div>
+          )}
 
           {/* Save */}
           <button onClick={save} disabled={!draft.trim() || saving}

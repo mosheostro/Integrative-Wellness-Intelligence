@@ -1,6 +1,5 @@
 'use client'
 import { useState, useCallback, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import { getInitialQuestions, getNextQuestions } from '@/data/questions/bank'
 import { getLocalizedQuestion } from '@/data/questions/bank.i18n'
 import type { AssessmentAnswer, Framework, Question, WellnessDimension } from '@/lib/types'
@@ -39,7 +38,6 @@ function getAmbientGradient(composite: number): string {
 }
 
 export default function AssessmentPage() {
-  const router = useRouter()
   const { strings, locale } = useLanguage()
   const s = strings.assessment
   const dims = strings.dimensions
@@ -57,7 +55,7 @@ export default function AssessmentPage() {
   const engine = useWellnessEngine(framework)
 
   const currentQ = questions[qIndex]
-  const progress = questions.length > 0 ? Math.round(((qIndex) / questions.length) * 100) : 0
+  const progress = questions.length > 0 ? Math.round(((qIndex + 1) / questions.length) * 100) : 0
 
   // Dimension labels built from translated strings
   const dimLabels: Record<WellnessDimension, string> = {
@@ -116,7 +114,7 @@ export default function AssessmentPage() {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
-      router.push(`/results/${data.assessmentId}`)
+      window.location.href = `/results/${data.assessmentId}`
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : strings.common.error)
       setPhase('questions')
@@ -216,7 +214,7 @@ export default function AssessmentPage() {
                 fontFamily: 'var(--font-mono)', fontSize: '.68rem',
                 textTransform: 'uppercase', letterSpacing: '.1em', color: 'var(--ink-faint)',
               }}>
-                {s.question} {qIndex + 1} {s.of} {questions.length}
+                {s.question} {qIndex + 1}
               </span>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', color: 'var(--ink-faint)' }}>
                 {progress}%

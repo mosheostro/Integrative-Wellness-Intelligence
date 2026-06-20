@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { LOCALE_META } from '@/lib/i18n/translations'
@@ -38,12 +38,15 @@ export default function GoalsPage() {
     return map[key] ?? key
   }
 
-  const [goals, setGoals]     = useState<Goal[]>([])
-  const [loading, setLoading] = useState(true)
-  const [form, setForm]       = useState(EMPTY_FORM)
-  const [adding, setAdding]   = useState(false)
-  const [saving, setSaving]   = useState(false)
-  const sb = createClient()
+  const [goals, setGoals]       = useState<Goal[]>([])
+  const [loading, setLoading]   = useState(true)
+  const [form, setForm]         = useState(EMPTY_FORM)
+  const [adding, setAdding]     = useState(false)
+  const [saving, setSaving]     = useState(false)
+  const [saveError, setSaveError] = useState('')
+
+  const sbRef = useRef(createClient())
+  const sb = sbRef.current
 
   useEffect(() => {
     sb.from('goals')
@@ -56,14 +59,22 @@ export default function GoalsPage() {
     e.preventDefault()
     if (!form.title.trim()) return
     setSaving(true)
-    const { data: { user } } = await sb.auth.getUser()
-    const { data, error } = await sb.from('goals').insert({
-      user_id: user!.id, title: form.title.trim(), description: form.description.trim(),
-      dimension: form.dimension, target_date: form.target_date || null,
-      status: form.status, progress: form.progress,
-    }).select('id, title, description, dimension, target_date, status, progress').single()
-    if (!error && data) { setGoals(g => [data as Goal, ...g]); setForm(EMPTY_FORM); setAdding(false) }
-    setSaving(false)
+    setSaveError('')
+    try {
+      const { data: { user } } = await sb.auth.getUser()
+      if (!user) { setSaveError('Not signed in. Please refresh.'); return }
+      const { data, error } = await sb.from('goals').insert({
+        user_id: user.id, title: form.title.trim(), description: form.description.trim(),
+        dimension: form.dimension, target_date: form.target_date || null,
+        status: form.status, progress: form.progress,
+      }).select('id, title, description, dimension, target_date, status, progress').single()
+      if (error) { setSaveError(error.message); return }
+      if (data) { setGoals(g => [data as Goal, ...g]); setForm(EMPTY_FORM); setAdding(false) }
+    } catch (e: unknown) {
+      setSaveError(e instanceof Error ? e.message : 'Save failed')
+    } finally {
+      setSaving(false)
+    }
   }
 
   async function updateProgress(id: string, progress: number) {
@@ -119,6 +130,11 @@ export default function GoalsPage() {
               <textarea rows={2} value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} placeholder={s.descPlaceholder} style={{ padding: '10px 14px', borderRadius: 'var(--radius)', border: '1px solid var(--line)', background: 'var(--canvas)', fontFamily: 'var(--font-body)', fontSize: '.9rem', color: 'var(--ink)', outline: 'none', resize: 'vertical' }} />
             </label>
           </div>
+          {saveError && (
+            <div style={{ marginTop: 12, padding: '10px 14px', borderRadius: 'var(--radius)', background: 'oklch(0.97 0.03 15 / 0.5)', border: '1px solid oklch(0.70 0.10 15)', color: 'oklch(0.40 0.10 15)', fontFamily: 'var(--font-body)', fontSize: '.85rem' }}>
+              {saveError}
+            </div>
+          )}
           <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
             <button type="submit" disabled={saving} style={{ padding: '10px 22px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.88rem', border: 'none', cursor: 'pointer' }}>
               {saving ? s.saving : s.addBtn}
