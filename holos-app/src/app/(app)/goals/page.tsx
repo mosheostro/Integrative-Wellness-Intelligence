@@ -10,15 +10,15 @@ type Goal = { id: string; title: string; description: string; dimension: string;
 // Internal keys stored in DB (always English)
 const DIMENSION_KEYS = ['Nutrition','Sleep','Recovery','Stress','Movement','Emotional','Life Balance','Purpose','Energy']
 
-function StatusBadge({ status }: { status: string }) {
+function StatusBadge({ status, label }: { status: string; label: string }) {
   const colors: Record<string, string> = { active: 'var(--sage)', completed: 'var(--indigo)', paused: 'var(--clay)' }
   return (
     <span style={{
       padding: '2px 10px', borderRadius: 100,
       background: (colors[status] ?? 'var(--ink)') + '18',
       color: colors[status] ?? 'var(--ink)',
-      fontFamily: 'var(--font-body)', fontSize: '.72rem', fontWeight: 600, textTransform: 'capitalize',
-    }}>{status}</span>
+      fontFamily: 'var(--font-body)', fontSize: '.72rem', fontWeight: 600,
+    }}>{label}</span>
   )
 }
 
@@ -161,7 +161,7 @@ export default function GoalsPage() {
             <div style={{ marginBottom: 40 }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 16 }}>{s.active} ({activeGoals.length})</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {activeGoals.map(g => <GoalCard key={g.id} goal={g} onProgress={updateProgress} target={s.target} dateLocale={dateLocale} dimLabel={dimLabel} />)}
+                {activeGoals.map(g => <GoalCard key={g.id} goal={g} onProgress={updateProgress} target={s.target} dateLocale={dateLocale} dimLabel={dimLabel} statusLabels={{ active: s.active, completed: s.completed, paused: s.paused }} />)}
               </div>
             </div>
           )}
@@ -169,7 +169,7 @@ export default function GoalsPage() {
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 16 }}>{s.completed} ({completedGoals.length})</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {completedGoals.map(g => <GoalCard key={g.id} goal={g} onProgress={updateProgress} target={s.target} dateLocale={dateLocale} dimLabel={dimLabel} />)}
+                {completedGoals.map(g => <GoalCard key={g.id} goal={g} onProgress={updateProgress} target={s.target} dateLocale={dateLocale} dimLabel={dimLabel} statusLabels={{ active: s.active, completed: s.completed, paused: s.paused }} />)}
               </div>
             </div>
           )}
@@ -179,9 +179,10 @@ export default function GoalsPage() {
   )
 }
 
-function GoalCard({ goal, onProgress, target, dateLocale, dimLabel }: {
+function GoalCard({ goal, onProgress, target, dateLocale, dimLabel, statusLabels }: {
   goal: Goal; onProgress: (id: string, p: number) => void
   target: string; dateLocale: string; dimLabel: (k: string) => string
+  statusLabels: Record<string, string>
 }) {
   return (
     <div style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--radius-lg)', padding: '20px 24px' }}>
@@ -191,7 +192,7 @@ function GoalCard({ goal, onProgress, target, dateLocale, dimLabel }: {
           {goal.description && <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-faint)' }}>{goal.description}</div>}
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6, flexShrink: 0 }}>
-          <StatusBadge status={goal.status} />
+          <StatusBadge status={goal.status} label={statusLabels[goal.status] ?? goal.status} />
           <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', color: 'var(--sage-deep)', background: 'rgba(122,158,142,.1)', padding: '2px 8px', borderRadius: 100 }}>{dimLabel(goal.dimension)}</span>
         </div>
       </div>

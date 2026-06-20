@@ -1,7 +1,6 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { useRouter } from 'next/navigation'
 import { useLanguage, LOCALE_META, type Locale } from '@/contexts/LanguageContext'
 import { useTheme, type Theme } from '@/contexts/ThemeContext'
 import { BackButton } from '@/components/ui/BackButton'
@@ -34,8 +33,8 @@ export default function SettingsPage() {
   })
   const [newPw, setNewPw]       = useState({ current: '', next: '', confirm: '' })
   const [pwStatus, setPwStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
-  const router = useRouter()
-  const sb     = createClient()
+  const sbRef = useRef(createClient())
+  const sb    = sbRef.current
 
   async function changePassword(e: React.FormEvent) {
     e.preventDefault()
@@ -59,7 +58,8 @@ export default function SettingsPage() {
   async function deleteAccount() {
     const ok = confirm(s.deleteAccountDesc)
     if (!ok) return
-    alert('Please contact support to complete account deletion.')
+    // Account deletion requires contacting support (proper delete flow TBD)
+    window.location.href = '/contact'
   }
 
   const THEME_OPTIONS: { value: Theme; label: string }[] = [

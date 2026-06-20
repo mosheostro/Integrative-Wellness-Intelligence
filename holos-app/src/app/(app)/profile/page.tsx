@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { BackButton } from '@/components/ui/BackButton'
+import { FRAMEWORKS_LIST } from '@/frameworks'
+import { getLocalizedFramework } from '@/frameworks/frameworks.i18n'
 
 type Profile = {
   id: string
@@ -21,7 +23,8 @@ type UserProgress = {
   level: number
 }
 
-const FRAMEWORKS = ['evidence-based','rambam','hippocrates','avicenna','ayurveda','daoist','tibetan','swarga']
+// Framework order for the selector (matches FRAMEWORKS_LIST order)
+const FRAMEWORKS = FRAMEWORKS_LIST.map(f => f.id)
 const TIMEZONES = ['UTC','America/New_York','America/Los_Angeles','America/Chicago','Europe/London','Europe/Paris','Asia/Jerusalem','Asia/Kolkata','Asia/Tokyo','Australia/Sydney']
 
 export default function ProfilePage() {
@@ -31,7 +34,7 @@ export default function ProfilePage() {
   const [saving, setSaving]           = useState(false)
   const [saved, setSaved]             = useState(false)
   const [saveError, setSaveError]     = useState('')
-  const { strings } = useLanguage()
+  const { strings, locale } = useLanguage()
   const s = strings.profile
 
   const sbRef = useRef(createClient())
@@ -130,7 +133,7 @@ export default function ProfilePage() {
               {s.level} {userProgress.level}
             </span>
             <div style={{ flex: 1, height: 4, background: 'var(--line)', borderRadius: 2, maxWidth: 120 }}>
-              <div style={{ height: '100%', width: `${(userProgress.total_xp % 100)}%`, background: 'var(--gold)', borderRadius: 2 }} />
+              <div style={{ height: '100%', width: `${Math.min(100, Math.round((userProgress.total_xp % 500) / 5))}%`, background: 'var(--gold)', borderRadius: 2 }} />
             </div>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.7rem', color: 'var(--ink-faint)' }}>{userProgress.total_xp} XP</span>
           </div>
@@ -154,7 +157,10 @@ export default function ProfilePage() {
           </F>
           <F label={s.tradition}>
             <select value={profile.preferred_framework ?? 'swarga'} onChange={e => setProfile(p => ({ ...p, preferred_framework: e.target.value }))} style={inputStyle}>
-              {FRAMEWORKS.map(f => <option key={f} value={f}>{f.charAt(0).toUpperCase() + f.slice(1).replace('-', ' ')}</option>)}
+              {FRAMEWORKS_LIST.map(fw => {
+                const loc = getLocalizedFramework(fw.id, { label: fw.label, origin: fw.origin, description: fw.description }, locale)
+                return <option key={fw.id} value={fw.id}>{loc.label}</option>
+              })}
             </select>
           </F>
           <F label={s.timezone}>

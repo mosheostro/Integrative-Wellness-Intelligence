@@ -46,7 +46,7 @@ export default function SignupPage() {
         transition:     'background .15s, color .15s',
         zIndex:         10,
       }}>
-        ← Home
+        {s.backHome}
       </Link>
       <div style={{ width:'100%', maxWidth:400 }}>
         <div style={{ textAlign:'center', marginBottom:40 }}>

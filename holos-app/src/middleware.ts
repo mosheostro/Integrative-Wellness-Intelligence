@@ -1,7 +1,11 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-const PUBLIC_PATHS = ['/', '/auth/login', '/auth/signup', '/api/']
+const PROTECTED_PREFIXES = [
+  '/dashboard', '/assessment', '/coach', '/progress', '/results',
+  '/profile', '/settings', '/goals', '/habits', '/journal',
+  '/recommendations', '/reports', '/compare', '/integrations', '/admin',
+]
 
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
@@ -34,7 +38,7 @@ export async function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname
 
     // Redirect unauthenticated users away from app routes
-    if (!user && path.startsWith('/dashboard') || !user && path.startsWith('/assessment') || !user && path.startsWith('/coach') || !user && path.startsWith('/progress') || !user && path.startsWith('/results')) {
+    if (!user && PROTECTED_PREFIXES.some(p => path === p || path.startsWith(p + '/'))) {
       const url = request.nextUrl.clone()
       url.pathname = '/auth/login'
       url.searchParams.set('next', path)

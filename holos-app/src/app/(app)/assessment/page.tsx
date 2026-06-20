@@ -183,7 +183,7 @@ export default function AssessmentPage() {
         />
         <div className="spinner" style={{ width: 28, height: 28, borderWidth: 2 }} />
         <p style={{ color: 'var(--ink-soft)', fontSize: '.9rem' }}>
-          {s.analysing} {FRAMEWORKS_LIST.find(f => f.id === framework)?.label}…
+          {s.analysing} {(() => { const fw = FRAMEWORKS_LIST.find(f => f.id === framework); return fw ? getLocalizedFramework(fw.id, { label: fw.label, origin: fw.origin, description: fw.description }, locale).label : framework })()}…
         </p>
       </div>
     )

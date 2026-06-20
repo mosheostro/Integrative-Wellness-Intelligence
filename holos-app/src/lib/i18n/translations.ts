@@ -30,7 +30,7 @@ export interface Translations {
     signIn: string; signingIn: string; noAccount: string; createFree: string
     createAccount: string; createDesc: string; fullName: string
     confirmPassword: string; createBtn: string; haveAccount: string; signInLink: string
-    creatingAccount: string
+    creatingAccount: string; backHome: string
   }
   common: {
     save: string; cancel: string; delete: string; edit: string; back: string
@@ -97,7 +97,7 @@ export interface Translations {
     dimension: string; targetDate: string; description: string
     saving: string; addBtn: string
     noGoals: string; noGoalsDesc: string
-    active: string; completed: string; target: string
+    active: string; completed: string; paused: string; target: string
     descPlaceholder: string; titlePlaceholder: string; loading: string
   }
   habits: {
@@ -297,6 +297,9 @@ export interface Translations {
     statusAvailable: string; statusBeta: string; statusSoon: string
     apiTitle: string; apiBody: string; apiCta: string
   }
+  notFound: {
+    title: string; body: string; home: string; assess: string
+  }
 }
 
 // ── English ───────────────────────────────────────────────────────────────────
@@ -319,7 +322,7 @@ const en: Translations = {
     createAccount: 'Begin your journey', createDesc: 'Your integrative wellness intelligence awaits',
     fullName: 'Full name', confirmPassword: 'Confirm password',
     createBtn: 'Create free account', haveAccount: 'Already have an account?', signInLink: 'Sign in',
-    creatingAccount: 'Creating account…',
+    creatingAccount: 'Creating account…', backHome: '← Home',
   },
   common: {
     save: 'Save', cancel: 'Cancel', delete: 'Delete', edit: 'Edit', back: 'Back',
@@ -421,7 +424,7 @@ const en: Translations = {
     dimension: 'Dimension', targetDate: 'Target date', description: 'Description',
     saving: 'Saving…', addBtn: 'Add goal →',
     noGoals: 'No goals yet', noGoalsDesc: 'Set your first wellness goal to track what matters most.',
-    active: 'Active', completed: 'Completed', target: 'Target:',
+    active: 'Active', completed: 'Completed', paused: 'Paused', target: 'Target:',
     descPlaceholder: 'Why does this goal matter?', titlePlaceholder: 'e.g. Sleep 8 hours every night',
     loading: 'Loading…',
   },
@@ -813,6 +816,12 @@ const en: Translations = {
     apiBody: 'The Holos API lets you embed wellness scoring, tradition analysis, and AI coaching directly in your own clinical or coaching platform.',
     apiCta: 'Talk to us about the API →',
   },
+  notFound: {
+    title: 'Page not found.',
+    body: 'It may have been moved, renamed, or — like unexamined habits — it never really existed in the first place.',
+    home: 'Return home →',
+    assess: 'Take an assessment',
+  },
 }
 
 // ── Russian ───────────────────────────────────────────────────────────────────
@@ -835,7 +844,7 @@ const ru: Translations = {
     createAccount: 'Начните свой путь', createDesc: 'Ваш интегративный wellness-интеллект ждёт вас',
     fullName: 'Полное имя', confirmPassword: 'Подтвердите пароль',
     createBtn: 'Создать бесплатный аккаунт', haveAccount: 'Уже есть аккаунт?', signInLink: 'Войти',
-    creatingAccount: 'Создание аккаунта…',
+    creatingAccount: 'Создание аккаунта…', backHome: '← Главная',
   },
   common: {
     save: 'Сохранить', cancel: 'Отмена', delete: 'Удалить', edit: 'Изменить', back: 'Назад',
@@ -940,7 +949,7 @@ deleteAccountBtn: 'Удалить аккаунт',
     dimension: 'Измерение', targetDate: 'Целевая дата', description: 'Описание',
     saving: 'Сохранение…', addBtn: 'Добавить цель →',
     noGoals: 'Целей пока нет', noGoalsDesc: 'Поставьте первую цель, чтобы отслеживать важное.',
-    active: 'Активные', completed: 'Завершённые', target: 'Цель:',
+    active: 'Активные', completed: 'Завершённые', paused: 'Приостановлено', target: 'Цель:',
     descPlaceholder: 'Почему эта цель важна?', titlePlaceholder: 'напр. Спать 8 часов каждую ночь',
     loading: 'Загрузка…',
   },
@@ -1333,6 +1342,12 @@ deleteAccountBtn: 'Удалить аккаунт',
     apiBody: 'API Holos позволяет встраивать оценку здоровья, анализ традиций и ИИ-коучинг непосредственно в вашу клиническую или коучинговую платформу.',
     apiCta: 'Поговорить с нами об API →',
   },
+  notFound: {
+    title: 'Страница не найдена.',
+    body: 'Возможно, она была перемещена, переименована или, как непроверенные привычки, никогда по-настоящему не существовала.',
+    home: 'На главную →',
+    assess: 'Пройти оценку',
+  },
 }
 
 // ── Hebrew ─────────────────────────────────────────────────────────────────────
@@ -1355,7 +1370,7 @@ const he: Translations = {
     createAccount: 'התחל את המסע שלך', createDesc: 'בינת הבריאות האינטגרטיבית שלך מחכה',
     fullName: 'שם מלא', confirmPassword: 'אמת סיסמה',
     createBtn: 'צור חשבון בחינם', haveAccount: 'כבר יש חשבון?', signInLink: 'כניסה',
-    creatingAccount: 'יוצר חשבון…',
+    creatingAccount: 'יוצר חשבון…', backHome: 'בית ←',
   },
   common: {
     save: 'שמור', cancel: 'ביטול', delete: 'מחק', edit: 'ערוך', back: 'חזרה',
@@ -1457,7 +1472,7 @@ const he: Translations = {
     dimension: 'ממד', targetDate: 'תאריך יעד', description: 'תיאור',
     saving: 'שומר…', addBtn: 'הוסף מטרה ←',
     noGoals: 'אין מטרות עדיין', noGoalsDesc: '.קבע את מטרת הבריאות הראשונה שלך כדי לעקוב אחר מה שחשוב',
-    active: 'פעיל', completed: 'הושלם', target: 'יעד:',
+    active: 'פעיל', completed: 'הושלם', paused: 'מושהה', target: 'יעד:',
     descPlaceholder: 'למה המטרה הזו חשובה?', titlePlaceholder: 'לדוגמה: לישון 8 שעות כל לילה',
     loading: 'טוען…',
   },
@@ -1849,6 +1864,12 @@ const he: Translations = {
     apiBody: '.ה-API של Holos מאפשר להטמיע ניקוד בריאות, ניתוח מסורות וקואצ\'ינג AI ישירות בפלטפורמה הקלינית או הקואצ\'ינג שלך',
     apiCta: '← דבר איתנו על ה-API',
   },
+  notFound: {
+    title: 'הדף לא נמצא.',
+    body: '.ייתכן שהוא הועבר, שונה שמו, או — כמו הרגלים שלא נבחנו — לא ממש קיים מלכתחילה',
+    home: '← חזרה לדף הבית',
+    assess: 'בצע הערכה',
+  },
 }
 
 // ── German ────────────────────────────────────────────────────────────────────
@@ -1871,7 +1892,7 @@ const de: Translations = {
     createAccount: 'Beginnen Sie Ihre Reise', createDesc: 'Ihre integrative Wellness-Intelligenz wartet auf Sie',
     fullName: 'Vollständiger Name', confirmPassword: 'Passwort bestätigen',
     createBtn: 'Kostenloses Konto erstellen', haveAccount: 'Bereits ein Konto?', signInLink: 'Anmelden',
-    creatingAccount: 'Konto wird erstellt…',
+    creatingAccount: 'Konto wird erstellt…', backHome: '← Startseite',
   },
   common: {
     save: 'Speichern', cancel: 'Abbrechen', delete: 'Löschen', edit: 'Bearbeiten', back: 'Zurück',
@@ -1974,7 +1995,7 @@ const de: Translations = {
     dimension: 'Dimension', targetDate: 'Zieldatum', description: 'Beschreibung',
     saving: 'Speichern…', addBtn: 'Ziel hinzufügen →',
     noGoals: 'Noch keine Ziele', noGoalsDesc: 'Setzen Sie Ihr erstes Wellness-Ziel, um das Wichtigste zu verfolgen.',
-    active: 'Aktiv', completed: 'Abgeschlossen', target: 'Ziel:',
+    active: 'Aktiv', completed: 'Abgeschlossen', paused: 'Pausiert', target: 'Ziel:',
     descPlaceholder: 'Warum ist dieses Ziel wichtig?', titlePlaceholder: 'z.B. Jeden Abend 8 Stunden schlafen',
     loading: 'Lädt…',
   },
@@ -2366,6 +2387,12 @@ const de: Translations = {
     apiTitle: 'Entwickeln Sie etwas für Fachleute?',
     apiBody: 'Die Holos API ermöglicht es Ihnen, Wellness-Bewertung, Traditions-Analyse und KI-Coaching direkt in Ihre klinische oder Coaching-Plattform einzubetten.',
     apiCta: 'Mit uns über die API sprechen →',
+  },
+  notFound: {
+    title: 'Seite nicht gefunden.',
+    body: 'Sie wurde möglicherweise verschoben, umbenannt oder — wie ungeprüfte Gewohnheiten — existierte nie wirklich.',
+    home: 'Zur Startseite →',
+    assess: 'Bewertung starten',
   },
 }
 

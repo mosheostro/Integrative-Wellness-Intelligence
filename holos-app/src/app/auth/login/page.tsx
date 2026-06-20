@@ -48,7 +48,7 @@ function LoginForm() {
         transition:     'background .15s, color .15s',
         zIndex:         10,
       }}>
-        ← Home
+        {s.backHome}
       </Link>
       <div style={{ width:'100%', maxWidth:400 }}>
         {/* Logo */}

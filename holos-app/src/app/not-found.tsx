@@ -1,6 +1,10 @@
 import Link from 'next/link'
+import { getServerStrings } from '@/lib/i18n/server'
 
-export default function NotFound() {
+export default async function NotFound() {
+  const { strings } = await getServerStrings()
+  const n = strings.notFound
+
   return (
     <div style={{
       minHeight:      '100dvh',
@@ -38,7 +42,7 @@ export default function NotFound() {
         color:        'var(--ink)',
         margin:       '0 0 16px',
       }}>
-        This page has not been found.
+        {n.title}
       </h1>
       <p style={{
         fontFamily: 'var(--font-body)',
@@ -48,7 +52,7 @@ export default function NotFound() {
         maxWidth:   400,
         margin:     '0 0 40px',
       }}>
-        It may have been moved, renamed, or — like unexamined habits — it never really existed in the first place.
+        {n.body}
       </p>
 
       <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -63,7 +67,7 @@ export default function NotFound() {
             fontSize:     '.9rem',
             textDecoration: 'none',
           }}>
-          Return home &#8594;
+          {n.home}
         </Link>
         <Link href="/assessment"
           style={{
@@ -76,7 +80,7 @@ export default function NotFound() {
             fontSize:     '.9rem',
             textDecoration: 'none',
           }}>
-          Take an assessment
+          {n.assess}
         </Link>
       </div>
     </div>
