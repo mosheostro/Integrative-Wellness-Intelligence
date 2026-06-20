@@ -30,6 +30,10 @@ export const metadata: Metadata = {
   description:
     'Holos unites modern science with eight wisdom traditions into one adaptive wellness intelligence — so your health reflects body, energy, mind, and meaning.',
   keywords: ['wellness', 'integrative health', 'Ayurveda', 'biohacking', 'holistic'],
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+  },
   other: {
     'color-scheme': 'light dark',
   },
