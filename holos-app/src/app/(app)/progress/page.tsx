@@ -13,26 +13,30 @@ export default async function ProgressPage() {
   const dims = strings.dimensions
   const nav = strings.nav
 
-  const { data: snapshots } = await supabase
-    .from('progress_snapshots')
-    .select('*')
-    .eq('user_id', user.id)
-    .order('snapshot_date', { ascending: true })
-    .limit(60)
-
-  const { data: assessments } = await supabase
-    .from('assessments')
-    .select('id, completed_at, composite_score, wellness_state, framework')
-    .eq('user_id', user.id)
-    .eq('status', 'completed')
-    .order('completed_at', { ascending: false })
-    .limit(20)
-
-  const { data: userProgress } = await supabase
-    .from('user_progress')
-    .select('*')
-    .eq('user_id', user.id)
-    .maybeSingle()
+  const [
+    { data: snapshots },
+    { data: assessments },
+    { data: userProgress },
+  ] = await Promise.all([
+    supabase
+      .from('progress_snapshots')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('snapshot_date', { ascending: true })
+      .limit(60),
+    supabase
+      .from('assessments')
+      .select('id, completed_at, composite_score, wellness_state, framework')
+      .eq('user_id', user.id)
+      .eq('status', 'completed')
+      .order('completed_at', { ascending: false })
+      .limit(20),
+    supabase
+      .from('user_progress')
+      .select('*')
+      .eq('user_id', user.id)
+      .maybeSingle(),
+  ])
 
   const hasData = (snapshots?.length ?? 0) > 0
 

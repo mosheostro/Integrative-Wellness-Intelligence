@@ -1,7 +1,6 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { BackButton } from '@/components/ui/BackButton'
 
@@ -15,8 +14,10 @@ type Profile = {
   date_of_birth: string
   preferred_framework: string
   timezone: string
-  onboarding_completed: boolean
-  xp: number
+}
+
+type UserProgress = {
+  total_xp: number
   level: number
 }
 
@@ -24,20 +25,27 @@ const FRAMEWORKS = ['evidence-based','rambam','hippocrates','avicenna','ayurveda
 const TIMEZONES = ['UTC','America/New_York','America/Los_Angeles','America/Chicago','Europe/London','Europe/Paris','Asia/Jerusalem','Asia/Kolkata','Asia/Tokyo','Australia/Sydney']
 
 export default function ProfilePage() {
-  const [profile, setProfile]   = useState<Partial<Profile>>({})
-  const [loading, setLoading]   = useState(true)
-  const [saving, setSaving]     = useState(false)
-  const [saved, setSaved]       = useState(false)
-  const router                  = useRouter()
-  const sb                      = createClient()
+  const [profile, setProfile]         = useState<Partial<Profile>>({})
+  const [userProgress, setUserProgress] = useState<UserProgress>({ total_xp: 0, level: 1 })
+  const [loading, setLoading]         = useState(true)
+  const [saving, setSaving]           = useState(false)
+  const [saved, setSaved]             = useState(false)
+  const [saveError, setSaveError]     = useState('')
   const { strings } = useLanguage()
   const s = strings.profile
 
+  const sbRef = useRef(createClient())
+  const sb    = sbRef.current
+
   useEffect(() => {
     sb.auth.getUser().then(({ data: { user } }) => {
-      if (!user) { router.push('/auth/login'); return }
-      sb.from('profiles').select('*').eq('id', user.id).single().then(({ data }) => {
-        setProfile({ ...(data ?? {}), email: user.email ?? '', id: user.id })
+      if (!user) { window.location.href = '/auth/login'; return }
+      Promise.all([
+        sb.from('profiles').select('*').eq('id', user.id).single(),
+        sb.from('user_progress').select('total_xp, level').eq('user_id', user.id).maybeSingle(),
+      ]).then(([{ data: prof }, { data: prog }]) => {
+        setProfile({ ...(prof ?? {}), email: user.email ?? '', id: user.id })
+        if (prog) setUserProgress(prog)
         setLoading(false)
       })
     })
@@ -46,6 +54,7 @@ export default function ProfilePage() {
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
     setSaving(true)
+    setSaveError('')
     const { error } = await sb.from('profiles').upsert({
       id:                   profile.id,
       full_name:            profile.full_name ?? '',
@@ -60,6 +69,8 @@ export default function ProfilePage() {
     if (!error) {
       setSaved(true)
       setTimeout(() => setSaved(false), 2500)
+    } else {
+      setSaveError(error.message)
     }
   }
 
@@ -116,12 +127,12 @@ export default function ProfilePage() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', color: 'var(--gold)', background: 'rgba(196,165,90,.12)', padding: '2px 10px', borderRadius: 100 }}>
-              {s.level} {profile.level ?? 1}
+              {s.level} {userProgress.level}
             </span>
             <div style={{ flex: 1, height: 4, background: 'var(--line)', borderRadius: 2, maxWidth: 120 }}>
-              <div style={{ height: '100%', width: `${((profile.xp ?? 0) % 100)}%`, background: 'var(--gold)', borderRadius: 2 }} />
+              <div style={{ height: '100%', width: `${(userProgress.total_xp % 100)}%`, background: 'var(--gold)', borderRadius: 2 }} />
             </div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.7rem', color: 'var(--ink-faint)' }}>{profile.xp ?? 0} XP</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.7rem', color: 'var(--ink-faint)' }}>{userProgress.total_xp} XP</span>
           </div>
         </div>
       </div>
@@ -156,6 +167,12 @@ export default function ProfilePage() {
             <textarea rows={3} value={profile.bio ?? ''} onChange={e => setProfile(p => ({ ...p, bio: e.target.value }))} placeholder={s.bioPlaceholder} style={{ ...inputStyle, resize: 'vertical' }} />
           </label>
         </div>
+
+        {saveError && (
+          <div style={{ marginTop: 14, padding: '10px 14px', borderRadius: 'var(--radius)', background: 'oklch(0.97 0.03 15 / 0.5)', border: '1px solid oklch(0.70 0.10 15)', color: 'oklch(0.40 0.10 15)', fontFamily: 'var(--font-body)', fontSize: '.85rem' }}>
+            {saveError}
+          </div>
+        )}
 
         <div style={{ marginTop: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
           <button type="submit" disabled={saving}

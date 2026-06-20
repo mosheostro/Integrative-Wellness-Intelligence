@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -44,7 +44,8 @@ export default function RecommendationsPage() {
   const [loading, setLoading] = useState(true)
   const [filter, setFilter]   = useState<'all' | 'pending' | 'completed'>('pending')
 
-  const sb = createClient()
+  const sbRef = useRef(createClient())
+  const sb    = sbRef.current
 
   useEffect(() => {
     sb.from('issued_recommendations')

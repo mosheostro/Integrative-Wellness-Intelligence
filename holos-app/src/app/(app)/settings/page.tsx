@@ -53,7 +53,7 @@ export default function SettingsPage() {
 
   async function signOut() {
     await sb.auth.signOut()
-    router.push('/')
+    window.location.href = '/'
   }
 
   async function deleteAccount() {

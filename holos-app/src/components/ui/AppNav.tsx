@@ -3,14 +3,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher'
 
 export function AppNav() {
   const pathname  = usePathname()
-  const router    = useRouter()
   const { strings } = useLanguage()
   const n = strings.nav
   const [scrolled, setScrolled] = useState(false)
@@ -39,7 +37,7 @@ export function AppNav() {
   async function signOut() {
     const sb = createClient()
     await sb.auth.signOut()
-    router.push('/')
+    window.location.href = '/'
   }
 
   return (

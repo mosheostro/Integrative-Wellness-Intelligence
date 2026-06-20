@@ -27,7 +27,7 @@ export default async function AdminPage() {
   ])
 
   const { data: recentUsers } = await sb.from('profiles')
-    .select('id, full_name, email, created_at, level, xp, preferred_framework')
+    .select('id, full_name, email, created_at, user_progress(level, total_xp)')
     .order('created_at', { ascending: false })
     .limit(20)
 
@@ -76,7 +76,7 @@ export default async function AdminPage() {
                 </div>
                 <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexShrink: 0 }}>
                   <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.7rem', color: 'var(--gold)', background: 'rgba(196,165,90,.1)', padding: '2px 8px', borderRadius: 100 }}>
-                    Lv {(u as {level?: number}).level ?? 1}
+                    Lv {((u as {user_progress?: {level?: number}}).user_progress?.level) ?? 1}
                   </span>
                   <span style={{ fontFamily: 'var(--font-body)', fontSize: '.7rem', color: 'var(--ink-faint)' }}>
                     {new Date((u as {created_at: string}).created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}

@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
 import { createClient } from '@/lib/supabase/server'
+import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { getServerStrings } from '@/lib/i18n/server'
 import { BackButton } from '@/components/ui/BackButton'
@@ -34,6 +35,7 @@ function ScoreBar({ dim, score, label, thriving, stable, needsAttention, critica
 export default async function ReportsPage() {
   const sb = await createClient()
   const { data: { user } } = await sb.auth.getUser()
+  if (!user) redirect('/auth/login')
 
   const { strings, dateLocale } = await getServerStrings()
   const s = strings.reports
@@ -52,17 +54,18 @@ export default async function ReportsPage() {
     energy:       dims.energy,
   }
 
-  const { data: snapshots } = await sb.from('progress_snapshots')
-    .select('*')
-    .eq('user_id', user?.id ?? '')
-    .order('snapshot_date', { ascending: false })
-    .limit(12)
-
-  const { data: assessments } = await sb.from('assessments')
-    .select('id, framework, composite_score, wellness_state, completed_at')
-    .eq('user_id', user?.id ?? '')
-    .order('completed_at', { ascending: false })
-    .limit(10)
+  const [{ data: snapshots }, { data: assessments }] = await Promise.all([
+    sb.from('progress_snapshots')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('snapshot_date', { ascending: false })
+      .limit(12),
+    sb.from('assessments')
+      .select('id, framework, composite_score, wellness_state, completed_at')
+      .eq('user_id', user.id)
+      .order('completed_at', { ascending: false })
+      .limit(10),
+  ])
 
   const latest = snapshots?.[0]
   const previous = snapshots?.[1]
