@@ -52,7 +52,7 @@ export default function AssessmentPage() {
   const [error, setError]             = useState('')
   const [showLivePanel, setShowLivePanel] = useState(false)
 
-  const engine = useWellnessEngine(framework)
+  const engine = useWellnessEngine(framework, locale)
 
   const currentQ = questions[qIndex]
   const progress = questions.length > 0 ? Math.round(((qIndex + 1) / questions.length) * 100) : 0
@@ -113,10 +113,10 @@ export default function AssessmentPage() {
         body: JSON.stringify({ framework, answers: finalAnswers }),
       })
       const data = await res.json()
-      if (!res.ok) throw new Error(data.error)
+      if (!res.ok) throw new Error(s.saveFailed)
       window.location.href = `/results/${data.assessmentId}`
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : strings.common.error)
+      setError(e instanceof Error ? e.message : s.saveFailed)
       setPhase('questions')
     }
   }

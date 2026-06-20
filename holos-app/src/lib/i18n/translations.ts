@@ -73,7 +73,7 @@ export interface Translations {
     continue: string; back: string; complete: string; completing: string
     step1: string; step1Title: string; step1Desc: string; begin: string
     calculating: string; analysing: string; adaptive: string
-    liveEstimate: string; livePreview: string
+    liveEstimate: string; livePreview: string; saveFailed: string
   }
   progress: {
     title: string; noData: string; noDataDesc: string
@@ -396,6 +396,7 @@ const en: Translations = {
     adaptive: 'Adaptive · your answers shape what follows',
     liveEstimate: 'Live estimate',
     livePreview: 'Final scores use all 6 scoring layers — this preview uses Layer 1 only.',
+    saveFailed: 'Could not save your assessment. Please try again.',
   },
   progress: {
     title: 'Progress', noData: 'No data yet',
@@ -921,6 +922,7 @@ deleteAccountBtn: 'Удалить аккаунт',
     adaptive: 'Адаптивный · ваши ответы определяют следующие вопросы',
     liveEstimate: 'Живая оценка',
     livePreview: 'Финальные баллы используют все 6 уровней — этот предварительный просмотр только Уровня 1.',
+    saveFailed: 'Не удалось сохранить оценку. Пожалуйста, попробуйте ещё раз.',
   },
   progress: {
     title: 'Прогресс', noData: 'Данных пока нет',
@@ -1444,6 +1446,7 @@ const he: Translations = {
     adaptive: 'אדפטיבי · תשובותיך מעצבות את ההמשך',
     liveEstimate: 'הערכה חיה',
     livePreview: '.ציונים סופיים משתמשים בכל 6 שכבות הניקוד — תצוגה מקדימה זו משתמשת בשכבה 1 בלבד',
+    saveFailed: '.לא ניתן לשמור את ההערכה שלך. אנא נסה שנית',
   },
   progress: {
     title: 'התקדמות', noData: 'אין נתונים עדיין',
@@ -1967,6 +1970,7 @@ const de: Translations = {
     adaptive: 'Adaptiv · Ihre Antworten bestimmen den Verlauf',
     liveEstimate: 'Live-Schätzung',
     livePreview: 'Endgültige Ergebnisse verwenden alle 6 Bewertungsebenen — diese Vorschau verwendet nur Ebene 1.',
+    saveFailed: 'Bewertung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.',
   },
   progress: {
     title: 'Fortschritt', noData: 'Noch keine Daten',

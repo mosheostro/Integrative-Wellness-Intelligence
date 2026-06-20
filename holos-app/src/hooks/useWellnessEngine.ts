@@ -24,7 +24,7 @@ interface LiveEngineState {
   calculationCount: number
 }
 
-export function useWellnessEngine(framework: Framework) {
+export function useWellnessEngine(framework: Framework, locale?: string) {
   const [engineState, setEngineState] = useState<LiveEngineState>({
     partialScores: {},
     liveComposite: 50,
@@ -46,11 +46,12 @@ export function useWellnessEngine(framework: Framework) {
     // Clear any pending debounced calculation
     if (calcTimeoutRef.current) clearTimeout(calcTimeoutRef.current)
 
-    // Generate live comment for this answer
+    // Generate live comment for this answer (locale-aware)
     const comment = getLiveAssessmentComment(
       answer.dimension as WellnessDimension,
       Array.isArray(answer.optionIndex) ? answer.optionIndex[0] : answer.optionIndex,
-      questionOptions
+      questionOptions,
+      locale
     )
 
     // Debounce the score calculation (50ms) to avoid thrashing
