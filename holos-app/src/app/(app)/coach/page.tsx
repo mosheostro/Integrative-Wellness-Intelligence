@@ -61,22 +61,10 @@ export default function CoachPage() {
     }
   }
 
-  const STARTERS = [
-    strings.coach.title === 'Holos Coach'
-      ? 'What does my latest assessment reveal?'
-      : null,
-  ].filter(Boolean) as string[]
-
-  // Hardcoded starters per locale — translate only via t() if we add keys later
-  const starterKeys = [
-    'What does my latest assessment reveal?',
-    'How can I improve my sleep quality?',
-    'Explain the Ayurvedic view of my state',
-    'What are the highest-impact changes I can make?',
-  ]
+  const starterKeys = [s.starter1, s.starter2, s.starter3, s.starter4]
 
   return (
-    <div style={{ display:'flex', flexDirection:'column', height:'calc(100vh - 60px)', background:'var(--canvas)' }}>
+    <div className="coach-page" style={{ display:'flex', flexDirection:'column', height:'calc(100dvh - 60px)', background:'var(--canvas)' }}>
 
       {/* Header */}
       <div style={{ padding:'20px 24px 16px', borderBottom:'1px solid var(--line)', background:'var(--canvas)', flexShrink:0 }}>
@@ -185,7 +173,12 @@ export default function CoachPage() {
           >↑</button>
         </div>
       </div>
-      <style>{`@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }`}</style>
+      <style>{`
+        @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+        @media (max-width: 767px) {
+          .coach-page { height: calc(100dvh - 60px - 56px - env(safe-area-inset-bottom, 0px)) !important; }
+        }
+      `}</style>
     </div>
   )
 }

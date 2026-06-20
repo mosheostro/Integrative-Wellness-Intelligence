@@ -66,6 +66,7 @@ export interface Translations {
   }
   coach: {
     title: string; subtitle: string; placeholder: string; disclaimer: string; initialMessage: string
+    starter1: string; starter2: string; starter3: string; starter4: string
   }
   assessment: {
     title: string; question: string; of: string
@@ -371,7 +372,11 @@ const en: Translations = {
     title: 'Holos Coach', subtitle: '8 wisdom traditions · evidence-based',
     placeholder: 'Ask anything about your wellness…',
     disclaimer: 'AI coaching · not medical advice · always consult your physician',
-    initialMessage: "Shalom. I'm your Holos AI coach — an integration of eight wisdom traditions with modern evidence-based science. I'm here to help you understand your wellness landscape and take meaningful steps forward.\n\nWhat's on your mind today?",
+    initialMessage: "Hello. I'm your Holos AI coach — an integration of eight wisdom traditions with modern evidence-based science. I'm here to help you understand your wellness landscape and take meaningful steps forward.\n\nWhat's on your mind today?",
+    starter1: 'What does my latest assessment reveal?',
+    starter2: 'How can I improve my sleep quality?',
+    starter3: 'Explain the Ayurvedic view of my state',
+    starter4: 'What are the highest-impact changes I can make?',
   },
   assessment: {
     title: 'Wellness Assessment', question: 'Question', of: 'of',
@@ -883,7 +888,11 @@ deleteAccountBtn: 'Удалить аккаунт',
     title: 'Коуч Holos', subtitle: '8 традиций мудрости · доказательная наука',
     placeholder: 'Задайте любой вопрос о вашем здоровье…',
     disclaimer: 'AI-коучинг · не является медицинским советом · консультируйтесь с врачом',
-    initialMessage: 'Шалом. Я ваш AI-коуч Holos — интеграция восьми традиций мудрости с современной доказательной наукой. Я здесь, чтобы помочь вам понять ваш путь к здоровью.\n\nЧто у вас на уме сегодня?',
+    initialMessage: 'Здравствуйте. Я ваш AI-коуч Holos — интеграция восьми традиций мудрости с современной доказательной наукой. Я здесь, чтобы помочь вам понять ваш путь к здоровью.\n\nЧто у вас на уме сегодня?',
+    starter1: 'Что показывает моя последняя оценка?',
+    starter2: 'Как улучшить качество моего сна?',
+    starter3: 'Объясни аюрведический взгляд на моё состояние',
+    starter4: 'Какие изменения дадут наибольший результат?',
   },
   assessment: {
     title: 'Оценка здоровья', question: 'Вопрос', of: 'из',
@@ -1394,6 +1403,10 @@ const he: Translations = {
     placeholder: 'שאל כל שאלה על הבריאות שלך…',
     disclaimer: 'אימון AI · אינו ייעוץ רפואי · תמיד התייעץ עם הרופא שלך',
     initialMessage: 'שלום. אני המאמן ה-AI שלך ב-Holos — שילוב של שמונה מסורות חוכמה עם המדע המבוסס ראיות המודרני. אני כאן כדי לעזור לך להבין את נוף הבריאות שלך.\n\nמה עומד על לבך היום?',
+    starter1: 'מה מגלה ההערכה האחרונה שלי?',
+    starter2: 'כיצד אוכל לשפר את איכות השינה שלי?',
+    starter3: 'הסבר את הפרספקטיבה האיורוודית על מצבי',
+    starter4: 'אילו שינויים ישפיעו הכי הרבה?',
   },
   assessment: {
     title: 'הערכת בריאות', question: 'שאלה', of: 'מתוך',
@@ -1903,7 +1916,11 @@ const de: Translations = {
     title: 'Holos Coach', subtitle: '8 Weisheitstraditionen · evidenzbasiert',
     placeholder: 'Stellen Sie beliebige Fragen zu Ihrem Wohlbefinden…',
     disclaimer: 'KI-Coaching · kein medizinischer Rat · konsultieren Sie immer Ihren Arzt',
-    initialMessage: 'Shalom. Ich bin Ihr Holos KI-Coach — eine Integration von acht Weisheitstraditionen mit moderner evidenzbasierter Wissenschaft. Ich helfe Ihnen, Ihre Wellnesslandschaft zu verstehen.\n\nWas beschäftigt Sie heute?',
+    initialMessage: 'Hallo. Ich bin Ihr Holos KI-Coach — eine Integration von acht Weisheitstraditionen mit moderner evidenzbasierter Wissenschaft. Ich helfe Ihnen, Ihre Wellnesslandschaft zu verstehen.\n\nWas beschäftigt Sie heute?',
+    starter1: 'Was zeigt meine letzte Bewertung?',
+    starter2: 'Wie kann ich meine Schlafqualität verbessern?',
+    starter3: 'Erkläre die ayurvedische Sicht auf meinen Zustand',
+    starter4: 'Welche Veränderungen haben die größte Wirkung?',
   },
   assessment: {
     title: 'Wellnessbewertung', question: 'Frage', of: 'von',
