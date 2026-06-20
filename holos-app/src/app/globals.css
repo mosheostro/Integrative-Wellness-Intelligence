@@ -419,3 +419,17 @@ a, button, [role="button"] {
     overflow-x: hidden;
   }
 }
+
+/* ── MobileTabBar: hidden on desktop, shown on mobile ────────── */
+/* These rules live here (not in a JSX <style> tag) so they apply
+   reliably regardless of SSR hydration order or zoom level.       */
+.mobile-tab-bar,
+.mobile-more-sheet,
+.mobile-more-backdrop {
+  display: none !important;
+}
+@media (max-width: 767px) {
+  .mobile-tab-bar       { display: flex  !important; }
+  .mobile-more-sheet    { display: block !important; }
+  .mobile-more-backdrop { display: block !important; }
+}

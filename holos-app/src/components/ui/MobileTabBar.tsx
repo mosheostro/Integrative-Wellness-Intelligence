@@ -36,6 +36,7 @@ export function MobileTabBar() {
       {/* Backdrop */}
       {moreOpen && (
         <div
+          className="mobile-more-backdrop"
           onClick={() => setMoreOpen(false)}
           aria-hidden
           style={{
@@ -48,7 +49,7 @@ export function MobileTabBar() {
       )}
 
       {/* More sheet */}
-      <div style={{
+      <div className="mobile-more-sheet" style={{
         position:      'fixed',
         bottom:        'calc(56px + env(safe-area-inset-bottom, 0px))',
         left:          0,
@@ -207,12 +208,6 @@ export function MobileTabBar() {
         </button>
       </nav>
 
-      <style>{`
-        /* Only show tab bar on mobile */
-        @media (min-width: 768px) {
-          .mobile-tab-bar { display: none !important; }
-        }
-      `}</style>
     </>
   )
 }

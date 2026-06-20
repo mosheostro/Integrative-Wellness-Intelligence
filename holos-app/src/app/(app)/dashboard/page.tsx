@@ -49,7 +49,10 @@ export default async function DashboardPage() {
   const hasData = !!latestScores
   const score   = latestAssessment?.composite_score ?? 0
   const state   = latestAssessment?.wellness_state ?? 'LIFESTYLE_IMPROVEMENT'
-  const firstName = (profile?.full_name ?? '').split(' ')[0] || 'there'
+  // Fallback chain: full_name → email username (never show "there")
+  const rawFirst = (profile?.full_name ?? '').split(' ')[0].trim()
+  const emailFirst = (user.email ?? '').split('@')[0]
+  const firstName = rawFirst || emailFirst
 
   type DimDef = { key: string; label: string; color: string; invert?: boolean }
   const DIMS: DimDef[] = [

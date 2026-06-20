@@ -5,6 +5,7 @@ import { getInitialQuestions, getNextQuestions } from '@/data/questions/bank'
 import { getLocalizedQuestion } from '@/data/questions/bank.i18n'
 import type { AssessmentAnswer, Framework, Question, WellnessDimension } from '@/lib/types'
 import { FRAMEWORKS_LIST } from '@/frameworks'
+import { getLocalizedFramework } from '@/frameworks/frameworks.i18n'
 import { useWellnessEngine } from '@/hooks/useWellnessEngine'
 import { AnimatedScore, LiveScoreBar } from '@/components/ui/AnimatedScore'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -125,7 +126,7 @@ export default function AssessmentPage() {
   // ── Framework Selection ──────────────────────────────────────
   if (phase === 'framework') {
     return (
-      <div className="wrap section-pad" style={{ maxWidth: 860 }}>
+      <div className="wrap section-pad" style={{ maxWidth: 860, paddingBottom: 'calc(80px + env(safe-area-inset-bottom, 0px))' }}>
         <div className="section-head">
           <div className="eyebrow"><span style={{ color: 'var(--sage-deep)' }}>◉</span> {s.step1}</div>
           <h1 className="h1" style={{ marginTop: 12 }}>{s.step1Title}</h1>
@@ -133,27 +134,30 @@ export default function AssessmentPage() {
         </div>
 
         <div className="grid-2" style={{ gap: 16, marginBottom: 40 }}>
-          {FRAMEWORKS_LIST.map(fw => (
-            <button
-              key={fw.id}
-              onClick={() => setFramework(fw.id)}
-              style={{
-                display: 'flex', alignItems: 'flex-start', gap: 16, padding: 20,
-                border: `2px solid ${framework === fw.id ? 'var(--sage)' : 'var(--line)'}`,
-                borderRadius: 16, background: framework === fw.id ? 'oklch(0.96 0.03 155 / 0.4)' : 'var(--surface)',
-                cursor: 'pointer', textAlign: 'left', transition: 'all .15s',
-              }}
-            >
-              <span style={{ fontSize: 28, lineHeight: 1 }}>{fw.icon}</span>
-              <div>
-                <div style={{ fontWeight: 600, fontSize: '.9375rem', color: 'var(--ink)', marginBottom: 4 }}>{fw.label}</div>
-                <div style={{ fontSize: '.8rem', color: 'var(--ink-soft)', lineHeight: 1.5 }}>{fw.origin}</div>
-              </div>
-              {framework === fw.id && (
-                <span style={{ marginLeft: 'auto', color: 'var(--sage-deep)', fontSize: 18, flexShrink: 0 }}>✓</span>
-              )}
-            </button>
-          ))}
+          {FRAMEWORKS_LIST.map(fw => {
+            const loc = getLocalizedFramework(fw.id, { label: fw.label, origin: fw.origin, description: fw.description }, locale)
+            return (
+              <button
+                key={fw.id}
+                onClick={() => setFramework(fw.id)}
+                style={{
+                  display: 'flex', alignItems: 'flex-start', gap: 16, padding: 20,
+                  border: `2px solid ${framework === fw.id ? 'var(--sage)' : 'var(--line)'}`,
+                  borderRadius: 16, background: framework === fw.id ? 'oklch(0.96 0.03 155 / 0.4)' : 'var(--surface)',
+                  cursor: 'pointer', textAlign: 'left', transition: 'all .15s',
+                }}
+              >
+                <span style={{ fontSize: 28, lineHeight: 1 }}>{fw.icon}</span>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: '.9375rem', color: 'var(--ink)', marginBottom: 4 }}>{loc.label}</div>
+                  <div style={{ fontSize: '.8rem', color: 'var(--ink-soft)', lineHeight: 1.5 }}>{loc.origin}</div>
+                </div>
+                {framework === fw.id && (
+                  <span style={{ marginLeft: 'auto', color: 'var(--sage-deep)', fontSize: 18, flexShrink: 0 }}>✓</span>
+                )}
+              </button>
+            )
+          })}
         </div>
 
         <button className="btn btn-primary btn-lg" onClick={() => { engine.reset(); setPhase('questions') }}>
