@@ -169,7 +169,7 @@ export default function CoachPage() {
               outline:'none', lineHeight:1.5,
             }}
           />
-          <button onClick={send} disabled={loading || !input.trim()}
+          <button onClick={() => send()} disabled={loading || !input.trim()}
             className="btn btn-sage"
             style={{ padding:'0 20px', borderRadius:14, alignSelf:'stretch' }}
           >↑</button>
