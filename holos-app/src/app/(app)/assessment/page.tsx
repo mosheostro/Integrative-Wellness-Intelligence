@@ -55,7 +55,10 @@ export default function AssessmentPage() {
   const engine = useWellnessEngine(framework, locale)
 
   const currentQ = questions[qIndex]
-  const progress = questions.length > 0 ? Math.round(((qIndex + 1) / questions.length) * 100) : 0
+  // progress: 0% at question 1, 100% at final question — uses (n-1) denominator so last Q always hits 100%
+  const progress = questions.length > 1
+    ? Math.round((qIndex / (questions.length - 1)) * 100)
+    : 100
 
   // Dimension labels built from translated strings
   const dimLabels: Record<WellnessDimension, string> = {

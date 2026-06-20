@@ -313,79 +313,282 @@ export function generateNarrative(
 // ── Real-Time Assessment Commentary ─────────────────────────
 // Generated live during assessment as answers are submitted
 
+const LIVE_COMMENTS_EN: Record<WellnessDimension, Record<ScoreLevel, string>> = {
+  sleep: {
+    HIGH: 'Strong sleep foundation. This will amplify every other dimension.',
+    MID_HIGH: 'Decent sleep with room to improve. Quality matters more than quantity.',
+    MID: 'Sleep is mixed. This dimension affects everything downstream.',
+    LOW_MID: 'Sleep needs attention. This is often the highest-leverage intervention.',
+    LOW: 'Sleep debt is accumulating. This becomes the top priority.',
+  },
+  stress: {
+    HIGH: 'Excellent stress resilience. Your nervous system is well-regulated.',
+    MID_HIGH: 'Stress is manageable. Good tools will keep this stable.',
+    MID: 'Stress is elevated. The nervous system is working harder than it should.',
+    LOW_MID: 'Chronic stress is taking a toll. Intervention is needed.',
+    LOW: 'Very high stress load. This requires immediate attention.',
+  },
+  nutrition: {
+    HIGH: 'Strong nutritional foundation. Food is working for you.',
+    MID_HIGH: 'Mostly good. Small refinements will compound over time.',
+    MID: 'Mixed nutritional patterns. More consistency will help.',
+    LOW_MID: 'Diet needs attention — this affects energy, mood, and recovery.',
+    LOW: 'Nutritional foundation needs significant work.',
+  },
+  movement: {
+    HIGH: 'Excellent physical activity. The body is getting the signals it needs.',
+    MID_HIGH: 'Good movement base. Recovery quality matters here too.',
+    MID: 'Movement is moderate. Consistency will change the trajectory.',
+    LOW_MID: 'More movement will have a significant positive effect.',
+    LOW: 'Physical activity is a key priority for your profile.',
+  },
+  recovery: {
+    HIGH: 'Recovery is excellent. You\'re rebuilding effectively between efforts.',
+    MID_HIGH: 'Good recovery with some gaps. Deliberate rest practices will help.',
+    MID: 'Recovery is partial. Active recovery protocols could shift this.',
+    LOW_MID: 'Recovery deficit is building. The body needs more restoration.',
+    LOW: 'Significant recovery debt. Rebuilding capacity is the priority.',
+  },
+  energy: {
+    HIGH: 'Energy is a genuine asset. Vitality is supporting everything else.',
+    MID_HIGH: 'Good energy base with some variability.',
+    MID: 'Variable energy suggests an unstable metabolic pattern.',
+    LOW_MID: 'Low energy is limiting capacity. Multiple dimensions may be involved.',
+    LOW: 'Energy depletion is significant. Multiple systems are affected.',
+  },
+  emotional: {
+    HIGH: 'Emotional wellbeing is strong. Inner resources are resilient.',
+    MID_HIGH: 'Emotional regulation is mostly good. Some reactive patterns to refine.',
+    MID: 'Emotional state is variable. More support tools would help.',
+    LOW_MID: 'Emotional challenges deserve direct attention.',
+    LOW: 'Emotional wellbeing needs significant support and attention.',
+  },
+  life_balance: {
+    HIGH: 'Life balance reflects genuine integration across key domains.',
+    MID_HIGH: 'Good balance overall. Some areas need rebalancing.',
+    MID: 'Life domains are uneven. Some areas thrive while others struggle.',
+    LOW_MID: 'Significant imbalance is emerging. Recalibration needed.',
+    LOW: 'Life balance is severely off. Structural changes may be needed.',
+  },
+  purpose: {
+    HIGH: 'Purpose is a powerful driver. Life has clear meaning and direction.',
+    MID_HIGH: 'Mostly clear purpose with some uncertainty to explore.',
+    MID: 'Purpose feels intermittent. Clarifying work would strengthen the other dimensions.',
+    LOW_MID: 'Lack of clear purpose is affecting resilience across the profile.',
+    LOW: 'Purpose deficit is significant. Reconnection with meaning is foundational.',
+  },
+}
+
+const LIVE_COMMENTS_RU: Record<WellnessDimension, Record<ScoreLevel, string>> = {
+  sleep: {
+    HIGH: 'Крепкий сон. Это усилит каждое другое измерение.',
+    MID_HIGH: 'Сон нормальный, но есть куда расти. Качество важнее количества.',
+    MID: 'Сон неровный. Это измерение влияет на всё остальное.',
+    LOW_MID: 'Сну нужно внимание. Это часто самое высокоэффективное изменение.',
+    LOW: 'Накапливается недосыпание. Это становится главным приоритетом.',
+  },
+  stress: {
+    HIGH: 'Отличная стрессоустойчивость. Нервная система хорошо регулируется.',
+    MID_HIGH: 'Стресс управляем. Хорошие инструменты сохранят эту стабильность.',
+    MID: 'Стресс повышен. Нервная система работает интенсивнее, чем должна.',
+    LOW_MID: 'Хронический стресс берёт своё. Необходимы изменения.',
+    LOW: 'Очень высокая стрессовая нагрузка. Требуется немедленное внимание.',
+  },
+  nutrition: {
+    HIGH: 'Сильный нутриционный фундамент. Питание работает на вас.',
+    MID_HIGH: 'В основном хорошо. Небольшие улучшения с течением времени дадут результат.',
+    MID: 'Неравномерное питание. Больше постоянства поможет.',
+    LOW_MID: 'Питание требует внимания — это влияет на энергию, настроение и восстановление.',
+    LOW: 'Нутриционный фундамент требует значительной работы.',
+  },
+  movement: {
+    HIGH: 'Отличная физическая активность. Тело получает нужные сигналы.',
+    MID_HIGH: 'Хорошая база движения. Качество восстановления тоже имеет значение.',
+    MID: 'Умеренная активность. Постоянство изменит траекторию.',
+    LOW_MID: 'Больше движения даст значительный положительный эффект.',
+    LOW: 'Физическая активность — ключевой приоритет для вашего профиля.',
+  },
+  recovery: {
+    HIGH: 'Восстановление отличное. Вы эффективно восстанавливаетесь между нагрузками.',
+    MID_HIGH: 'Хорошее восстановление с небольшими пробелами. Осознанный отдых поможет.',
+    MID: 'Восстановление частичное. Активные протоколы отдыха могут изменить ситуацию.',
+    LOW_MID: 'Дефицит восстановления нарастает. Телу нужно больше отдыха.',
+    LOW: 'Значительный долг по восстановлению. Восстановление возможностей — приоритет.',
+  },
+  energy: {
+    HIGH: 'Энергия — настоящий актив. Жизненные силы поддерживают всё остальное.',
+    MID_HIGH: 'Хорошая энергетическая база с некоторой вариабельностью.',
+    MID: 'Переменная энергия указывает на нестабильный метаболический паттерн.',
+    LOW_MID: 'Низкая энергия ограничивает возможности. Могут быть задействованы несколько измерений.',
+    LOW: 'Истощение энергии значительное. Затронуты несколько систем.',
+  },
+  emotional: {
+    HIGH: 'Эмоциональное благополучие сильное. Внутренние ресурсы устойчивы.',
+    MID_HIGH: 'Эмоциональная регуляция в целом хорошая. Есть реактивные паттерны для коррекции.',
+    MID: 'Эмоциональное состояние переменчиво. Больше инструментов поддержки поможет.',
+    LOW_MID: 'Эмоциональные трудности заслуживают прямого внимания.',
+    LOW: 'Эмоциональное благополучие требует значительной поддержки и внимания.',
+  },
+  life_balance: {
+    HIGH: 'Жизненный баланс отражает подлинную интеграцию во всех ключевых областях.',
+    MID_HIGH: 'Общий баланс хорош. Некоторые области требуют перебалансировки.',
+    MID: 'Жизненные области неравномерны. Одни процветают, другие испытывают трудности.',
+    LOW_MID: 'Нарастает значительный дисбаланс. Необходима перекалибровка.',
+    LOW: 'Жизненный баланс сильно нарушен. Возможно, нужны структурные изменения.',
+  },
+  purpose: {
+    HIGH: 'Цель — мощный движитель. Жизнь имеет чёткое значение и направление.',
+    MID_HIGH: 'Цель в основном ясна — есть некоторые области неопределённости.',
+    MID: 'Цель ощущается непостоянной. Прояснение укрепит другие измерения.',
+    LOW_MID: 'Отсутствие чёткой цели влияет на устойчивость во всём профиле.',
+    LOW: 'Дефицит цели значителен. Восстановление связи с смыслом — основополагающая потребность.',
+  },
+}
+
+const LIVE_COMMENTS_HE: Record<WellnessDimension, Record<ScoreLevel, string>> = {
+  sleep: {
+    HIGH: 'בסיס שינה חזק. זה יגביר כל מימד אחר.',
+    MID_HIGH: 'שינה סבירה עם מקום לשיפור. איכות חשובה יותר מכמות.',
+    MID: 'השינה מעורבת. מימד זה משפיע על הכל.',
+    LOW_MID: 'השינה זקוקה לתשומת לב. זו לעתים ההתערבות היעילה ביותר.',
+    LOW: 'חוב שינה מצטבר. זה הופך לעדיפות הראשית.',
+  },
+  stress: {
+    HIGH: 'חוסן מצוין מפני לחץ. מערכת העצבים מווסתת היטב.',
+    MID_HIGH: 'הלחץ ניתן לניהול. כלים טובים ישמרו על יציבות זו.',
+    MID: 'הלחץ מוגבר. מערכת העצבים עובדת קשה יותר ממה שצריך.',
+    LOW_MID: 'לחץ כרוני גובה מחיר. נדרשת התערבות.',
+    LOW: 'עומס לחץ גבוה מאוד. זה דורש תשומת לב מיידית.',
+  },
+  nutrition: {
+    HIGH: 'בסיס תזונתי חזק. המזון עובד עבורך.',
+    MID_HIGH: 'טוב ברובו. שיפורים קטנים ישתלמו לאורך זמן.',
+    MID: 'דפוסי תזונה מעורבים. יותר עקביות תעזור.',
+    LOW_MID: 'התזונה זקוקה לתשומת לב — זה משפיע על אנרגיה, מצב רוח והתאוששות.',
+    LOW: 'הבסיס התזונתי זקוק לעבודה משמעותית.',
+  },
+  movement: {
+    HIGH: 'פעילות גופנית מצוינת. הגוף מקבל את האותות הדרושים לו.',
+    MID_HIGH: 'בסיס תנועה טוב. איכות ההתאוששות חשובה גם כן.',
+    MID: 'התנועה מתונה. עקביות תשנה את המסלול.',
+    LOW_MID: 'יותר תנועה תשפיע באופן חיובי משמעותי.',
+    LOW: 'פעילות גופנית היא עדיפות מרכזית עבור הפרופיל שלך.',
+  },
+  recovery: {
+    HIGH: 'ההתאוששות מצוינת. אתה מתחדש ביעילות בין המאמצים.',
+    MID_HIGH: 'התאוששות טובה עם פערים מסוימים. שיטות מנוחה מכוונות יעזרו.',
+    MID: 'ההתאוששות חלקית. פרוטוקולי התאוששות פעילים יכולים לשנות זאת.',
+    LOW_MID: 'גירעון ההתאוששות מצטבר. הגוף זקוק ליותר שיקום.',
+    LOW: 'חוב התאוששות משמעותי. בניית קיבולת מחדש היא העדיפות.',
+  },
+  energy: {
+    HIGH: 'האנרגיה היא נכס אמיתי. החיוניות תומכת בכל השאר.',
+    MID_HIGH: 'בסיס אנרגיה טוב עם שונות מסוימת.',
+    MID: 'אנרגיה משתנה מצביעה על דפוס מטבולי לא יציב.',
+    LOW_MID: 'אנרגיה נמוכה מגבילה קיבולת. מספר מימדים עשויים להיות מעורבים.',
+    LOW: 'ניצול האנרגיה משמעותי. מספר מערכות מושפעות.',
+  },
+  emotional: {
+    HIGH: 'הרווחה הרגשית חזקה. משאבים פנימיים גמישים.',
+    MID_HIGH: 'הוויסות הרגשי טוב ברובו. כמה דפוסי תגובה לשכלל.',
+    MID: 'המצב הרגשי משתנה. כלי תמיכה נוספים יעזרו.',
+    LOW_MID: 'אתגרים רגשיים ראויים לתשומת לב ישירה.',
+    LOW: 'הרווחה הרגשית זקוקה לתמיכה ותשומת לב משמעותיות.',
+  },
+  life_balance: {
+    HIGH: 'איזון החיים משקף אינטגרציה אמיתית בתחומים המרכזיים.',
+    MID_HIGH: 'איזון טוב בסך הכל. כמה תחומים זקוקים לאיזון מחדש.',
+    MID: 'תחומי החיים אינם אחידים. חלקם פורחים בעוד אחרים מתקשים.',
+    LOW_MID: 'חוסר איזון משמעותי מתפתח. נדרשת כיול מחדש.',
+    LOW: 'האיזון בחיים פגוע קשות. ייתכן שנדרשים שינויים מבניים.',
+  },
+  purpose: {
+    HIGH: 'המטרה היא כוח מניע עוצמתי. לחיים יש משמעות וכיוון ברורים.',
+    MID_HIGH: 'מטרה ברורה ברובה עם אי-ודאות מסוימת לחקור.',
+    MID: 'המטרה מרגישה לסירוגין. עבודת הבהרה תחזק את המימדים האחרים.',
+    LOW_MID: 'חוסר מטרה ברורה משפיע על החוסן בכל הפרופיל.',
+    LOW: 'גירעון המטרה משמעותי. חיבור מחדש עם משמעות הוא צורך יסודי.',
+  },
+}
+
+const LIVE_COMMENTS_DE: Record<WellnessDimension, Record<ScoreLevel, string>> = {
+  sleep: {
+    HIGH: 'Starkes Schlaffundament. Dies wird jede andere Dimension verstärken.',
+    MID_HIGH: 'Guter Schlaf mit Verbesserungspotenzial. Qualität ist wichtiger als Quantität.',
+    MID: 'Schlaf ist gemischt. Diese Dimension beeinflusst alles andere.',
+    LOW_MID: 'Schlaf braucht Aufmerksamkeit. Dies ist oft die wirkungsvollste Maßnahme.',
+    LOW: 'Schlafmangel häuft sich an. Dies wird zur obersten Priorität.',
+  },
+  stress: {
+    HIGH: 'Hervorragende Stressresilienz. Das Nervensystem ist gut reguliert.',
+    MID_HIGH: 'Stress ist beherrschbar. Gute Werkzeuge halten diese Stabilität.',
+    MID: 'Stress ist erhöht. Das Nervensystem arbeitet intensiver als es sollte.',
+    LOW_MID: 'Chronischer Stress hinterlässt Spuren. Maßnahmen sind erforderlich.',
+    LOW: 'Sehr hohe Stressbelastung. Dies erfordert sofortige Aufmerksamkeit.',
+  },
+  nutrition: {
+    HIGH: 'Starkes Ernährungsfundament. Nahrung arbeitet für Sie.',
+    MID_HIGH: 'Größtenteils gut. Kleine Verbesserungen addieren sich über Zeit.',
+    MID: 'Gemischte Ernährungsmuster. Mehr Konstanz wird helfen.',
+    LOW_MID: 'Ernährung braucht Aufmerksamkeit — beeinflusst Energie, Stimmung und Erholung.',
+    LOW: 'Das Ernährungsfundament braucht erhebliche Arbeit.',
+  },
+  movement: {
+    HIGH: 'Ausgezeichnete körperliche Aktivität. Der Körper bekommt die Signale, die er braucht.',
+    MID_HIGH: 'Gute Bewegungsbasis. Erholungsqualität ist hier ebenfalls wichtig.',
+    MID: 'Bewegung ist mäßig. Konstanz wird die Trajektorie ändern.',
+    LOW_MID: 'Mehr Bewegung wird einen erheblichen positiven Effekt haben.',
+    LOW: 'Körperliche Aktivität ist eine Schlüsselpriorität für Ihr Profil.',
+  },
+  recovery: {
+    HIGH: 'Erholung ist ausgezeichnet. Sie regenerieren sich effektiv zwischen den Belastungen.',
+    MID_HIGH: 'Gute Erholung mit einigen Lücken. Bewusste Ruhepraktiken werden helfen.',
+    MID: 'Erholung ist teilweise. Aktive Erholungsprotokolle könnten dies verschieben.',
+    LOW_MID: 'Erholungsdefizit baut sich auf. Der Körper braucht mehr Regeneration.',
+    LOW: 'Erhebliches Erholungsdefizit. Kapazität wiederaufzubauen ist Priorität.',
+  },
+  energy: {
+    HIGH: 'Energie ist ein echter Vorteil. Vitalität unterstützt alles andere.',
+    MID_HIGH: 'Gute Energiebasis mit etwas Variabilität.',
+    MID: 'Variable Energie deutet auf ein instabiles Stoffwechselmuster hin.',
+    LOW_MID: 'Niedrige Energie begrenzt die Kapazität. Mehrere Dimensionen könnten beteiligt sein.',
+    LOW: 'Energieabbau ist erheblich. Mehrere Systeme sind betroffen.',
+  },
+  emotional: {
+    HIGH: 'Emotionales Wohlbefinden ist stark. Innere Ressourcen sind resilient.',
+    MID_HIGH: 'Emotionale Regulation ist größtenteils gut. Einige reaktive Muster zu verfeinern.',
+    MID: 'Emotionaler Zustand ist variabel. Mehr Unterstützungswerkzeuge würden helfen.',
+    LOW_MID: 'Emotionale Herausforderungen verdienen direkte Aufmerksamkeit.',
+    LOW: 'Emotionales Wohlbefinden braucht erhebliche Unterstützung und Aufmerksamkeit.',
+  },
+  life_balance: {
+    HIGH: 'Lebensbalance spiegelt echte Integration in allen Schlüsselbereichen wider.',
+    MID_HIGH: 'Insgesamt gute Balance. Einige Bereiche brauchen Neuausrichtung.',
+    MID: 'Lebensbereiche sind ungleichmäßig. Einige gedeihen, während andere kämpfen.',
+    LOW_MID: 'Erhebliches Ungleichgewicht entsteht. Neukalibrierung erforderlich.',
+    LOW: 'Lebensbalance ist stark gestört. Strukturelle Änderungen könnten nötig sein.',
+  },
+  purpose: {
+    HIGH: 'Zweck ist ein kraftvoller Antrieb. Das Leben hat klare Bedeutung und Richtung.',
+    MID_HIGH: 'Größtenteils klarer Zweck mit etwas Unsicherheit zu erkunden.',
+    MID: 'Zweck fühlt sich zeitweise an. Klärungsarbeit würde die anderen Dimensionen stärken.',
+    LOW_MID: 'Mangel an klarem Zweck beeinflusst die Resilienz im gesamten Profil.',
+    LOW: 'Zweckdefizit ist erheblich. Wiederverbindung mit Bedeutung ist grundlegend.',
+  },
+}
+
 export function getLiveAssessmentComment(
   dimension: WellnessDimension,
   optionIndex: number,
-  totalOptions: number
+  totalOptions: number,
+  locale?: string
 ): string {
   const score = Math.round(100 - (optionIndex / (totalOptions - 1)) * 100)
   const level = scoreLevel(score)
 
-  const comments: Record<WellnessDimension, Record<ScoreLevel, string>> = {
-    sleep: {
-      HIGH: 'Strong sleep foundation. This will amplify every other dimension.',
-      MID_HIGH: 'Decent sleep with room to improve. Quality matters more than quantity.',
-      MID: 'Sleep is mixed. This dimension affects everything downstream.',
-      LOW_MID: 'Sleep needs attention. This is often the highest-leverage intervention.',
-      LOW: 'Sleep debt is accumulating. This becomes the top priority.',
-    },
-    stress: {
-      HIGH: 'Excellent stress resilience. Your nervous system is well-regulated.',
-      MID_HIGH: 'Stress is manageable. Good tools will keep this stable.',
-      MID: 'Stress is elevated. The nervous system is working harder than it should.',
-      LOW_MID: 'Chronic stress is taking a toll. Intervention is needed.',
-      LOW: 'Very high stress load. This requires immediate attention.',
-    },
-    nutrition: {
-      HIGH: 'Strong nutritional foundation. Food is working for you.',
-      MID_HIGH: 'Mostly good. Small refinements will compound over time.',
-      MID: 'Mixed nutritional patterns. More consistency will help.',
-      LOW_MID: 'Diet needs attention — this affects energy, mood, and recovery.',
-      LOW: 'Nutritional foundation needs significant work.',
-    },
-    movement: {
-      HIGH: 'Excellent physical activity. The body is getting the signals it needs.',
-      MID_HIGH: 'Good movement base. Recovery quality matters here too.',
-      MID: 'Movement is moderate. Consistency will change the trajectory.',
-      LOW_MID: 'More movement will have a significant positive effect.',
-      LOW: 'Physical activity is a key priority for your profile.',
-    },
-    recovery: {
-      HIGH: 'Recovery is excellent. You\'re rebuilding effectively between efforts.',
-      MID_HIGH: 'Good recovery with some gaps. Deliberate rest practices will help.',
-      MID: 'Recovery is partial. Active recovery protocols could shift this.',
-      LOW_MID: 'Recovery deficit is building. The body needs more restoration.',
-      LOW: 'Significant recovery debt. Rebuilding capacity is the priority.',
-    },
-    energy: {
-      HIGH: 'Energy is a genuine asset. Vitality is supporting everything else.',
-      MID_HIGH: 'Good energy base with some variability.',
-      MID: 'Variable energy suggests an unstable metabolic pattern.',
-      LOW_MID: 'Low energy is limiting capacity. Multiple dimensions may be involved.',
-      LOW: 'Energy depletion is significant. Multiple systems are affected.',
-    },
-    emotional: {
-      HIGH: 'Emotional wellbeing is strong. Inner resources are resilient.',
-      MID_HIGH: 'Emotional regulation is mostly good. Some reactive patterns to refine.',
-      MID: 'Emotional state is variable. More support tools would help.',
-      LOW_MID: 'Emotional challenges deserve direct attention.',
-      LOW: 'Emotional wellbeing needs significant support and attention.',
-    },
-    life_balance: {
-      HIGH: 'Life balance reflects genuine integration across key domains.',
-      MID_HIGH: 'Good balance overall. Some areas need rebalancing.',
-      MID: 'Life domains are uneven. Some areas thrive while others struggle.',
-      LOW_MID: 'Significant imbalance is emerging. Recalibration needed.',
-      LOW: 'Life balance is severely off. Structural changes may be needed.',
-    },
-    purpose: {
-      HIGH: 'Purpose is a powerful driver. Life has clear meaning and direction.',
-      MID_HIGH: 'Mostly clear purpose with some uncertainty to explore.',
-      MID: 'Purpose feels intermittent. Clarifying work would strengthen the other dimensions.',
-      LOW_MID: 'Lack of clear purpose is affecting resilience across the profile.',
-      LOW: 'Purpose deficit is significant. Reconnection with meaning is foundational.',
-    },
-  }
+  if (locale === 'ru') return LIVE_COMMENTS_RU[dimension]?.[level] ?? ''
+  if (locale === 'he') return LIVE_COMMENTS_HE[dimension]?.[level] ?? ''
+  if (locale === 'de') return LIVE_COMMENTS_DE[dimension]?.[level] ?? ''
 
-  return comments[dimension]?.[level] ?? ''
+  return LIVE_COMMENTS_EN[dimension]?.[level] ?? ''
 }

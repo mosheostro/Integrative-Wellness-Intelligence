@@ -421,8 +421,6 @@ a, button, [role="button"] {
 }
 
 /* ── MobileTabBar: hidden on desktop, shown on mobile ────────── */
-/* These rules live here (not in a JSX <style> tag) so they apply
-   reliably regardless of SSR hydration order or zoom level.       */
 .mobile-tab-bar,
 .mobile-more-sheet,
 .mobile-more-backdrop {
@@ -433,3 +431,227 @@ a, button, [role="button"] {
   .mobile-more-sheet    { display: block !important; }
   .mobile-more-backdrop { display: block !important; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   PREMIUM 2.0 — Depth · Glass · Glow · Cinematic
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Depth shadow tokens ─────────────────────────────────────── */
+:root {
+  --depth-sm:    0 2px 8px rgba(43,47,69,.08), 0 1px 2px rgba(43,47,69,.05);
+  --depth-md:    0 8px 28px rgba(43,47,69,.12), 0 3px 8px rgba(43,47,69,.07);
+  --depth-lg:    0 20px 56px rgba(43,47,69,.16), 0 6px 18px rgba(43,47,69,.09);
+  --depth-xl:    0 36px 80px rgba(43,47,69,.20), 0 10px 28px rgba(43,47,69,.12);
+  --depth-float: 0 40px 90px rgba(43,47,69,.22), 0 12px 32px rgba(43,47,69,.14);
+
+  --neon-sage:    rgba(94,201,154,.9);
+  --neon-gold:    rgba(232,194,71,.9);
+  --neon-indigo:  rgba(142,130,255,.9);
+  --neon-rose:    rgba(255,107,138,.9);
+}
+
+[data-theme="dark"] {
+  --depth-sm:    0 2px 8px rgba(0,0,0,.32),  0 1px 2px rgba(0,0,0,.22);
+  --depth-md:    0 8px 28px rgba(0,0,0,.48), 0 3px 8px rgba(0,0,0,.32);
+  --depth-lg:    0 20px 56px rgba(0,0,0,.58), 0 6px 18px rgba(0,0,0,.36);
+  --depth-xl:    0 36px 80px rgba(0,0,0,.68), 0 10px 28px rgba(0,0,0,.42);
+  --depth-float: 0 40px 90px rgba(0,0,0,.72), 0 12px 32px rgba(0,0,0,.46);
+
+  --neon-sage:   #5CDBAA;
+  --neon-gold:   #F0C840;
+  --neon-indigo: #9E92FF;
+  --neon-rose:   #FF6B8A;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --depth-sm:    0 2px 8px rgba(0,0,0,.32),  0 1px 2px rgba(0,0,0,.22);
+    --depth-md:    0 8px 28px rgba(0,0,0,.48), 0 3px 8px rgba(0,0,0,.32);
+    --depth-lg:    0 20px 56px rgba(0,0,0,.58), 0 6px 18px rgba(0,0,0,.36);
+    --depth-xl:    0 36px 80px rgba(0,0,0,.68), 0 10px 28px rgba(0,0,0,.42);
+    --depth-float: 0 40px 90px rgba(0,0,0,.72), 0 12px 32px rgba(0,0,0,.46);
+
+    --neon-sage:   #5CDBAA;
+    --neon-gold:   #F0C840;
+    --neon-indigo: #9E92FF;
+    --neon-rose:   #FF6B8A;
+  }
+}
+
+/* ── Glassmorphism 2.0 ───────────────────────────────────────── */
+.glass-card {
+  background:              rgba(255,255,255,.07);
+  backdrop-filter:         blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border:                  1px solid rgba(255,255,255,.11);
+  border-top:              1px solid rgba(255,255,255,.18);
+  border-radius:           var(--radius-lg);
+  box-shadow:              var(--depth-md);
+}
+.glass-card-strong {
+  background:              rgba(255,255,255,.10);
+  backdrop-filter:         blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border:                  1px solid rgba(255,255,255,.14);
+  border-top:              1px solid rgba(255,255,255,.22);
+  border-radius:           var(--radius-lg);
+  box-shadow:              var(--depth-lg);
+}
+
+[data-theme="dark"] .glass-card,
+html:not([data-theme="light"]) .glass-card {
+  background:       rgba(255,255,255,.03);
+  border-color:     rgba(255,255,255,.07);
+  border-top-color: rgba(255,255,255,.11);
+}
+[data-theme="dark"] .glass-card-strong,
+html:not([data-theme="light"]) .glass-card-strong {
+  background:       rgba(255,255,255,.05);
+  border-color:     rgba(255,255,255,.09);
+  border-top-color: rgba(255,255,255,.15);
+}
+
+/* ── Depth card ──────────────────────────────────────────────── */
+.card-depth {
+  background:    var(--surface);
+  border:        1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow:    var(--depth-md);
+  transition:    box-shadow .25s, transform .25s;
+}
+.card-depth:hover { box-shadow: var(--depth-lg); transform: translateY(-3px); }
+
+/* ── Glow rings ──────────────────────────────────────────────── */
+.ring-glow-sage   { filter: drop-shadow(0 0 7px rgba(94,201,154,.55)); }
+.ring-glow-gold   { filter: drop-shadow(0 0 7px rgba(232,194,71,.55)); }
+.ring-glow-indigo { filter: drop-shadow(0 0 7px rgba(142,130,255,.55)); }
+.ring-glow-rose   { filter: drop-shadow(0 0 7px rgba(255,107,138,.55)); }
+.ring-glow-clay   { filter: drop-shadow(0 0 7px rgba(176,122,96,.55)); }
+
+/* ── Cinematic atmospheric background ────────────────────────── */
+.cinematic-bg {
+  background:
+    radial-gradient(ellipse 70% 60% at 18% 18%, rgba(94,201,154,.07) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 50% at 82% 82%, rgba(107,111,168,.06) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 80% at 50% 50%, rgba(232,194,71,.03) 0%, transparent 70%),
+    var(--canvas);
+  transition: background 1.2s ease;
+}
+[data-theme="dark"] .cinematic-bg,
+html:not([data-theme="light"]) .cinematic-bg {
+  background:
+    radial-gradient(ellipse 65% 55% at 18% 18%, rgba(94,201,154,.13) 0%, transparent 52%),
+    radial-gradient(ellipse 55% 48% at 82% 82%, rgba(107,111,168,.13) 0%, transparent 52%),
+    radial-gradient(ellipse 80% 70% at 50% 50%, rgba(232,194,71,.05) 0%, transparent 68%),
+    var(--canvas);
+}
+
+/* ── Premium hero panel ──────────────────────────────────────── */
+.hero-premium {
+  position: relative; overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  box-shadow: var(--depth-lg);
+  background: linear-gradient(160deg, var(--surface) 0%, var(--canvas2) 100%);
+}
+[data-theme="dark"] .hero-premium,
+html:not([data-theme="light"]) .hero-premium {
+  background:
+    radial-gradient(ellipse 110% 100% at 50% 50%, rgba(94,201,154,.09) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 8% 8%, rgba(107,111,168,.11) 0%, transparent 48%),
+    linear-gradient(160deg, #1a1e2c 0%, #13151e 100%);
+  border-color: rgba(255,255,255,.06);
+  box-shadow:   var(--depth-xl), inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* ── Dimension card ──────────────────────────────────────────── */
+.dim-card {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 16px 8px 12px;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--depth-sm);
+  transition: transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s;
+}
+.dim-card:hover {
+  transform:  translateY(-5px) scale(1.04);
+  box-shadow: var(--depth-md);
+}
+[data-theme="dark"] .dim-card,
+html:not([data-theme="light"]) .dim-card {
+  background:   rgba(255,255,255,.03);
+  border-color: rgba(255,255,255,.07);
+}
+[data-theme="dark"] .dim-card:hover,
+html:not([data-theme="light"]) .dim-card:hover {
+  background:   rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.12);
+}
+
+/* ── Premium score badge ─────────────────────────────────────── */
+.score-badge {
+  display: inline-flex; align-items: baseline; gap: 6px;
+  font-family: var(--font-serif);
+}
+.score-badge .score-num {
+  font-size: 3.5rem; font-weight: 600; line-height: 1;
+  letter-spacing: -.03em; color: var(--ink);
+}
+.score-badge .score-denom {
+  font-size: 1.1rem; color: var(--ink-faint); font-weight: 400;
+}
+
+/* ── Premium progress bar ────────────────────────────────────── */
+.progress-premium {
+  height: 6px; background: var(--surface-2);
+  border-radius: 6px; overflow: hidden;
+}
+.progress-premium-fill {
+  height: 100%; border-radius: 6px;
+  transition: width .8s cubic-bezier(.2,.8,.2,1);
+  background: linear-gradient(90deg, var(--sage-deep), var(--sage));
+}
+[data-theme="dark"] .progress-premium-fill,
+html:not([data-theme="light"]) .progress-premium-fill {
+  background: linear-gradient(90deg, #4ebf94, var(--neon-sage));
+  box-shadow: 0 0 10px rgba(94,201,154,.45);
+}
+
+/* ── Trend sparkline bar (premium) ───────────────────────────── */
+.spark-bar {
+  flex: 1; border-radius: 4px;
+  background: var(--surface-2);
+  transition: height .4s cubic-bezier(.2,.8,.2,1);
+}
+.spark-bar.active {
+  background: linear-gradient(180deg, var(--sage), var(--sage-deep));
+}
+[data-theme="dark"] .spark-bar.active,
+html:not([data-theme="light"]) .spark-bar.active {
+  background: linear-gradient(180deg, var(--neon-sage), #3db880);
+  box-shadow: 0 0 8px rgba(94,201,154,.4);
+}
+
+/* ── Float animation ─────────────────────────────────────────── */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0);    }
+  50%       { transform: translateY(-7px); }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: .65; }
+  50%       { opacity: 1.0; }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(.94) translateY(6px); }
+  to   { opacity: 1; transform: scale(1)   translateY(0);   }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+.anim-float  { animation: float-gentle 7s ease-in-out infinite; }
+.anim-glow   { animation: glow-pulse 3s ease-in-out infinite; }
+.anim-in     { animation: scale-in .45s cubic-bezier(.2,.8,.2,1) both; }
+.anim-fade-up { animation: fade-up .5s ease both; }
