@@ -1,7 +1,7 @@
 'use client'
 import { Suspense, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
 
@@ -10,7 +10,6 @@ function LoginForm() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const router = useRouter()
   const params = useSearchParams()
   const next = params.get('next') || '/dashboard'
   const { strings } = useLanguage()
@@ -22,7 +21,10 @@ function LoginForm() {
     const sb = createClient()
     const { error: err } = await sb.auth.signInWithPassword({ email, password })
     if (err) { setError(err.message); setLoading(false); return }
-    router.push(next)
+    // Hard navigation ensures fresh session cookies reach the server before
+    // the middleware runs — prevents the redirect loop (login → dashboard →
+    // login → …) that client-side router.push() can trigger with SSR auth.
+    window.location.href = next
   }
 
   return (

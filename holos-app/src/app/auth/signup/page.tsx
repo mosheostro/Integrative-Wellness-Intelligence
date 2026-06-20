@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
 
@@ -11,7 +10,6 @@ export default function SignupPage() {
   const [password, setPassword] = useState('')
   const [loading, setLoading]   = useState(false)
   const [error, setError]       = useState('')
-  const router = useRouter()
   const { strings } = useLanguage()
   const s = strings.auth
 
@@ -24,7 +22,7 @@ export default function SignupPage() {
       options: { data: { full_name: name } },
     })
     if (err) { setError(err.message); setLoading(false); return }
-    router.push('/dashboard')
+    window.location.href = '/dashboard'
   }
 
   return (
