@@ -8,20 +8,18 @@ export const metadata = {
   description: 'Explore the eight wisdom traditions that power HOLOS: Evidence-Based Medicine, Rambam, Hippocrates, Avicenna, Ayurveda, Daoist, Tibetan, and Swarga synthesis.',
 }
 
-// Tradition names and era/origin labels are proper nouns — not translated.
-// Body texts and pillars are translated via getMethodologiesBodies().
 const TRADITIONS_META = [
-  { id: 'evidence-based', contentKey: 'evidence' as ContentKey, icon: '⚗', name: 'Evidence-Based Medicine', color: 'var(--sage-deep)',   era: 'Modern · 20th–21st century',     origin: 'Global',                taglineKey: 'tEvidenceTagline'   as const },
-  { id: 'rambam',         contentKey: 'rambam'   as ContentKey, icon: '☽', name: 'Rambam',                 color: 'var(--indigo)', era: '12th century · 1138–1204 CE',    origin: 'Córdoba & Cairo',        taglineKey: 'tRambamTagline'     as const },
-  { id: 'hippocrates',    contentKey: 'hippocrates' as ContentKey, icon: '♾', name: 'Hippocratic Medicine',color: 'var(--clay)',   era: '5th century BCE',                 origin: 'Ancient Greece',         taglineKey: 'tHippocratesTagline' as const },
-  { id: 'avicenna',       contentKey: 'avicenna' as ContentKey, icon: '◈', name: 'Avicenna',               color: 'var(--gold)',   era: '10th–11th century · 980–1037 CE', origin: 'Persia',                 taglineKey: 'tAvicennaTagline'   as const },
-  { id: 'ayurveda',       contentKey: 'ayurveda' as ContentKey, icon: '🌿', name: 'Ayurveda',              color: 'var(--sage-deep)',   era: '3000 BCE – present',              origin: 'Indian subcontinent',    taglineKey: 'tAyurvedaTagline'   as const },
-  { id: 'daoist',         contentKey: 'daoist'   as ContentKey, icon: '☯', name: 'Daoist Medicine',        color: 'var(--indigo)', era: '5th century BCE – present',       origin: 'China',                  taglineKey: 'tDaoistTagline'     as const },
-  { id: 'tibetan',        contentKey: 'tibetan'  as ContentKey, icon: '❋', name: 'Tibetan Medicine',       color: 'var(--clay)',   era: '7th century CE – present',        origin: 'Tibet & Himalayan region', taglineKey: 'tTibetanTagline'  as const },
-  { id: 'swarga',         contentKey: 'swarga'   as ContentKey, icon: '✦', name: 'Swarga Synthesis',       color: 'var(--gold)',   era: '2024 CE',                         origin: 'HOLOS',                  taglineKey: 'tSwargaTagline'     as const },
+  { id: 'evidence-based', contentKey: 'evidence' as ContentKey, icon: '⚗', color: 'var(--sage-deep)',   era: 'Modern · 20th–21st century',     origin: 'Global',                nameKey: 'tEvidenceName'   as const, taglineKey: 'tEvidenceTagline'   as const },
+  { id: 'rambam',         contentKey: 'rambam'   as ContentKey, icon: '☽', color: 'var(--indigo)', era: '12th century · 1138–1204 CE',    origin: 'Córdoba & Cairo',        nameKey: 'tRambamName'     as const, taglineKey: 'tRambamTagline'     as const },
+  { id: 'hippocrates',    contentKey: 'hippocrates' as ContentKey, icon: '♾', color: 'var(--clay)',   era: '5th century BCE',                 origin: 'Ancient Greece',         nameKey: 'tHippocratesName' as const, taglineKey: 'tHippocratesTagline' as const },
+  { id: 'avicenna',       contentKey: 'avicenna' as ContentKey, icon: '◈', color: 'var(--gold)',   era: '10th–11th century · 980–1037 CE', origin: 'Persia',                 nameKey: 'tAvicennaName'   as const, taglineKey: 'tAvicennaTagline'   as const },
+  { id: 'ayurveda',       contentKey: 'ayurveda' as ContentKey, icon: '🌿', color: 'var(--sage-deep)',   era: '3000 BCE – present',              origin: 'Indian subcontinent',    nameKey: 'tAyurvedaName'   as const, taglineKey: 'tAyurvedaTagline'   as const },
+  { id: 'daoist',         contentKey: 'daoist'   as ContentKey, icon: '☯', color: 'var(--indigo)', era: '5th century BCE – present',       origin: 'China',                  nameKey: 'tDaoistName'     as const, taglineKey: 'tDaoistTagline'     as const },
+  { id: 'tibetan',        contentKey: 'tibetan'  as ContentKey, icon: '❋', color: 'var(--clay)',   era: '7th century CE – present',        origin: 'Tibet & Himalayan region', nameKey: 'tTibetanName'  as const, taglineKey: 'tTibetanTagline'  as const },
+  { id: 'swarga',         contentKey: 'swarga'   as ContentKey, icon: '✦', color: 'var(--gold)',   era: '2024 CE',                         origin: 'HOLOS',                  nameKey: 'tSwargaName'     as const, taglineKey: 'tSwargaTagline'     as const },
 ]
 
-type MetaKey = 'tEvidenceTagline' | 'tRambamTagline' | 'tHippocratesTagline' | 'tAvicennaTagline' | 'tAyurvedaTagline' | 'tDaoistTagline' | 'tTibetanTagline' | 'tSwargaTagline'
+type MetaKey = 'tEvidenceName' | 'tRambamName' | 'tHippocratesName' | 'tAvicennaName' | 'tAyurvedaName' | 'tDaoistName' | 'tTibetanName' | 'tSwargaName' | 'tEvidenceTagline' | 'tRambamTagline' | 'tHippocratesTagline' | 'tAvicennaTagline' | 'tAyurvedaTagline' | 'tDaoistTagline' | 'tTibetanTagline' | 'tSwargaTagline'
 
 export default async function MethodologiesPage() {
   const { strings, locale } = await getServerStrings()
@@ -32,6 +30,7 @@ export default async function MethodologiesPage() {
     const content = bodies[t.contentKey]
     return {
       ...t,
+      name:    m[t.nameKey as MetaKey],
       tagline: m[t.taglineKey as MetaKey],
       body:    content.body,
       pillars: content.pillars,

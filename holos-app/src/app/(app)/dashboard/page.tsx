@@ -17,34 +17,40 @@ export default async function DashboardPage() {
   const dims = strings.dimensions
   const nav = strings.nav
 
-  const { data: latestAssessment } = await supabase
-    .from('assessments')
-    .select('*')
-    .eq('user_id', user.id)
-    .eq('status', 'completed')
-    .order('completed_at', { ascending: false })
-    .limit(1)
-    .maybeSingle()
+  // Batch 1: run all independent queries in parallel
+  const [
+    { data: latestAssessment },
+    { data: profile },
+    { data: userProgress },
+    { data: snapshots },
+  ] = await Promise.all([
+    supabase.from('assessments')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('status', 'completed')
+      .order('completed_at', { ascending: false })
+      .limit(1)
+      .maybeSingle(),
+    supabase.from('profiles').select('full_name').eq('id', user.id).single(),
+    supabase.from('user_progress').select('*').eq('user_id', user.id).maybeSingle(),
+    supabase.from('progress_snapshots')
+      .select('composite,snapshot_date')
+      .eq('user_id', user.id)
+      .order('snapshot_date', { ascending: true })
+      .limit(30),
+  ])
 
-  const { data: latestScores } = latestAssessment
-    ? await supabase.from('dimension_scores').select('*').eq('assessment_id', latestAssessment.id).maybeSingle()
-    : { data: null }
-
-  const { data: latestRecs } = latestAssessment
-    ? await supabase.from('issued_recommendations').select('*')
-        .eq('assessment_id', latestAssessment.id)
-        .eq('status', 'active')
-        .order('priority_score', { ascending: false })
-        .limit(4)
-    : { data: null }
-
-  const { data: profile } = await supabase.from('profiles').select('full_name').eq('id', user.id).single()
-  const { data: userProgress } = await supabase.from('user_progress').select('*').eq('user_id', user.id).maybeSingle()
-  const { data: snapshots } = await supabase.from('progress_snapshots')
-    .select('composite,snapshot_date')
-    .eq('user_id', user.id)
-    .order('snapshot_date', { ascending: true })
-    .limit(30)
+  // Batch 2: scores + recs depend on latestAssessment.id — run in parallel with each other
+  const [{ data: latestScores }, { data: latestRecs }] = latestAssessment
+    ? await Promise.all([
+        supabase.from('dimension_scores').select('*').eq('assessment_id', latestAssessment.id).maybeSingle(),
+        supabase.from('issued_recommendations').select('*')
+          .eq('assessment_id', latestAssessment.id)
+          .eq('status', 'active')
+          .order('priority_score', { ascending: false })
+          .limit(4),
+      ])
+    : [{ data: null }, { data: null }]
 
   const hasData = !!latestScores
   const score   = latestAssessment?.composite_score ?? 0

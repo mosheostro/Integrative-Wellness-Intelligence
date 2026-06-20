@@ -10,7 +10,7 @@ interface Message {
 }
 
 export default function CoachPage() {
-  const { strings } = useLanguage()
+  const { strings, locale } = useLanguage()
   const s = strings.coach
 
   const [messages, setMessages] = useState<Message[]>([
@@ -55,7 +55,7 @@ export default function CoachPage() {
           'Content-Type': 'application/json',
           ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {})
         },
-        body: JSON.stringify({ message: text, history: messages.map(m => ({ role: m.role, content: m.content })) }),
+        body: JSON.stringify({ message: text, locale, history: messages.map(m => ({ role: m.role, content: m.content })) }),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error ?? 'Request failed')

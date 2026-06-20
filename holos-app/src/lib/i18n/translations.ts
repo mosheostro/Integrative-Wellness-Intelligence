@@ -222,6 +222,9 @@ export interface Translations {
   methodologies: {
     eyebrow: string; titleA: string; titleEm: string; subtitle: string
     keyPillars: string
+    tEvidenceName: string; tRambamName: string; tHippocratesName: string
+    tAvicennaName: string; tAyurvedaName: string; tDaoistName: string
+    tTibetanName: string; tSwargaName: string
     tEvidenceTagline: string; tRambamTagline: string; tHippocratesTagline: string
     tAvicennaTagline: string; tAyurvedaTagline: string; tDaoistTagline: string
     tTibetanTagline: string; tSwargaTagline: string
@@ -672,6 +675,9 @@ const en: Translations = {
     titleA: 'Every tradition holds a piece', titleEm: 'of the truth.',
     subtitle: 'HOLOS integrates eight complete medical philosophies spanning 5,000 years. Choose the lens you want applied — or let Swarga synthesise all eight.',
     keyPillars: 'Key Pillars',
+    tEvidenceName: 'Evidence-Based Medicine', tRambamName: 'Rambam', tHippocratesName: 'Hippocratic Medicine',
+    tAvicennaName: 'Avicenna', tAyurvedaName: 'Ayurveda', tDaoistName: 'Daoist Medicine',
+    tTibetanName: 'Tibetan Medicine', tSwargaName: 'Swarga Synthesis',
     tEvidenceTagline: 'Clinical science and peer-reviewed research.',
     tRambamTagline: 'Maimonides — the first integrative physician.',
     tHippocratesTagline: 'The father of medicine — balance as health.',
@@ -1189,6 +1195,9 @@ deleteAccountBtn: 'Удалить аккаунт',
     titleA: 'Каждая традиция несёт часть', titleEm: 'истины.',
     subtitle: 'HOLOS интегрирует восемь полных медицинских философий, охватывающих 5000 лет. Выберите нужный объектив — или позвольте Сварге синтезировать все восемь.',
     keyPillars: 'Ключевые принципы',
+    tEvidenceName: 'Доказательная медицина', tRambamName: 'Рамбам', tHippocratesName: 'Медицина Гиппократа',
+    tAvicennaName: 'Авиценна', tAyurvedaName: 'Аюрведа', tDaoistName: 'Даосская медицина',
+    tTibetanName: 'Тибетская медицина', tSwargaName: 'Синтез Сварги',
     tEvidenceTagline: 'Клиническая наука и рецензируемые исследования.',
     tRambamTagline: 'Маймонид — первый интегративный врач.',
     tHippocratesTagline: 'Отец медицины — баланс как здоровье.',
@@ -1702,6 +1711,9 @@ const he: Translations = {
     titleA: 'כל מסורת מחזיקה חלק', titleEm: '.מהאמת',
     subtitle: '.HOLOS משלב שמונה פילוסופיות רפואיות שלמות המשתרעות על 5,000 שנה. בחר את העדשה הרצויה — או אפשר לסוורגה לסנתז את כולן',
     keyPillars: 'עמודי תווך',
+    tEvidenceName: 'רפואה מבוססת ראיות', tRambamName: 'רמב"ם', tHippocratesName: 'רפואה היפוקרטית',
+    tAvicennaName: 'אבן סינא', tAyurvedaName: 'אייורוודה', tDaoistName: 'רפואה דאואיסטית',
+    tTibetanName: 'רפואה טיבטית', tSwargaName: 'סינתזת סוורגה',
     tEvidenceTagline: '.מדע קליני ומחקר שנבדק על ידי עמיתים',
     tRambamTagline: '.רמב"ם — הרופא האינטגרטיבי הראשון',
     tHippocratesTagline: '.אבי הרפואה — שיווי משקל כבריאות',
@@ -2217,6 +2229,9 @@ const de: Translations = {
     titleA: 'Jede Tradition trägt ein Stück', titleEm: 'der Wahrheit.',
     subtitle: 'HOLOS integriert acht vollständige medizinische Philosophien, die 5.000 Jahre umspannen. Wählen Sie die gewünschte Perspektive — oder lassen Sie Swarga alle acht synthetisieren.',
     keyPillars: 'Kernsäulen',
+    tEvidenceName: 'Evidenzbasierte Medizin', tRambamName: 'Rambam', tHippocratesName: 'Hippokratische Medizin',
+    tAvicennaName: 'Avicenna', tAyurvedaName: 'Ayurveda', tDaoistName: 'Daoistische Medizin',
+    tTibetanName: 'Tibetische Medizin', tSwargaName: 'Swarga-Synthese',
     tEvidenceTagline: 'Klinische Wissenschaft und begutachtete Forschung.',
     tRambamTagline: 'Maimonides — der erste integrative Arzt.',
     tHippocratesTagline: 'Der Vater der Medizin — Balance als Gesundheit.',
