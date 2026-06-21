@@ -18,6 +18,22 @@ const WellnessOrbR3F = dynamic(
   { ssr: false, loading: () => <OrbPlaceholder /> }
 )
 
+// Local error boundary for WebGL — prevents global error boundary from triggering
+class OrbErrorBoundary extends (require('react') as typeof import('react')).Component<
+  { children: React.ReactNode },
+  { crashed: boolean }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props)
+    this.state = { crashed: false }
+  }
+  static getDerivedStateFromError() { return { crashed: true } }
+  render() {
+    if (this.state.crashed) return <OrbPlaceholder />
+    return this.props.children
+  }
+}
+
 function OrbPlaceholder() {
   return (
     <div style={{
@@ -135,8 +151,8 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
   }
   const persona: PersonaResult = detectPersona(scores, behavioralProfile, !data.snapshots || data.snapshots.length === 0)
   const trajectory: TrajectoryResult = computeTrajectory(scores.composite, data.snapshots ?? [])
-  const personaMeta = PERSONA_META[persona.persona]
-  const trajectoryColor = TRAJECTORY_COLORS[trajectory.direction]
+  const personaMeta = PERSONA_META[persona.persona] ?? PERSONA_META['Stabilizer']
+  const trajectoryColor = TRAJECTORY_COLORS[trajectory.direction] ?? 'var(--ink-soft)'
 
   const tabLabels: Record<'overview' | 'framework' | 'recommendations' | 'intelligence', string> = {
     overview:        s.overview,
@@ -160,12 +176,14 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
 
             {/* 3D Orb */}
             <div className="orb-glow-wrap">
-              <WellnessOrbR3F
-                score={assessment.composite_score}
-                state={assessment.wellness_state}
-                size={240}
-                values={dimValues}
-              />
+              <OrbErrorBoundary>
+                <WellnessOrbR3F
+                  score={assessment.composite_score}
+                  state={assessment.wellness_state}
+                  size={240}
+                  values={dimValues}
+                />
+              </OrbErrorBoundary>
             </div>
 
             <div>

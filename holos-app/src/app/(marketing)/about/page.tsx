@@ -122,7 +122,7 @@ export default async function AboutPage() {
             <div style={{ marginTop: 32, textAlign: 'left' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 12 }}>{a.credentialsLabel}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {FOUNDER.credentials.map((cred: string) => (
+                {a.credentialsList.map((cred: string) => (
                   <div key={cred} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-soft)' }}>
                     <span style={{ color: 'var(--sage-deep)', flexShrink: 0, marginTop: 2 }}>✓</span>
                     {cred}
@@ -166,7 +166,7 @@ export default async function AboutPage() {
             <div style={{ marginTop: 36 }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 16 }}>{a.expertiseLabel}</div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
-                {FOUNDER.expertise.map((e: string) => (
+                {a.expertiseList.map((e: string) => (
                   <div key={e} style={{
                     background:   'var(--canvas2)',
                     border:       '1px solid var(--line)',
