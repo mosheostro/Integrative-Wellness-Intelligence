@@ -50,6 +50,7 @@ export function RadarChart({ axes, values, size = 280, className = '' }: RadarCh
     const start = performance.now()
 
     function draw(ts: number) {
+      if (!ctx) return
       const t    = Math.min(1, (ts - start) / dur)
       const ease = 1 - Math.pow(1 - t, 3) // cubic ease-out
       ctx.clearRect(0, 0, size, size)
