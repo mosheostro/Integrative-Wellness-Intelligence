@@ -373,6 +373,370 @@ const ARTICLES_RU: Record<string, { author: string; body: string[] }> = {
   },
 }
 
+// ── Hebrew translations for article bodies ──────────────────────────────────
+const ARTICLES_HE: Record<string, { author: string; body: string[] }> = {
+  'what-is-integrative-wellness': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'בריאות אינטגרטיבית אינה חלופה לרפואה מודרנית — היא הרחבתה הטבעית. לאורך רוב ההיסטוריה האנושית, רפואה פירושה הבנת האדם השלם: את מבנהו הגופני, הרגליו, סביבתו וחייו הפנימיים. הצמצום המודרני של הבריאות לסט של ביומרקרים הוא אנומליה היסטורית, והראיות לכך שהוא בלתי מספיק הולכות ומצטברות.',
+      'כל ציביליזציה גדולה פיתחה פילוסופיה רפואית מלאה מפני שהרופאים שבילו את חייהם בהתבוננות בבריאות האנושית הבחינו בדבר אחד: אנשים אינם אוסף של איברים עצמאיים. הגוף, הנפש והסביבה מהווים מערכת דינמית, וטיפול בכל חלק בנפרד מהאחרים מניב תוצאות חסרות.',
+      'HOLOS מסנתז שמונה פילוסופיות כאלה — איורוודה, רפואה טאואיסטית, רפואה היפוקרטית, משטר הרמב"ם, הקאנון של אבן סינא, רפואה טיבטית, מדע מבוסס-ראיות מודרני ומסגרת HOLOS האינטגרטיבית — לא מפני שהן מסכימות על המנגנונים, אלא מפני שהן מסכימות על ההתבוננות: האורגניזם האנושי מגיב למזון, תנועה, שינה, רגשות, משמעות ויחסים בדרכים מדידות, צפויות וניתנות לפעולה.',
+      'פלטפורמת HOLOS אינה מבקשת ממך להאמין באף מסורת. היא מעריכה אותך לפי תשעה מימדים, ואז משתמשת במסגרת התואמת ביותר לפרופיל הקונסטיטוציוני שלך כדי לתעדף את ההתערבויות. מטה-אנליזה משנת 2023 ב-Annals of Internal Medicine גילתה שגישות רב-מודאליות לבריאות עלו על טיפולים חד-מודאליים ב-34% בתוצאות ראשוניות — לא מפני שהמרכיב הבודד היה חזק יותר, אלא מפני שהאינטראקציה ביניהם הצטברה.',
+      'בסיס הידע הזה חוקר כל מסורת לעומק: מקורותיה, מסגרת האבחנה שלה ומה שהמדע המודרני אישר לגבי מרשמיה. המטרה היא סינתזה מעשית — הבנת המקומות שבהם המפות העתיקות והמודרניות מסכימות, ושימוש בהסכמה זו לצורך פעולה.',
+    ]
+  },
+  'nine-dimensions': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'רוב פלטפורמות הבריאות מודדות מימד אחד או שניים — בדרך כלל שעות שינה וספירת צעדים. הערכת HOLOS מתייחסת לתשעה: תזונה, שינה, התאוששות, לחץ, תנועה, בריאות רגשית, איזון חיים, מטרה ואנרגיה. זה אינו מקיף לשם המקיפות — אלא משום שמימדים אלה מתקשרים זה לזה, ובאינטראקציות ביניהם שוכן האות האבחנתי האמיתי.',
+      'שקול דפוס נפוץ: מישהו ישן שבע שעות אך מתעורר לא נח. מבט חד-מימדי יאשים את איכות השינה ויורה על היגיינת שינה טובה יותר. מודל HOLOS שואל נוספות: מהו ציון הלחץ? קורטיזול מוגבה מדכא שינה גלית-איטית מבלי להפחית את משך השינה הכולל. האם ציון המטרה נמוך? מחקרים מראים שאנשים ללא תחושת משמעות ברורה חווים עיסוק ליליין גבוה יותר ויקיצה מוקדמת יותר. האם התזונה לקויה? דיסביוזיס מעי קשור כעת לשיבוש ארכיטקטורת השינה דרך ציר המעי-מוח.',
+      'אותה תלות הדדית עובדת בכיוון הפוך. ציונות מטרה גבוהים מתאמים עם שינה טובה יותר, בחירות תזונתיות טובות יותר, עקביות גופנית גבוהה יותר והחלמה מהירה יותר ממחלות — לא מפני שהמטרה גורמת לאלה ישירות, אלא מפני שהיא מארגנת התנהגות לאורך כל המימדים. זו הסיבה שבה HOLOS משקל את המלצותיו לפי השפעה בין-מימדית ולא לפי גירעון חד-מימדי.',
+      'תשעת המימדים לא נבחרו באקראי. הם ממפים את מה שכל מסורת חוכמה גדולה זיהתה כמשתנים הקובעים בריאות, בצלב-הפניה עם התחומים המופיעים בצורה חזקה ביותר במחקר האריכות: איכות תזונה, ארכיטקטורת שינה, פיזיולוגיית לחץ, מינון תנועה, ויסות רגשי, קשר חברתי וכיוון מטרה. לכל מימד יש מודול הערכה מתאים, והציונות מזינות מנגנון ניקוד בן שש שכבות המייצר סט ממודרג של המלצות.',
+      'ניקוד כל תשעת המימדים מאפשר ל-HOLOS לאתר את הדפוסים שגשושי מדד-יחיד מפספסים: האדם שלו שעות שינה מספקות אך שציוני הלחץ והמטרה שלו מצביעים על נטל אלוסטטי נסתר; האדם שלו ציוני תזונה ותנועה מצוינים אך שציוני ההתאוששות והבריאות הרגשית שלו מרמזים שהוא מוציא את הרזרבות שלו. דפוסים מורכבים אלה מנבאים מסלולי בריאות עתידיים בדיוק רב יותר מכל מדד בודד.',
+    ]
+  },
+  'doshas-explained': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'הדושות — ואטה, פיטה וקאפה — הן העיקרון המארגן הבסיסי של הרפואה האיורוודית. הן אינן סוגי דם, קטגוריות אישיות או תוויות תזונתיות. הן יחסים דינמיים של איכויות יסודיות בתוך האורגניזם האנושי, והבנתן דורשת לוותר על האינסטינקט המערבי לסיווג וללמוד במקומו להתבונן בדפוסים לאורך זמן.',
+      'ואטה היא עקרון התנועה והמרחב — אוויר ואתר בתנועה. כשהיא מאוזנת, היא שולטת ביצירתיות, גמישות, חשיבה מהירה והתלהבות. כשהיא מוגברת, היא מייצרת חרדה, נדודי שינה, עור יבש, עצירות, תיאבון לא סדיר ומצב נפשי מפוזר ומוצף. ואטה מוגברת על ידי איכויות קרות, יבשות, קלות ולא סדירות — חורף, נסיעות, לוחות זמנים משתנים, זמן מסך מוגזם וממריצים.',
+      'פיטה היא עקרון הטרנספורמציה — אש ומים. פיטה מאוזנת מניעה אינטלקט חד, שאפתנות, מנהיגות ויעילות מטבולית. פיטה מוגברת מייצרת דלקת, פריחות עור, ריפלוקס, עצבנות, פרפקציוניזם ושחיקה. פיטה מוגברת על ידי חום, עצימות ותחרותיות — עבודת יתר, אלכוהול, אוכל חריף, שמש ישירה וסביבות בלחץ גבוה.',
+      'קאפה היא עקרון המבנה והלכידות — אדמה ומים. קאפה מאוזנת מספקת יציבות, סיבולת, חמלה וחסינות עמוקה. קאפה מוגברת מתבטאת כעייפות, עלייה במשקל, גודש, מצב רוח נמוך וקושי ביוזמה. קאפה מוגברת על ידי תנאים קרים, כבדים ויושבניים — שינה יתרה, אוכל מתוק ושמן והתנהגויות ממוקדות-נוחות.',
+      'לכל אדם יש יחס קונסטיטוציוני של שלוש הדושות — הפרקריטי שלו, שנקבע בלידה — ויחס נוכחי הנקרא ויקריטי, שעוצב על ידי אורח חיים, עונה ואירועי חיים. הערכה איורוודית מזהה את הפער בין הפרקריטי לויקריטי ומורה על התערבויות לשחזור האיזון הקונסטיטוציוני: הנחיות תזונתיות ספציפיות, צמחים רפואיים, סוגי תנועה, לוחות שינה ושגרות יומיות. מודול האיורוודה של HOLOS משתמש בהערכת התשעה מימדים שלך כדי לזהות את פרופיל הדושה הסביר ולייצר המלצות מותאמות אישית.',
+    ]
+  },
+  'rambam-preventive': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'רבי משה בן מימון (1138–1204) — הרמב"ם למסורת היהודית, מיימונידס למערב — היה רופא החצר של סולטן מצרים, פילוסוף שסינתז את אריסטו עם התורה, ומחבר טקסטים רפואיים שחזו את הרפואה המניעתית המודרנית בדיוק שעדיין מפתיע קלינאים הנתקלים בהם.',
+      'משטר הבריאות שלו, שנכתב עבור בנו החולה של הסולטן, מזהה שישה גורמים קובעי בריאות שקרא להם "הלא-טבעיים": אוויר וסביבה; מזון ושתייה; שינה וערות; תנועה ומנוחה; הפרשת פסולת; והמצבים הרגשיים של הנשמה. זה אינו מיסטיקה — זוהי מסגרת אמפירית שנבנתה מעשרות שנות התבוננות קלינית אצל אלפי מטופלים.',
+      'בנוגע לתזונה, הרמב"ם היה מדויק: אכול עד 75% שביעות — "האדם תמיד צריך להיות מעט רעב." התחל את הארוחה במזון קל, שניתן לעיכול בקלות; סיים במאכלים כבדים יותר. תעדף יבול עונתי. מרשמים אלה ממפים על מחקרים עכשוויים על הגבלה קלורית, רצף עיכולי והפחתת סיכון מחלות כרוניות דרך דפוס תזונה ולא נוטריינטים בודדים.',
+      'בנוגע לתנועה: "האדם צריך להתאמן כל בוקר עד שהגוף יתחמם." הוא ציין כי תנועה בלתי מספקת היא הגורם לרוב המחלות הכרוניות — "הגוף נהיה כבד ומסורבל וכוחותיו נחלשים." עקומת המינון-תגובה המודרנית לפעילות גופנית ותמותה מכל סיבה מאשרת זאת בפרטים כמותיים.',
+      'בנוגע לבריאות הרגשית, הרמב"ם היה נחרץ: "רופא שאינו מטפל בנשמה אינו יכול לטפל בגוף." הוא זיהה אבל, זעם וחרדה כרונית כמזיקים פיזיולוגית — טענה הנתמכת כעת על ידי עשרות שנים של מחקר פסיכונוירואימונולוגי המקשר מצבים רגשיים לקורטיזול, פרופילי ציטוקינים ותפקוד חיסוני. מרשמיו לרווחה רגשית — עבודה משמעותית, ידידות מתונה, עיסוק אינטלקטואלי וטיפוח שיווי-נפש — נותרים בין ההתערבויות הנתמכות ביותר בבסיס הראיות.',
+    ]
+  },
+  'qi-cultivation': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'ההתנגדות הספקנית לרפואה הטאואיסטית בדרך כלל נשמעת כך: "צ\'י לא קיים. לא ניתן למדוד אותו. לכן המערכת היא טרום-מדעית." התנגדות זו ראויה להתייחסות רצינית — ואז לבחינה מדוקדקת, כי היא מזהה בצורה שגויה מה הרפואה הטאואיסטית טוענת בפועל.',
+      'צ\'י אינו חומר ניתן לגילוי תחת מיקרוסקופ. הוא מושג פונקציונלי — הפעילות הרגולטורית העצמית של מערכות חיות. כאשר רופא טאואיסטי אומר שהצ\'י שלך קפוא, הוא מתאר מצב פונקציונלי: מחזור הדם עצלני, העיכול איטי, ניקוז הלימפה גדוש, טונוס מערכת העצבים מדוכא. אלה תופעות מדידות. השפה שונה מהשפה הביורפואית; ההתבוננות אינה.',
+      'בסיס הראיות לתרגולים שמקורם בטאואיזם הוא כעת מהותי. מטה-אנליזה משנת 2017 של 35 ניסויים אקראיים מבוקרים מצאה שצ\'יגונג הפחית משמעותית חרדה, דיכאון וסמנים ביולוגיים של דלקת — אפקטים דומים לאלה של פעילות אירובית בעצימות נמוכה יותר. סקירות שיטתיות מרובות מאשרות את עליונות הטאי-צ\'י על פני אימוני שיווי-משקל קונבנציונליים למניעת נפילות בקרב מבוגרים. דיקור מראה יעילות עקבית לכאב כרוני, מניעת מיגרנה ובחילות הנגרמות מכימותרפיה.',
+      'מסגרת חמשת היסודות — עץ, אש, אדמה, מתכת, מים — ממפה מערכות איברים, מצבים רגשיים, עונות ונטיות תזונתיות על מודל מחזורי של ייצור ושליטה הדדית. כבד (עץ) מזין לב (אש); לב מזין טחול (אדמה); טחול מזין ריאות (מתכת); ריאות מזינות כליות (מים); כליות מזינות כבד. שיבוש בכל יסוד מתפשט דרך המחזור — מפה מערכתית של תלות פיזיולוגית הדדית.',
+      'עבור מתרגל HOLOS, טיפוח הצ\'י פירושו תשומת לב לזרימת אנרגיית החיים דרך תרגול יומי עקבי: צ\'יגונג בוקר, התאמה תזונתית עונתית, ויסות רגשי וטיפוח שֶׁן — רוח ומודעות מכוונת-מטרה. תרגולים אלה שומרים על התנאים שבהם האורגניזם מרפא את עצמו. המטרה אינה מצב אקזוטי אלא קו בסיס של ויסות עצמי משולב.',
+    ]
+  },
+  'sleep-traditions': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'כל מסורת רפואית גדולה פיתחה תיאוריה מתוחכמת של שינה, וכאשר משווים אותן בין תרבויות ומאות שנים, הקונוורגנציות מרשימות יותר מהשונויות. ללא גשושי שינה, EEG או כרונוביולוגיה, רופאים בארבע יבשות הגיעו למסקנות כמעט זהות לגבי מתי לישון, למשך כמה זמן ובאילו תנאים.',
+      'האיורוודה מורה לישון בזמן הקאפה של הלילה — בערך מ-10 בלילה עד 2 לפנות בוקר — כאשר יסוד האדמה-מים תומך בהתאוששות האנבולית העמוקה ביותר. קימה לפני 6 בבוקר בתקופת הואטה מיישרת את מצב הערות עם בהירות מחשבתית וקלות. מחקר כרונוביולוגי מאשר כי יישור צירקדי — שינה כשהמלטונין בשיאו, קימה עם האור המוקדם — משפר את משך שינת הגלים-האיטיים ב-20-30% ללא קשר לשעות השינה הכוללות.',
+      'הרמב"ם היה מפורש: "מבין הדברים המזיקים לגוף ומקצרים את החיים: ערות בלילה וקיצור השינה." הוא הורה לישון תחילה על הצד הימני, ואז לפנות לשמאל — המלצה שמחקר גסטרואינטסטינלי מודרני מאשר חלקית. שינה על הצד הימין מפחיתה ריפלוקס; שינה על הצד השמאלי משפרת את ניקוז הלימפה של הצינור החזי ועשויה לשפר את תפוקת הלב.',
+      'הרפואה הטיבטית מתארת שינה כזמן שבו לונג — הומור הרוח המנהל את הפעילות הנפשית — שוקע, והערוצים העדינים של הגוף עוברים תיקון. זה ממפה על השערת הגלימפה שאושרה ב-2013: במהלך שינה עמוקה, נוזל עמוד השדרה שוטף פסולת מטבולית מהמוח בנפח גדול ב-60% מאשר בזמן ערות. איכות שינה לקויה היא כיום גורם הסיכון הניתן לשינוי הנוכחי ביותר למחלת אלצהיימר.',
+      'הקונצנזוס הרב-מסורתי: ישן בזמנים עקביים המיושרים עם מחזורי האור הטבעיים; שמור על סביבת שינה קרירה, חשוכה ושקטה; הימנע מגירוי בשעה האחרונה לפני השינה; וראה שינה כשיקום ביולוגי פעיל ולא כחוסר הכרה פאסיבי. מימד השינה של HOLOS מנקד יישור צירקדי, הצטברות חוב שינה, איכות סובייקטיבית ותוצאות תפקודיות של יום — ומספק תמונה מלאה ולא מדד בודד.',
+    ]
+  },
+  'stress-dimension': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'עומס אלוסטטי הוא העלות הפיזיולוגית המצטברת של הסתגלות כרונית — מה שקורה לגוף כאשר תגובת הלחץ, שנועדה לאיומים חריפים, מופעלת באופן רציף על פני חודשים ושנים. המונח הוצג על ידי ברוס מקיוון ב-1993, אך ההתבוננות שהוא מכנה עתיקה: כל מסורת חוכמה זיהתה הפרעה רגשית מתמשכת כגורם עיקרי למחלות כרוניות.',
+      'המתווכים העיקריים הם קורטיזול, אדרנלין וציטוקינים פרו-דלקתיים. פרצי קורטיזול קצרים מחדדים קוגניציה, מגייסים אנרגיה ומדכאים כאב. עלייה כרונית בקורטיזול עושה את ההפך: היא מדכאת נוירוגנזה היפוקמפלית, פוגעת בזיכרון ובלמידה; מסדירה לא נכון את חילוף החומרים של גלוקוז, מניעה עמידות לאינסולין; משבשת את הקצב הצירקדי, פוגעת בארכיטקטורת השינה; ומאיצה הזדקנות תאית דרך קיצור טלומרים. זו הסיבה שלחץ פסיכולוגי כרוני מנבא מחלות לב-וכלי-דם, הפרעות אוטואימוניות, תסמונת מטבולית ודיכאון.',
+      'רוב התערבויות הלחץ נכשלות מפני שהן מתייחסות לתחושה הסובייקטיבית של לחץ ולא לחוב הביולוגי המצטבר מתחתיה. תרגילי נשימה ומיינדפולנס מפחיתים עוררות חריפה. הם אינם מנקים את העומס האלוסטטי שנבנה על פני חודשים של הפעלה כרונית. רק הפחתה מתמשכת בגורמי העומס האלוסטטיים — שינה משופרת, דלקת מופחתת, עומס עבודה ניתן לניהול, בטיחות יחסית, שחזור תחושת משמעות — בשילוב עם תרגולי התאוששות שיטתיים יכולה לעשות זאת.',
+      'האיורוודה מזהה מחלה הנגרמת מלחץ כהחמרת ואטה ומורה על עיגון: מזון חם ושמני; תנועה ריתמית איטית; שגרה יומית קבועה; וצמחי אדפטוגן כולל אשוואגנדהה, שניסוי אקראי מבוקר עדכני מצא שהיא מפחיתה קורטיזול בסרום ב-27.9% לאחר 60 יום. צ\'יגונג וטאי-צ\'י טאואיסטיים משחזרים זרימת צ\'י חלקה ומרגיעים את השֶׁן. הרמב"ם הורה מנוחה, ידידות, עבודה משמעותית ומתינות כתנאים מבניים לבריאות פסיכולוגית. התרגול הטיבטי עובד ישירות עם דפוסי ההימנעות וההגברה שהופכים לחץ לסבל.',
+      'מימד הלחץ של HOLOS אינו שואל רק עד כמה אתה מרגיש לחץ. הוא מעריך איכות שינה, מהירות התאוששות, יכולת ויסות רגשי, נוכחות משמעות ותמיכה חברתית — ומספק הערכה כוללת של נטל אלוסטטי. המלצות נשאבות מהמסורת שערכת הכלים שלה מתייחסת לגורמי השורש בצורה הישירה ביותר, מדורגות לפי השפעה סבירה בהינתן פרופיל תשעת המימדים הכולל שלך.',
+    ]
+  },
+  'avicenna-canon': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'אבן סינא (980–1037) — הידוע במערב כאביצ\'נה — היה הרופא המשפיע ביותר בהיסטוריה של הרפואה. הקאנון שלו (אל-קאנון פי ל-טיבּ) היה ספר הלימוד הרפואי הסטנדרטי באוניברסיטאות האירופיות מהמאה ה-12 עד ה-17 — קדנציה שאף טקסט רפואי אחר לא התקרב אליה. הוא סינתז את הרפואה היוונית, הפרסית והאיסלאמית למסגרת שהשרידה את כל מסורת מרכיביה.',
+      'הקאנון מזהה שש קטגוריות של גורמים הקובעים בריאות — "שישת הדברים הכרחיים": אוויר וסביבה; מזון ושתייה; תנועה גופנית ומנוחה; תנועה פסיכית ומנוחה (מצבים רגשיים); שינה וערות; ושימור והפרשה. אלה אינם שישה מרשמים נפרדים. הם שישה מימדים של מערכת משולבת אחת, ושיבוש בכל אחד מהם מתפשט לאחרים — תובנה ברמת מערכות שהרפואה הביורפואית רק עכשיו מפרמלת.',
+      'בנוגע לאיכות האוויר, ההתבוננויות של אבן סינא היו נבואיות: הוא תיאר כיצד אוויר עומד וחללים סגורים גרמו למחלות, המליץ על אוורור בבתי חולים ועיצב נהלי הסגר למחלות מדבקות — אלף שנה לפני שתיאורית הנבט סיפקה את המנגנון. האפידמיולוגיה הסביבתית המודרנית מזהה באופן עקבי את איכות האוויר כאחד מגורמי הסיכון הסביבתיים החזקים ביותר לנטל מחלות כרוניות.',
+      'בנוגע למזון, הקאנון מבחין בין מזונות לפי השפעתם על המזג הגופני — התכונות המחממות, המקררות, המרטיבות או המייבשות שלהם — ומורה על התאמות תזונתיות לשחזור האיזון הקונסטיטוציוני. התובנה המבנית — שמרשמים תזונתיים צריכים להיות מותאמים אישית לקונסטיטוציה ולמצב הבריאות הנוכחי, לא להיות מוכללים — היא בדיוק מה שמחקר התזונה המדויקת מגלה מחדש כיום דרך גנומיקה תזונתית ומדע המיקרוביום.',
+      'בנוגע למצבים רגשיים, אבן סינא היה ישיר: "שמחה מרחיבה את הרוח החיונית; אבל מכווצת אותה; כעס מחמם את הדם; פחד מקרר אותו." מרשמי הקאנון לרווחה פסיכולוגית — עבודה משמעותית, סביבות יפות, ידידות קרובה, מתינות תשוקה ועיסוק אינטלקטואלי — חוזים את ההתערבויות המבוססות-ראיות המודרניות למחלות כרוניות בכמעט אלף שנה. HOLOS משתמש במסגרת אבן סינא כאחד משמונת העדשות שלו לפרשנות נתוני ההערכה.',
+    ]
+  },
+  'tibetan-three-humours': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'הרפואה הטיבטית (סוֹוָה ריגפָּה, "ידע הריפוי") היא אחת ממערכות הרפואה המלאות העתיקות ביותר בעולם, שפותחה על פני שני אלפי שנים בצומת האיורוודה ההודית, הרפואה הסינית ומסורת הריפוי הילידית הבּוֹן. המודל הבסיסי שלה מזהה שלושה הומורים — לונג, טריפה ובֶּקֶן — ככוחות הראשוניים הקובעים בריאות, ומחלה כשיבוש האיזון הדינמי ביניהם.',
+      'לונג (מבוטא "לונג") הוא עקרון הרוח: הוא שולט בכל תנועה, הן גופנית — נשימה, דחפים עצביים, מחזור דם — והן נפשית — מחשבה, כוונה ורגש. לונג מאוזן מייצר חיוניות, בהירות, התלהבות ואינטלקט יצירתי. לונג מופרע מתבטא כחרדה, נדודי שינה, רעד, עור יבש, טינטון ומצב נפשי מפוזר ומוצף — ממפה בקלות על הפרעות טווח החרדה שהפסיכיאטריה המערבית מתארת ועל מה שהאיורוודה קוראת להחמרת ואטה.',
+      'טריפה — מרה — הוא עקרון האש: טרנספורמציה, עיכול מזון וחוויה, תפיסה חדה ויכולת הבחנה וקבלת החלטות. טריפה מאוזנת מייצרת אינטלקט, אומץ ויעילות מטבולית. טריפה מופרעת מייצרת דלקת, מחלת עור, חום, עצבנות, פרפקציוניזם ואי-שביעות רצון כרונית של בלתי-שבעות. זה מתאם עם חוסר איזון פיטה באיורוודה ו, במינוח ביורפואי, עם המצב הדלקתי כרוני-חמור הנמוך-ברמה המוכר כיום כגורם עיקרי למחלות לב-וכלי-דם, סוכרת ודיכאון.',
+      'בקן — ליחה — הוא עקרון המים-האדמה: מבנה, לחות, לכידות ויציבות. בקן מאוזן מספק סיבולת, חמלה, סבלנות וחסינות עמוקה. בקן מופרע מתבטא כהשמנה, עייפות, שינה יתרה, גודש ומצב דכאוני של עוררות נמוכה. זה מתאים לחוסר איזון קאפה באיורוודה ו, במינוח מודרני, לאשכול תסמונת המטבולי.',
+      'מה שמייחד את הרפואה הטיבטית הוא מורכבות האינטגרציה הפסיכופיזית שלה. שלוש הנייפה אינן קטגוריות גופניות בלבד ולא פסיכולוגיות בלבד — הן עקרונות פסיכופיזיים. הפרעת לונג היא בו-זמנית הפרעה של מערכת העצבים ואקזיסטנציאלית: הנפש הנסערת והגוף הנרגש מובנים כתופעה אחת עם קשת טיפול אחת. הפרוטוקול מתייחס בהתאם לשני הרמות: שינויים תזונתיים, תכשירי צמחים ספציפיים, טיפולים חיצוניים ותרגולים קונטמפלטיביים — בפרט אלה העובדים עם איכות התנועה הנפשית עצמה. אינטגרציה כפולה זו של התערבות סומטית ופסיכולוגית היא בדיוק לאן הרפואה המבוססת-ראיות נעה כעת.',
+    ]
+  },
+  'integrative-wellness-science': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'בריאות אינטגרטיבית אינה חלופה לרפואה מבוססת-ראיות — היא הרחבתה הלוגית. ביולוגיה מערכתית, פסיכונוירואימונולוגיה וכרונוביולוגיה כולן מצביעות על אותה מסקנה: הגוף פועל כאינטלקט אחד, וטיפול בו בבידוד מניב תוצאות מקוטעות.',
+      'מטה-אנליזה מכוננת משנת 2023 ב-Annals of Internal Medicine סקרה 187 מחקרים על התערבויות גוף-נפש ומצאה כי גישות רב-מודאליות עלו על טיפולים חד-מודאליים ב-34% בתוצאות ראשוניות — לא מפני שמרכיב כלשהו היה חזק יותר, אלא מפני שהאינטראקציות ביניהם הצטברו.',
+      'הערכת HOLOS לוכדת מורכבות זו על ידי מיפוי תשעה מימדים תלויים זה בזה: תזונה, שינה, התאוששות, לחץ, תנועה, בריאות רגשית, איזון חיים, מטרה ואנרגיה. אלה אינם ממגורות נפרדות. חסך שינה מעלה קורטיזול, שפוגע בחילוף החומרים של גלוקוז, שמשבש את הקצב הצירקדי, שמחמיר שינה. המנגנון ממפה לולאות משוב אלה — כדי שהמלצותיך יתייחסו לגורמי שורש, לא לסימפטומים שטחיים.',
+      'ממסורות החוכמה, השקפה מערכתית זו אינה חדשה. האיורוודה מתארת פרקריטי כשיווי-משקל דינמי בין שלוש דושות. הרפואה הטאואיסטית מדברת על האינטרפליי המתמשך של צ\'י, דם וג\'ינג. הרמב"ם התעקש שתזונה, אוויר, תנועה, שינה, רגשות ומטרה משפיעים זה על זה.',
+      'מה ש-HOLOS תורם הוא היכולת לכמת היכן המערכת האישית שלך נמצאת מחוץ לשיווי-משקל — ולהורות על התערבויות מדורגות לפי השפעה סבירה וקושי מעשי.',
+    ]
+  },
+  'sleep-recovery-ancient': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'מערכת הרפואה הטיבטית מתארת שינה כזמן שבו הומור הרוח (לונג) שוקע והערוצים העדינים של הגוף עוברים תיקון. זה ממפה בדיוק מרשים על השערת הגלימפה: במהלך שינה עמוקה, נוזל עמוד השדרה שוטף פסולת מטבולית מהמוח בנפח גדול ב-60% מאשר בזמן ערות.',
+      'האיורוודה מורה לישון לפני 22:00 ולקום לפני 6:00 — זמן הקאפה של הלילה, כאשר יסוד האדמה-מים תומך בהתאוששות האנבולית העמוקה. מחקר כרונוביולוגי מאשר שיישור צירקדי משפר את משך שינת הגלים-האיטיים ב-20-30%, ללא קשר לזמן השינה הכולל.',
+      'הרמב"ם היה מפורש: "מבין הדברים המזיקים לגוף ומקצרים את החיים: ערות בלילה וקיצור השינה." הוא הורה לישון תחילה על הצד הימני, ואז לפנות לשמאלי. שינה על הצד השמאלי משפרת ניקוז לימפה ומפחיתה ריפלוקס חומצה — הפיזיולוגיה שונה מהתפיסה שלו מהמאה ה-12, אך ההמלצה עומדת.',
+      'המסורת הטאואיסטית מדגישה וּ-וֵיי — אי-עשייה מאמצת — כתנאי מוקדם לשיקום. שינה אינה פאסיבית; היא מצב הריפוי הפעיל ביותר של הגוף. הבנה מודרנית של ארכיטקטורת השינה (מחזוריות N1/N2/N3/REM כל ~90 דקות) מצדיקה זאת: כל שלב מבצע פונקציות ייחודיות.',
+      'במימד השינה של HOLOS, הציון שלך משקף לא רק שעות אלא יישור צירקדי, חוב שינה, איכות סובייקטיבית ותוצאות תפקודיות של יום.',
+    ]
+  },
+  'nutrition-frameworks': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'לשאלה "מה לאכול?" יש תשובה שונה בהתאם למסורת שאתה שואל — אך התשובות חולקות יותר מבנה ממה שנראה בתחילה. כל שמונת המסגרות מזהות מזון לא רק כדלק מקרו-נוטריינטים, אלא כמכשיר לאיזון קונסטיטוציוני, הסתגלות עונתית ואינדיבידואליות מטבולית.',
+      'מבוסס-ראיות: הקונצנזוס החזק ביותר תומך בתזונה עשירה בצמחים שלמים עם חלבון מספיק (1.2-2 גרם/ק"ג מסת גוף רזה), שומני אומגה-3 ומגוון פוליפנולים. עקירת מזון מעובד מסבירה את רוב הפחתת סיכון המחלות הכרוניות במחקרי עוקבה גדולים.',
+      'הרמב"ם: מורה לאכול לפי סדר עיכולי — מזון קל תחילה; צפוף בסוף. הגבל כמות ל-75% שביעות. תעדף תוצרת עונתית, מקומית. "האדם לא יאכל אלא אם כן הוא רעב, ולא ישתה אלא אם כן הוא צמא."',
+      'איורוודה: מתאימה גוּנות מזון לחוסר איזון הדושה. סוגי ואטה זקוקים למזון חם, שמני, מעגן; סוגי פיטה זקוקים למזון מקרר; סוגי קאפה זקוקים למזון קל, חריף, יבש. אגני (אש עיכולית) הוא המשתנה המרכזי — כל המלצות המזון כפופות למצבו הנוכחי.',
+      'מסגרת HOLOS סוורגה שוקלת המלצות תזונתיות לפי חוסרי האיזון המדודים שלך בכל המסורות, ומייצרת ארכיטיפ תזונתי מותאם אישית — לא דיאטה אחת, אלא מסגרת החלטה לכל ארוחה.',
+    ]
+  },
+  'stress-resilience-traditions': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'ציר ה-HPA מייצר קורטיזול בתגובה לאיום נתפס — תגובה מותאמת לסכנה חריפה, לא ללחצים כרוניים-קלים. הפעלה מורחבת של ה-HPA מדכאת תפקוד חיסוני, פוגעת בזיכרון, משבשת את הקצב הצירקדי ומאיצה הזדקנות תאית דרך קיצור טלומרים.',
+      'האיורוודה מכנה זאת החמרת ואטה: יסוד הרוח-האוויר הופך מוגזם, מסדיר לא נכון את מערכת העצבים. התרופה היא עיגון: עיסוי שמן אביינגה, מזון חם כבד, תנועה איטית, אשוואגנדהה. מחקרים מודרניים מראים שאשוואגנדהה מפחיתה קורטיזול ב-27.9% בניסויים אקראיים מבוקרים.',
+      'המסורת הטאואיסטית פיתחה צ\'יגונג וטאי-צ\'י ככלים לוויסות שן (רוח) ושקיעת צ\'י. מטה-אנליזה משנת 2017 של 35 ניסויים אקראיים מבוקרים מצאה כי תרגול צ\'יגונג הפחית משמעותית חרדה, דיכאון וסמנים ביולוגיים של דלקת — אפקטים דומים לפעילות אירובית בעצימות נמוכה יותר.',
+      'הבודהיזם הטיבטי תרם את טונגלן ואת ההכרה בסבל כניתן לעבודה. זה אינו אופטימיות רעילה — זוהי התבוננות אמפירית שהימנעות מגבירה לחץ בעוד שמעורבות מעכלת אותו. טיפולים מבוססי-חשיפה מודרניים זהים מבחינה מכניסטית.',
+      'במימד הלחץ של HOLOS, המלצות נשאבות מהמסורת התואמת ביותר למצבך הנוכחי — עבודת נשימה, צמחי אדפטוגן, צ\'יגונג או תרגולי הרהור מובנים.',
+    ]
+  },
+  'movement-medicine': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'מטה-אנליזה משנת 2022 מצאה כי פעילות גופנית מפחיתה סיכון תמותה מכל סיבה ב-30-35%, אירועים קרדיווסקולריים ב-40%, שכיחות דיכאון ב-33% ודעיכה קוגניטיבית ב-38%. אפקטים אלה תקפים בכל קבוצות הגיל ואינם דורשים ציוד או מתקן.',
+      'אך תנועה אינה מונוליתית. האיורוודה מבחינה בין תנועת ברמהנה (מחזקת) לבין לנגהנה (מקילה) — מוּרות לפי דושה, עונה ומצב אנרגיה. אדם עם ואטה דומיננטי נהנה מתנועה איטית, ריתמית, מעגנת — לא אינטרוולים בעצימות גבוהה, שמרוקנים עוד יותר את מערכת העצבים.',
+      'היפוקרטס כתב: "ההליכה היא הרפואה הטובה ביותר של האדם" — והאפידמיולוגיה המודרנית מאשרת זאת לחלוטין. עקומת המינון-תגובה להליכה תלולה בין 0 ל-7,500 צעדים ליום ומתיישרת לאחר מכן. יתרונות התמותה של 7,500 צעדים יומיים כמעט זהים ל-12,000.',
+      'המסורת הטאואיסטית הבחינה בין אי-מאמץ מאמץ. טאי-צ\'י וצ\'יגונג הם אימון נוירומוטורי מדויק. מחקרים מראים שהם משפרים שיווי-משקל, פרופריוספציה ומניעת נפילות בקרב מבוגרים בצורה יעילה כמו אימוני שיווי-משקל קונבנציונליים.',
+      'מימד התנועה של HOLOS מנקד תדירות, התפלגות עצימות, סמני כוח תפקודי ואיכות תנועה — מותאמים לפרופיל הקונסטיטוציוני שלך ולמצב האנרגיה הנוכחי שלך.',
+    ]
+  },
+  'emotional-intelligence-holos': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'תיאורית הפוליוואגל מספקת בסיס פיזיולוגי למה שמסורות התבוננו זה מכבר: מצב מערכת העצבים — ספציפית טונוס הוואגוס — קובע את יכולתנו למעורבות חברתית, למידה, יצירתיות וריפוי גופני.',
+      'האיורוודה מזהה סאטווה (בהירות נפשית ושיווי-נפש) כמטרת כל תרגולי הבריאות — שמושגת לא על ידי דיכוי רגשות, אלא על ידי טיהור הנפש מראג\'אס (התסיסה) ותמאס (האינרציה) דרך יוגה, מדיטציה, מזון בריא וחשיפה לטבע.',
+      'המסורת הרפואית הטיבטית פיתחה את המפה הגרנולארית ביותר של מצבים נפשיים-רגשיים. "חמשת הרעלים" מובנים כגורמים ראשוניים של מחלה — דפוסי הפעלה כרוניים שמסדירים לא נכון את הפיזיולוגיה. ניגודי-הרעל שלהם מטופחים דרך תרגולי מדיטציה ספציפיים המותאמים לסוג קונסטיטוציונלי.',
+      'היפוקרטס הבין שנוכחות הרופא וקשר רגשי היו טיפוליים בפני עצמם. יחסים חמים ואמינים מפחיתים קורטיזול, מגדילים אוקסיטוצין ומשפרים את הדבקות בטיפול.',
+      'במימד הרגשי של HOLOS, המאמן האינטגרטיבי משמש כשותף רפלקטיבי המאומן בפרספקטיבות בריאות אינטגרטיביות. כאשר תמיכה קלינית מתאימה, המאמן אומר זאת ישירות.',
+    ]
+  },
+  'purpose-longevity': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'פרויקט זיכרון והזדקנות של Rush עקב אחרי 1,500 מבוגרים מבוגרים במשך שבע שנים ומצא שלאלה שהייתה להם תחושת מטרה גבוהה היה סיכון תמותה נמוך פי 2.5 מכל סיבה — ללא קשר למצב בריאות גופנית, מצב דיכאון או גורמים סוציואקונומיים. מטרה חזתה שרידה ביעילות רבה יותר מהפסקת עישון.',
+      'המנגנון: מטרה מארגנת תשומת לב, מעכבת רומינציה ומפעילה את מערכת הגישה ההתנהגותית. אנשים עם מטרה ברורה ישנים טוב יותר, מתעמלים בצורה עקבית יותר, מחפשים טיפול רפואי באופן פרואקטיבי ומחלימים מהר יותר ממחלות. מטרה אינה התוצאה של בריאות — היא מניע שלה.',
+      'התרבות היפנית קידדה זאת באיקיגאי — הצומת של מה שאתה אוהב, מה שאתה טוב בו, מה העולם צריך ומה ניתן לשלם לך עליו. אוקינאווה, ביתם של חלק מאוכלוסיות ארוכות החיים בעולם, אין לה מושג של פרישה.',
+      'מימד המטרה של HOLOS מעריך בהירות ערכים, תחושת תרומה, מעורבות מול ניכור מפעילויות יומיות וכיוון זמני. הוא המימד הניואנסי ביותר לניקוד והמשפיע ביותר לשינוי.',
+    ]
+  },
+  'rambam-modern-wellness': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'הרמב"ם כתב את "משטר הבריאות" לבנו של הסולטן — שסבל מדיכאון ועצירות. המרשמים מודרניים באופן מרשים: פעילות גופנית מתונה יומית, לוח שינה קבוע, ניהול רגשי, סדירות מעיים והימנעות מאכילת יתר.',
+      '"שמונת הפרקים" שלו על בריאות הנפש מקדימים טיפול קוגניטיבי-התנהגותי: לנשמה יש תיאבונות והשכל חייב לווסת אותם; אופי נוצר על ידי הרגל; מצבים רגשיים שליליים משתנים על ידי תרגול ניגודיהם.',
+      'בתזונה, הרמב"ם היה מדויק: אכול עד 75% שביעות. התחל עם מזון קל, סיים עם צפוף. מחקר המיקרוביום של המעי של המאה ה-21 מספק מנגנונים לכל אחד ממרשמים אלה.',
+      'הרמב"ם התעקש שרופאים צריכים לטפל באדם לפני שהוא חולה. "האדם החכם צריך לתת תשומת לב רבה יותר לשמירה על בריאותו מלריפוי מחלות." זוהי רפואה מניעתית מודרנית — מקודדת בחוק היהודי של המאה ה-12.',
+    ]
+  },
+  'swarga-tradition': {
+    author: 'משה אוסטרובסקי',
+    body: [
+      'סוורגה היא מילה סנסקריטית למרחב שמעבר לרגיל — הרוממות הבאה מאינטגרציה אמיתית של הטוב ביותר בכל מסורת ולא רק מקיטלוגו. מסגרת HOLOS סוורגה אינה מסורת תשיעית שנוספת לשמונה; היא המטא-מסגרת שהופכת את שמונת המסורות קריאות זו לזו.',
+      'כל אחת מהשמונה מסורות במערכת HOLOS — איורוודה, רפואה טאואיסטית, רפואה היפוקרטית, משטר הרמב"ם, הקאנון של אבן סינא, רפואה טיבטית, מדע מבוסס-ראיות מודרני ומערכת HOLOS האינטגרטיבית — שלמה בלוגיקה הפנימית שלה. לכל אחת יש תיאוריה של סיבה, מערכת אבחנה, סט התערבויות וגוף של התבוננות מצטברת על פני מאות שנים. אף אחת אינה רק אוסף של טיפים.',
+      'האתגר הוא שכל מסורת משתמשת באוצר מילים שונה, קטגוריות מדידה שונות ותיאוריה שונה של מהי בריאות. רופא איורוודי קורא פיטה; רופא טיבטי קורא טריפה; קרדיולוג מערבי קורא CRP ו-LDL. הם עשויים להסתכל על אותה מציאות פיזיולוגית ולתאר אותה במונחים שונים לחלוטין — ולהחמיץ בכך את ממצאי זה.',
+      'שכבת הסוורגה מתרגמת בין אוצרות מילים אלה. היא מזהה את ההתאמות המבניות — המקומות שבהם מסורות מתכנסות באופן עצמאי על אותה התבוננות — ומשתמשת בהתכנסויות אלה כדי להגביר ביטחון אבחנתי. כאשר איורוודה, רפואה טיבטית ופסיכונוירואימונולוגיה מודרנית כולן מצביעות על אותו דפוס בפרופיל שלך, התכנסות זו אינה מקרית. היא אות.',
+      'התפוקה המעשית היא מה ש-HOLOS מכנה דוח סינתזת הסוורגה: ניתוח בין-מסורתי מותאם אישית המזהה את הפרופיל הקונסטיטוציוני שלך, את המסורות שהמסגרות שלהן מתאימות במדויק ביותר לפרופיל זה, ואת ההתערבויות הספציפיות שכל מסורת ממליצה עליהן — מדורגות לפי אישוש בין-מסורתי ומותאמות ליישום מעשי בחיים מודרניים. סוורגה אינה המטרה. זה הנוף מגבוה מספיק כדי לראות את הטרריין כולו.',
+    ]
+  },
+}
+
+// ── German translations for article bodies ──────────────────────────────────
+const ARTICLES_DE: Record<string, { author: string; body: string[] }> = {
+  'what-is-integrative-wellness': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Integrative Wellness ist keine Alternative zur konventionellen Medizin — sie ist ihre natürliche Erweiterung. Für den größten Teil der Menschheitsgeschichte bedeutete Medizin das Verstehen des ganzen Menschen: seiner Konstitution, seiner Gewohnheiten, seiner Umgebung und seines inneren Lebens. Die moderne Reduktion von Gesundheit auf einen Satz von Biomarkern ist historisch anomal, und die Belege dafür, dass sie unzureichend ist, häufen sich.',
+      'Jede große Zivilisation entwickelte eine vollständige medizinische Philosophie, weil die Praktiker, die ihr Leben damit verbrachten, die menschliche Gesundheit zu beobachten, dasselbe bemerkten: Menschen sind keine Sammlungen unabhängiger Organe. Körper, Geist und Umwelt bilden ein dynamisches System, und die Behandlung eines Teils isoliert von den anderen produziert fragmentierte Ergebnisse.',
+      'HOLOS synthetisiert acht solcher Philosophien — Ayurveda, daoistische Medizin, hippokratische Medizin, das Regimen des Rambam, Avicennas Canon, tibetische Medizin, moderne evidenzbasierte Wissenschaft und das HOLOS-Integrationsrahmenwerk — nicht weil sie über Mechanismen übereinstimmen, sondern weil sie über Beobachtungen übereinstimmen: Der menschliche Organismus reagiert auf Ernährung, Bewegung, Schlaf, Emotionen, Bedeutung und Beziehungen in messbarer, vorhersehbarer und handlungsrelevanter Weise.',
+      'Die HOLOS-Plattform verlangt nicht, dass Sie an eine Tradition glauben. Sie bewertet Sie über neun Dimensionen und verwendet dann das mit Ihrem konstitutionellen Profil kompatibleste Framework, um Ihre Interventionen zu priorisieren. Eine Metaanalyse aus dem Jahr 2023 in den Annals of Internal Medicine ergab, dass multimodale Wellness-Ansätze einmodale Behandlungen bei Primärergebnissen um 34% übertrafen — nicht weil eine einzelne Komponente stärker war, sondern weil ihre Interaktionen sich verstärkten.',
+      'Diese Wissensdatenbank erkundet jede Tradition in der Tiefe: ihre Ursprünge, ihr Diagnosesystem und was die moderne Forschung über ihre Empfehlungen bestätigt hat. Das Ziel ist praktische Synthese — zu verstehen, wo alte und moderne Karten übereinstimmen, und diese Übereinstimmung zur Handlung zu nutzen.',
+    ]
+  },
+  'nine-dimensions': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Die meisten Wellness-Plattformen messen eine oder zwei Dimensionen — in der Regel Schlafstunden und Schrittzahl. Die HOLOS-Bewertung erfasst neun: Ernährung, Schlaf, Erholung, Stress, Bewegung, Emotionale Gesundheit, Lebensbalance, Zweck und Energie. Das ist nicht Vollständigkeit um ihrer selbst willen — es liegt daran, dass diese Dimensionen interagieren und in diesen Interaktionen das eigentliche diagnostische Signal liegt.',
+      'Betrachten Sie ein häufiges Muster: Jemand schläft sieben Stunden, wacht aber unausgeruht auf. Eine eindimensionale Sichtweise beschuldigt die Schlafqualität und verschreibt bessere Schlafhygiene. Das HOLOS-Modell fragt weiter: Wie ist der Stress-Score? Erhöhtes Kortisol unterdrückt den Tiefschlaf, ohne die Gesamtschlafdauer zu reduzieren. Ist der Zweck-Score niedrig? Forschungen zeigen, dass Menschen ohne klaren Sinn ein stärkeres nächtliches Grübeln und früheres Erwachen erleben. Ist die Ernährung schlecht? Darmdysbiose ist jetzt über die Darm-Hirn-Achse mit Störungen der Schlafarchitektur verbunden.',
+      'Die gleiche gegenseitige Abhängigkeit verläuft umgekehrt. Hohe Zweck-Scores korrelieren mit besserem Schlaf, besseren Ernährungsgewohnheiten, höherer Sport-Konsistenz und schnellerer Erholung von Krankheiten — nicht weil der Zweck dies direkt verursacht, sondern weil er das Verhalten über alle Dimensionen hinweg organisiert. Deshalb gewichtet HOLOS seine Empfehlungen nach dimensionsübergreifender Wirkung statt nach eindimensionalem Defizit.',
+      'Die neun Dimensionen wurden nicht willkürlich gewählt. Sie bilden ab, was jede große Weisheitstradition als gesundheitsbestimmende Variablen identifiziert hat, gegengeprüft mit den Bereichen, die in der Langlebigkeitsforschung am robustesten erscheinen: Ernährungsqualität, Schlafarchitektur, Stressphysiologie, Bewegungsdosis, emotionale Regulation, sozialer Zusammenhalt und Zweckorientierung.',
+      'Die Bewertung aller neun Dimensionen ermöglicht HOLOS, die Muster zu erkennen, die Einzelkennzahl-Tracker verpassen: die Person, deren Schlafstunden ausreichend sind, aber deren Stress- und Zweck-Scores eine verborgene allostatische Belastung anzeigen; die Person, deren Ernährungs- und Bewegungs-Scores hervorragend sind, aber deren Erholungs- und Emotionale-Gesundheits-Scores darauf hindeuten, dass sie ihre Reserven überziehen.',
+    ]
+  },
+  'doshas-explained': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Die Doshas — Vata, Pitta und Kapha — sind das grundlegende Organisationsprinzip der ayurvedischen Medizin. Sie sind keine Blutgruppen, Persönlichkeitskategorien oder Ernährungsetiketten. Sie sind dynamische Verhältnisse elementarer Qualitäten innerhalb des menschlichen Organismus, und ihr Verständnis erfordert es, den westlichen Instinkt zur Klassifizierung loszulassen und stattdessen zu lernen, Muster im Laufe der Zeit zu beobachten.',
+      'Vata ist das Prinzip der Bewegung und des Raums — Luft und Äther in Bewegung. Im Gleichgewicht regiert es Kreativität, Flexibilität, schnelles Denken und Enthusiasmus. Wenn erregt, produziert es Angst, Schlaflosigkeit, trockene Haut, Verstopfung, unregelmäßigen Appetit und einen zerstreuten, überwältigten Geisteszustand. Vata wird durch kalte, trockene, leichte und unregelmäßige Qualitäten erhöht — Winter, Reisen, wechselnde Zeitpläne, übermäßige Bildschirmzeit und Stimulanzien.',
+      'Pitta ist das Prinzip der Transformation — Feuer und Wasser. Ausgeglichenes Pitta treibt scharfe Intelligenz, Ehrgeiz, Führung und metabolische Effizienz an. Erregtes Pitta produziert Entzündungen, Hautausschläge, Sodbrennen, Reizbarkeit, Perfektionismus und Burnout. Pitta wird durch Hitze, Intensität und Wettbewerbsdenken erhöht — Überarbeitung, Alkohol, scharfes Essen, direkte Sonne und stressige Umgebungen.',
+      'Kapha ist das Prinzip der Struktur und Kohäsion — Erde und Wasser. Ausgeglichenes Kapha bietet Stabilität, Ausdauer, Mitgefühl und tiefe Immunität. Erregtes Kapha manifestiert sich als Trägheit, Gewichtszunahme, Verstopfung, schlechte Stimmung und Schwierigkeiten beim Beginnen. Kapha wird durch kalte, schwere und sitzende Bedingungen erhöht — Überschlafen, süße und fettige Speisen und komfortsuchende Verhaltensweisen.',
+      'Jeder Mensch hat ein konstitutionelles Verhältnis der drei Doshas — seine Prakriti, die bei der Empfängnis festgelegt wird — und ein aktuelles Verhältnis namens Vikriti, das durch Lebensstil, Jahreszeit und Lebensereignisse geformt wird. Die ayurvedische Bewertung identifiziert die Lücke zwischen Prakriti und Vikriti und verschreibt Interventionen zur Wiederherstellung des konstitutionellen Gleichgewichts: spezifische Ernährungsrichtlinien, pflanzliche Rezepturen, Bewegungsarten, Schlafpläne und Tagesroutinen.',
+    ]
+  },
+  'rambam-preventive': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Rabbi Moses ben Maimon (1138–1204) — der Rambam in der jüdischen Tradition, Maimonides im Westen — war Hofarzt des Sultans von Ägypten, ein Philosoph, der Aristoteles mit der Torah synthetisierte, und der Autor medizinischer Texte, die die moderne Präventivmedizin mit einer Genauigkeit vorwegnahmen, die Kliniker, die ihnen begegnen, noch heute überrascht.',
+      'Sein Regimen of Health, geschrieben für den kranken Sohn des Sultans, identifiziert sechs Determinanten der Gesundheit, die er die "Nicht-Naturalen" nannte: Luft und Umwelt; Essen und Trinken; Schlaf und Wachen; Bewegung und Ruhe; Ausscheidung von Abfallstoffen; und die emotionalen Zustände der Seele. Das ist keine Mystik — es ist ein empirisches Rahmenwerk, das aus jahrzehntelanger klinischer Beobachtung tausender Patienten aufgebaut wurde.',
+      'Zur Ernährung war der Rambam präzise: Essen Sie bis zu 75% Sättigung — "Ein Mensch sollte immer leicht hungrig sein." Beginnen Sie eine Mahlzeit mit leichten, leicht verdaulichen Speisen; enden Sie mit dichteren. Bevorzugen Sie saisonale Produkte. Diese Vorschriften stimmen mit zeitgenössischer Forschung zu Kalorienrestriktion, Verdauungssequenzierung und Reduktion des Risikos chronischer Erkrankungen durch Ernährungsmuster überein.',
+      'Zur Bewegung: "Ein Mensch soll jeden Morgen trainieren, bis der Körper warm wird." Er spezifizierte, dass unzureichende Bewegung die Ursache der meisten chronischen Krankheiten ist — "der Körper wird schwer und plump und seine Kräfte schwächen sich." Die moderne Dosis-Wirkungs-Kurve für körperliche Aktivität und Gesamtmortalität bestätigt dies in quantitativen Details.',
+      'Zur emotionalen Gesundheit war der Rambam nachdrücklich: "Ein Arzt, der die Seele nicht behandelt, kann den Körper nicht behandeln." Er identifizierte Trauer, Wut und chronische Angst als physiologisch schädlich — eine Behauptung, die nun durch Jahrzehnte psychoneuroimmunologischer Forschung gestützt wird, die emotionale Zustände mit Kortisol, Zytokinprofilen und Immunfunktion verknüpft. Seine Vorschriften für emotionales Wohlbefinden — sinnvolle Arbeit, maßvolle Freundschaft, intellektuelles Engagement und die Kultivierung von Gleichmut — gehören zu den am stärksten evidenzgestützten Interventionen.',
+    ]
+  },
+  'qi-cultivation': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Der skeptische Einwand gegen die daoistische Medizin lautet üblicherweise: "Qi existiert nicht. Man kann es nicht messen. Also ist das System vorwissenschaftlich." Dieser Einwand ist ernst zu nehmen — und dann sorgfältig zu untersuchen, weil er falsch identifiziert, was die daoistische Medizin tatsächlich behauptet.',
+      'Qi ist keine unter einem Mikroskop nachweisbare Substanz. Es ist ein funktionelles Konzept — die selbstregulatorische Aktivität lebender Systeme. Wenn ein daoistischer Arzt sagt, Ihr Qi ist gestaut, beschreibt er einen funktionellen Zustand: die Zirkulation ist träge, die Verdauung langsam, die Lymphdrainage gestaut, der Nervensystemtonus gedrückt. Das sind messbare Phänomene. Die Sprache unterscheidet sich von der biomedizinischen Sprache; die Beobachtung nicht.',
+      'Die Evidenzbasis für daoistisch abgeleitete Praktiken ist nun erheblich. Eine Metaanalyse von 2017, die 35 randomisierte kontrollierte Studien umfasste, fand, dass Qigong Angst, Depression und Entzündungsbiomarker signifikant reduzierte — Effekte, die bei niedrigerer Intensität mit aerober Übung vergleichbar sind. Multiple systematische Übersichten bestätigen die Überlegenheit von Tai Chi gegenüber konventionellem Gleichgewichtstraining zur Sturzprävention bei älteren Erwachsenen.',
+      'Das Fünf-Elemente-Framework — Holz, Feuer, Erde, Metall, Wasser — bildet Organsysteme, emotionale Zustände, Jahreszeiten und Ernährungstendenzen auf ein zyklisches Modell gegenseitiger Erzeugung und Kontrolle ab. Leber (Holz) nährt Herz (Feuer); Herz nährt Milz (Erde); Milz nährt Lunge (Metall); Lunge nährt Niere (Wasser); Niere nährt Leber. Eine Störung in einem Element breitet sich durch den Zyklus aus.',
+      'Für den HOLOS-Praktiker bedeutet Qi-Kultivierung, durch konsistente tägliche Praxis auf den Fluss vitaler Energie zu achten: Morgen-Qigong, saisonale Ernährungsanpassung, emotionale Regulation und die Kultivierung von Shen — Geist und zweckorientiertes Bewusstsein. Diese Praktiken erhalten die Bedingungen, unter denen sich der Organismus selbst heilt.',
+    ]
+  },
+  'sleep-traditions': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Jede große medizinische Tradition entwickelte eine ausgefeilte Theorie des Schlafs, und wenn man sie über Kulturen und Jahrhunderte vergleicht, sind die Konvergenzen bemerkenswerter als die Unterschiede. Ohne Schlaf-Tracker, EEG oder Chronobiologie gelangten Ärzte auf vier Kontinenten zu nahezu identischen Schlussfolgerungen darüber, wann, wie lange und unter welchen Bedingungen man schlafen sollte.',
+      'Das Ayurveda schreibt vor, während der Kapha-Zeit der Nacht zu schlafen — ungefähr von 22:00 bis 2:00 Uhr —, wenn das Erd-Wasser-Element die tiefste anabole Wiederherstellung unterstützt. Das Aufstehen vor 6:00 Uhr während der Vata-Periode richtet den Wachzustand auf geistige Klarheit und Leichtheit aus. Chronobiologische Forschungen bestätigen, dass zirkadiane Ausrichtung die Tiefschlafdauer um 20–30% verbessert, unabhängig von der Gesamtschlafdauer.',
+      'Der Rambam war explizit: "Zu den Dingen, die dem Körper schaden und das Leben verkürzen: nachts wach zu bleiben und den Schlaf zu kürzen." Er verschrieb, zuerst auf der rechten Seite zu schlafen, dann auf die linke zu wechseln — eine Empfehlung, die moderne gastrointestinale Forschung teilweise bestätigt.',
+      'Die tibetische Medizin beschreibt Schlaf als die Zeit, in der Lung — der Windhumor, der die geistige Aktivität regiert — sich setzt und die feinen Kanäle des Körpers repariert werden. Dies korrespondiert mit der Glymphatischen Hypothese: Während des Tiefschlafs spült Zerebrospinalflüssigkeit metabolischen Abfall — einschließlich Amyloid-beta — aus dem Gehirn in einem um 60% größeren Volumen als im Wachzustand.',
+      'Der traditionenübergreifende Konsens: Schlafen Sie zu konsistenten Zeiten, die an natürliche Lichtzyklen ausgerichtet sind; halten Sie die Schlafumgebung kühl, dunkel und ruhig; vermeiden Sie Stimulation in der letzten Stunde vor dem Schlaf; und behandeln Sie Schlaf als aktive biologische Wiederherstellung statt als passive Bewusstlosigkeit.',
+    ]
+  },
+  'stress-dimension': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Allostatische Last ist die kumulative physiologische Kosten chronischer Anpassung — was mit dem Körper passiert, wenn die Stressreaktion, die für akute Bedrohungen konzipiert wurde, über Monate und Jahre hinweg kontinuierlich aktiviert wird. Der Begriff wurde 1993 von Bruce McEwen eingeführt, aber die Beobachtung, die er benennt, ist uralt: Jede Weisheitstradition identifizierte anhaltende emotionale Störung als primären Treiber chronischer Erkrankungen.',
+      'Die primären Mediatoren sind Kortisol, Adrenalin und proinflammatorische Zytokine. Kurze Kortisol-Schübe schärfen die Kognition, mobilisieren Energie und unterdrücken Schmerzen. Chronisch erhöhtes Kortisol tut das Gegenteil: Es unterdrückt hippokampale Neurogenese und beeinträchtigt Gedächtnis und Lernen; dysreguliert den Glukosestoffwechsel und treibt die Insulinresistenz voran; stört den zirkadianen Rhythmus und verschlechtert die Schlafarchitektur; und beschleunigt die zelluläre Alterung durch Telomerverkürzung.',
+      'Die meisten Stress-Interventionen scheitern, weil sie das subjektive Gefühl von Stress ansprechen und nicht die biologische Schuld, die darunter aufgebaut wird. Atemübungen und Achtsamkeit reduzieren akute Erregung. Sie räumen nicht die allostatische Last auf, die über Monate chronischer Aktivierung aufgebaut wurde. Nur eine nachhaltige Reduzierung der allostatischen Inputs — verbesserter Schlaf, reduzierte Entzündung, handhabbare Arbeitsbelastung, relationale Sicherheit, wiederhergestelltes Sinngefühl — kombiniert mit systematischen Erholungspraktiken kann das.',
+      'Das Ayurveda identifiziert stressbedingte Krankheit als Vata-Aggravation und verschreibt Erdung: warme, ölige Speisen; langsame rhythmische Bewegung; regelmäßige Tagesroutine; und adaptogene Kräuter einschließlich Ashwagandha, die eine aktuelle randomisierte kontrollierte Studie um 27,9% serumkortisolreduzierend nach 60 Tagen fand. Daoistisches Qigong und Tai Chi stellen einen reibungslosen Qi-Fluss wieder her und beruhigen das Shen.',
+      'Die HOLOS-Stress-Dimension fragt nicht nur, wie gestresst Sie sich fühlen. Sie bewertet Schlafqualität, Erholungsgeschwindigkeit, emotionale Regulationskapazität, das Vorhandensein von Bedeutung und sozialer Unterstützung. Empfehlungen werden aus der Tradition gezogen, deren Werkzeugkoffer die Ursachen am direktesten anspricht, eingestuft nach wahrscheinlicher Wirkung angesichts Ihres Neun-Dimensionen-Gesamtprofils.',
+    ]
+  },
+  'avicenna-canon': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Ibn Sina (980–1037) — im Westen bekannt als Avicenna — war der einflussreichste Arzt in der Geschichte der Medizin. Sein Canon of Medicine (Al-Qanun fi al-Tibb) war das standardmäßige medizinische Lehrbuch an europäischen Universitäten vom 12. bis 17. Jahrhundert — eine Amtszeit, die kein anderer medizinischer Text erreicht hat. Er synthetisierte griechische, persische und islamische Medizin in ein Rahmenwerk, das alle Komponententraditionen überdauerte.',
+      'Der Canon identifiziert sechs Kategorien von gesundheitsbestimmenden Faktoren — die "sechs notwendigen Dinge": Luft und Umwelt; Essen und Trinken; körperliche Bewegung und Ruhe; psychische Bewegung und Ruhe (emotionale Zustände); Schlaf und Wachen; und Rückhaltung und Ausscheidung. Das sind nicht sechs separate Verschreibungen. Sie sind sechs Dimensionen eines einzigen integrierten Systems, und eine Störung in einem breitet sich auf die anderen aus.',
+      'Zur Luftqualität waren Avicennas Beobachtungen visionär: Er beschrieb, wie stagnierende Luft und geschlossene Räume Krankheiten verursachten, empfahl Belüftung für Krankenhäuser und entwarf Quarantäneverfahren für Infektionskrankheiten — ein Jahrtausend bevor die Keimtheorie den Mechanismus lieferte. Moderne Umweltepidemiologie identifiziert Luftqualität konsequent als einen der stärksten Umweltdeterminanten der chronischen Krankheitslast.',
+      'Bei Speisen unterscheidet der Canon Lebensmittel nach ihrer Wirkung auf das Körpertemperament — ihre erwärmenden, kühlenden, befeuchtenden oder austrocknenden Eigenschaften — und verschreibt Ernährungsanpassungen zur Wiederherstellung des konstitutionellen Gleichgewichts. Die strukturelle Einsicht — dass Ernährungsempfehlungen individuell auf Konstitution und aktuellen Gesundheitszustand zugeschnitten und nicht verallgemeinert werden sollten — ist genau das, was die Präzisionsernährungsforschung nun durch Nutrigenomik und Mikrobiomwissenschaft wiederentdeckt.',
+      'Zu emotionalen Zuständen war Avicenna direkt: "Freude erweitert den Lebensgeist; Trauer verengt ihn; Zorn erhitzt das Blut; Angst kühlt es." Die Verschreibungen des Canon für psychologisches Wohlbefinden — sinnvolle Arbeit, schöne Umgebungen, enge Freundschaft, Mäßigung der Leidenschaft und intellektuelles Engagement — antizipieren moderne evidenzbasierte Interventionen für chronische Erkrankungen um fast tausend Jahre.',
+    ]
+  },
+  'tibetan-three-humours': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Die tibetische Medizin (Sowa Rigpa, "das Wissen der Heilung") ist eines der ältesten vollständigen Medizinsysteme der Welt, das sich über zwei Jahrtausende an der Kreuzung von indischem Ayurveda, chinesischer Medizin und der indigenen Bön-Heilungstradition entwickelte. Ihr grundlegendes Modell identifiziert drei Humoren — Lung, Tripa und Beken — als die primären Kräfte, die Gesundheit bestimmen, und Krankheit als die Störung ihres dynamischen Gleichgewichts.',
+      'Lung (ausgesprochen "loong") ist das Windprinzip: Es regiert alle Bewegung, sowohl physisch — Atem, Nervenimpuls, Zirkulation — als auch mental — Gedanke, Absicht und Emotion. Ausgeglichenes Lung produziert Vitalität, Klarheit, Enthusiasmus und kreative Intelligenz. Gestörtes Lung manifestiert sich als Angst, Schlaflosigkeit, Zittern, trockene Haut, Tinnitus und ein zerstreuter, überwältigter Geisteszustand — eng auf das abbildend, was die westliche Psychiatrie als Angstspektrum-Störungen beschreibt.',
+      'Tripa — Galle — ist das Feuerprinzip: Transformation, Verdauung von Nahrung und Erfahrung, scharfe Wahrnehmung und die Fähigkeit zur Unterscheidung und Entscheidung. Ausgeglichenes Tripa produziert Intelligenz, Mut und metabolische Effizienz. Gestörtes Tripa produziert Entzündungen, Hauterkrankungen, Fieber, Reizbarkeit, Perfektionismus und chronische Unzufriedenheit. Dies korreliert mit Ayurvedischem Pitta-Ungleichgewicht.',
+      'Beken — Schleim — ist das Wasser-Erde-Prinzip: Struktur, Feuchtigkeit, Kohäsion und Stabilität. Ausgeglichenes Beken bietet Ausdauer, Mitgefühl, Geduld und tiefe Immunität. Gestörtes Beken manifestiert sich als Adipositas, Trägheit, übermäßiger Schlaf, Verstopfung und ein hypoton-depressiver Zustand. Dies entspricht Ayurvedischem Kapha-Ungleichgewicht und, in modernen Begriffen, dem metabolischen Syndrom-Cluster.',
+      'Was die tibetische Medizin auszeichnet, ist die Raffinesse ihrer psychophysischen Integration. Die drei Nyépa sind nicht rein physische oder rein psychologische Kategorien — sie sind psychophysische Prinzipien. Lung-Störung ist gleichzeitig eine Nervensystem-Störung und eine existenzielle: Der unruhige Geist und der aufgeregte Körper werden als ein Phänomen mit einem Behandlungsbogen verstanden. Das Protokoll adressiert entsprechend beide Ebenen: Ernährungsmodifikationen, spezifische pflanzliche Rezepturen, externe Therapien und kontemplative Praktiken.',
+    ]
+  },
+  'integrative-wellness-science': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Integrative Wellness ist keine Alternative zur evidenzbasierten Medizin — sie ist ihre logische Erweiterung. Systembiologie, Psychoneuroimmunologie und Chronobiologie deuten alle auf dieselbe Schlussfolgerung hin: Der Körper operiert als vereinte Intelligenz, und seine isolierte Behandlung produziert fragmentierte Ergebnisse.',
+      'Eine wegweisende Metaanalyse aus dem Jahr 2023 in den Annals of Internal Medicine überprüfte 187 Studien zu Geist-Körper-Interventionen und fand heraus, dass multimodale Ansätze einmodale Behandlungen bei Primärergebnissen um 34% übertrafen — nicht weil eine einzelne Komponente stärker war, sondern weil ihre Interaktionen sich verstärkten.',
+      'Die HOLOS-Bewertung erfasst diese Komplexität, indem sie neun voneinander abhängige Dimensionen kartiert: Ernährung, Schlaf, Erholung, Stress, Bewegung, Emotionale Gesundheit, Lebensbalance, Zweck und Energie. Das sind keine separaten Silos. Schlafentzug erhöht Kortisol, das den Glukosestoffwechsel beeinträchtigt, das den zirkadianen Rhythmus stört, das den Schlaf verschlechtert. Der Motor kartiert diese Rückkopplungsschleifen — damit Ihre Empfehlungen Ursachen ansprechen, nicht oberflächliche Symptome.',
+      'Aus den Weisheitstraditionen ist diese Systemsicht nicht neu. Ayurveda beschreibt Prakriti als dynamisches Gleichgewicht unter drei Doshas. Daoistische Medizin spricht vom kontinuierlichen Zusammenspiel von Qi, Blut und Jing. Der Rambam bestand darauf, dass Ernährung, Luft, Bewegung, Schlaf, Emotionen und Zweck sich gegenseitig beeinflussen.',
+      'Was HOLOS beiträgt, ist die Fähigkeit zu quantifizieren, wo Ihr persönliches System aus dem Gleichgewicht geraten ist — und Interventionen zu verschreiben, die nach wahrscheinlicher Wirkung und praktischer Schwierigkeit eingestuft sind.',
+    ]
+  },
+  'sleep-recovery-ancient': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Das tibetische Medizinsystem beschreibt Schlaf als eine Zeit, in der der Windhumor (Lung) sich setzt und die feinen Kanäle des Körpers repariert werden. Dies korrespondiert mit bemerkenswerter Genauigkeit mit der Glymphatischen Hypothese: Während des Tiefschlafs spült Zerebrospinalflüssigkeit metabolischen Abfall aus dem Gehirn in einem um 60% größeren Volumen als im Wachzustand.',
+      'Das Ayurveda schreibt vor, vor 22:00 Uhr zu schlafen und vor 6:00 Uhr aufzuwachen — die Kapha-Zeit der Nacht, wenn das Erd-Wasser-Element die tiefe anabole Wiederherstellung unterstützt. Chronobiologische Forschungen bestätigen, dass zirkadiane Ausrichtung die Tiefschlafdauer um 20–30% verbessert, unabhängig von der Gesamtschlafzeit.',
+      'Der Rambam war explizit: "Zu den Dingen, die dem Körper schaden und das Leben verkürzen: nachts wach zu bleiben und den Schlaf zu kürzen." Er verschrieb, zuerst auf der rechten Seite zu schlafen, dann auf die linke zu wechseln. Linksseitiger Schlaf verbessert die Lymphdrainage und reduziert Sodbrennen — die Physiologie unterscheidet sich von seiner Konzeption aus dem 12. Jahrhundert, aber die Empfehlung gilt.',
+      'Die daoistische Tradition betont Wu Wei — müheloses Nicht-Tun — als Voraussetzung für Wiederherstellung. Schlaf ist nicht passiv; er ist der aktivste Heilzustand des Körpers. Das moderne Verständnis der Schlafarchitektur (N1/N2/N3/REM-Zyklus alle ~90 Minuten) bestätigt dies: Jede Phase erfüllt unterschiedliche Funktionen.',
+      'Im HOLOS-Schlaf-Dimension spiegelt Ihr Score nicht nur Stunden wider, sondern auch zirkadiane Ausrichtung, Schlafschulden, subjektive Qualität und funktionale Tageskonsequenzen.',
+    ]
+  },
+  'nutrition-frameworks': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Die Frage "Was soll ich essen?" hat eine unterschiedliche Antwort je nachdem, welche Tradition man fragt — aber die Antworten teilen mehr Struktur, als sie zunächst erscheinen. Alle acht Frameworks identifizieren Nahrung nicht nur als Makronährstoff-Treibstoff, sondern als Vehikel für konstitutionelles Gleichgewicht, saisonale Anpassung und metabolische Individualität.',
+      'Evidenzbasiert: Der stärkste Konsens unterstützt eine überwiegend vollwertige, pflanzenreiche Ernährung mit ausreichend Protein (1,2–2 g/kg Magermasse), Omega-3-Fetten und Polyphenol-Vielfalt. Die Verdrängung von verarbeiteten Lebensmitteln erklärt den größten Teil der Risikoreduktion chronischer Erkrankungen in großen Kohortenstudien.',
+      'Rambam: Schreibt vor, in der Reihenfolge der Verdaulichkeit zu essen — zuerst leichte Speisen, zuletzt dichte. Menge auf 75% Sättigung beschränken. Saisonale, lokale Produkte priorisieren. "Ein Mensch soll nicht essen, solange er nicht hungrig ist, und nicht trinken, solange er nicht durstig ist."',
+      'Ayurveda: Stimmt Speise-Gunas auf das Dosha-Ungleichgewicht ab. Vata-Typen brauchen warme, ölige, erdende Speisen; Pitta-Typen brauchen kühlende Speisen; Kapha-Typen brauchen leichte, würzige, trockene Speisen. Agni (Verdauungsfeuer) ist die zentrale Variable — alle Ernährungsempfehlungen unterordnen sich seinem aktuellen Zustand.',
+      'Das HOLOS-Swarga-Framework gewichtet Ernährungsempfehlungen nach Ihren bewerteten Dimensionsungleichgewichten in allen Traditionen und produziert einen personalisierten Ernährungs-Archetypen — keine einzelne Diät, sondern ein Entscheidungsrahmen für jede Mahlzeit.',
+    ]
+  },
+  'stress-resilience-traditions': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Die HPA-Achse produziert Kortisol als Reaktion auf wahrgenommene Bedrohung — eine Reaktion, die für akute Gefahr abgestimmt ist, nicht für chronische niedriggradige Stressoren. Verlängerte HPA-Aktivierung unterdrückt die Immunfunktion, beeinträchtigt das Gedächtnis, stört den zirkadianen Rhythmus und beschleunigt zelluläres Altern durch Telomerverkürzung.',
+      'Das Ayurveda nennt es Vata-Aggravation: Das Wind-Luft-Element wird übermäßig und destabilisiert das Nervensystem. Das Mittel ist Erdung: Abhyanga-Ölmassage, warme schwere Speisen, langsame Bewegung, Ashwagandha. Moderne Forschung zeigt, dass Ashwagandha-Wurzel Kortisol um 27,9% in randomisierten kontrollierten Studien reduziert.',
+      'Die daoistische Tradition entwickelte Qigong und Tai Chi als Werkzeuge zur Regulierung von Shen (Geist) und zur Beruhigung von Qi. Eine Metaanalyse von 2017 über 35 randomisierte kontrollierte Studien fand, dass Qigong-Praxis Angst, Depression und Entzündungsbiomarker signifikant reduzierte — Effekte, die aerober Übung bei niedrigerer Intensität vergleichbar sind.',
+      'Der tibetische Buddhismus trug Tonglen und die Erkenntnis bei, dass Leiden bearbeitbar ist. Das ist kein toxischer Positivismus — es ist die empirische Beobachtung, dass Vermeidung Stress verstärkt, während Engagement ihn metabolisiert. Moderne expositionsbasierte Therapien sind mechanistisch identisch.',
+      'Im HOLOS-Stress-Dimension werden Empfehlungen aus der Tradition gezogen, die am besten zu Ihrem aktuellen Zustand passt — Atemarbeit, adaptogene Kräuter, Qigong oder strukturierte Reflexionspraktiken.',
+    ]
+  },
+  'movement-medicine': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Eine Metaanalyse aus dem Jahr 2022 ergab, dass körperliche Aktivität das Risiko der Gesamtmortalität um 30–35%, kardiovaskuläre Ereignisse um 40%, die Depressionshäufigkeit um 33% und den kognitiven Rückgang um 38% reduziert. Diese Effekte gelten für alle Altersgruppen und erfordern weder Ausrüstung noch Einrichtungen.',
+      'Aber Bewegung ist nicht monolithisch. Das Ayurveda unterscheidet Brmhana (stärkende) von Langhana (erleichternde) Bewegungsmodalitäten — verschrieben auf Basis von Dosha, Jahreszeit und Energiezustand. Eine Vata-dominante Person profitiert von langsamer, rhythmischer, erdender Bewegung — nicht von Hochintensitätsintervalltraining, das das Nervensystem weiter erschöpft.',
+      'Hippokrates schrieb: "Gehen ist die beste Medizin des Menschen" — und die moderne Epidemiologie bestätigt dies vollständig. Die Dosis-Wirkungs-Kurve für Gehen ist zwischen 0 und 7.500 Schritten/Tag steil und flacht danach ab. Die Sterblichkeitsvorteile von 7.500 täglichen Schritten sind nahezu identisch mit denen von 12.000.',
+      'Die daoistische Tradition unterschied müheloses Nicht-Anstrengung. Tai Chi und Qigong sind präzises neuromotorisches Training. Forschungen zeigen, dass sie Gleichgewicht, Propriozeption und Sturzprävention bei älteren Erwachsenen genauso effektiv verbessern wie konventionelles Gleichgewichtstraining.',
+      'Die HOLOS-Bewegungs-Dimension bewertet Häufigkeit, Intensitätsverteilung, funktionelle Stärkemarker und Bewegungsqualität — abgestimmt auf Ihr konstitutionelles Profil und Ihren aktuellen Energiezustand.',
+    ]
+  },
+  'emotional-intelligence-holos': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Die Polyvagal-Theorie bietet eine physiologische Basis für das, was Traditionen seit langem beobachten: Der Zustand des Nervensystems — insbesondere der Vagustonus — bestimmt unsere Kapazität für soziales Engagement, Lernen, Kreativität und körperliche Heilung.',
+      'Das Ayurveda identifiziert Sattva (geistige Klarheit und Gleichmut) als das Ziel aller Wellness-Praktiken — erreicht nicht durch Unterdrückung von Emotionen, sondern durch Reinigung des Geistes von Rajas (Erregung) und Tamas (Trägheit) durch Yoga, Meditation, gesunde Ernährung und Naturexposition.',
+      'Die tibetische Medizintradition entwickelte die granularste Karte mentaler-emotionaler Zustände. Die "fünf Gifte" werden als primäre Erzeuger von Krankheit verstanden — chronische Aktivierungsmuster, die die Physiologie dysregulieren. Ihre Gegengifte werden durch spezifische Meditationspraktiken kultiviert, die auf den konstitutionellen Typ abgestimmt sind.',
+      'Hippokrates verstand, dass Arztpräsenz und emotionaler Kontakt therapeutisch waren. Eine warme, vertrauensvolle Beziehung reduziert Kortisol, erhöht Oxytocin und verbessert die Behandlungstreue.',
+      'Im HOLOS-Emotionalen-Dimension dient der integrative Coach als reflektierender Partner, der in integrativen Wellness-Perspektiven ausgebildet ist. Wenn klinische Unterstützung angemessen ist, sagt der Coach es direkt.',
+    ]
+  },
+  'purpose-longevity': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Das Rush Memory and Aging Project verfolgte 1.500 ältere Erwachsene über sieben Jahre und fand, dass diejenigen mit einem hohen Sinnempfinden ein 2,5-fach niedrigeres Gesamtmortalitätsrisiko hatten — unabhängig von körperlicher Gesundheit, Depressionsstatus oder sozioökonomischen Faktoren. Zweck sagte Überleben stärker voraus als die Rauchentwöhnung.',
+      'Der Mechanismus: Zweck organisiert Aufmerksamkeit, hemmt Grübeln und aktiviert das Verhaltens-Annäherungs-System. Menschen mit klarem Zweck schlafen besser, treiben konsequenter Sport, suchen proaktiv medizinische Versorgung und erholen sich schneller von Krankheiten. Zweck ist nicht das Ergebnis von Gesundheit — er ist ein Treiber davon.',
+      'Die japanische Kultur kodierte dies in Ikigai — dem Schnittpunkt von dem, was man liebt, was man gut kann, was die Welt braucht und wofür man bezahlt werden kann. Okinawa, Heimat einiger der langlebigsten Bevölkerungen der Welt, hat kein Konzept von Ruhestand.',
+      'Die HOLOS-Zweck-Dimension bewertet Werteklarheit, Beitragsgefühl, Engagement versus Entfremdung von täglichen Aktivitäten und Zeitorientierung. Es ist die nuancierteste Dimension zu bewerten und die wirkungsvollste zu verändern.',
+    ]
+  },
+  'rambam-modern-wellness': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Maimonides schrieb das Regimen of Health für den Sohn des Sultans — der an Depression und Verstopfung litt. Die Verschreibungen sind bemerkenswert zeitgemäß: moderate tägliche Bewegung, regelmäßiger Schlafplan, emotionales Management, Darmregularität und die Vermeidung von Überessen.',
+      'Seine "acht Kapitel" über psychische Gesundheit antizipieren die kognitive Verhaltenstherapie: Die Seele hat Appetiten und die Vernunft muss sie regulieren; Charakter wird durch Gewohnheit geformt; negative emotionale Zustände werden durch das Üben ihrer Gegenteile verändert.',
+      'Zur Ernährung war der Rambam präzise: Essen Sie bis zu 75% Sättigung. Beginnen Sie mit leichten Speisen, enden Sie mit dichten. Die Darmmikrobiom-Forschung des 21. Jahrhunderts liefert Mechanismen für jede dieser Verschreibungen.',
+      'Der Rambam bestand darauf, dass Ärzte Menschen behandeln sollten, bevor sie krank sind. "Ein weiser Mensch sollte mehr Aufmerksamkeit der Erhaltung seiner Gesundheit widmen als der Heilung von Krankheiten." Das ist moderne Präventivmedizin — kodiert im jüdischen Recht des 12. Jahrhunderts.',
+    ]
+  },
+  'swarga-tradition': {
+    author: 'Moshe Ostrovsky',
+    body: [
+      'Svarga ist Sanskrit für den Bereich jenseits des Gewöhnlichen — die Erhebung, die aus der echten Integration des Besten jeder Tradition kommt, statt sie nur zu katalogisieren. Das HOLOS-Svarga-Framework ist nicht eine neunte Tradition, die den acht hinzugefügt wird; es ist das Meta-Framework, das die acht Traditionen füreinander lesbar macht.',
+      'Jede der acht Traditionen im HOLOS-System — Ayurveda, daoistische Medizin, hippokratische Medizin, das Maimonides-Regimen, Avicennas Canon, tibetische Medizin, moderne evidenzbasierte Wissenschaft und das HOLOS-Integrationssystem — ist innerhalb ihrer eigenen Logik vollständig. Jede hat eine Kausaltheorie, ein Diagnosesystem, eine Reihe von Interventionen und einen Bestand akkumulierter Beobachtung über Jahrhunderte. Keine ist bloß eine Sammlung von Tipps.',
+      'Die Herausforderung ist, dass jede Tradition einen anderen Wortschatz, andere Messkategorien und eine andere Theorie davon verwendet, was Gesundheit ausmacht. Ein Ayurveda-Praktiker liest Pitta; ein tibetischer Arzt liest Tripa; ein westlicher Kardiologe liest CRP und LDL. Sie schauen möglicherweise auf dieselbe physiologische Realität und beschreiben sie in völlig unterschiedlichen Begriffen — und verpassen dabei gegenseitig die Erkenntnisse des anderen.',
+      'Die Svarga-Schicht übersetzt zwischen diesen Wortschätzen. Sie identifiziert die strukturellen Korrespondenzen — die Orte, an denen Traditionen unabhängig voneinander auf dieselbe Beobachtung konvergieren — und nutzt diese Konvergenzen, um das diagnostische Vertrauen zu stärken. Wenn Ayurveda, tibetische Medizin und moderne Psychoneuroimmunologie alle auf dasselbe Muster in Ihrem Profil hinweisen, ist diese Konvergenz kein Zufall. Es ist Signal.',
+      'Das praktische Ergebnis ist, was HOLOS den Svarga-Synthesebericht nennt: eine personalisierte traditionenübergreifende Analyse, die Ihr konstitutionelles Profil identifiziert, die Traditionen, deren Frameworks am genauesten zu diesem Profil passen, und die spezifischen Interventionen, die jede Tradition empfiehlt — eingestuft nach traditionenübergreifender Bestätigung und angepasst für die praktische Umsetzung im modernen Leben. Svarga ist nicht das Ziel. Es ist die Aussicht aus einer Höhe, die ausreicht, um das gesamte Gelände zu sehen.',
+    ]
+  },
+}
+
 const CAT_COLORS: Record<string, string> = {
   'Foundation':           '#6B6FA8',
   'Основы':               '#6B6FA8',
@@ -452,7 +816,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const meta = localeMeta[slug] ?? SLUG_META.en[slug]
   const bodyData = locale === 'ru'
     ? (ARTICLES_RU[slug] ?? ARTICLES[slug])
-    : ARTICLES[slug]
+    : locale === 'he'
+      ? (ARTICLES_HE[slug] ?? ARTICLES[slug])
+      : locale === 'de'
+        ? (ARTICLES_DE[slug] ?? ARTICLES[slug])
+        : ARTICLES[slug]
 
   const article = meta && bodyData ? {
     title:    meta.title,

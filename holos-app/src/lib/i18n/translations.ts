@@ -44,6 +44,7 @@ export interface Translations {
     dimensionBreakdown: string; wellnessRadar: string; currentState: string
     lastAnalysed: string; takeNew: string; wellnessJourney: string
     priorityActions: string; seeAll: string; level: string; totalXP: string; compositeTrend: string
+    xpToNextLevel: string; dataPoints: string
   }
   settings: {
     title: string; account: string; notifications: string; privacy: string
@@ -67,6 +68,7 @@ export interface Translations {
   coach: {
     title: string; subtitle: string; placeholder: string; disclaimer: string; initialMessage: string
     starter1: string; starter2: string; starter3: string; starter4: string
+    errorTimeout: string; errorConnection: string
   }
   assessment: {
     title: string; question: string; of: string
@@ -133,6 +135,11 @@ export interface Translations {
     noRecs: string; talkCoach: string; reassess: string; interpretation: string
     score: string; impact: string; evidence: string; min: string
     inBalance: string; needsAttention: string
+    intelligence: string; yourWellnessEcosystem: string
+    wellnessArchetype: string; primaryDriveLabel: string
+    coachingApproachLabel: string; detectionConfidenceLabel: string
+    wellnessTrajectory: string; focusAreasTitle: string
+    whyRecsTitle: string; ptsVsPrevious: string
   }
   pricing: {
     eyebrow: string; titleA: string; titleEm: string; subtitle: string
@@ -342,6 +349,7 @@ const en: Translations = {
     takeNew: 'Take a new assessment to track your progress.',
     wellnessJourney: 'Wellness Journey', priorityActions: 'Priority Actions',
     seeAll: 'See all →', level: 'LEVEL', totalXP: 'Total XP', compositeTrend: 'Composite Trend',
+    xpToNextLevel: 'to next level', dataPoints: 'data points',
   },
   settings: {
     title: 'Settings', account: 'Account', notifications: 'Notifications',
@@ -384,6 +392,8 @@ const en: Translations = {
     starter2: 'How can I improve my sleep quality?',
     starter3: 'Explain the Ayurvedic view of my state',
     starter4: 'What are the highest-impact changes I can make?',
+    errorTimeout: 'Response took too long. Please try again.',
+    errorConnection: 'Having trouble connecting. Please try again in a moment.',
   },
   assessment: {
     title: 'Wellness Assessment', question: 'Question', of: 'of',
@@ -476,6 +486,11 @@ const en: Translations = {
     talkCoach: 'Talk to your AI coach →', reassess: 'Reassess under a different framework',
     interpretation: 'Interpretation', score: 'Score:', impact: 'Impact', evidence: 'evidence', min: 'min',
     inBalance: 'is in balance.', needsAttention: 'needs attention.',
+    intelligence: 'Intelligence', yourWellnessEcosystem: 'Your wellness ecosystem',
+    wellnessArchetype: 'Wellness Archetype', primaryDriveLabel: 'Primary drive:',
+    coachingApproachLabel: 'Coaching approach:', detectionConfidenceLabel: 'Detection confidence',
+    wellnessTrajectory: 'Wellness Trajectory', focusAreasTitle: 'Highest-Leverage Focus Areas',
+    whyRecsTitle: 'Why These Recommendations', ptsVsPrevious: 'pts vs previous',
   },
   pricing: {
     eyebrow: 'Pricing', titleA: 'Start free.', titleEm: 'Scale when you are ready.',
@@ -885,6 +900,7 @@ const ru: Translations = {
     takeNew: 'Пройдите новую оценку, чтобы отследить прогресс.',
     wellnessJourney: 'Путь к здоровью', priorityActions: 'Приоритетные действия',
     seeAll: 'Все →', level: 'УРОВЕНЬ', totalXP: 'Всего XP', compositeTrend: 'Общий тренд',
+    xpToNextLevel: 'до след. уровня', dataPoints: 'точки данных',
   },
   settings: {
     title: 'Настройки', account: 'Аккаунт', notifications: 'Уведомления',
@@ -930,6 +946,8 @@ deleteAccountBtn: 'Удалить аккаунт',
     starter2: 'Как улучшить качество моего сна?',
     starter3: 'Объясни аюрведический взгляд на моё состояние',
     starter4: 'Какие изменения дадут наибольший результат?',
+    errorTimeout: 'Ответ занял слишком долго. Попробуйте ещё раз.',
+    errorConnection: 'Проблема с подключением. Попробуйте через мгновение.',
   },
   assessment: {
     title: 'Оценка здоровья', question: 'Вопрос', of: 'из',
@@ -1022,6 +1040,11 @@ deleteAccountBtn: 'Удалить аккаунт',
     talkCoach: 'Поговорить с AI-коучем →', reassess: 'Оценить в другой традиции',
     interpretation: 'Интерпретация', score: 'Балл:', impact: 'Влияние', evidence: 'доказательства', min: 'мин',
     inBalance: 'в балансе.', needsAttention: 'требует внимания.',
+    intelligence: 'Интеллект', yourWellnessEcosystem: 'Ваша экосистема здоровья',
+    wellnessArchetype: 'Архетип здоровья', primaryDriveLabel: 'Основная мотивация:',
+    coachingApproachLabel: 'Подход коучинга:', detectionConfidenceLabel: 'Уверенность определения',
+    wellnessTrajectory: 'Траектория здоровья', focusAreasTitle: 'Приоритетные области',
+    whyRecsTitle: 'Почему эти рекомендации', ptsVsPrevious: 'пт. от предыдущего',
   },
   pricing: {
     eyebrow: 'Тарифы', titleA: 'Начните бесплатно.', titleEm: 'Масштабируйтесь, когда будете готовы.',
@@ -1432,6 +1455,7 @@ const he: Translations = {
     takeNew: '.בצע הערכה חדשה כדי לעקוב אחר ההתקדמות שלך',
     wellnessJourney: 'מסע הבריאות', priorityActions: 'פעולות עדיפות',
     seeAll: 'ראה הכל ←', level: 'רמה', totalXP: 'סה"כ XP', compositeTrend: 'מגמה כוללת',
+    xpToNextLevel: 'לרמה הבאה', dataPoints: 'נקודות נתונים',
   },
   settings: {
     title: 'הגדרות', account: 'חשבון', notifications: 'התראות',
@@ -1474,6 +1498,8 @@ const he: Translations = {
     starter2: 'כיצד אוכל לשפר את איכות השינה שלי?',
     starter3: 'הסבר את הפרספקטיבה האיורוודית על מצבי',
     starter4: 'אילו שינויים ישפיעו הכי הרבה?',
+    errorTimeout: '.התגובה ארכה זמן רב מדי. נסה שנית',
+    errorConnection: '.יש בעיה בהתחברות. נסה שנית בעוד רגע',
   },
   assessment: {
     title: 'הערכת בריאות', question: 'שאלה', of: 'מתוך',
@@ -1566,6 +1592,11 @@ const he: Translations = {
     talkCoach: 'שוחח עם מאמן ה-AI ←', reassess: 'הערך מחדש תחת מסורת אחרת',
     interpretation: 'פרשנות', score: 'ציון:', impact: 'השפעה', evidence: 'ראיות', min: 'דק',
     inBalance: 'במאזן.', needsAttention: 'דורש תשומת לב.',
+    intelligence: 'בינה', yourWellnessEcosystem: 'מערכת הבריאות שלך',
+    wellnessArchetype: 'ארכיטיפ בריאות', primaryDriveLabel: 'מניע עיקרי:',
+    coachingApproachLabel: 'גישת אימון:', detectionConfidenceLabel: 'רמת ביטחון',
+    wellnessTrajectory: 'מסלול בריאות', focusAreasTitle: 'תחומי המיקוד המרכזיים',
+    whyRecsTitle: 'מדוע ההמלצות הללו', ptsVsPrevious: 'נק׳ מההערכה הקודמת',
   },
   pricing: {
     eyebrow: 'תמחור', titleA: 'התחל חינם.', titleEm: '.הרחב כשתהיה מוכן',
@@ -1975,6 +2006,7 @@ const de: Translations = {
     takeNew: 'Machen Sie eine neue Bewertung, um Ihren Fortschritt zu verfolgen.',
     wellnessJourney: 'Wellnessreise', priorityActions: 'Prioritätsmaßnahmen',
     seeAll: 'Alle anzeigen →', level: 'STUFE', totalXP: 'Gesamt XP', compositeTrend: 'Gesamttrend',
+    xpToNextLevel: 'bis nächste Stufe', dataPoints: 'Datenpunkte',
   },
   settings: {
     title: 'Einstellungen', account: 'Konto', notifications: 'Benachrichtigungen',
@@ -2018,6 +2050,8 @@ const de: Translations = {
     starter2: 'Wie kann ich meine Schlafqualität verbessern?',
     starter3: 'Erkläre die ayurvedische Sicht auf meinen Zustand',
     starter4: 'Welche Veränderungen haben die größte Wirkung?',
+    errorTimeout: 'Die Antwort hat zu lange gedauert. Bitte versuchen Sie es erneut.',
+    errorConnection: 'Verbindungsproblem. Bitte versuchen Sie es in einem Moment erneut.',
   },
   assessment: {
     title: 'Wellnessbewertung', question: 'Frage', of: 'von',
@@ -2110,6 +2144,11 @@ const de: Translations = {
     talkCoach: 'Mit Ihrem KI-Coach sprechen →', reassess: 'Unter einer anderen Tradition neu bewerten',
     interpretation: 'Interpretation', score: 'Punkte:', impact: 'Wirkung', evidence: 'Evidenz', min: 'Min',
     inBalance: 'ist im Gleichgewicht.', needsAttention: 'bedarf Aufmerksamkeit.',
+    intelligence: 'Intelligenz', yourWellnessEcosystem: 'Ihr Wellness-Ökosystem',
+    wellnessArchetype: 'Wellness-Archetyp', primaryDriveLabel: 'Hauptantrieb:',
+    coachingApproachLabel: 'Coaching-Ansatz:', detectionConfidenceLabel: 'Erkennungssicherheit',
+    wellnessTrajectory: 'Wellness-Verlauf', focusAreasTitle: 'Wichtigste Fokusbereiche',
+    whyRecsTitle: 'Warum diese Empfehlungen', ptsVsPrevious: 'Pkt. vs. Vorherige',
   },
   pricing: {
     eyebrow: 'Preise', titleA: 'Kostenlos starten.', titleEm: 'Erweitern, wenn bereit.',

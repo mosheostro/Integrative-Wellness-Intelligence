@@ -75,7 +75,7 @@ export default function SettingsPage() {
       <div style={{ gridColumn: '1 / -1', marginBottom: 8 }}><BackButton href="/dashboard" /></div>
       {/* Sidebar nav */}
       <nav style={{ position: 'sticky', top: 80 }}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 12 }}>{s.title}</div>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 12 }}>{s.title}</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {SECTIONS.map(sv => (
             <button key={sv.id} onClick={() => setSection(sv.id)}
@@ -189,7 +189,7 @@ export default function SettingsPage() {
               <form onSubmit={changePassword} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {(['current', 'next', 'confirm'] as const).map(f => (
                   <label key={f} style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>
                       {f === 'current' ? s.currentPw : f === 'next' ? s.newPw : s.confirmPw}
                     </span>
                     <input type="password" value={newPw[f]} onChange={e => setNewPw(p => ({ ...p, [f]: e.target.value }))}
@@ -285,7 +285,7 @@ export default function SettingsPage() {
 
 function STitle({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 16 }}>
+    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 16 }}>
       {children}
     </div>
   )

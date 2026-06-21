@@ -27,11 +27,11 @@ const CATEGORY_COLORS: Record<string, string> = {
 function ScoreBar({ label, value, color }: { label: string; value: number; color: string }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-      <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', color: 'var(--ink-faint)', width: 70, flexShrink: 0 }}>{label}</span>
+      <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-faint)', width: 70, flexShrink: 0 }}>{label}</span>
       <div style={{ flex: 1, height: 4, background: 'var(--line)', borderRadius: 2, overflow: 'hidden' }}>
         <div style={{ height: '100%', width: `${value}%`, background: color, borderRadius: 2 }} />
       </div>
-      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.7rem', color: 'var(--ink-soft)', width: 24, textAlign: 'right' }}>{value}</span>
+      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.75rem', color: 'var(--ink-soft)', width: 24, textAlign: 'right' }}>{value}</span>
     </div>
   )
 }
@@ -82,7 +82,7 @@ export default function RecommendationsPage() {
       <BackButton href="/dashboard" style={{ marginBottom: 24 }} />
       <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◈ {strings.nav.actions}</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◈ {strings.nav.actions}</div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
             {s.title}
           </h1>
@@ -134,10 +134,10 @@ export default function RecommendationsPage() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, marginBottom: 14 }}>
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.1em', color: catColor }}>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.1em', color: catColor }}>
                         {r.category.replace('_', ' ')}
                       </span>
-                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', color: 'var(--ink-faint)', background: 'var(--canvas2)', padding: '1px 8px', borderRadius: 100 }}>
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-faint)', background: 'var(--canvas2)', padding: '1px 8px', borderRadius: 100 }}>
                         {r.framework}
                       </span>
                     </div>

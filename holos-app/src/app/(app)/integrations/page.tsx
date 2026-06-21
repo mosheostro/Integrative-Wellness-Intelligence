@@ -200,7 +200,7 @@ export default async function IntegrationsPage() {
                           borderRadius: 999,
                           background: st.bg,
                           color: st.color,
-                          fontSize: '.72rem',
+                          fontSize: '.78rem',
                           fontFamily: 'var(--font-mono)',
                           letterSpacing: '.04em',
                           whiteSpace: 'nowrap',

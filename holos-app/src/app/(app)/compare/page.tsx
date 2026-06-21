@@ -103,7 +103,7 @@ export default async function ComparePage() {
                 textAlign: 'left',
                 padding: '12px 16px',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '.72rem',
+                fontSize: '.78rem',
                 letterSpacing: '.06em',
                 textTransform: 'uppercase',
                 color: 'var(--ink-faint)',

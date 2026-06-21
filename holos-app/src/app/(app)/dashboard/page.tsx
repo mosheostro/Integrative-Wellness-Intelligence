@@ -13,10 +13,43 @@ export default async function DashboardPage() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/auth/login')
 
-  const { strings, dateLocale } = await getServerStrings()
+  const { strings, locale, dateLocale } = await getServerStrings()
   const s = strings.dashboard
   const dims = strings.dimensions
   const nav = strings.nav
+
+  // ── Localized label lookup tables ─────────────────────────────────────────
+  const STATE_LABELS: Record<string, Partial<Record<string, string>>> = {
+    HIGH_PERFORMANCE:    { en: 'High Performance',    ru: 'Высокая эффективность', he: 'ביצועים גבוהים',       de: 'Hochleistung'          },
+    OPTIMIZATION:        { en: 'Optimization Mode',   ru: 'Режим оптимизации',     he: 'מצב אופטימיזציה',      de: 'Optimierungsmodus'     },
+    BALANCED:            { en: 'Balanced',             ru: 'Сбалансированный',      he: 'מאוזן',                de: 'Ausgewogen'            },
+    MAINTENANCE:         { en: 'Maintenance',          ru: 'Поддержание',           he: 'תחזוקה',               de: 'Erhaltung'             },
+    SLEEP_DEFICIT:       { en: 'Sleep Deficit',        ru: 'Дефицит сна',           he: 'חוסר שינה',            de: 'Schlafdefizit'         },
+    STRESS_DOMINANT:     { en: 'Stress Dominant',      ru: 'Доминирует стресс',     he: 'דומיננטיות של לחץ',    de: 'Stressdominant'        },
+    LOW_RECOVERY:        { en: 'Low Recovery',         ru: 'Слабое восстановление', he: 'התאוששות נמוכה',       de: 'Geringe Erholung'      },
+    ENERGY_IMBALANCE:    { en: 'Energy Imbalance',     ru: 'Дисбаланс энергии',     he: 'חוסר איזון אנרגטי',   de: 'Energieungleichgewicht'},
+    INFLAMMATORY_PATTERN:{ en: 'Inflammatory Pattern', ru: 'Воспалительный паттерн',he: 'דפוס דלקתי',           de: 'Entzündungsmuster'     },
+    LIFESTYLE_IMPROVEMENT:{ en: 'Lifestyle Improvement',ru: 'Улучшение образа жизни',he: 'שיפור אורח חיים',     de: 'Lebensstilverbesserung'},
+  }
+  const TRAJ_LABELS: Record<string, Partial<Record<string, string>>> = {
+    first_session: { en: 'First Session', ru: 'Первая сессия',   he: 'ראשון',             de: 'Erste Sitzung'    },
+    improving:     { en: 'Improving',     ru: 'Улучшение',       he: 'משתפר',             de: 'Verbesserung'     },
+    recovering:    { en: 'Recovering',    ru: 'Восстановление',  he: 'מתאושש',            de: 'Erholung'         },
+    plateauing:    { en: 'Plateauing',    ru: 'Плато',           he: 'מישורי',            de: 'Plateau'          },
+    declining:     { en: 'Declining',     ru: 'Снижение',        he: 'בירידה',            de: 'Rückgang'         },
+    unstable:      { en: 'Unstable',      ru: 'Нестабильный',    he: 'לא יציב',           de: 'Instabil'         },
+  }
+  const PERSONA_NAMES: Record<string, Partial<Record<string, string>>> = {
+    Optimizer:  { en: 'Optimizer',  ru: 'Оптимизатор',  he: 'אופטימיזר',    de: 'Optimierer'   },
+    Seeker:     { en: 'Seeker',     ru: 'Искатель',     he: 'מחפש',         de: 'Suchender'    },
+    Builder:    { en: 'Builder',    ru: 'Строитель',    he: 'בונה',         de: 'Erbauer'      },
+    Recoverer:  { en: 'Recoverer',  ru: 'Восстановитель',he: 'מתאושש',      de: 'Regenerierer' },
+    Explorer:   { en: 'Explorer',   ru: 'Исследователь',he: 'חוקר',         de: 'Entdecker'    },
+    Stabilizer: { en: 'Stabilizer', ru: 'Стабилизатор', he: 'מייצב',        de: 'Stabilisierer'},
+  }
+  const stateLabel = STATE_LABELS[state]?.[locale] ?? state.replace(/_/g, ' ')
+  const trajLabel  = TRAJ_LABELS[trajectory.direction]?.[locale] ?? trajectory.direction.replace('_', ' ')
+  const personaLabel = persona ? (PERSONA_NAMES[persona.persona]?.[locale] ?? persona.persona) : ''
 
   // Batch 1: run all independent queries in parallel
   const [
@@ -169,10 +202,10 @@ export default async function DashboardPage() {
                 <div style={{
                   display: 'inline-block', padding: '4px 14px', borderRadius: 20,
                   background: 'rgba(122,158,142,.15)', color: 'var(--sage-deep)',
-                  fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 600,
+                  fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 600,
                   letterSpacing: '.07em', textTransform: 'uppercase', marginBottom: 14,
                 }}>
-                  {state.replace(/_/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}
+                  {stateLabel}
                 </div>
                 {/* Trajectory badge */}
                 {trajectory.direction !== 'first_session' && (
@@ -181,11 +214,11 @@ export default async function DashboardPage() {
                     padding: '3px 10px', borderRadius: 100,
                     background: `${trajectoryColor}15`,
                     color: trajectoryColor,
-                    fontFamily: 'var(--font-mono)', fontSize: '.65rem', fontWeight: 600,
+                    fontFamily: 'var(--font-mono)', fontSize: '.73rem', fontWeight: 600,
                     textTransform: 'uppercase', letterSpacing: '.07em',
                     marginBottom: 10,
                   }}>
-                    {trajectory.emoji} {trajectory.direction.replace('_', ' ')}
+                    {trajectory.emoji} {trajLabel}
                     {trajectory.delta !== 0 && ` (${trajectory.delta > 0 ? '+' : ''}${trajectory.delta})`}
                   </div>
                 )}
@@ -197,11 +230,11 @@ export default async function DashboardPage() {
                     padding: '3px 10px', borderRadius: 100,
                     background: `${personaMeta.color}12`,
                     color: personaMeta.color,
-                    fontFamily: 'var(--font-mono)', fontSize: '.65rem', fontWeight: 600,
+                    fontFamily: 'var(--font-mono)', fontSize: '.73rem', fontWeight: 600,
                     textTransform: 'uppercase', letterSpacing: '.07em',
                     marginBottom: 10, marginLeft: 6,
                   }}>
-                    {personaMeta.emoji} {persona.persona}
+                    {personaMeta.emoji} {personaLabel}
                   </div>
                 )}
 
@@ -257,7 +290,7 @@ export default async function DashboardPage() {
                     glow={true}
                   />
                   <div style={{
-                    fontSize: 10, marginTop: 8, color: 'var(--ink-faint)',
+                    fontSize: 11, marginTop: 8, color: 'var(--ink-faint)',
                     fontFamily: 'var(--font-mono)', letterSpacing: '.06em',
                     textTransform: 'uppercase', textAlign: 'center', lineHeight: 1.3,
                   }}>
@@ -273,8 +306,8 @@ export default async function DashboardPage() {
             <div className="card-depth" style={{ padding: 24, marginBottom: 24 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
                 <div className="eyebrow">&#9675; {s.compositeTrend}</div>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--ink-faint)' }}>
-                  {snapshots.length} {snapshots.length === 1 ? 'point' : 'points'}
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--ink-faint)' }}>
+                  {snapshots.length} {s.dataPoints}
                 </span>
               </div>
               <div style={{ height: 64, display: 'flex', alignItems: 'flex-end', gap: 3 }}>
@@ -300,7 +333,7 @@ export default async function DashboardPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
                 <div className="eyebrow">&#9672; {s.priorityActions}</div>
                 <a href={'/results/' + latestAssessment?.id} style={{ color: 'var(--sage-deep)', fontSize: '.8125rem', textDecoration: 'none', fontWeight: 500 }}>
-                  {s.seeAll} &#8594;
+                  {s.seeAll}
                 </a>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -341,7 +374,7 @@ export default async function DashboardPage() {
                   <div style={{ fontSize: 26, fontFamily: 'var(--font-serif)', fontWeight: 600, color: 'var(--gold-deep)', lineHeight: 1 }}>
                     {userProgress.level}
                   </div>
-                  <div style={{ fontSize: 10, color: 'var(--ink-faint)', fontFamily: 'var(--font-mono)', marginTop: 3, textTransform: 'uppercase', letterSpacing: '.06em' }}>
+                  <div style={{ fontSize: 11, color: 'var(--ink-faint)', fontFamily: 'var(--font-mono)', marginTop: 3, textTransform: 'uppercase', letterSpacing: '.06em' }}>
                     {s.level}
                   </div>
                 </div>
@@ -356,7 +389,7 @@ export default async function DashboardPage() {
                     <div className="progress-premium-fill" style={{ width: Math.min(100, (userProgress.total_xp % 500) / 5) + '%' }} />
                   </div>
                   <div style={{ fontSize: '.75rem', color: 'var(--ink-faint)', marginTop: 6, fontFamily: 'var(--font-mono)' }}>
-                    {userProgress.total_xp % 500} / 500 XP to next level
+                    {userProgress.total_xp % 500} / 500 XP {s.xpToNextLevel}
                   </div>
                 </div>
               </div>

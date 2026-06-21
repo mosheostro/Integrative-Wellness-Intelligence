@@ -27,7 +27,7 @@ function ScoreBar({ dim, score, label, thriving, stable, needsAttention, critica
         <div style={{ height: '100%', width: `${score ?? 0}%`, background: color, borderRadius: 4 }} />
       </div>
       <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.82rem', fontWeight: 600, color: 'var(--ink)', textAlign: 'right' }}>{score ?? '—'}</div>
-      <div style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', color: stateColor }}>{state}</div>
+      <div style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: stateColor }}>{state}</div>
     </div>
   )
 }
@@ -78,7 +78,7 @@ export default async function ReportsPage() {
       <BackButton href="/dashboard" style={{ marginBottom: 24 }} />
       {/* Header */}
       <div style={{ marginBottom: 40 }}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◎ {nav.reports}</div>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◎ {nav.reports}</div>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
           {s.title}
         </h1>
@@ -101,7 +101,7 @@ export default async function ReportsPage() {
           {/* Composite score card */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
             <div style={{ background: 'var(--ink-stable)', borderRadius: 'var(--radius-lg)', padding: '28px 24px', gridColumn: '1 / 2' }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.4)', marginBottom: 12 }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.4)', marginBottom: 12 }}>
                 {s.compositeScore}
               </div>
               <div style={{ fontFamily: 'var(--font-serif)', fontSize: '3.2rem', fontWeight: 500, color: '#fff', letterSpacing: '-.03em', lineHeight: 1 }}>
@@ -118,7 +118,7 @@ export default async function ReportsPage() {
             </div>
             {DIMENSION_KEYS.slice(0, 3).map(k => (
               <div key={k} style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--radius-lg)', padding: '20px 18px' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.1em', color: COLORS[k], marginBottom: 8 }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.1em', color: COLORS[k], marginBottom: 8 }}>
                   {DIM_LABELS[k]}
                 </div>
                 <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2.2rem', fontWeight: 500, color: 'var(--ink)', letterSpacing: '-.02em' }}>
@@ -130,7 +130,7 @@ export default async function ReportsPage() {
 
           {/* Full dimension breakdown */}
           <div style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--radius-lg)', padding: '28px' }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 20 }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 20 }}>
               {s.allNineDims}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -152,7 +152,7 @@ export default async function ReportsPage() {
           {/* Assessment history */}
           {assessments && assessments.length > 0 && (
             <div style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--radius-lg)', padding: '24px 28px' }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 16 }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 16 }}>
                 {s.assessmentHistory}
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>

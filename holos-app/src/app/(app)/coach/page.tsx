@@ -62,7 +62,7 @@ export default function CoachPage() {
       setMessages(prev => [...prev, { role: 'assistant', content: data.reply, timestamp: new Date() }])
     } catch (err) {
       const isTimeout = err instanceof Error && err.name === 'AbortError'
-      setMessages(prev => [...prev, { role: 'assistant', content: isTimeout ? 'Response took too long. Please try again.' : 'I\'m having trouble connecting right now. Please try again in a moment.', timestamp: new Date() }])
+      setMessages(prev => [...prev, { role: 'assistant', content: isTimeout ? s.errorTimeout : s.errorConnection, timestamp: new Date() }])
     } finally {
       clearTimeout(timer)
       setLoading(false)

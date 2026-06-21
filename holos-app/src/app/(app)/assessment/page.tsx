@@ -224,12 +224,12 @@ export default function AssessmentPage() {
           <div style={{ marginBottom: 28 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
               <span style={{
-                fontFamily: 'var(--font-mono)', fontSize: '.68rem',
+                fontFamily: 'var(--font-mono)', fontSize: '.73rem',
                 textTransform: 'uppercase', letterSpacing: '.1em', color: 'var(--ink-faint)',
               }}>
                 {s.question} {qIndex + 1}
               </span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', color: 'var(--ink-faint)' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', color: 'var(--ink-faint)' }}>
                 {progress}%
               </span>
             </div>
@@ -251,7 +251,7 @@ export default function AssessmentPage() {
               padding: '4px 12px', borderRadius: 100,
               background: (DIM_COLORS[currentQ.dimension] ?? 'var(--sage)') + '22',
               color: DIM_COLORS[currentQ.dimension] ?? 'var(--sage-deep)',
-              fontFamily: 'var(--font-mono)', fontSize: '.68rem',
+              fontFamily: 'var(--font-mono)', fontSize: '.73rem',
               textTransform: 'uppercase', letterSpacing: '.1em',
             }}>
               ◉ {dimLabels[currentQ.dimension]}
@@ -302,7 +302,7 @@ export default function AssessmentPage() {
                         <span style={{
                           display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                           width: 28, height: 28, borderRadius: 6, flexShrink: 0,
-                          fontFamily: 'var(--font-mono)', fontSize: '.72rem', fontWeight: 600,
+                          fontFamily: 'var(--font-mono)', fontSize: '.78rem', fontWeight: 600,
                           background: isSelected ? 'var(--sage-deep)' : 'var(--line)',
                           color: isSelected ? '#fff' : 'var(--ink-soft)',
                           transition: 'all .15s',
@@ -379,7 +379,7 @@ export default function AssessmentPage() {
             </div>
 
             <div style={{
-              fontFamily: 'var(--font-mono)', fontSize: '.62rem',
+              fontFamily: 'var(--font-mono)', fontSize: '.73rem',
               textTransform: 'uppercase', letterSpacing: '.1em',
               color: 'var(--ink-faint)', marginBottom: 14, textAlign: 'center',
             }}>

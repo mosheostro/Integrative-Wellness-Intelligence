@@ -17,7 +17,7 @@ function StatusBadge({ status, label }: { status: string; label: string }) {
       padding: '2px 10px', borderRadius: 100,
       background: (colors[status] ?? 'var(--ink)') + '18',
       color: colors[status] ?? 'var(--ink)',
-      fontFamily: 'var(--font-body)', fontSize: '.72rem', fontWeight: 600,
+      fontFamily: 'var(--font-body)', fontSize: '.78rem', fontWeight: 600,
     }}>{label}</span>
   )
 }
@@ -93,7 +93,7 @@ export default function GoalsPage() {
       {/* Header */}
       <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◆ {strings.nav.goals}</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◆ {strings.nav.goals}</div>
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
             {s.title}
           </h1>
@@ -112,21 +112,21 @@ export default function GoalsPage() {
           <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', color: 'var(--ink)', marginBottom: 20, fontWeight: 500 }}>{s.newGoal}</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
             <label style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>{s.goalTitle}</span>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>{s.goalTitle}</span>
               <input required value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} placeholder={s.titlePlaceholder} style={{ padding: '10px 14px', borderRadius: 'var(--radius)', border: '1px solid var(--line)', background: 'var(--canvas)', fontFamily: 'var(--font-body)', fontSize: '.9rem', color: 'var(--ink)', outline: 'none' }} />
             </label>
             <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>{s.dimension}</span>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>{s.dimension}</span>
               <select value={form.dimension} onChange={e => setForm(f => ({ ...f, dimension: e.target.value }))} style={{ padding: '10px 14px', borderRadius: 'var(--radius)', border: '1px solid var(--line)', background: 'var(--canvas)', fontFamily: 'var(--font-body)', fontSize: '.9rem', color: 'var(--ink)', outline: 'none' }}>
                 {DIMENSION_KEYS.map(d => <option key={d} value={d}>{dimLabel(d)}</option>)}
               </select>
             </label>
             <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>{s.targetDate}</span>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>{s.targetDate}</span>
               <input type="date" value={form.target_date} onChange={e => setForm(f => ({ ...f, target_date: e.target.value }))} style={{ padding: '10px 14px', borderRadius: 'var(--radius)', border: '1px solid var(--line)', background: 'var(--canvas)', fontFamily: 'var(--font-body)', fontSize: '.9rem', color: 'var(--ink)', outline: 'none' }} />
             </label>
             <label style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>{s.description}</span>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>{s.description}</span>
               <textarea rows={2} value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} placeholder={s.descPlaceholder} style={{ padding: '10px 14px', borderRadius: 'var(--radius)', border: '1px solid var(--line)', background: 'var(--canvas)', fontFamily: 'var(--font-body)', fontSize: '.9rem', color: 'var(--ink)', outline: 'none', resize: 'vertical' }} />
             </label>
           </div>
@@ -159,7 +159,7 @@ export default function GoalsPage() {
         <div>
           {activeGoals.length > 0 && (
             <div style={{ marginBottom: 40 }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 16 }}>{s.active} ({activeGoals.length})</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 16 }}>{s.active} ({activeGoals.length})</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {activeGoals.map(g => <GoalCard key={g.id} goal={g} onProgress={updateProgress} target={s.target} dateLocale={dateLocale} dimLabel={dimLabel} statusLabels={{ active: s.active, completed: s.completed, paused: s.paused }} />)}
               </div>
@@ -167,7 +167,7 @@ export default function GoalsPage() {
           )}
           {completedGoals.length > 0 && (
             <div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 16 }}>{s.completed} ({completedGoals.length})</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 16 }}>{s.completed} ({completedGoals.length})</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {completedGoals.map(g => <GoalCard key={g.id} goal={g} onProgress={updateProgress} target={s.target} dateLocale={dateLocale} dimLabel={dimLabel} statusLabels={{ active: s.active, completed: s.completed, paused: s.paused }} />)}
               </div>
@@ -193,7 +193,7 @@ function GoalCard({ goal, onProgress, target, dateLocale, dimLabel, statusLabels
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6, flexShrink: 0 }}>
           <StatusBadge status={goal.status} label={statusLabels[goal.status] ?? goal.status} />
-          <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', color: 'var(--sage-deep)', background: 'rgba(122,158,142,.1)', padding: '2px 8px', borderRadius: 100 }}>{dimLabel(goal.dimension)}</span>
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--sage-deep)', background: 'rgba(122,158,142,.1)', padding: '2px 8px', borderRadius: 100 }}>{dimLabel(goal.dimension)}</span>
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -205,14 +205,14 @@ function GoalCard({ goal, onProgress, target, dateLocale, dimLabel, statusLabels
           <div style={{ display: 'flex', gap: 4 }}>
             {[25, 50, 75, 100].map(p => (
               <button key={p} onClick={() => onProgress(goal.id, p)}
-                style={{ padding: '3px 8px', borderRadius: 4, border: '1px solid var(--line)', background: goal.progress >= p ? 'var(--sage-deep)' : 'transparent', color: goal.progress >= p ? '#fff' : 'var(--ink-soft)', fontFamily: 'var(--font-mono)', fontSize: '.72rem', cursor: 'pointer' }}>
+                style={{ padding: '3px 8px', borderRadius: 4, border: '1px solid var(--line)', background: goal.progress >= p ? 'var(--sage-deep)' : 'transparent', color: goal.progress >= p ? '#fff' : 'var(--ink-soft)', fontFamily: 'var(--font-mono)', fontSize: '.78rem', cursor: 'pointer' }}>
                   {p}%
                 </button>
             ))}
           </div>
         )}
         {goal.target_date && (
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', color: 'var(--ink-faint)', marginTop: 8 }}>
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-faint)', marginTop: 8 }}>
             {target}: {new Date(goal.target_date).toLocaleDateString(dateLocale, { month: 'short', day: 'numeric', year: 'numeric' })}
           </div>
         )}

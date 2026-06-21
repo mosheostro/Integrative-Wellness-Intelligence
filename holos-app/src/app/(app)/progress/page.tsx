@@ -87,7 +87,7 @@ export default async function ProgressPage() {
               <div style={{ fontSize: 32, fontFamily: 'var(--font-serif)', fontWeight: 500, color: 'var(--sage-deep)', marginBottom: 6 }}>
                 {(latest?.composite as number) ?? '—'}
               </div>
-              <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '.08em' }}>
+              <div style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '.08em' }}>
                 {s.latestScore}
               </div>
             </div>
@@ -95,7 +95,7 @@ export default async function ProgressPage() {
               <div style={{ fontSize: 32, fontFamily: 'var(--font-serif)', fontWeight: 500, color: 'var(--gold-deep)', marginBottom: 6 }}>
                 {assessments?.length ?? 0}
               </div>
-              <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '.08em' }}>
+              <div style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '.08em' }}>
                 {s.assessments}
               </div>
             </div>
@@ -103,7 +103,7 @@ export default async function ProgressPage() {
               <div style={{ fontSize: 32, fontFamily: 'var(--font-serif)', fontWeight: 500, color: 'var(--indigo)', marginBottom: 6 }}>
                 {userProgress?.level ?? 1}
               </div>
-              <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '.08em' }}>
+              <div style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '.08em' }}>
                 {s.level}
               </div>
             </div>
@@ -111,7 +111,7 @@ export default async function ProgressPage() {
               <div style={{ fontSize: 32, fontFamily: 'var(--font-serif)', fontWeight: 500, color: 'var(--clay)', marginBottom: 6 }}>
                 {userProgress?.total_xp ?? 0}
               </div>
-              <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '.08em' }}>
+              <div style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '.08em' }}>
                 {s.totalXP}
               </div>
             </div>
@@ -138,7 +138,7 @@ export default async function ProgressPage() {
                   )
                 })}
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6, fontSize: 11, color: 'var(--ink-faint)', fontFamily: 'var(--font-mono)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6, fontSize: 12, color: 'var(--ink-faint)', fontFamily: 'var(--font-mono)' }}>
                 <span>{String((snapshots[0] as Snapshot)?.snapshot_date ?? '')}</span>
                 <span>{String((snapshots[snapshots.length - 1] as Snapshot)?.snapshot_date ?? '')}</span>
               </div>
@@ -161,7 +161,7 @@ export default async function ProgressPage() {
                       </div>
                       <div style={{ width: 32, textAlign: 'right', fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 600 }}>{val}</div>
                       {delta !== 0 && (
-                        <div style={{ width: 28, textAlign: 'right', fontSize: 11, fontFamily: 'var(--font-mono)', color: delta > 0 ? 'var(--sage)' : 'var(--rose)' }}>
+                        <div style={{ width: 28, textAlign: 'right', fontSize: 12, fontFamily: 'var(--font-mono)', color: delta > 0 ? 'var(--sage)' : 'var(--rose)' }}>
                           {delta > 0 ? '+' + delta : delta}
                         </div>
                       )}

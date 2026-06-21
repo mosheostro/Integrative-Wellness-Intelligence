@@ -79,7 +79,7 @@ export default function ProfilePage() {
 
   const F = ({ label, children }: { label: string; children: React.ReactNode }) => (
     <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-      <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>{label}</span>
+      <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>{label}</span>
       {children}
     </label>
   )
@@ -105,7 +105,7 @@ export default function ProfilePage() {
     <div style={{ maxWidth: 720, margin: '0 auto', padding: '32px 24px' }}>
       <BackButton href="/dashboard" style={{ marginBottom: 24 }} />
       <div style={{ marginBottom: 36 }}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◈ {strings.nav.profile}</div>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.14em', color: 'var(--sage-deep)', marginBottom: 8 }}>◈ {strings.nav.profile}</div>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>
           {s.title}
         </h1>
@@ -129,13 +129,13 @@ export default function ProfilePage() {
             {profile.email}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', color: 'var(--gold)', background: 'rgba(196,165,90,.12)', padding: '2px 10px', borderRadius: 100 }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.78rem', color: 'var(--gold)', background: 'rgba(196,165,90,.12)', padding: '2px 10px', borderRadius: 100 }}>
               {s.level} {userProgress.level}
             </span>
             <div style={{ flex: 1, height: 4, background: 'var(--line)', borderRadius: 2, maxWidth: 120 }}>
               <div style={{ height: '100%', width: `${Math.min(100, Math.round((userProgress.total_xp % 500) / 5))}%`, background: 'var(--gold)', borderRadius: 2 }} />
             </div>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.7rem', color: 'var(--ink-faint)' }}>{userProgress.total_xp} XP</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.75rem', color: 'var(--ink-faint)' }}>{userProgress.total_xp} XP</span>
           </div>
         </div>
       </div>
@@ -169,7 +169,7 @@ export default function ProfilePage() {
             </select>
           </F>
           <label style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <span style={{ fontFamily: 'var(--font-body)', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>{s.bio}</span>
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>{s.bio}</span>
             <textarea rows={3} value={profile.bio ?? ''} onChange={e => setProfile(p => ({ ...p, bio: e.target.value }))} placeholder={s.bioPlaceholder} style={{ ...inputStyle, resize: 'vertical' }} />
           </label>
         </div>

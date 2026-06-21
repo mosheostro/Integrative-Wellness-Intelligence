@@ -46,11 +46,16 @@ function OrbPlaceholder() {
 }
 
 // Confidence badge
-function ConfidenceBadge({ level }: { level: ConfidenceLevel }) {
+const CONFIDENCE_LABELS: Record<ConfidenceLevel, Record<string, string>> = {
+  high:   { en: 'High confidence',   ru: 'Высокая точность',  he: 'ביטחון גבוה',   de: 'Hohe Genauigkeit'  },
+  medium: { en: 'Medium confidence', ru: 'Средняя точность',  he: 'ביטחון בינוני', de: 'Mittlere Genauigkeit'},
+  low:    { en: 'Preliminary',       ru: 'Предварительно',    he: 'ראשוני',         de: 'Vorläufig'         },
+}
+function ConfidenceBadge({ level, locale = 'en' }: { level: ConfidenceLevel; locale?: string }) {
   const meta: Record<ConfidenceLevel, { label: string; bg: string; color: string }> = {
-    high:   { label: 'High confidence', bg: 'rgba(78,122,106,.12)', color: 'var(--sage-deep)' },
-    medium: { label: 'Medium confidence', bg: 'rgba(196,165,90,.12)', color: 'var(--gold-deep)' },
-    low:    { label: 'Preliminary', bg: 'rgba(180,80,80,.10)', color: 'var(--rose)' },
+    high:   { label: CONFIDENCE_LABELS.high[locale]   ?? 'High confidence',   bg: 'rgba(78,122,106,.12)', color: 'var(--sage-deep)' },
+    medium: { label: CONFIDENCE_LABELS.medium[locale] ?? 'Medium confidence', bg: 'rgba(196,165,90,.12)', color: 'var(--gold-deep)' },
+    low:    { label: CONFIDENCE_LABELS.low[locale]    ?? 'Preliminary',       bg: 'rgba(180,80,80,.10)', color: 'var(--rose)' },
   }
   const m = meta[level]
   return (
@@ -58,7 +63,7 @@ function ConfidenceBadge({ level }: { level: ConfidenceLevel }) {
       display: 'inline-flex', alignItems: 'center', gap: 4,
       padding: '2px 8px', borderRadius: 100,
       background: m.bg, color: m.color,
-      fontFamily: 'var(--font-mono)', fontSize: '.62rem',
+      fontFamily: 'var(--font-mono)', fontSize: '.73rem',
       textTransform: 'uppercase', letterSpacing: '.08em',
       fontWeight: 600,
     }}>
@@ -84,9 +89,35 @@ const DIM_COLORS: Record<string, string> = {
   movement:'--clay', emotional:'--sage', life_balance:'--gold', purpose:'--indigo', energy:'--sage',
 }
 
+// ── Localized intelligence labels (client-side lookup) ─────────────────────
+const PERSONA_NAMES_L: Record<string, Record<string, string>> = {
+  Optimizer:  { en:'Optimizer',   ru:'Оптимизатор',   he:'אופטימיזר',   de:'Optimierer'    },
+  Seeker:     { en:'Seeker',      ru:'Искатель',      he:'מחפש',         de:'Suchender'     },
+  Builder:    { en:'Builder',     ru:'Строитель',     he:'בונה',         de:'Erbauer'       },
+  Recoverer:  { en:'Recoverer',   ru:'Восстановитель',he:'מתאושש',       de:'Regenerierer'  },
+  Explorer:   { en:'Explorer',    ru:'Исследователь', he:'חוקר',         de:'Entdecker'     },
+  Stabilizer: { en:'Stabilizer',  ru:'Стабилизатор',  he:'מייצב',        de:'Stabilisierer' },
+}
+const PERSONA_TAGLINES_L: Record<string, Record<string, string>> = {
+  Optimizer:  { en:'Peak performance seeker',     ru:'Стремление к максимальной эффективности', he:'שואף לביצועים שיא',         de:'Leistungsstreber'          },
+  Seeker:     { en:'Meaning and depth explorer',  ru:'Исследователь смысла и глубины',          he:'חוקר משמעות ועומק',         de:'Sinn- und Tiefenerforscher'},
+  Builder:    { en:'Systematic gap-closer',       ru:'Системный устранитель пробелов',          he:'סוגר פערים שיטתי',         de:'Systematischer Lückenschließer'},
+  Recoverer:  { en:'Rebuilding with intention',   ru:'Восстановление с намерением',             he:'בנייה מחדש בכוונה',         de:'Bewusstes Wiederaufbauen'  },
+  Explorer:   { en:'Curious wellness pioneer',    ru:'Любознательный пионер здоровья',          he:'חלוץ בריאות סקרן',         de:'Neugieriger Wellness-Pionier'},
+  Stabilizer: { en:'Consistency champion',        ru:'Чемпион последовательности',              he:'אלוף העקביות',              de:'Beständigkeitschampion'    },
+}
+const TRAJ_LABELS_L: Record<string, Record<string, string>> = {
+  first_session: { en:'First Session',  ru:'Первая сессия',    he:'סשן ראשון',      de:'Erste Sitzung'  },
+  improving:     { en:'Improving',      ru:'Улучшение',        he:'משתפר',           de:'Verbesserung'   },
+  recovering:    { en:'Recovering',     ru:'Восстановление',   he:'מתאושש',          de:'Erholung'       },
+  plateauing:    { en:'Plateauing',     ru:'Плато',            he:'מישורי',          de:'Plateau'        },
+  declining:     { en:'Declining',      ru:'Снижение',         he:'בירידה',          de:'Rückgang'       },
+  unstable:      { en:'Unstable',       ru:'Нестабильный',     he:'לא יציב',         de:'Instabil'       },
+}
+
 export default function ResultsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
-  const { strings } = useLanguage()
+  const { strings, locale } = useLanguage()
   const s = strings.results
   const dims = strings.dimensions
 
@@ -154,11 +185,16 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
   const personaMeta = PERSONA_META[persona.persona] ?? PERSONA_META['Stabilizer']
   const trajectoryColor = TRAJECTORY_COLORS[trajectory.direction] ?? 'var(--ink-soft)'
 
+  // Localized persona / trajectory labels
+  const personaNameL  = PERSONA_NAMES_L[persona.persona]?.[locale]     ?? persona.persona
+  const personaTaglineL = PERSONA_TAGLINES_L[persona.persona]?.[locale] ?? personaMeta.tagline
+  const trajLabelL    = TRAJ_LABELS_L[trajectory.direction]?.[locale]   ?? trajectory.direction.replace('_', ' ')
+
   const tabLabels: Record<'overview' | 'framework' | 'recommendations' | 'intelligence', string> = {
     overview:        s.overview,
     framework:       s.framework,
     recommendations: s.recommendations,
-    intelligence:    'Intelligence',
+    intelligence:    s.intelligence,
   }
 
   // Confidence by score density proxy
@@ -203,15 +239,15 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                   fontFamily:'var(--font-mono)', fontSize:'.68rem',
                   textTransform:'uppercase', letterSpacing:'.08em', fontWeight:600,
                 }}>
-                  {personaMeta.emoji} {persona.persona}
+                  {personaMeta.emoji} {personaNameL}
                 </span>
                 <span style={{ fontSize:'.78rem', color:'var(--ink-faint)', fontFamily:'var(--font-body)' }}>
-                  {personaMeta.tagline}
+                  {personaTaglineL}
                 </span>
               </div>
 
               <h1 className="h1" style={{ marginBottom:12 }}>
-                Your wellness ecosystem<br/>
+                {s.yourWellnessEcosystem}<br/>
                 <span className="serif-it">{stateDef.label === 'BALANCED' ? s.inBalance : s.needsAttention}</span>
               </h1>
               <p className="lede" style={{ marginBottom:20 }}>{stateDef.description}</p>
@@ -234,7 +270,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                     color: trajectoryColor,
                     fontFamily:'var(--font-mono)', fontSize:'.68rem', fontWeight:600,
                   }}>
-                    {trajectory.emoji} {trajectory.direction}
+                    {trajectory.emoji} {trajLabelL}
                   </span>
                 )}
               </div>
@@ -399,7 +435,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                       <div>
                         <div style={{ display:'flex', gap:8, alignItems:'center', marginBottom:8, flexWrap:'wrap' }}>
                           <span className="badge badge-sage">{rec.category}</span>
-                          <ConfidenceBadge level={confLevel} />
+                          <ConfidenceBadge level={confLevel} locale={locale} />
                         </div>
                         <h3 style={{ fontFamily:'var(--font-serif)', fontSize:'1.05rem', color:'var(--ink)' }}>
                           {i + 1}. {rec.title}
@@ -433,7 +469,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
             {/* Persona card */}
             <RevealSection>
               <div className="card-depth" style={{ padding:28 }}>
-                <div className="eyebrow" style={{ marginBottom:16 }}>◈ Wellness Archetype</div>
+                <div className="eyebrow" style={{ marginBottom:16 }}>◈ {s.wellnessArchetype}</div>
                 <div style={{ display:'flex', alignItems:'flex-start', gap:20 }}>
                   <div style={{
                     width:56, height:56, borderRadius:16, flexShrink:0,
@@ -443,20 +479,20 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                   }}>{personaMeta.emoji}</div>
                   <div>
                     <h3 style={{ fontFamily:'var(--font-serif)', fontSize:'1.3rem', color:'var(--ink)', marginBottom:6 }}>
-                      {persona.persona}
+                      {personaNameL}
                     </h3>
                     <p style={{ color:'var(--ink-soft)', fontSize:'.9rem', lineHeight:1.7, marginBottom:10 }}>
-                      {personaMeta.tagline}
+                      {personaTaglineL}
                     </p>
                     <p style={{ color:'var(--ink-soft)', fontSize:'.875rem', lineHeight:1.7 }}>
-                      <strong style={{ color:'var(--ink)' }}>Primary drive:</strong> {persona.primaryDrive}
+                      <strong style={{ color:'var(--ink)' }}>{s.primaryDriveLabel}</strong> {persona.primaryDrive}
                     </p>
                     <p style={{ color:'var(--ink-soft)', fontSize:'.875rem', lineHeight:1.7, marginTop:6 }}>
-                      <strong style={{ color:'var(--ink)' }}>Coaching approach:</strong> {persona.coachingStyle}
+                      <strong style={{ color:'var(--ink)' }}>{s.coachingApproachLabel}</strong> {persona.coachingStyle}
                     </p>
                     <div style={{ marginTop:12, display:'flex', alignItems:'center', gap:8 }}>
                       <span style={{ fontFamily:'var(--font-mono)', fontSize:'.68rem', color:'var(--ink-faint)', textTransform:'uppercase', letterSpacing:'.08em' }}>
-                        Detection confidence
+                        {s.detectionConfidenceLabel}
                       </span>
                       <div style={{ flex:1, height:4, background:'var(--line)', borderRadius:2, maxWidth:120 }}>
                         <div style={{ width:`${persona.confidence}%`, height:'100%', background: personaMeta.color, borderRadius:2 }} />
@@ -473,7 +509,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
             {/* Trajectory card */}
             <RevealSection delay={0.08}>
               <div className="card-depth" style={{ padding:28 }}>
-                <div className="eyebrow" style={{ marginBottom:16 }}>◎ Wellness Trajectory</div>
+                <div className="eyebrow" style={{ marginBottom:16 }}>◎ {s.wellnessTrajectory}</div>
                 <div style={{ display:'flex', alignItems:'center', gap:16 }}>
                   <div style={{
                     width:52, height:52, borderRadius:'50%', flexShrink:0,
@@ -484,7 +520,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                   }}>{trajectory.emoji}</div>
                   <div>
                     <div style={{ fontFamily:'var(--font-serif)', fontSize:'1.1rem', color:'var(--ink)', marginBottom:4, textTransform:'capitalize' }}>
-                      {trajectory.direction.replace('_', ' ')}
+                      {trajLabelL}
                     </div>
                     <p style={{ color:'var(--ink-soft)', fontSize:'.875rem', lineHeight:1.6 }}>
                       {trajectory.label}
@@ -495,7 +531,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                         fontFamily:'var(--font-mono)', fontSize:11, fontWeight:700,
                         color: trajectory.delta > 0 ? 'var(--sage-deep)' : 'var(--rose)',
                       }}>
-                        {trajectory.delta > 0 ? '+' : ''}{trajectory.delta} pts vs previous
+                        {trajectory.delta > 0 ? '+' : ''}{trajectory.delta} {s.ptsVsPrevious}
                       </div>
                     )}
                   </div>
@@ -506,7 +542,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
             {/* Focus areas */}
             <RevealSection delay={0.16}>
               <div className="card-depth" style={{ padding:28 }}>
-                <div className="eyebrow" style={{ marginBottom:16 }}>◆ Highest-Leverage Focus Areas</div>
+                <div className="eyebrow" style={{ marginBottom:16 }}>◆ {s.focusAreasTitle}</div>
                 <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
                   {persona.focusAreas.map((dim, i) => {
                     const val = dim === 'stress' ? 100 - scores[dim] : scores[dim]
@@ -540,13 +576,27 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
             {/* Why this matters */}
             <RevealSection delay={0.22}>
               <div className="glass-card" style={{ padding:24 }}>
-                <div className="eyebrow" style={{ marginBottom:12 }}>◉ Why These Recommendations</div>
+                <div className="eyebrow" style={{ marginBottom:12 }}>◉ {s.whyRecsTitle}</div>
                 <p style={{ color:'var(--ink-soft)', fontSize:'.9rem', lineHeight:1.75 }}>
-                  As a <strong style={{ color:'var(--ink)' }}>{persona.persona}</strong>, your coaching is optimized for{' '}
-                  <em>{persona.primaryDrive.toLowerCase()}</em>. The recommendations above were selected because they
-                  address your lowest-scoring dimensions, where a small improvement yields the largest composite gain.
-                  Alternatives (like focusing on your strongest dimensions) were deprioritized — your strengths are
-                  already sustaining you; leverage them to support weaker areas.
+                  {locale === 'ru' && <>
+                    Как <strong style={{ color:'var(--ink)' }}>{personaNameL}</strong>, ваш коучинг оптимизирован под{' '}
+                    <em>{persona.primaryDrive.toLowerCase()}</em>. Рекомендации выше выбраны потому, что они устраняют ваши
+                    наименее выраженные измерения — там небольшое улучшение даёт наибольший общий прирост.
+                  </>}
+                  {locale === 'he' && <>
+                    כ-<strong style={{ color:'var(--ink)' }}>{personaNameL}</strong>, האימון שלך מותאם ל-<em>{persona.primaryDrive.toLowerCase()}</em>.
+                    {' '}ההמלצות נבחרו כיוון שהן מתמקדות בממדים הנמוכים ביותר שלך, שם שיפור קטן מניב את הרווח המצרפי הגדול ביותר.
+                  </>}
+                  {locale === 'de' && <>
+                    Als <strong style={{ color:'var(--ink)' }}>{personaNameL}</strong> ist Ihr Coaching auf{' '}
+                    <em>{persona.primaryDrive.toLowerCase()}</em> ausgerichtet. Die obigen Empfehlungen wurden ausgewählt,
+                    weil sie Ihre schwächsten Dimensionen ansprechen — dort bringt eine kleine Verbesserung den größten Gesamtfortschritt.
+                  </>}
+                  {(locale === 'en' || !['ru','he','de'].includes(locale)) && <>
+                    As a <strong style={{ color:'var(--ink)' }}>{personaNameL}</strong>, your coaching is optimized for{' '}
+                    <em>{persona.primaryDrive.toLowerCase()}</em>. The recommendations above were selected because they
+                    address your lowest-scoring dimensions, where a small improvement yields the largest composite gain.
+                  </>}
                 </p>
               </div>
             </RevealSection>
