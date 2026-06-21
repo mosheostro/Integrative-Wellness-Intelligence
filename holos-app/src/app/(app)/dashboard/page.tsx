@@ -174,7 +174,9 @@ export default async function DashboardPage() {
 
               {/* Centre — premium orb */}
               <div style={{ position: 'relative', padding: '16px 0', display: 'flex', justifyContent: 'center' }}>
-                <WellnessOrb score={score} state={state} size={270} values={dimValues} />
+                <div className="orb-glow-wrap">
+                  <WellnessOrb score={score} state={state} size={270} values={dimValues} />
+                </div>
                 <DashboardLiveLayer initialScore={score} />
               </div>
 

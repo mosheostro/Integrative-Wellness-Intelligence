@@ -89,7 +89,9 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
       {/* Hero */}
       <div className="hero-premium" style={{ marginBottom:40, padding:0 }}>
         <div style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:32, alignItems:'center', padding:'32px 36px' }}>
-          <WellnessOrb score={assessment.composite_score} state={stateDef.label} size={240} values={dimValues} />
+          <div className="orb-glow-wrap">
+            <WellnessOrb score={assessment.composite_score} state={stateDef.label} size={240} values={dimValues} />
+          </div>
           <div>
             <div className="eyebrow" style={{ marginBottom:12 }}>
               <span style={{ fontSize:16 }}>{fw?.icon ?? '◆'}</span>

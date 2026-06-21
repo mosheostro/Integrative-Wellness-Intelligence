@@ -655,3 +655,264 @@ html:not([data-theme="light"]) .spark-bar.active {
 .anim-glow   { animation: glow-pulse 3s ease-in-out infinite; }
 .anim-in     { animation: scale-in .45s cubic-bezier(.2,.8,.2,1) both; }
 .anim-fade-up { animation: fade-up .5s ease both; }
+
+/* ════════════════════════════════════════════════════════════════
+   HOLOS PREMIUM 3.0 — Ambient Depth System
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Additional dark mode tokens ─────────────────────────────── */
+[data-theme="dark"],
+html:not([data-theme="light"]) {
+  --neon-sage:     #4ebf94;
+  --neon-gold:     #e8c247;
+  --neon-indigo:   #9b9ff5;
+  --neon-rose:     #ff7b9c;
+  --canvas:        #14161d;   /* deeper black for premium feel */
+  --canvas2:       #1c1e28;
+  --surface-glass: rgba(255,255,255,.04);
+  /* Note: --surface stays #252832 from main dark block — do not override here */
+}
+
+/* ── Ambient floating orbs (background layer) ─────────────────── */
+.ambient-layer {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  overflow: hidden;
+}
+.ambient-orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(72px);
+}
+.ao-1 {
+  width: 640px; height: 640px; top: -220px; right: -80px;
+  background: radial-gradient(ellipse, rgba(78,191,148,.06) 0%, transparent 68%);
+  animation: ambient-drift1 22s ease-in-out infinite;
+}
+.ao-2 {
+  width: 480px; height: 480px; bottom: -120px; left: -60px;
+  background: radial-gradient(ellipse, rgba(107,111,168,.05) 0%, transparent 68%);
+  animation: ambient-drift2 28s ease-in-out infinite;
+}
+.ao-3 {
+  width: 560px; height: 560px; top: 35%; left: 28%;
+  background: radial-gradient(ellipse, rgba(196,165,90,.04) 0%, transparent 68%);
+  animation: ambient-drift3 35s ease-in-out infinite;
+}
+.ao-4 {
+  width: 300px; height: 300px; top: 15%; left: 55%;
+  background: radial-gradient(ellipse, rgba(176,122,96,.04) 0%, transparent 68%);
+  animation: ambient-drift1 18s ease-in-out infinite reverse;
+}
+
+/* Dark mode: stronger orbs */
+[data-theme="dark"] .ao-1,
+html:not([data-theme="light"]) .ao-1 {
+  background: radial-gradient(ellipse, rgba(78,191,148,.14) 0%, transparent 65%);
+}
+[data-theme="dark"] .ao-2,
+html:not([data-theme="light"]) .ao-2 {
+  background: radial-gradient(ellipse, rgba(107,111,168,.12) 0%, transparent 65%);
+}
+[data-theme="dark"] .ao-3,
+html:not([data-theme="light"]) .ao-3 {
+  background: radial-gradient(ellipse, rgba(232,194,71,.07) 0%, transparent 65%);
+}
+[data-theme="dark"] .ao-4,
+html:not([data-theme="light"]) .ao-4 {
+  background: radial-gradient(ellipse, rgba(155,159,245,.09) 0%, transparent 65%);
+}
+
+@keyframes ambient-drift1 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33%      { transform: translate(50px,-40px) scale(1.06); }
+  66%      { transform: translate(-25px,30px) scale(0.97); }
+}
+@keyframes ambient-drift2 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  40%      { transform: translate(-40px,-30px) scale(1.04); }
+  70%      { transform: translate(30px,25px) scale(0.98); }
+}
+@keyframes ambient-drift3 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50%      { transform: translate(35px,45px) scale(1.08); }
+}
+
+/* ── Premium canvas background ────────────────────────────────── */
+[data-theme="dark"] .cinematic-bg,
+html:not([data-theme="light"]) .cinematic-bg {
+  background:
+    radial-gradient(ellipse 65% 55% at 18% 18%, rgba(78,191,148,.16) 0%, transparent 50%),
+    radial-gradient(ellipse 55% 48% at 82% 82%, rgba(107,111,168,.16) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 70% at 50% 50%, rgba(232,194,71,.04) 0%, transparent 65%),
+    #14161d;
+}
+
+/* ── Premium hero — cinematic dark ───────────────────────────── */
+[data-theme="dark"] .hero-premium,
+html:not([data-theme="light"]) .hero-premium {
+  background:
+    radial-gradient(ellipse 130% 110% at 50% 50%, rgba(78,191,148,.10) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 60% at 5% 5%,  rgba(107,111,168,.14) 0%, transparent 45%),
+    radial-gradient(ellipse 60% 50% at 95% 95%,rgba(196,165,90,.08) 0%, transparent 45%),
+    linear-gradient(145deg, #1d2030 0%, #15172000 100%);
+  border-color: rgba(255,255,255,.07);
+  box-shadow:
+    0 4px 6px -1px rgba(0,0,0,.4),
+    0 20px 60px rgba(0,0,0,.5),
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 0 80px rgba(78,191,148,.03);
+}
+
+/* ── Depth card dark mode ─────────────────────────────────────── */
+[data-theme="dark"] .card-depth,
+html:not([data-theme="light"]) .card-depth {
+  background:       rgba(255,255,255,.03);
+  border-color:     rgba(255,255,255,.07);
+  box-shadow:
+    0 1px 3px rgba(0,0,0,.3),
+    0 8px 32px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+[data-theme="dark"] .card-depth:hover,
+html:not([data-theme="light"]) .card-depth:hover {
+  background:   rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.10);
+  box-shadow:
+    0 1px 3px rgba(0,0,0,.3),
+    0 16px 48px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.09);
+  transform: translateY(-4px);
+}
+
+/* ── Glass card dark enhancement ─────────────────────────────── */
+[data-theme="dark"] .glass-card,
+html:not([data-theme="light"]) .glass-card {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.055) 0%, rgba(255,255,255,.02) 100%);
+  border-color:     rgba(255,255,255,.08);
+  border-top-color: rgba(255,255,255,.14);
+  box-shadow:
+    0 4px 24px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+[data-theme="dark"] .glass-card:hover,
+html:not([data-theme="light"]) .glass-card:hover {
+  background:   linear-gradient(135deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.03) 100%);
+  border-color: rgba(255,255,255,.12);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.14);
+}
+
+/* ── Glow ring intensities in dark ───────────────────────────── */
+[data-theme="dark"] .ring-glow-sage,
+html:not([data-theme="light"]) .ring-glow-sage {
+  filter: drop-shadow(0 0 10px rgba(78,191,148,.70));
+}
+[data-theme="dark"] .ring-glow-gold,
+html:not([data-theme="light"]) .ring-glow-gold {
+  filter: drop-shadow(0 0 10px rgba(232,194,71,.68));
+}
+[data-theme="dark"] .ring-glow-indigo,
+html:not([data-theme="light"]) .ring-glow-indigo {
+  filter: drop-shadow(0 0 10px rgba(155,159,245,.68));
+}
+[data-theme="dark"] .ring-glow-rose,
+html:not([data-theme="light"]) .ring-glow-rose {
+  filter: drop-shadow(0 0 10px rgba(255,123,156,.68));
+}
+
+/* ── Dim card dark orbit pulse ────────────────────────────────── */
+[data-theme="dark"] .dim-card:hover,
+html:not([data-theme="light"]) .dim-card:hover {
+  box-shadow:
+    0 8px 32px rgba(0,0,0,.5),
+    0 0 0 1px rgba(78,191,148,.15),
+    inset 0 1px 0 rgba(255,255,255,.09);
+}
+
+/* ── Score badge dark glow ────────────────────────────────────── */
+[data-theme="dark"] .score-badge .score-num,
+html:not([data-theme="light"]) .score-badge .score-num {
+  color: var(--ink);
+  text-shadow: 0 0 40px rgba(78,191,148,.25);
+}
+
+/* ── Button premium hover ─────────────────────────────────────── */
+[data-theme="dark"] .btn-sage,
+html:not([data-theme="light"]) .btn-sage {
+  box-shadow: 0 4px 16px rgba(78,191,148,.3);
+}
+[data-theme="dark"] .btn-sage:hover,
+html:not([data-theme="light"]) .btn-sage:hover {
+  box-shadow: 0 6px 24px rgba(78,191,148,.5);
+}
+
+/* ── Metric pill — inline score display ───────────────────────── */
+.metric-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px 3px 4px;
+  border-radius: 100px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  background: rgba(78,158,142,.1); color: var(--sage-deep);
+  border: 1px solid rgba(78,158,142,.2);
+}
+[data-theme="dark"] .metric-pill,
+html:not([data-theme="light"]) .metric-pill {
+  background:   rgba(78,191,148,.12);
+  color:        var(--neon-sage, #4ebf94);
+  border-color: rgba(78,191,148,.22);
+  box-shadow:   0 0 12px rgba(78,191,148,.15);
+}
+
+/* ── Positive delta badge ─────────────────────────────────────── */
+.delta-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 2px 8px; border-radius: 100px;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+  background: rgba(78,158,142,.12); color: var(--sage-deep);
+}
+[data-theme="dark"] .delta-badge,
+html:not([data-theme="light"]) .delta-badge {
+  background: rgba(78,191,148,.15);
+  color: var(--neon-sage, #4ebf94);
+}
+
+/* ── Orb container glow wrapper ───────────────────────────────── */
+.orb-glow-wrap {
+  position: relative; display: inline-flex;
+}
+.orb-glow-wrap::after {
+  content: '';
+  position: absolute; inset: -20px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(78,158,142,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+[data-theme="dark"] .orb-glow-wrap::after,
+html:not([data-theme="light"]) .orb-glow-wrap::after {
+  background: radial-gradient(ellipse, rgba(78,191,148,.18) 0%, transparent 65%);
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+/* ── Premium scroll ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--line); border-radius: 3px;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb,
+html:not([data-theme="light"]) ::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.12);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--ink-faint); }
+
+/* ── Selection colour ─────────────────────────────────────────── */
+::selection {
+  background: rgba(78,158,142,.28);
+  color: var(--ink);
+}
+[data-theme="dark"] ::selection,
+html:not([data-theme="light"]) ::selection {
+  background: rgba(78,191,148,.32);
+}
