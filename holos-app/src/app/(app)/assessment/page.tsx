@@ -12,6 +12,20 @@ import { WowCompletionScreen } from '@/components/ui/WowCompletionScreen'
 
 type Phase = 'framework' | 'questions' | 'submitting' | 'done'
 
+// Deterministic Fisher-Yates shuffle seeded by question ID.
+// Returns the ORIGINAL indices in their new display order so we can
+// map displayIndex → originalIndex when recording the answer.
+function seededShuffle(count: number, seed: string): number[] {
+  const indices = Array.from({ length: count }, (_, i) => i)
+  let s = [...seed].reduce((acc, c) => acc + c.charCodeAt(0), 17)
+  for (let i = count - 1; i > 0; i--) {
+    s = (Math.imul(s, 1664525) + 1013904223) >>> 0
+    const j = s % (i + 1)
+    ;[indices[i], indices[j]] = [indices[j], indices[i]]
+  }
+  return indices  // indices[displayPos] = originalIndex
+}
+
 const ALL_DIMS: WellnessDimension[] = [
   'nutrition','sleep','recovery','stress','movement',
   'emotional','life_balance','purpose','energy'
@@ -80,9 +94,12 @@ export default function AssessmentPage() {
 
   const handleNext = useCallback(() => {
     if (selected === null || !currentQ) return
+    // Map display index → original index (shuffle is deterministic per question ID)
+    const shuffleOrder = seededShuffle(currentQ.options.length, currentQ.id)
+    const originalIndex = shuffleOrder[selected]
     const answer: AssessmentAnswer = {
       questionId: currentQ.id,
-      optionIndex: selected,
+      optionIndex: originalIndex,
       dimension: currentQ.dimension,
     }
     const newAnswers = [...answers, answer]
@@ -90,7 +107,7 @@ export default function AssessmentPage() {
 
     engine.processAnswer(answer, newAnswers, currentQ.options.length)
 
-    const followUps = getNextQuestions(currentQ.id, selected, newAnsweredIds)
+    const followUps = getNextQuestions(currentQ.id, originalIndex, newAnsweredIds)
     const nextQuestions = [...questions]
     if (followUps.length > 0) {
       nextQuestions.splice(qIndex + 1, 0, ...followUps)
@@ -241,7 +258,7 @@ export default function AssessmentPage() {
             </span>
           </div>
 
-          {/* Question text — localized */}
+          {/* Question text + options — localized and shuffled */}
           {(() => {
             const locQ = getLocalizedQuestion(
               currentQ.id,
@@ -249,6 +266,8 @@ export default function AssessmentPage() {
               currentQ.text,
               locale,
             )
+            // Deterministic display shuffle: same order per question, different across questions
+            const shuffleOrder = seededShuffle(currentQ.options.length, currentQ.id)
             return (
               <>
                 <h2 style={{
@@ -260,16 +279,17 @@ export default function AssessmentPage() {
                   {locQ.text}
                 </h2>
 
-                {/* Options */}
+                {/* Options rendered in shuffled display order */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 32 }}>
-                  {currentQ.options.map((opt, i) => {
-                    const isSelected = selected === i
-                    const key = ['A', 'B', 'C', 'D', 'E'][i]
-                    const optLabel = locQ.options[i] ?? opt.text
+                  {shuffleOrder.map((origIdx, displayPos) => {
+                    const opt = currentQ.options[origIdx]
+                    const isSelected = selected === displayPos
+                    const key = ['A', 'B', 'C', 'D', 'E'][displayPos]
+                    const optLabel = locQ.options[origIdx] ?? opt.text
                     return (
                       <button
-                        key={i}
-                        onClick={() => setSelected(i)}
+                        key={origIdx}
+                        onClick={() => setSelected(displayPos)}
                         style={{
                           display: 'flex', alignItems: 'center', gap: 14,
                           padding: '14px 18px', borderRadius: 'var(--radius-lg)',

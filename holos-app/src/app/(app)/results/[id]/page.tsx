@@ -81,8 +81,14 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
 
   useEffect(() => {
     fetch(`/api/results/${id}`)
-      .then(r => r.json())
-      .then(setData)
+      .then(r => {
+        if (!r.ok) throw new Error('not_found')
+        return r.json()
+      })
+      .then(d => {
+        if (!d?.scores) throw new Error('incomplete')
+        setData(d)
+      })
       .catch(() => setError(strings.common.error))
       .finally(() => setLoading(false))
   }, [id])
@@ -302,11 +308,11 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
           <RevealSection>
             <div className="card-depth" style={{ padding:28, marginBottom:20 }}>
               <div className="eyebrow" style={{ marginBottom:16 }}>{fw?.icon} {fw?.label} {s.interpretation}</div>
-              <p style={{ lineHeight:1.8, color:'var(--ink-soft)' }}>{fwResult.narrative}</p>
+              <p style={{ lineHeight:1.8, color:'var(--ink-soft)' }}>{fwResult?.narrative ?? '—'}</p>
             </div>
           </RevealSection>
 
-          {fwResult.dosha_vata != null && (
+          {fwResult?.dosha_vata != null && (
             <RevealSection delay={0.1}>
               <div className="card-depth" style={{ padding:24, marginBottom:20 }}>
                 <div className="eyebrow" style={{ marginBottom:16 }}>◎ {s.doshaBalance}</div>
@@ -332,7 +338,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
             </RevealSection>
           )}
 
-          {fwResult.element_wood != null && (
+          {fwResult?.element_wood != null && (
             <RevealSection delay={0.15}>
               <div className="card-depth" style={{ padding:24 }}>
                 <div className="eyebrow" style={{ marginBottom:16 }}>◎ {s.fiveElements}</div>

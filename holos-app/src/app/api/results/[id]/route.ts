@@ -14,7 +14,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
     supabase.from('issued_recommendations').select('*').eq('assessment_id', id).order('priority_score', { ascending: false }),
   ])
 
-  if (!assessment) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  if (!assessment || !scores) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
-  return NextResponse.json({ assessment, scores, fwResult, recommendations: recs ?? [] })
+  return NextResponse.json({ assessment, scores, fwResult: fwResult ?? null, recommendations: recs ?? [] })
 }
