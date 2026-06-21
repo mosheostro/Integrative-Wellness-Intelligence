@@ -80,7 +80,7 @@ export default async function AboutPage() {
               color:          '#fff',
             }}>◈</div>
             <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 500, color: 'var(--ink)', margin: '0 0 4px' }}>{FOUNDER.name}</h2>
-            <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-faint)', marginBottom: 28 }}>{FOUNDER.title}</div>
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-faint)', marginBottom: 28 }}>{a.founderTitle}</div>
 
             {/* Contact links */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28 }}>
@@ -138,7 +138,7 @@ export default async function AboutPage() {
               {a.bioHeading}
             </h2>
             <div style={{ fontFamily: 'var(--font-body)', fontSize: '.95rem', lineHeight: 1.8, color: 'var(--ink-soft)' }}>
-              <p>{FOUNDER.bio}</p>
+              <p>{a.bioPara1}</p>
               <p style={{ marginTop: 20 }}>{a.bioPara2}</p>
               <p style={{ marginTop: 20 }}>{a.bioPara3}</p>
             </div>

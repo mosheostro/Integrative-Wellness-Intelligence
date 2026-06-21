@@ -8,6 +8,7 @@ import { getLocalizedFramework } from '@/frameworks/frameworks.i18n'
 import { useWellnessEngine } from '@/hooks/useWellnessEngine'
 import { AnimatedScore, LiveScoreBar } from '@/components/ui/AnimatedScore'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { WowCompletionScreen } from '@/components/ui/WowCompletionScreen'
 
 type Phase = 'framework' | 'questions' | 'submitting' | 'done'
 
@@ -170,25 +171,17 @@ export default function AssessmentPage() {
 
   // ── Submitting ───────────────────────────────────────────────
   if (phase === 'submitting') {
+    const fwLabel = (() => {
+      const fw = FRAMEWORKS_LIST.find(f => f.id === framework)
+      return fw ? getLocalizedFramework(fw.id, { label: fw.label, origin: fw.origin, description: fw.description }, locale).label : framework
+    })()
     return (
-      <div style={{
-        minHeight: '80dvh', display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center', gap: 32,
-        background: getAmbientGradient(engine.liveComposite),
-        transition: 'background 1s ease',
-      }}>
-        <AnimatedScore
-          value={engine.liveComposite}
-          size="xl"
-          color="var(--sage)"
-          label={s.calculating}
-          duration={1200}
-        />
-        <div className="spinner" style={{ width: 28, height: 28, borderWidth: 2 }} />
-        <p style={{ color: 'var(--ink-soft)', fontSize: '.9rem' }}>
-          {s.analysing} {(() => { const fw = FRAMEWORKS_LIST.find(f => f.id === framework); return fw ? getLocalizedFramework(fw.id, { label: fw.label, origin: fw.origin, description: fw.description }, locale).label : framework })()}…
-        </p>
-      </div>
+      <WowCompletionScreen
+        score={engine.liveComposite}
+        framework={fwLabel}
+        calculatingLabel={s.calculating}
+        analysingLabel={`${s.analysing} ${fwLabel}…`}
+      />
     )
   }
 

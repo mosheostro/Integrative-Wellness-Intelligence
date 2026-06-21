@@ -6,6 +6,7 @@ import { WellnessOrb } from '@/components/ui/WellnessOrb'
 import { RadarChart } from '@/components/ui/RadarChart'
 import { ScoreRing } from '@/components/ui/ScoreRing'
 import { DashboardLiveLayer } from '@/components/ui/DashboardLiveLayer'
+import { computeTrajectory, TRAJECTORY_COLORS, detectPersona, PERSONA_META } from '@/engine/intelligence-engine'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -55,6 +56,21 @@ export default async function DashboardPage() {
   const hasData = !!latestScores
   const score   = latestAssessment?.composite_score ?? 0
   const state   = latestAssessment?.wellness_state ?? 'LIFESTYLE_IMPROVEMENT'
+
+  // Intelligence layer: trajectory + persona
+  const snapshotHistory = (snapshots ?? []).map((s: Record<string, unknown>) => ({
+    composite: (s.composite as number) ?? 0,
+    snapshot_date: (s.snapshot_date as string) ?? '',
+  }))
+  const trajectory = computeTrajectory(score, snapshotHistory)
+  const trajectoryColor = TRAJECTORY_COLORS[trajectory.direction]
+
+  const behavioralProfile = {
+    contradictions: [] as string[], consistencyScore: 72, extremeBias: 0,
+    dominantConcern: null, patternLabel: 'Balanced',
+  }
+  const persona = latestScores ? detectPersona(latestScores as Parameters<typeof detectPersona>[0], behavioralProfile, snapshotHistory.length === 0) : null
+  const personaMeta = persona ? PERSONA_META[persona.persona] : null
   // Fallback chain: full_name → email username (never show "there")
   const rawFirst = (profile?.full_name ?? '').split(' ')[0].trim()
   const emailFirst = (user.email ?? '').split('@')[0]
@@ -158,6 +174,37 @@ export default async function DashboardPage() {
                 }}>
                   {state.replace(/_/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase())}
                 </div>
+                {/* Trajectory badge */}
+                {trajectory.direction !== 'first_session' && (
+                  <div style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 5,
+                    padding: '3px 10px', borderRadius: 100,
+                    background: `${trajectoryColor}15`,
+                    color: trajectoryColor,
+                    fontFamily: 'var(--font-mono)', fontSize: '.65rem', fontWeight: 600,
+                    textTransform: 'uppercase', letterSpacing: '.07em',
+                    marginBottom: 10,
+                  }}>
+                    {trajectory.emoji} {trajectory.direction.replace('_', ' ')}
+                    {trajectory.delta !== 0 && ` (${trajectory.delta > 0 ? '+' : ''}${trajectory.delta})`}
+                  </div>
+                )}
+
+                {/* Persona badge */}
+                {personaMeta && persona && (
+                  <div style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 5,
+                    padding: '3px 10px', borderRadius: 100,
+                    background: `${personaMeta.color}12`,
+                    color: personaMeta.color,
+                    fontFamily: 'var(--font-mono)', fontSize: '.65rem', fontWeight: 600,
+                    textTransform: 'uppercase', letterSpacing: '.07em',
+                    marginBottom: 10, marginLeft: 6,
+                  }}>
+                    {personaMeta.emoji} {persona.persona}
+                  </div>
+                )}
+
                 {analysedDate && (
                   <p style={{ fontSize: '.82rem', color: 'var(--ink-faint)', lineHeight: 1.6, margin: 0 }}>
                     {s.lastAnalysed} {analysedDate}

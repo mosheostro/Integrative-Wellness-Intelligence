@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { NewsletterForm } from '@/components/ui/NewsletterForm'
+import { KnowledgeFilterGrid } from '@/components/ui/KnowledgeFilterGrid'
 import { getServerStrings } from '@/lib/i18n/server'
 import { getListingArticles } from '@/lib/i18n/knowledge-articles'
 
@@ -18,14 +19,17 @@ const ARTICLE_COLORS: Record<string, string> = {
   'stress-dimension':      'var(--rose)',
   'avicenna-canon':        'var(--gold)',
   'tibetan-three-humours': 'var(--clay)',
+  'swarga-tradition':      'var(--sage-deep)',
 }
 
-const CATEGORIES = ['All', 'Foundation', 'Assessment', 'Ayurveda', 'Daoist Medicine', 'Rambam', 'Tibetan Medicine', 'Avicenna', 'Sleep', 'Stress', 'Nutrition', 'Movement']
+// Locale-specific "All" label for the filter
+const ALL_LABEL: Record<string, string> = { en: 'All', ru: 'Все', he: 'הכל', de: 'Alle' }
 
 export default async function KnowledgePage() {
   const { strings, locale } = await getServerStrings()
   const k = strings.knowledge
   const { featured: FEATURED, articles: ARTICLES } = getListingArticles(locale)
+  const allLabel = ALL_LABEL[locale] ?? 'All'
 
   return (
     <div style={{ background: 'var(--canvas)' }}>
@@ -43,27 +47,6 @@ export default async function KnowledgePage() {
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--ink-soft)' }}>
             {k.heroSubtitle}
           </p>
-        </div>
-      </section>
-
-      {/* Category filters (decorative) */}
-      <section style={{ padding: '0 24px 40px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-          {CATEGORIES.map((c, i) => (
-            <button key={c}
-              style={{
-                padding:      '6px 16px',
-                borderRadius: 100,
-                border:       '1px solid var(--line)',
-                background:   i === 0 ? 'var(--sage-deep)' : 'var(--surface)',
-                color:        i === 0 ? '#fff' : 'var(--ink-soft)',
-                fontFamily:   'var(--font-body)',
-                fontSize:     '.8rem',
-                cursor:       'pointer',
-              }}>
-              {c}
-            </button>
-          ))}
         </div>
       </section>
 
@@ -108,34 +91,8 @@ export default async function KnowledgePage() {
         </div>
       </section>
 
-      {/* Article grid */}
-      <section style={{ padding: '0 24px 96px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
-          {ARTICLES.map(a => {
-            const color = ARTICLE_COLORS[a.id] ?? 'var(--sage-deep)'
-            return (
-              <Link key={a.id} href={`/knowledge/${a.id}`}
-                style={{
-                  display:        'block',
-                  background:     'var(--surface)',
-                  border:         '1px solid var(--line)',
-                  borderTop:      `3px solid ${color}`,
-                  borderRadius:   'var(--radius-lg)',
-                  padding:        '28px 24px',
-                  textDecoration: 'none',
-                }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color, marginBottom: 12 }}>{a.category}</div>
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', fontWeight: 500, color: 'var(--ink)', lineHeight: 1.35, margin: '0 0 10px' }}>{a.title}</h3>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-faint)', lineHeight: 1.6, margin: '0 0 16px' }}>{a.excerpt}</p>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '.75rem', color: 'var(--ink-faint)' }}>{a.date} · {a.readTime}</span>
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '.8rem', color: 'var(--sage-deep)', fontWeight: 600 }}>{k.read}</span>
-                </div>
-              </Link>
-            )
-          })}
-        </div>
-      </section>
+      {/* Interactive filter + article grid (client component) */}
+      <KnowledgeFilterGrid articles={ARTICLES} allLabel={allLabel} readLabel={k.read} />
 
       {/* Newsletter */}
       <section style={{ background: 'var(--canvas2)', padding: '80px 24px', textAlign: 'center' }}>

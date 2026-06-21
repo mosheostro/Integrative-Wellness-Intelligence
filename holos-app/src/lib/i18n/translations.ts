@@ -193,8 +193,8 @@ export interface Translations {
   }
   about: {
     eyebrow: string; heroTitleA: string; heroTitleEm: string; heroSubtitle: string
-    bioHeading: string; bioPara2: string; bioPara3: string; blockquote: string
-    expertiseLabel: string; credentialsLabel: string
+    bioHeading: string; bioPara1: string; bioPara2: string; bioPara3: string; blockquote: string
+    founderTitle: string; expertiseLabel: string; credentialsLabel: string
     philosophyEyebrow: string; philosophyTitle: string
     p1Icon: string; p1Title: string; p1Body: string
     p2Icon: string; p2Title: string; p2Body: string
@@ -632,6 +632,8 @@ const en: Translations = {
     heroTitleA: 'Built at the intersection of', heroTitleEm: 'ancient and modern.',
     heroSubtitle: ' spent >15 years studying wellness traditions across four continents before building the tool he wished had existed from the beginning.',
     bioHeading: 'The 15-year journey behind HOLOS.',
+    bioPara1: 'Moshe Ostrovsky spent 15 years studying wellness traditions on four continents — from Ayurvedic ashrams in India to Tibetan medical colleges in Nepal, from Hippocratic archives in Greece to clinical research institutions in Europe. He synthesised these insights into HOLOS: a precision wellness intelligence system that maps the human being across nine dimensions and eight traditions simultaneously.',
+    founderTitle: 'Founder & Chief Wellness Architect',
     bioPara2: 'What began as a personal quest to resolve a chronic health mystery that Western medicine couldn\'t explain became a systematic study of every major medical tradition on earth. From Ayurvedic ashrams in Kerala to Tibetan medical colleges in Dharamsala; from Daoist monasteries in Wudang to academic hospitals in Tel Aviv — Moshe studied where the traditions agreed, and more importantly, where they disagreed.',
     bioPara3: 'The pattern he found: every tradition uses different language, different mechanisms, different treatments — but they all converge on the same underlying signal. That signal is HOLOS.',
     blockquote: 'True health is the dynamic harmony between body, energy, mind, and meaning. Every tradition holds a piece of the truth. HOLOS holds them all at once.',
@@ -1158,6 +1160,8 @@ deleteAccountBtn: 'Удалить аккаунт',
     heroTitleA: 'Создано на пересечении', heroTitleEm: 'древнего и современного.',
     heroSubtitle: ' провёл >15 лет, изучая традиции оздоровления на четырёх континентах, прежде чем создал инструмент, который мечтал иметь с самого начала.',
     bioHeading: '15-летний путь, стоящий за HOLOS.',
+    bioPara1: 'Моше Островский провёл 15 лет, изучая традиции оздоровления на четырёх континентах — от аюрведических ашрамов в Индии до тибетских медицинских колледжей в Непале, от архивов Гиппократа в Греции до клинических исследовательских институтов в Европе. Он синтезировал эти знания в HOLOS: систему точного wellness-интеллекта, которая отображает человека по девяти измерениям и восьми традициям одновременно.',
+    founderTitle: 'Основатель и Главный Архитектор Благополучия',
     bioPara2: 'То, что началось как личный поиск решения хронической проблемы со здоровьем, которую не могла объяснить западная медицина, превратилось в систематическое изучение всех крупных медицинских традиций мира. От аюрведических ашрамов в Керале до тибетских медицинских колледжей в Дхарамсале; от даосских монастырей в Удандане до академических больниц в Тель-Авиве — Моше изучал, где традиции сходятся, и, что важнее, где расходятся.',
     bioPara3: 'Обнаруженная закономерность: каждая традиция использует разный язык, механизмы, методы лечения — но все они сходятся к одному сигналу. Этот сигнал и есть HOLOS.',
     blockquote: 'Истинное здоровье — это динамическая гармония тела, энергии, разума и смысла. Каждая традиция хранит часть истины. HOLOS хранит их все.',
@@ -1682,6 +1686,8 @@ const he: Translations = {
     heroTitleA: 'נבנה בצומת בין', heroTitleEm: 'העתיק לעכשווי.',
     heroSubtitle: ' בילה למעלה מ-15 שנה בחקר מסורות בריאות בארבע יבשות לפני שבנה את הכלי שרצה שיהיה קיים מההתחלה.',
     bioHeading: '.מסע של 15 שנה מאחורי HOLOS',
+    bioPara1: 'משה אוסטרובסקי בילה 15 שנה בחקר מסורות הבריאות בארבע יבשות — מאשרמי האיורוודה בהודו ועד לבתי ספר לרפואה טיבטית בנפאל, מארכיוני היפוקרטס ביוון ועד למוסדות מחקר קליני באירופה. הוא סינתז את התובנות הללו ל-HOLOS: מערכת בינת בריאות מדויקת שממפה את האדם על פני תשעה ממדים ושמונה מסורות בו-זמנית.',
+    founderTitle: 'מייסד ואדריכל ראשי של הרווחה',
     bioPara2: 'מה שהתחיל כחיפוש אישי לפתרון תעלומה בריאותית כרונית שהרפואה המערבית לא הצליחה להסביר הפך למחקר שיטתי של כל המסורות הרפואיות הגדולות בעולם. מאשרמי איורוודה בקרלה ועד לבתי ספר לרפואה טיבטית בדהרמסאלה; ממנזרים טאואיסטיים בוודאנג ועד לבתי חולים אקדמיים בתל אביב — משה חקר היכן המסורות מסכימות, וחשוב מכך, היכן הן נחלקות.',
     bioPara3: '.הדפוס שמצא: כל מסורת משתמשת בשפה, מנגנונים וטיפולים שונים — אך כולן מתכנסות לאותו אות יסוד. האות הזה הוא HOLOS',
     blockquote: '.בריאות אמיתית היא ההרמוניה הדינמית בין גוף, אנרגיה, נפש ומשמעות. כל מסורת מחזיקה חלק מהאמת. HOLOS מחזיק את כולן יחד',
@@ -2206,6 +2212,8 @@ const de: Translations = {
     heroTitleA: 'Gebaut an der Schnittstelle von', heroTitleEm: 'Alt und Modern.',
     heroSubtitle: ' verbrachte >15 Jahre damit, Wellness-Traditionen auf vier Kontinenten zu studieren, bevor er das Tool entwickelte, das er sich von Anfang an gewünscht hätte.',
     bioHeading: 'Die 15-jährige Reise hinter HOLOS.',
+    bioPara1: 'Moshe Ostrovsky verbrachte 15 Jahre damit, Wellness-Traditionen auf vier Kontinenten zu studieren — von Ayurveda-Ashrams in Indien bis zu tibetischen Medizinschulen in Nepal, von hippokratischen Archiven in Griechenland bis zu klinischen Forschungsinstituten in Europa. Er synthetisierte diese Erkenntnisse zu HOLOS: einem Präzisions-Wellness-Intelligenzsystem, das den Menschen gleichzeitig über neun Dimensionen und acht Traditionen hinweg kartiert.',
+    founderTitle: 'Gründer & Chefarchitekt für Wohlbefinden',
     bioPara2: 'Was als persönliche Suche nach einer Lösung für ein chronisches Gesundheitsproblem begann, das die westliche Medizin nicht erklären konnte, wurde zu einem systematischen Studium jeder großen Medizintradition der Erde. Von Ayurveda-Ashrams in Kerala bis zu tibetischen Medizinkollegs in Dharamsala; von daoistischen Klöstern in Wudang bis zu akademischen Krankenhäusern in Tel Aviv — Moshe studierte, wo die Traditionen übereinstimmen, und wichtiger noch, wo sie sich unterscheiden.',
     bioPara3: 'Das Muster, das er fand: Jede Tradition verwendet eine andere Sprache, andere Mechanismen, andere Behandlungen — aber alle konvergieren auf dasselbe zugrunde liegende Signal. Dieses Signal ist HOLOS.',
     blockquote: 'Wahre Gesundheit ist die dynamische Harmonie zwischen Körper, Energie, Geist und Bedeutung. Jede Tradition hält ein Stück der Wahrheit. HOLOS hält sie alle gleichzeitig.',
