@@ -47,9 +47,6 @@ export default async function DashboardPage() {
     Explorer:   { en: 'Explorer',   ru: 'Исследователь',he: 'חוקר',         de: 'Entdecker'    },
     Stabilizer: { en: 'Stabilizer', ru: 'Стабилизатор', he: 'מייצב',        de: 'Stabilisierer'},
   }
-  const stateLabel = STATE_LABELS[state]?.[locale] ?? state.replace(/_/g, ' ')
-  const trajLabel  = TRAJ_LABELS[trajectory.direction]?.[locale] ?? trajectory.direction.replace('_', ' ')
-  const personaLabel = persona ? (PERSONA_NAMES[persona.persona]?.[locale] ?? persona.persona) : ''
 
   // Batch 1: run all independent queries in parallel
   const [
@@ -104,6 +101,9 @@ export default async function DashboardPage() {
   }
   const persona = latestScores ? detectPersona(latestScores as Parameters<typeof detectPersona>[0], behavioralProfile, snapshotHistory.length === 0) : null
   const personaMeta = persona ? PERSONA_META[persona.persona] : null
+  const stateLabel = STATE_LABELS[state]?.[locale] ?? state.replace(/_/g, ' ')
+  const trajLabel  = TRAJ_LABELS[trajectory.direction]?.[locale] ?? trajectory.direction.replace('_', ' ')
+  const personaLabel = persona ? (PERSONA_NAMES[persona.persona]?.[locale] ?? persona.persona) : ''
   // Fallback chain: full_name → email username (never show "there")
   const rawFirst = (profile?.full_name ?? '').split(' ')[0].trim()
   const emailFirst = (user.email ?? '').split('@')[0]
