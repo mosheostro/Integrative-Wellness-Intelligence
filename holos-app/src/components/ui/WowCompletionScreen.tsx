@@ -21,7 +21,7 @@ function useParticleBurst(canvasRef: React.RefObject<HTMLCanvasElement | null>, 
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
     if (!ctx) return
 
     const W = canvas.width  = canvas.offsetWidth  * (window.devicePixelRatio || 1)
