@@ -7,4 +7,10 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
     <>
       <SiteNav />
       <main style={{ paddingTop: 68, minHeight: '100dvh' }}>
-        {c
+        {children}
+      </main>
+      <SiteFooter />
+      <ScrollToTop />
+    </>
+  )
+}

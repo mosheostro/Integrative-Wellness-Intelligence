@@ -155,4 +155,74 @@ export default async function MethodologiesPage() {
               <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start', marginBottom: 24, flexWrap: 'wrap' }}>
                 <div style={{ fontSize: '2.4rem', lineHeight: 1 }}>{t.icon}</div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: '
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', textTransform: 'uppercase', letterSpacing: '.12em', color: t.color, marginBottom: 6 }}>
+                    {t.era} · {t.origin}
+                  </div>
+                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.4rem, 3vw, 1.8rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: '0 0 4px' }}>
+                    {t.name}
+                  </h2>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '.9rem', color: 'var(--ink-soft)', fontStyle: 'italic', margin: 0 }}>
+                    {t.tagline}
+                  </p>
+                </div>
+              </div>
+
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', lineHeight: 1.8, color: 'var(--ink-soft)', marginBottom: 28 }}>
+                {t.body.split('\n\n').map((para, j) => (
+                  <p key={j} style={{ margin: j > 0 ? '16px 0 0' : 0 }}>{para}</p>
+                ))}
+              </div>
+
+              <div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.65rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 12 }}>
+                  {m.keyPillars}
+                </div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                  {t.pillars.map(pillar => (
+                    <span key={pillar} style={{
+                      padding:      '5px 12px',
+                      borderRadius: 100,
+                      background:   'var(--surface)',
+                      border:       `1px solid ${t.color}33`,
+                      fontFamily:   'var(--font-body)',
+                      fontSize:     '.78rem',
+                      color:        'var(--ink-soft)',
+                    }}>{pillar}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section style={{ background: 'var(--canvas2)', padding: '96px 24px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 560, margin: '0 auto' }}>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 500, letterSpacing: '-.02em', color: 'var(--ink)', margin: '0 0 16px' }}>
+            {m.ctaTitle}
+          </h2>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '.95rem', color: 'var(--ink-soft)', margin: '0 0 36px', lineHeight: 1.65 }}>
+            {m.ctaBody}
+          </p>
+          <Link href="/auth/signup"
+            style={{
+              display:        'inline-flex',
+              alignItems:     'center',
+              gap:            8,
+              padding:        '14px 32px',
+              borderRadius:   'var(--radius)',
+              background:     'var(--sage-deep)',
+              color:          '#fff',
+              fontFamily:     'var(--font-body)',
+              fontWeight:     600,
+              fontSize:       '.95rem',
+              textDecoration: 'none',
+            }}>
+            {m.ctaCta}
+          </Link>
+        </div>
+      </section>
+    </div>
+  )
+}

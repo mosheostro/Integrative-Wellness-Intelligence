@@ -169,4 +169,27 @@ export default function ProfilePage() {
             </select>
           </F>
           <label style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeigh
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', textTransform: 'uppercase', letterSpacing: '.08em', color: 'var(--ink-faint)', fontWeight: 600 }}>{s.bio}</span>
+            <textarea rows={3} value={profile.bio ?? ''} onChange={e => setProfile(p => ({ ...p, bio: e.target.value }))} placeholder={s.bioPlaceholder} style={{ ...inputStyle, resize: 'vertical' }} />
+          </label>
+        </div>
+
+        {saveError && (
+          <div style={{ marginTop: 14, padding: '10px 14px', borderRadius: 'var(--radius)', background: 'oklch(0.97 0.03 15 / 0.5)', border: '1px solid oklch(0.70 0.10 15)', color: 'oklch(0.40 0.10 15)', fontFamily: 'var(--font-body)', fontSize: '.85rem' }}>
+            {saveError}
+          </div>
+        )}
+
+        <div style={{ marginTop: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
+          <button type="submit" disabled={saving}
+            style={{ padding: '11px 24px', borderRadius: 'var(--radius)', background: saving ? 'var(--line)' : 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.9rem', border: 'none', cursor: saving ? 'wait' : 'pointer' }}>
+            {saving ? s.saving : s.saveChanges}
+          </button>
+          {saved && (
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: 'var(--sage-deep)', fontWeight: 600 }}>{s.saved}</span>
+          )}
+        </div>
+      </form>
+    </div>
+  )
+}

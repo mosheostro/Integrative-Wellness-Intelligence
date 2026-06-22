@@ -164,4 +164,58 @@ export default function RecommendationsPage() {
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
                       <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.1em', color: catColor }}>
-                      
+                        {CATEGORY_LABELS[r.category?.toUpperCase()]?.[locale] ?? r.category.replace(/_/g, ' ')}
+                      </span>
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-faint)', background: 'var(--canvas2)', padding: '1px 8px', borderRadius: 100 }}>
+                        {TRADITION_LABELS[r.framework]?.[locale] ?? r.framework}
+                      </span>
+                    </div>
+                    <h3 style={{ fontFamily: 'var(--font-body)', fontSize: '.95rem', fontWeight: 600, color: 'var(--ink)', margin: '0 0 6px', textDecoration: done ? 'line-through' : 'none' }}>
+                      {r.title}
+                    </h3>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '.84rem', color: 'var(--ink-soft)', lineHeight: 1.65, margin: 0 }}>
+                      {r.description}
+                    </p>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'flex-end', flexShrink: 0 }}>
+                    <div style={{
+                      fontFamily: 'var(--font-mono)', fontSize: '.75rem', fontWeight: 600,
+                      color: r.priority_score >= 70 ? 'var(--rose)' : r.priority_score >= 40 ? 'var(--gold)' : 'var(--sage)',
+                      background: r.priority_score >= 70 ? 'rgba(176,96,112,.1)' : r.priority_score >= 40 ? 'rgba(196,165,90,.1)' : 'rgba(122,158,142,.1)',
+                      padding: '4px 10px', borderRadius: 100,
+                    }}>
+                      P{Math.round(r.priority_score)}
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 16 }}>
+                  <ScoreBar label={s.impact}     value={Math.round(r.impact_score)}     color="var(--sage)" />
+                  <ScoreBar label={s.difficulty} value={Math.round(r.difficulty_score)} color="var(--rose)" />
+                </div>
+
+                {!done && (
+                  <div style={{ display: 'flex', gap: 8 }}>
+                    <button onClick={() => markDone(r.id)}
+                      style={{ padding: '8px 16px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.8rem', border: 'none', cursor: 'pointer' }}>
+                      {s.markDone}
+                    </button>
+                    <button onClick={() => dismiss(r.id)}
+                      style={{ padding: '8px 14px', borderRadius: 'var(--radius)', border: '1px solid var(--line)', background: 'transparent', color: 'var(--ink-faint)', fontFamily: 'var(--font-body)', fontSize: '.8rem', cursor: 'pointer' }}>
+                      {s.dismiss}
+                    </button>
+                  </div>
+                )}
+                {done && (
+                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '.8rem', color: 'var(--sage-deep)', fontWeight: 600 }}>
+                    {s.completedLabel}
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}

@@ -285,4 +285,7 @@ export function WowCompletionScreen({
             zIndex: 0,
           }}
         />
-      </AnimatePresen
+      </AnimatePresence>
+    </motion.div>
+  )
+}

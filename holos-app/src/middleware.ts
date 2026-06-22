@@ -41,4 +41,23 @@ export async function middleware(request: NextRequest) {
     if (!user && PROTECTED_PREFIXES.some(p => path === p || path.startsWith(p + '/'))) {
       const url = request.nextUrl.clone()
       url.pathname = '/auth/login'
-      url.searchParams.set('ne
+      url.searchParams.set('next', path)
+      return NextResponse.redirect(url)
+    }
+
+    // Redirect authenticated users away from auth pages
+    if (user && (path === '/auth/login' || path === '/auth/signup')) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/dashboard'
+      return NextResponse.redirect(url)
+    }
+  } catch (e) {
+    console.error('Middleware auth check failed:', e)
+  }
+
+  return supabaseResponse
+}
+
+export const config = {
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'],
+}
