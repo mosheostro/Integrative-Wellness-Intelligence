@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import SiteNav from '@/components/layout/SiteNav'
 import SiteFooter from '@/components/layout/SiteFooter'
@@ -24,7 +25,7 @@ const TRAD_META = [
   { icon: '☽', name: 'Rambam',         id: 'rambam',         color: 'var(--indigo)', descKey: 'tradDescRambam'     },
   { icon: '♾', name: 'Hippocrates',    id: 'hippocrates',    color: 'var(--clay)',   descKey: 'tradDescHippocrates'},
   { icon: '◈', name: 'Avicenna',       id: 'avicenna',       color: 'var(--gold)',   descKey: 'tradDescAvicenna'   },
-  { icon: '\U0001f33f', name: 'Ayurveda',   id: 'ayurveda',       color: 'var(--sage-deep)',   descKey: 'tradDescAyurveda'   },
+  { icon: '🌿', name: 'Ayurveda',   id: 'ayurveda',       color: 'var(--sage-deep)',   descKey: 'tradDescAyurveda'   },
   { icon: '☯', name: 'Daoist',         id: 'daoist',         color: 'var(--indigo)', descKey: 'tradDescDaoist'     },
   { icon: '❋', name: 'Tibetan',        id: 'tibetan',        color: 'var(--clay)',   descKey: 'tradDescTibetan'    },
   { icon: '✦', name: 'Swarga',         id: 'swarga',         color: 'var(--gold)',   descKey: 'tradDescSwarga'     },
@@ -630,3 +631,4 @@ export default async function HomePage() {
     </>
   )
 }
+      

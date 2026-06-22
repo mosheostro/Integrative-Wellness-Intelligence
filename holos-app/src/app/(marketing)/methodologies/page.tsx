@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import { getServerStrings } from '@/lib/i18n/server'
 import { getMethodologiesBodies, type ContentKey } from '@/lib/i18n/methodologies-bodies'
@@ -164,10 +165,4 @@ export default async function MethodologiesPage() {
               fontSize:       '.95rem',
               textDecoration: 'none',
             }}>
-            {m.ctaCta}
-          </Link>
-        </div>
-      </section>
-    </div>
-  )
-}
+            {m.ct

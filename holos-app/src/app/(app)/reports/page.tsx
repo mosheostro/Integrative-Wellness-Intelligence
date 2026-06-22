@@ -182,11 +182,4 @@ export default async function ReportsPage() {
               {s.newAssessment}
             </Link>
             <Link href="/progress" style={{ padding: '11px 24px', borderRadius: 'var(--radius)', border: '1.5px solid var(--line)', color: 'var(--ink)', fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '.9rem', textDecoration: 'none' }}>
-              {s.viewActionPlan}
-            </Link>
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
+              

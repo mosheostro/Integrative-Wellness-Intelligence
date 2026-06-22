@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import type { Metadata } from 'next'
 import { FOUNDER } from '@/lib/founder'
 import { getServerStrings } from '@/lib/i18n/server'

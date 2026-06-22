@@ -36,8 +36,37 @@ function ScoreBar({ label, value, color }: { label: string; value: number; color
   )
 }
 
+const CATEGORY_LABELS: Record<string, Record<string, string>> = {
+  SLEEP:       { en: 'Sleep',       ru: 'Сон',            he: 'שינה',       de: 'Schlaf'       },
+  MOVEMENT:    { en: 'Movement',    ru: 'Движение',       he: 'תנועה',      de: 'Bewegung'     },
+  NUTRITION:   { en: 'Nutrition',   ru: 'Питание',        he: 'תזונה',      de: 'Ernährung'    },
+  RECOVERY:    { en: 'Recovery',    ru: 'Восстановление', he: 'התאוששות',   de: 'Erholung'     },
+  EMOTIONAL:   { en: 'Emotional',   ru: 'Эмоции',         he: 'רגשי',       de: 'Emotional'    },
+  STRESS:      { en: 'Calm',        ru: 'Спокойствие',    he: 'שלווה',      de: 'Gelassenheit' },
+  CALM:        { en: 'Calm',        ru: 'Спокойствие',    he: 'שלווה',      de: 'Gelassenheit' },
+  BALANCE:     { en: 'Balance',     ru: 'Баланс',         he: 'איזון',      de: 'Balance'      },
+  PURPOSE:     { en: 'Purpose',     ru: 'Цель',           he: 'מטרה',       de: 'Zweck'        },
+  ENERGY:      { en: 'Energy',      ru: 'Энергия',        he: 'אנרגיה',     de: 'Energie'      },
+  MINDFULNESS: { en: 'Mindfulness', ru: 'Осознанность',   he: 'מיינדפולנס', de: 'Achtsamkeit'  },
+}
+const TRADITION_LABELS: Record<string, Record<string, string>> = {
+  tibetan:          { en: 'Tibetan',        ru: 'Тибетская',       he: 'טיבטי',          de: 'Tibetisch'      },
+  swarga:           { en: 'Swarga',         ru: 'Сварга',          he: 'סוורגה',         de: 'Swarga'         },
+  ayurveda:         { en: 'Ayurveda',       ru: 'Аюрведа',         he: 'אורוודה',        de: 'Ayurveda'       },
+  tcm:              { en: 'TCM',            ru: 'ТКМ',             he: 'רפואה סינית',    de: 'TCM'            },
+  functional:       { en: 'Functional',     ru: 'Функциональная',  he: 'פונקציונלי',     de: 'Funktionell'    },
+  biorhythm:        { en: 'Biorhythm',      ru: 'Биоритм',         he: 'ביוריתם',        de: 'Biorhythmus'    },
+  naturopathy:      { en: 'Naturopathy',    ru: 'Натуропатия',     he: 'נטורופתיה',      de: 'Naturheilkunde' },
+  integrative:      { en: 'Integrative',    ru: 'Интегративная',   he: 'אינטגרטיבי',     de: 'Integrativ'     },
+  rambam:           { en: 'Rambam',         ru: 'Рамбам',          he: 'רמב"ם',          de: 'Rambam'         },
+  hippocrates:      { en: 'Hippocrates',    ru: 'Гиппократ',       he: 'היפוקרטס',       de: 'Hippokrates'    },
+  avicenna:         { en: 'Avicenna',       ru: 'Авиценна',        he: 'אביצנה',         de: 'Avicenna'       },
+  daoist:           { en: 'Daoist',         ru: 'Даосская',        he: 'דאואיסטי',       de: 'Daoistisch'     },
+  'evidence-based': { en: 'Evidence-Based', ru: 'Доказательная',   he: 'מבוסס ראיות',    de: 'Evidenzbasiert' },
+}
+
 export default function RecommendationsPage() {
-  const { strings } = useLanguage()
+  const { strings, locale } = useLanguage()
   const s = strings.recommendations
 
   const [recs, setRecs]       = useState<Rec[]>([])
@@ -135,58 +164,4 @@ export default function RecommendationsPage() {
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
                       <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.1em', color: catColor }}>
-                        {r.category.replace('_', ' ')}
-                      </span>
-                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-faint)', background: 'var(--canvas2)', padding: '1px 8px', borderRadius: 100 }}>
-                        {r.framework}
-                      </span>
-                    </div>
-                    <h3 style={{ fontFamily: 'var(--font-body)', fontSize: '.95rem', fontWeight: 600, color: 'var(--ink)', margin: '0 0 6px', textDecoration: done ? 'line-through' : 'none' }}>
-                      {r.title}
-                    </h3>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '.84rem', color: 'var(--ink-soft)', lineHeight: 1.65, margin: 0 }}>
-                      {r.description}
-                    </p>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'flex-end', flexShrink: 0 }}>
-                    <div style={{
-                      fontFamily: 'var(--font-mono)', fontSize: '.75rem', fontWeight: 600,
-                      color: r.priority_score >= 70 ? 'var(--rose)' : r.priority_score >= 40 ? 'var(--gold)' : 'var(--sage)',
-                      background: r.priority_score >= 70 ? 'rgba(176,96,112,.1)' : r.priority_score >= 40 ? 'rgba(196,165,90,.1)' : 'rgba(122,158,142,.1)',
-                      padding: '4px 10px', borderRadius: 100,
-                    }}>
-                      P{Math.round(r.priority_score)}
-                    </div>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 16 }}>
-                  <ScoreBar label={s.impact}     value={Math.round(r.impact_score)}     color="var(--sage)" />
-                  <ScoreBar label={s.difficulty} value={Math.round(r.difficulty_score)} color="var(--rose)" />
-                </div>
-
-                {!done && (
-                  <div style={{ display: 'flex', gap: 8 }}>
-                    <button onClick={() => markDone(r.id)}
-                      style={{ padding: '8px 16px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.8rem', border: 'none', cursor: 'pointer' }}>
-                      {s.markDone}
-                    </button>
-                    <button onClick={() => dismiss(r.id)}
-                      style={{ padding: '8px 14px', borderRadius: 'var(--radius)', border: '1px solid var(--line)', background: 'transparent', color: 'var(--ink-faint)', fontFamily: 'var(--font-body)', fontSize: '.8rem', cursor: 'pointer' }}>
-                      {s.dismiss}
-                    </button>
-                  </div>
-                )}
-                {done && (
-                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '.8rem', color: 'var(--sage-deep)', fontWeight: 600 }}>
-                    {s.completedLabel}
-                  </div>
-                )}
-              </div>
-            )
-          })}
-        </div>
-      )}
-    </div>
-  )
-}
+                      

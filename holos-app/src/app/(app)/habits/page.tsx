@@ -35,10 +35,11 @@ export default function HabitsPage() {
 
   const freqLabel = (key: string): string => {
     const map: Record<string, string> = {
-      'daily': s.addHabit.includes('+') ? 'Daily' : s.frequency, // fallback
+      'daily':    s.freqDaily,
+      'weekdays': s.freqWeekdays,
+      'weekly':   s.freqWeekly,
     }
-    // Use capitalized key as display — ideally add translation keys for each
-    return key.charAt(0).toUpperCase() + key.slice(1)
+    return map[key] ?? (key.charAt(0).toUpperCase() + key.slice(1))
   }
 
   const [habits, setHabits]     = useState<Habit[]>([])
@@ -200,29 +201,3 @@ export default function HabitsPage() {
                 }}>
                   {h.completed_today && '✓'}
                 </div>
-                <div style={{ flex: 1 }}>
-                  <div style={{
-                    fontFamily: 'var(--font-body)', fontSize: '.92rem', fontWeight: 600,
-                    color: h.completed_today ? 'var(--ink-soft)' : 'var(--ink)',
-                    textDecoration: h.completed_today ? 'line-through' : 'none',
-                    textDecorationColor: 'var(--line)',
-                  }}>
-                    {h.title}
-                  </div>
-                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '.75rem', color: 'var(--ink-faint)', marginTop: 2 }}>
-                    {dimLabel(h.dimension)} · {h.frequency}
-                  </div>
-                </div>
-                {h.streak > 0 && (
-                  <div style={{ flexShrink: 0 }}>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.78rem', color: 'var(--gold)', fontWeight: 600 }}>🔥 {h.streak}</span>
-                  </div>
-                )}
-              </button>
-            )
-          })}
-        </div>
-      )}
-    </div>
-  )
-}

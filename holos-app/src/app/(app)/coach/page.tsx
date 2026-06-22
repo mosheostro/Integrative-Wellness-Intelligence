@@ -176,17 +176,4 @@ export default function CoachPage() {
             }}
           />
           <button onClick={() => send()} disabled={loading || !input.trim()}
-            className="btn btn-sage"
-            style={{ padding:'0 20px', borderRadius:14, alignSelf:'stretch' }}
-          >↑</button>
-        </div>
-      </div>
-      <style>{`
-        @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
-        @media (max-width: 767px) {
-          .coach-page { bottom: calc(56px + env(safe-area-inset-bottom, 0px)) !important; }
-        }
-      `}</style>
-    </div>
-  )
-}
+            className

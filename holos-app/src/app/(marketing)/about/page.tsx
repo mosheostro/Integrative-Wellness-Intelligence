@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import { FOUNDER } from '@/lib/founder'
 import { getServerStrings } from '@/lib/i18n/server'
@@ -259,7 +260,3 @@ export default async function AboutPage() {
             </Link>
           </div>
         </div>
-      </section>
-    </div>
-  )
-}

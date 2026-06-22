@@ -55,26 +55,4 @@ export function ScoreRing({ value, color = '--sage', size = 96, label, animate =
         <circle
           ref={arcRef}
           cx={cx} cy={cx} r={R}
-          fill="none" stroke={cssColor} strokeWidth={sw}
-          strokeLinecap="round"
-          strokeDasharray={C}
-          strokeDashoffset={animate ? C : C * (1 - value / 100)}
-          transform={`rotate(-90 ${cx} ${cx})`}
-          style={{ transition: animate ? undefined : 'none' }}
-        />
-        {/* Score text */}
-        <text
-          x={cx} y={cx}
-          textAnchor="middle" dominantBaseline="central"
-          fill="var(--ink)"
-          fontSize={size > 80 ? 20 : 14}
-          fontFamily="Spectral, Georgia, serif"
-          fontWeight={600}
-        >
-          {value}
-        </text>
-      </svg>
-      {label && <div className="ring-label" style={{ fontSize: 10, marginTop: 5, letterSpacing: '.06em', textTransform: 'uppercase' }}>{label}</div>}
-    </div>
-  )
-}
+          fill="none" stroke={cssColor} strokeW

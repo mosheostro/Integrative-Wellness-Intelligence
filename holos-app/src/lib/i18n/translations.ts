@@ -43,7 +43,7 @@ export interface Translations {
     beginAssessment: string; newAssessment: string; startAssessment: string
     dimensionBreakdown: string; wellnessRadar: string; currentState: string
     lastAnalysed: string; takeNew: string; wellnessJourney: string
-    priorityActions: string; seeAll: string; level: string; totalXP: string; compositeTrend: string
+    priorityActions: string; seeAll: string; level: string; totalXP: string; xpUnit: string; compositeTrend: string
     xpToNextLevel: string; dataPoints: string
   }
   settings: {
@@ -107,6 +107,7 @@ export interface Translations {
     dimension: string; frequency: string; saving: string; addBtn: string
     todayProgress: string; allCompleted: string
     noHabits: string; noHabitsDesc: string; addFirst: string; loading: string
+    freqDaily: string; freqWeekdays: string; freqWeekly: string
   }
   recommendations: {
     title: string; noRecs: string; noRecsDesc: string
@@ -348,7 +349,7 @@ const en: Translations = {
     currentState: 'Current State', lastAnalysed: 'Your profile was last analysed on',
     takeNew: 'Take a new assessment to track your progress.',
     wellnessJourney: 'Wellness Journey', priorityActions: 'Priority Actions',
-    seeAll: 'See all →', level: 'LEVEL', totalXP: 'Total XP', compositeTrend: 'Composite Trend',
+    seeAll: 'See all →', level: 'LEVEL', totalXP: 'Total XP', xpUnit: 'XP', compositeTrend: 'Composite Trend',
     xpToNextLevel: 'to next level', dataPoints: 'data points',
   },
   settings: {
@@ -448,6 +449,7 @@ const en: Translations = {
     noHabits: 'No habits yet',
     noHabitsDesc: 'Small daily practices compound into lasting transformation.',
     addFirst: 'Add your first habit →', loading: 'Loading…',
+    freqDaily: 'Daily', freqWeekdays: 'Weekdays', freqWeekly: 'Weekly',
   },
   recommendations: {
     title: 'Your Action Plan',
@@ -899,7 +901,7 @@ const ru: Translations = {
     currentState: 'Текущее состояние', lastAnalysed: 'Профиль последний раз анализировался',
     takeNew: 'Пройдите новую оценку, чтобы отследить прогресс.',
     wellnessJourney: 'Путь к здоровью', priorityActions: 'Приоритетные действия',
-    seeAll: 'Все →', level: 'УРОВЕНЬ', totalXP: 'Всего XP', compositeTrend: 'Общий тренд',
+    seeAll: 'Все →', level: 'УРОВЕНЬ', totalXP: 'Всего', xpUnit: 'очков', compositeTrend: 'Общий тренд',
     xpToNextLevel: 'до след. уровня', dataPoints: 'точки данных',
   },
   settings: {
@@ -966,7 +968,7 @@ deleteAccountBtn: 'Удалить аккаунт',
   progress: {
     title: 'Прогресс', noData: 'Данных пока нет',
     noDataDesc: 'Пройдите первую оценку, чтобы начать отслеживать путь к здоровью.',
-    latestScore: 'Последний балл', assessments: 'Оценки', level: 'Уровень', totalXP: 'Всего XP',
+    latestScore: 'Последний балл', assessments: 'Оценки', level: 'Уровень', totalXP: 'Всего очков',
     compositeOverTime: 'Общий балл с течением времени', dimensionBreakdown: 'Разбивка по измерениям',
     assessmentHistory: 'История оценок', yourJourney: 'Ваш путь к здоровью',
     takeAssessment: 'Пройти оценку →',
@@ -1002,6 +1004,7 @@ deleteAccountBtn: 'Удалить аккаунт',
     noHabits: 'Привычек пока нет',
     noHabitsDesc: 'Небольшие ежедневные практики становятся длительными изменениями.',
     addFirst: 'Добавить первую привычку →', loading: 'Загрузка…',
+    freqDaily: 'Ежедневно', freqWeekdays: 'По будням', freqWeekly: 'Еженедельно',
   },
   recommendations: {
     title: 'Ваш план действий',
@@ -1454,7 +1457,7 @@ const he: Translations = {
     currentState: 'מצב נוכחי', lastAnalysed: 'הפרופיל שלך נותח לאחרונה ב',
     takeNew: '.בצע הערכה חדשה כדי לעקוב אחר ההתקדמות שלך',
     wellnessJourney: 'מסע הבריאות', priorityActions: 'פעולות עדיפות',
-    seeAll: 'ראה הכל ←', level: 'רמה', totalXP: 'סה"כ XP', compositeTrend: 'מגמה כוללת',
+    seeAll: 'ראה הכל ←', level: 'רמה', totalXP: 'סה"כ', xpUnit: 'נקודות', compositeTrend: 'מגמה כוללת',
     xpToNextLevel: 'לרמה הבאה', dataPoints: 'נקודות נתונים',
   },
   settings: {
@@ -1518,7 +1521,7 @@ const he: Translations = {
   progress: {
     title: 'התקדמות', noData: 'אין נתונים עדיין',
     noDataDesc: '.השלם את ההערכה הראשונה שלך כדי להתחיל לעקוב אחר מסע הבריאות שלך',
-    latestScore: 'ציון אחרון', assessments: 'הערכות', level: 'רמה', totalXP: 'סה"כ XP',
+    latestScore: 'ציון אחרון', assessments: 'הערכות', level: 'רמה', totalXP: 'סה"כ נקודות',
     compositeOverTime: 'ציון כולל לאורך זמן', dimensionBreakdown: 'פירוט ממדים',
     assessmentHistory: 'היסטוריית הערכות', yourJourney: 'מסע הבריאות שלך',
     takeAssessment: 'בצע הערכה ←',
@@ -1554,6 +1557,7 @@ const he: Translations = {
     noHabits: 'אין הרגלים עדיין',
     noHabitsDesc: '.תרגולים יומיים קטנים מצטברים לשינוי מתמשך',
     addFirst: 'הוסף את ההרגל הראשון שלך ←', loading: 'טוען…',
+    freqDaily: 'יומי', freqWeekdays: 'ימי חול', freqWeekly: 'שבועי',
   },
   recommendations: {
     title: 'תוכנית הפעולה שלך',
@@ -2005,7 +2009,7 @@ const de: Translations = {
     currentState: 'Aktueller Zustand', lastAnalysed: 'Ihr Profil wurde zuletzt analysiert am',
     takeNew: 'Machen Sie eine neue Bewertung, um Ihren Fortschritt zu verfolgen.',
     wellnessJourney: 'Wellnessreise', priorityActions: 'Prioritätsmaßnahmen',
-    seeAll: 'Alle anzeigen →', level: 'STUFE', totalXP: 'Gesamt XP', compositeTrend: 'Gesamttrend',
+    seeAll: 'Alle anzeigen →', level: 'STUFE', totalXP: 'Gesamt', xpUnit: 'Pkt.', compositeTrend: 'Gesamttrend',
     xpToNextLevel: 'bis nächste Stufe', dataPoints: 'Datenpunkte',
   },
   settings: {
@@ -2070,7 +2074,7 @@ const de: Translations = {
   progress: {
     title: 'Fortschritt', noData: 'Noch keine Daten',
     noDataDesc: 'Schließen Sie Ihre erste Bewertung ab, um Ihre Wellnessreise zu verfolgen.',
-    latestScore: 'Letzter Score', assessments: 'Bewertungen', level: 'Stufe', totalXP: 'Gesamt XP',
+    latestScore: 'Letzter Score', assessments: 'Bewertungen', level: 'Stufe', totalXP: 'Gesamt Pkt.',
     compositeOverTime: 'Gesamtpunktzahl über Zeit', dimensionBreakdown: 'Dimensionsaufschlüsselung',
     assessmentHistory: 'Bewertungsverlauf', yourJourney: 'Ihre Wellnessreise',
     takeAssessment: 'Bewertung starten →',
@@ -2106,6 +2110,7 @@ const de: Translations = {
     noHabits: 'Noch keine Gewohnheiten',
     noHabitsDesc: 'Kleine tägliche Praktiken führen zu dauerhafter Veränderung.',
     addFirst: 'Erste Gewohnheit hinzufügen →', loading: 'Lädt…',
+    freqDaily: 'Täglich', freqWeekdays: 'Wochentags', freqWeekly: 'Wöchentlich',
   },
   recommendations: {
     title: 'Ihr Aktionsplan',
@@ -2402,142 +2407,4 @@ const de: Translations = {
     feat5Title: 'Ziele & Gewohnheiten', feat5Desc: 'Setzen Sie Absichten, die auf Ihr Wellness-Profil abgestimmt sind. Bauen Sie Mikrogewohnheiten mit adaptiver Planung auf, die Ihren Chronotyp respektiert.', feat5Cta: 'Gewohnheiten aufbauen',
     feat6Title: 'Fortschritt & Berichte', feat6Desc: 'Langzeit-Tracking über alle 9 Dimensionen. Exportierbare PDF-Berichte für Sie und optional Ihren Arzt.', feat6Cta: 'Berichte ansehen',
     feat7Title: 'Personalisierte Empfehlungen', feat7Desc: 'Protokolle aus sechs Weisheitstraditionen und klinischer Forschung — Ernährung, Bewegung, Schlaf, Atmung und mehr — auf Ihr Profil zugeschnitten.', feat7Cta: 'Empfehlungen ansehen',
-    feat8Title: 'Fortschrittsverfolgung', feat8Desc: 'Wöchentliche Dimensions-Trends, Korrelationseinblicke und Meilensteinfeierlichkeiten zur Motivation.', feat8Cta: 'Fortschritt verfolgen',
-    tradEyebrow: 'Weisheitstraditionen, die die Plattform antreiben',
-    tradTitle: 'Sechs Rahmenwerke. Eine Synthese.',
-    tradCta: 'Methoden erkunden →',
-    tradTagAyurveda: 'Dosha-bewusste Personalisierung',
-    tradTagTCM: 'Qi-Balance & Meridianmuster',
-    tradTagStoicism: 'Mentale Resilienzprotokolle',
-    tradTagKabbalah: 'Zweck- und Bedeutungskartierung',
-    tradTagChrono: 'Zirkadian-optimierter Tagesplan',
-    tradTagFunctional: 'Ursachenanalyse',
-    ctaTitle: 'Bereit, zu beginnen?',
-    ctaBody: 'Starten Sie mit einer kostenlosen Bewertung und sehen Sie Ihr vollständiges Wellness-Profil in Minuten.',
-    ctaCta: 'Die kostenlose Bewertung machen →',
-  },
-  bookSession: {
-    eyebrow: 'Mit Moshe arbeiten',
-    heroTitle: 'Eine Sitzung mit Moshe buchen',
-    heroSubtitle: 'Personalisierte 1:1-Sitzungen, die evidenzbasiertes Coaching mit den Weisheitstraditionen verbinden, die Ihr Profil am meisten anspricht.',
-    s1Title: 'Wellness-Entdeckungssitzung', s1Tag: 'Erste Sitzung', s1Price: 'Kostenlos', s1Duration: '60 Min.',
-    s1Desc: 'Ein tiefgehendes Gespräch, um Ihre aktuelle Wellness-Landschaft zu kartieren — Symptome, Ziele, Lebensstil und Traditionsresonanz. Sie gehen mit Klarheit über Ihre drei Hauptprioritäten und einem Beispielprotokoll.',
-    s1Cta: 'Kostenlose Sitzung buchen',
-    s2Title: 'Integrative Wellness-Überprüfung', s2Tag: 'Am beliebtesten', s2Price: '$180', s2Duration: '90 Min.',
-    s2Desc: 'Vollständige 9-Dimensions-Bewertungsüberprüfung mit Moshe. Enthält Ayurvedische Konstitutionsanalyse, Chronotyp-Kartierung und ein 30-Tage-Personalprotokoll mit wöchentlichen Check-ins in der Holos-Plattform.',
-    s2Cta: 'Sitzung buchen',
-    s3Title: 'Practitioner-Partnerschaftsgespräch', s3Tag: 'Für Fachleute', s3Duration: '45 Min.',
-    s3Desc: 'Für Gesundheitscoaches, Ernährungsberater, Therapeuten und integrative Praktiker, die daran interessiert sind, Holos mit Klienten zu nutzen. Erfahren Sie, wie Sie Klienten onboarden, Berichte lesen und Protokolle gemeinsam erstellen.',
-    s3Cta: 'Gespräch buchen',
-    altTitle: 'Direkten Kontakt bevorzugen?',
-    altBody: 'Senden Sie eine Nachricht via WhatsApp oder Telegram — Moshe antwortet innerhalb eines Werktages.',
-  },
-  legal: {
-    eyebrow: 'Rechtsdokumente',
-    privacyTitle: 'Datenschutzrichtlinie',
-    termsTitle: 'Nutzungsbedingungen',
-    lastUpdated: 'Zuletzt aktualisiert:',
-    privacyNote: 'Dieses Dokument wird auf Englisch bereitgestellt. Bei Fragen kontaktieren Sie uns — wir helfen gerne.',
-    termsNote: 'Diese Bedingungen werden auf Englisch bereitgestellt. Bei Fragen kontaktieren Sie uns — wir helfen gerne.',
-  },
-  science: {
-    eyebrow: 'Wissenschaft & Tradition',
-    heroTitle: 'Alte Weisheit.', heroTitleEm: 'Moderne Erkenntnisse.',
-    heroSubtitle: 'Holos ist kein Wellness-Theater. Jede Empfehlung geht auf peer-reviewte Forschung oder Jahrhunderte reproduzierbarer Tradition zurück — und wir zeigen Ihnen die Quelle.',
-    pillarsTitle: 'Sechs wissenschaftliche Säulen',
-    rambamEyebrow: 'Die Rambam-Synthese',
-    rambamTitle: 'Maimonides beschrieb acht Gesundheitsregime im 12. Jahrhundert. Die moderne Medizin hat sie alle bestätigt.',
-    rambamBody: 'Schlaf, Bewegung, Ernährung, emotionale Regulation, soziale Verbindung, sinnvolle Arbeit, spirituelle Praxis und Umwelt. Das Rambam-Rahmenwerk entspricht fast genau der modernen Funktionsmedizin und Psychoneuroimmunologie. Holos verwendet dies als vereinigende Linse über alle sechs Traditionen.',
-    rambamCta: 'Lesen: Rambams Regime und moderne Wellness →',
-    refsTitle: 'Wichtigste Referenzen',
-    refsFooter: '* Vollständige Bibliographie und klinische Beratungshinweise auf Anfrage für verifizierte Praktiker verfügbar.',
-    refsFooterCta: 'Kontakt aufnehmen',
-    ctaTitle: 'Wissenschaftsbasiert. Weisheitsinformiert.',
-    ctaBody: 'Sehen Sie, wie die Forschung sich in Ihr persönliches Wellness-Protokoll übersetzt.',
-    ctaCta: 'Bewertung starten →',
-  },
-  knowledge: {
-    eyebrow: 'Wissenszentrum',
-    heroTitle: 'Der tiefe Lehrplan hinter', heroTitleEm: 'HOLOS.',
-    heroSubtitle: 'Artikel, Leitfäden und Tiefenanalysen zu integrativer Wellness, den neun Dimensionen und den acht Weisheitstraditionen.',
-    featuredLabel: 'Empfohlen', readArticle: 'Artikel lesen →', read: 'Lesen →',
-    newsletterTitle: 'Der wöchentliche Wellness-Dispatch.',
-    newsletterBody: 'Ein Einblick pro Woche an der Schnittstelle von alter Weisheit und moderner Wissenschaft. Kein Spam. Jederzeit abmelden.',
-    newsletterSubmit: 'Abonnieren →', newsletterPlaceholder: 'ihre@email.de',
-    articleBack: '← Wissenszentrum',
-    articleDisclaimer: 'Wellness-Informationen, kein medizinischer Rat.',
-    articleDisclaimerBody: 'Dieser Artikel dient Bildungszwecken. HOLOS-Inhalte stellen keine medizinische Diagnose, Behandlung oder Beratung dar. Konsultieren Sie einen qualifizierten Gesundheitsfachmann, bevor Sie Änderungen an Ihrer Gesundheitsroutine vornehmen.',
-    articleMore: 'Mehr aus dem Wissenszentrum',
-    articleViewAll: 'Alle Artikel anzeigen →',
-    articleCtaTitle: 'Wenden Sie dieses Wissen auf Ihre Gesundheit an',
-    articleCtaBody: 'Ihre HOLOS-Bewertung übersetzt Forschung und Tradition in einen personalisierten Aktionsplan — spezifisch für Ihren Körper, Ihre Konstitution und Ihr Leben.',
-    articleCtaCta: 'Bewertung beginnen →',
-    articleNotFound: 'Artikel nicht gefunden',
-    articleNotFoundBody: 'Dieser Artikel wurde noch nicht veröffentlicht.',
-    articleNotFoundMore: 'Wir erweitern das HOLOS-Wissenszentrum kontinuierlich. Schauen Sie bald wieder vorbei oder entdecken Sie andere Artikel unten.',
-  },
-  compare: {
-    eyebrow: 'Holos vs. die Alternativen',
-    heroTitle: 'Warum Holos statt einer anderen Wellness-App?',
-    heroSubtitle: 'Generische Apps zählen Schritte. Menschliche Coaches kosten $300 pro Stunde. Holos tut, was keiner von beiden kann: Ihre ganze Person synthetisieren — Körper, Geist, Energie, Zweck — in einem intelligenten, immer aktiven System.',
-    colFeature: 'Funktion', colHolos: 'Holos', colGeneric: 'Generische App', colPro: 'Fachperson',
-    f1: '9-dimensionale Wellness-Karte', f2: 'Ayurvedische Konstitutionsanalyse',
-    f3: 'Chronotyp-bewusste Planung', f4: 'KI-Coach verfügbar 24 / 7',
-    f5: 'Sechs-Traditions-Synthese',
-    f6: 'Tagesjournal mit KI-Einsichten', f6Generic: 'Einfache Protokollierung',
-    f7: 'Langzeitliche Fortschrittsverfolgung', f7Generic: 'Nur Schrittanzahl', f7Pro: 'Manuelle Notizen',
-    f8: 'Personalisierte Ernährungsprotokolle', f8Generic: 'Allgemeine Pläne', f8Pro: 'Nur Spezialgebiete',
-    f9: 'Mit Fachleuten teilbare Berichte',
-    f10: 'Evidenzbasierte Empfehlungen', f10Pro: 'Variiert',
-    f11: 'Auf Abruf verfügbar',
-    f12: 'Monatliche Kosten', f12Holos: 'Ab $29 / Mo', f12Generic: '$0–15 / Mo', f12Pro: '$200–500 / Mo',
-    diffTitle: 'Drei Dinge, die nur Holos kann',
-    d1Title: 'Traditions-Synthese', d1Body: 'Keine einzelne Tradition hat das vollständige Bild. Holos kartiert Sie gleichzeitig über Ayurveda, TCM, Stoizismus, Kabbala, Chronobiologie und Funktionsmedizin.',
-    d2Title: '9-dimensionale Bewertung', d2Body: 'Die meisten Apps verfolgen eine Achse. Holos verfolgt neun — und zeigt Ihnen, welche Dimensionen kausal mit Ihrem größten Schmerzpunkt verbunden sind.',
-    d3Title: 'Adaptive Intelligenz', d3Body: 'Ihr Profil entwickelt sich beim Führen von Journalen und beim Abschließen von Gewohnheiten. Der KI-Coach kalibriert Empfehlungen wöchentlich basierend auf Ihren tatsächlichen Daten neu.',
-    ctaTitle: 'Starten Sie Ihre kostenlose Bewertung',
-    ctaBody: '14-tägige kostenlose Testversion. Keine Kreditkarte erforderlich. Jederzeit kündbar.',
-    ctaCta: 'Kostenlos starten →', ctaCta2: 'Preise ansehen',
-  },
-  integrations: {
-    eyebrow: 'Verbinden Sie Ihre Daten',
-    heroTitle: 'Ihre Gesundheitsdaten,', heroTitleEm: 'alles an einem Ort',
-    heroSubtitle: 'Holos verbindet sich mit Ihren Wearables, Ernährungs-Apps, Kalender und Laborergebnissen, um das vollständigste Bild Ihrer Gesundheit zu erstellen — ohne manuelle Dateneingabe.',
-    ctaCta: 'Apps verbinden →', ctaCta2: 'Integration anfragen',
-    cat1: 'Wearables & Gesundheitsdaten', cat2: 'Ernährung & Essen',
-    cat3: 'Kalender & Terminplanung', cat4: 'Psychische Gesundheit & Achtsamkeit',
-    cat5: 'Labor & Biomarkerdaten',
-    statusAvailable: 'Verfügbar', statusBeta: 'Beta', statusSoon: 'Demnächst',
-    apiTitle: 'Entwickeln Sie etwas für Fachleute?',
-    apiBody: 'Die Holos API ermöglicht es Ihnen, Wellness-Bewertung, Traditions-Analyse und KI-Coaching direkt in Ihre klinische oder Coaching-Plattform einzubetten.',
-    apiCta: 'Mit uns über die API sprechen →',
-  },
-  notFound: {
-    title: 'Seite nicht gefunden.',
-    body: 'Sie wurde möglicherweise verschoben, umbenannt oder — wie ungeprüfte Gewohnheiten — existierte nie wirklich.',
-    home: 'Zur Startseite →',
-    assess: 'Bewertung starten',
-  },
-}
-
-// ── Dictionary map + lookup helper ───────────────────────────────────────────
-export const TRANSLATIONS: Record<Locale, Translations> = { en, ru, he, de }
-
-/** Deep key lookup: t('nav.dashboard') */
-export function getTranslation(locale: Locale, key: string): string {
-  const parts = key.split('.')
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let val: any = TRANSLATIONS[locale]
-  for (const part of parts) {
-    val = val?.[part]
-    if (val === undefined) break
-  }
-  // Fall back to English if key missing in locale
-  if (typeof val !== 'string') {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let fallback: any = TRANSLATIONS.en
-    for (const part of parts) { fallback = fallback?.[part] }
-    return typeof fallback === 'string' ? fallback : key
-  }
-  return val
-}
+    feat8Title: 'Fortschrittsverfolgung', feat8Desc: 'Wöchentliche Dimensions-Trends, Korrelationseinblick

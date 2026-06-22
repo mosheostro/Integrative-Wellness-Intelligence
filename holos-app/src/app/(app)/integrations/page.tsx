@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { getServerStrings } from '@/lib/i18n/server'
