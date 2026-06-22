@@ -160,7 +160,7 @@ export default function ContactPage() {
                     type="tel"
                     value={form.phone}
                     onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="+X XXX XXX XXXX"
                     style={{
                       padding:      '10px 14px',
                       borderRadius: 'var(--radius)',
@@ -273,4 +273,4 @@ export default function ContactPage() {
               <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', color: 'var(--ink)', marginBottom: 4 }}>{FOUNDER.name}</div>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-faint)', marginBottom: 16 }}>{FOUNDER.title}</div>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-soft)', fontStyle: 'italic', lineHeight: 1.6 }}>
-            
+              
