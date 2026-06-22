@@ -232,36 +232,4 @@ export default function JournalPage() {
             const m = MOODS.find(x => x.v === entry.mood)
             return (
               <div key={entry.id} style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--radius-lg)', padding: '24px 28px', marginBottom: 16 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 8 }}>
-                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '.82rem', color: 'var(--ink-faint)' }}>{dateLabel(entry.created_at)}</div>
-                  {m && (
-                    <span style={{ padding: '3px 10px', borderRadius: 100, background: m.color + '20', color: m.color, fontFamily: 'var(--font-body)', fontSize: '.75rem', fontWeight: 600 }}>
-                      {m.label}
-                    </span>
-                  )}
-                </div>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '.92rem', lineHeight: 1.75, color: 'var(--ink-soft)', margin: 0, whiteSpace: 'pre-wrap' }}>{entry.content}</p>
-                {entry.dimension_tags.length > 0 && (
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 12 }}>
-                    {entry.dimension_tags.map(tag => (
-                      <span key={tag} style={{
-                        padding:     '3px 10px',
-                        borderRadius: 100,
-                        background:  'rgba(122,158,142,.12)',
-                        color:       'var(--sage)',
-                        fontFamily:  'var(--font-body)',
-                        fontSize:    '.73rem',
-                      }}>
-                        {dimLabel(tag)}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )
-          })}
-        </div>
-      )}
-    </div>
-  )
-}
+       

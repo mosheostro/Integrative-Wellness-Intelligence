@@ -25,22 +25,33 @@ const COMPANY_LINKS = [
   { key: 'contact',        href: '/contact'       },
 ] as const
 
-// Tradition names are proper nouns — not translated
-const TRADITIONS = [
-  { label: 'Evidence-Based', href: '/methodologies#evidence-based' },
-  { label: 'Rambam',         href: '/methodologies#rambam'         },
-  { label: 'Hippocrates',    href: '/methodologies#hippocrates'    },
-  { label: 'Avicenna',       href: '/methodologies#avicenna'       },
-  { label: 'Ayurveda',       href: '/methodologies#ayurveda'       },
-  { label: 'Daoist',         href: '/methodologies#daoist'         },
-  { label: 'Tibetan',        href: '/methodologies#tibetan'        },
-  { label: 'Swarga',         href: '/methodologies#swarga'         },
+const TRADITION_HREFS = [
+  '/methodologies#evidence-based',
+  '/methodologies#rambam',
+  '/methodologies#hippocrates',
+  '/methodologies#avicenna',
+  '/methodologies#ayurveda',
+  '/methodologies#daoist',
+  '/methodologies#tibetan',
+  '/methodologies#swarga',
 ]
 
 export default function SiteFooter() {
   const { strings } = useLanguage()
   const nav = strings.nav
   const f = strings.footer
+  const m = strings.methodologies
+
+  const TRADITIONS = [
+    { label: m.tEvidenceName,   href: TRADITION_HREFS[0] },
+    { label: m.tRambamName,     href: TRADITION_HREFS[1] },
+    { label: m.tHippocratesName,href: TRADITION_HREFS[2] },
+    { label: m.tAvicennaName,   href: TRADITION_HREFS[3] },
+    { label: m.tAyurvedaName,   href: TRADITION_HREFS[4] },
+    { label: m.tDaoistName,     href: TRADITION_HREFS[5] },
+    { label: m.tTibetanName,    href: TRADITION_HREFS[6] },
+    { label: m.tSwargaName,     href: TRADITION_HREFS[7] },
+  ]
 
   // Map nav keys → translated labels
   type NavKey = keyof typeof nav
@@ -193,16 +204,4 @@ export default function SiteFooter() {
             </Link>
             <Link href="/terms"
               style={{
-                fontFamily:     'var(--font-body)',
-                fontSize:       '.75rem',
-                color:          'rgba(255,255,255,.55)',
-                textDecoration: 'none',
-              }}>
-              {f.termsOfService}
-            </Link>
-          </div>
-        </div>
-      </div>
-    </footer>
-  )
-}
+                

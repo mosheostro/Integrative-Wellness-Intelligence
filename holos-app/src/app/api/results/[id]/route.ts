@@ -16,5 +16,4 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 
   if (!assessment || !scores) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
-  return NextResponse.json({ assessment, scores, fwResult: fwResult ?? null, recommendations: recs ?? [] })
-}
+  return NextResponse.json({ assessment, scores, fwResult: fwResult ?? null, reco

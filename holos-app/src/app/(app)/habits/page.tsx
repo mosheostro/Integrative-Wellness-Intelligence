@@ -200,30 +200,4 @@ export default function HabitsPage() {
                   color: '#fff', fontSize: '.75rem', flexShrink: 0, transition: 'all .2s',
                 }}>
                   {h.completed_today && '✓'}
-                </div>
-                <div style={{ flex: 1 }}>
-                  <div style={{
-                    fontFamily: 'var(--font-body)', fontSize: '.92rem', fontWeight: 600,
-                    color: h.completed_today ? 'var(--ink-soft)' : 'var(--ink)',
-                    textDecoration: h.completed_today ? 'line-through' : 'none',
-                    textDecorationColor: 'var(--line)',
-                  }}>
-                    {h.title}
-                  </div>
-                  <div style={{ fontFamily: 'var(--font-body)', fontSize: '.75rem', color: 'var(--ink-faint)', marginTop: 2 }}>
-                    {dimLabel(h.dimension)} · {freqLabel(h.frequency)}
-                  </div>
-                </div>
-                {h.streak > 0 && (
-                  <div style={{ flexShrink: 0 }}>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.78rem', color: 'var(--gold)', fontWeight: 600 }}>🔥 {h.streak}</span>
-                  </div>
-                )}
-              </button>
-            )
-          })}
-        </div>
-      )}
-    </div>
-  )
-}
+                

@@ -143,5 +143,4 @@ export function useWellnessEngine(framework: Framework, locale?: string) {
 export function interpolateScore(from: number, to: number, t: number): number {
   // Ease-in-out cubic
   const ease = t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2
-  return Math.round(from + (to - from) * ease)
-}
+  r

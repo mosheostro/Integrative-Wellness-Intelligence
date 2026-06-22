@@ -193,30 +193,4 @@ function GoalCard({ goal, onProgress, target, dateLocale, dimLabel, statusLabels
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6, flexShrink: 0 }}>
           <StatusBadge status={goal.status} label={statusLabels[goal.status] ?? goal.status} />
-          <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--sage-deep)', background: 'rgba(122,158,142,.1)', padding: '2px 8px', borderRadius: 100 }}>{dimLabel(goal.dimension)}</span>
-        </div>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <div style={{ flex: 1, height: 6, background: 'var(--line)', borderRadius: 3, overflow: 'hidden' }}>
-          <div style={{ height: '100%', width: `${goal.progress}%`, background: 'var(--sage)', borderRadius: 3, transition: 'width .3s' }} />
-        </div>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.75rem', color: 'var(--ink-soft)', minWidth: 32, textAlign: 'right' }}>{goal.progress}%</span>
-        {goal.status !== 'completed' && (
-          <div style={{ display: 'flex', gap: 4 }}>
-            {[25, 50, 75, 100].map(p => (
-              <button key={p} onClick={() => onProgress(goal.id, p)}
-                style={{ padding: '3px 8px', borderRadius: 4, border: '1px solid var(--line)', background: goal.progress >= p ? 'var(--sage-deep)' : 'transparent', color: goal.progress >= p ? '#fff' : 'var(--ink-soft)', fontFamily: 'var(--font-mono)', fontSize: '.78rem', cursor: 'pointer' }}>
-                  {p}%
-                </button>
-            ))}
-          </div>
-        )}
-        {goal.target_date && (
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-faint)', marginTop: 8 }}>
-            {target}: {new Date(goal.target_date).toLocaleDateString(dateLocale, { month: 'short', day: 'numeric', year: 'numeric' })}
-          </div>
-        )}
-      </div>
-    </div>
-  )
-}
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--sage-deep)', background: 'r

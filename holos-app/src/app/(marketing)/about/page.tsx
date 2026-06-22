@@ -260,7 +260,3 @@ export default async function AboutPage() {
             </Link>
           </div>
         </div>
-      </section>
-    </div>
-  )
-}
