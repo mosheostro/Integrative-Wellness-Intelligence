@@ -161,4 +161,78 @@ export default async function ProgressPage() {
                       style={{
                         flex: 1, height: h, borderRadius: '3px 3px 0 0',
                         background: isLast ? 'var(--sage)' : 'hsl(' + (140 + (composite - 50) * 1.2) + ', 40%, 60%)',
-                        transition: 'height .4s', cursor: 'default', opacity: isLast ? 1
+                        transition: 'height .4s', cursor: 'default', opacity: isLast ? 1 : 0.7,
+                      }}
+                    />
+                  )
+                })}
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6, fontSize: 12, color: 'var(--ink-faint)', fontFamily: 'var(--font-mono)' }}>
+                <span>{String((snapshots[0] as Snapshot)?.snapshot_date ?? '')}</span>
+                <span>{String((snapshots[snapshots.length - 1] as Snapshot)?.snapshot_date ?? '')}</span>
+              </div>
+            </div>
+          )}
+
+          {/* Dimension comparison */}
+          {latest && (
+            <div className="card" style={{ marginBottom: 24 }}>
+              <div className="eyebrow" style={{ marginBottom: 20 }}>&#9672; {s.dimensionBreakdown}</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                {DIMS.map((dim) => {
+                  const val = (latest[dim] as number) ?? 0
+                  const delta = trend(dim)
+                  return (
+                    <div key={dim} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                      <div style={{ width: 88, fontSize: '.8rem', color: 'var(--ink-soft)', flexShrink: 0 }}>{DIM_LABELS[dim]}</div>
+                      <div className="progress-track" style={{ flex: 1 }}>
+                        <div className="progress-fill" style={{ width: val + '%', background: val >= 70 ? 'var(--sage)' : val >= 50 ? 'var(--gold)' : 'var(--rose)' }} />
+                      </div>
+                      <div style={{ width: 32, textAlign: 'right', fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 600 }}>{val}</div>
+                      {delta !== 0 && (
+                        <div style={{ width: 28, textAlign: 'right', fontSize: 12, fontFamily: 'var(--font-mono)', color: delta > 0 ? 'var(--sage)' : 'var(--rose)' }}>
+                          {delta > 0 ? '+' + delta : delta}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Assessment history */}
+          {assessments && assessments.length > 0 && (
+            <div className="card">
+              <div className="eyebrow" style={{ marginBottom: 16 }}>&#9675; {s.assessmentHistory}</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                {(assessments as { id: string; completed_at: string; composite_score: number | null; wellness_state: string | null; framework: string | null }[]).map((a, i) => (
+                  <a key={a.id} href={'/results/' + a.id} style={{
+                    display: 'flex', alignItems: 'center', gap: 16, padding: '14px 0',
+                    borderBottom: i < assessments.length - 1 ? '1px solid var(--line)' : 'none',
+                    textDecoration: 'none', color: 'inherit',
+                  }}>
+                    <div style={{
+                      width: 44, height: 44, borderRadius: 10, flexShrink: 0,
+                      background: (a.composite_score ?? 0) >= 70 ? 'var(--sage-deep)' : (a.composite_score ?? 0) >= 50 ? 'var(--gold)' : 'var(--rose)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 14, color: '#fff',
+                    }}>{a.composite_score ?? '?'}</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontWeight: 500, fontSize: '.875rem', color: 'var(--ink)' }}>
+                        {STATE_LABELS[a.wellness_state ?? '']?.[locale] ?? (a.wellness_state ?? 'UNKNOWN').replace(/_/g, ' ')}
+                      </div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.75rem', color: 'var(--ink-faint)' }}>
+                        {new Date(a.completed_at).toLocaleDateString(dateLocale, { month: 'short', day: 'numeric', year: 'numeric' })} · {TRADITION_LABELS[a.framework ?? '']?.[locale] ?? a.framework}
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  )
+}

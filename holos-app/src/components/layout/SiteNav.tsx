@@ -374,4 +374,35 @@ export default function SiteNav() {
         <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 24 }}>
           <ThemeToggle size={34} />
           <LanguageSwitcher />
-        </d
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <Link href="/auth/login"
+            style={{
+              display:      'block',
+              textAlign:    'center',
+              padding:      '12px 24px',
+              borderRadius: 'var(--radius)',
+              border:       '1.5px solid var(--line)',
+              fontFamily:   'var(--font-body)',
+              fontWeight:   600,
+              color:        'var(--ink)',
+              textDecoration: 'none',
+            }}>{n.signIn}</Link>
+          <Link href="/auth/signup"
+            style={{
+              display:      'block',
+              textAlign:    'center',
+              padding:      '12px 24px',
+              borderRadius: 'var(--radius)',
+              background:   'var(--sage-deep)',
+              fontFamily:   'var(--font-body)',
+              fontWeight:   600,
+              color:        '#fff',
+              textDecoration: 'none',
+            }}>{n.getStarted}</Link>
+        </div>
+      </div>
+    </>
+  )
+}

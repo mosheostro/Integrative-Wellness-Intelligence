@@ -1,4 +1,5 @@
 import type { Question } from '@/lib/types'
+import { selectAssessmentQuestions } from './pools'
 
 export const QUESTION_BANK: Question[] = [
   // ── SECTION 1: Daily Rhythm & Energy ───────────────────────
@@ -278,4 +279,315 @@ export const QUESTION_BANK: Question[] = [
     type: 'single',
     tags: ['sleep', 'insomnia-type', 'adaptive'],
     options: [
-      { index: 0, text: "I fall asleep easily 
+      { index: 0, text: "Difficulty falling asleep — my mind races at bedtime", weights: { sleep: -2, stress: 2 } },
+      { index: 1, text: "I fall asleep but wake 2–4am and can't return to sleep", weights: { sleep: -2, stress: 1, recovery: -1 } },
+      { index: 2, text: "Both — I struggle with onset and staying asleep", weights: { sleep: -3, stress: 2 } },
+      { index: 3, text: "I sleep heavily but never feel rested", weights: { sleep: -2, recovery: -2 } },
+    ],
+    showIf: { questionId: 'q-sleep-01', optionIndex: [2, 3] },
+  },
+  {
+    id: 'q-sleep-b02',
+    section: 'Sleep — Adaptive',
+    dimension: 'sleep',
+    text: 'What does your pre-sleep routine look like in the 60 minutes before bed?',
+    type: 'single',
+    tags: ['sleep', 'wind-down', 'hygiene', 'adaptive'],
+    options: [
+      { index: 0, text: "Deliberate wind-down — dim light, no screens, calm activity", weights: { sleep: 2, stress: -1 } },
+      { index: 1, text: "Light routine — I try to slow down but it's inconsistent", weights: { sleep: 1 } },
+      { index: 2, text: "Work or scroll until I feel sleepy", weights: { sleep: -2 } },
+      { index: 3, text: "No routine — I collapse whenever I can", weights: { sleep: -2, stress: 1 } },
+    ],
+    showIf: { questionId: 'q-sleep-01', optionIndex: [2, 3] },
+  },
+
+  // ── Nutrition Branches ───────────────────────────────────────
+
+  {
+    id: 'q-nutrition-b01',
+    section: 'Nutrition — Adaptive',
+    dimension: 'nutrition',
+    text: 'Which best describes your relationship with food emotionally?',
+    type: 'single',
+    tags: ['nutrition', 'emotional-eating', 'adaptive'],
+    options: [
+      { index: 0, text: "Mostly neutral — I eat for fuel and enjoyment, not emotions", weights: { nutrition: 2, emotional: 1 } },
+      { index: 1, text: "Sometimes emotional — stress or boredom triggers eating", weights: { nutrition: -1, emotional: -1, stress: 1 } },
+      { index: 2, text: "Often — food is my primary comfort when stressed", weights: { nutrition: -2, emotional: -1, stress: 2 } },
+      { index: 3, text: "I restrict food when stressed or anxious", weights: { nutrition: -2, emotional: -2 } },
+    ],
+    showIf: { questionId: 'q-nutrition-01', optionIndex: [2, 3] },
+  },
+  {
+    id: 'q-nutrition-b02',
+    section: 'Nutrition — Adaptive',
+    dimension: 'nutrition',
+    text: 'How much ultra-processed food (packaged snacks, fast food, sugary drinks) do you consume daily?',
+    type: 'single',
+    tags: ['nutrition', 'processed-food', 'adaptive'],
+    options: [
+      { index: 0, text: "Very little — I prepare most meals from whole ingredients", weights: { nutrition: 2 } },
+      { index: 1, text: "Some — 1–2 processed items per day", weights: { nutrition: 0 } },
+      { index: 2, text: "Several — a significant portion of my diet", weights: { nutrition: -2, energy: -1 } },
+      { index: 3, text: "Most of what I eat is processed or takeout", weights: { nutrition: -3, energy: -2 } },
+    ],
+    showIf: { questionId: 'q-nutrition-01', optionIndex: [2, 3] },
+  },
+  {
+    id: 'q-nutrition-b03',
+    section: 'Nutrition — Adaptive',
+    dimension: 'nutrition',
+    text: 'Do you include adequate protein in most meals?',
+    type: 'single',
+    tags: ['nutrition', 'protein', 'adaptive'],
+    options: [
+      { index: 0, text: "Yes — protein anchors every meal intentionally", weights: { nutrition: 2, recovery: 1 } },
+      { index: 1, text: "Usually — I think about it but don't track", weights: { nutrition: 1 } },
+      { index: 2, text: "Inconsistently — some meals are very low", weights: { nutrition: -1, recovery: -1 } },
+      { index: 3, text: "Rarely — my meals are mostly carbs or low in protein", weights: { nutrition: -2, recovery: -2, energy: -1 } },
+    ],
+    showIf: { questionId: 'q-nutrition-02', optionIndex: [2, 3] },
+  },
+
+  // ── Movement Branches ────────────────────────────────────────
+
+  {
+    id: 'q-movement-b01',
+    section: 'Movement — Adaptive',
+    dimension: 'movement',
+    text: 'What most often prevents you from being more active?',
+    type: 'single',
+    tags: ['movement', 'barriers', 'adaptive'],
+    options: [
+      { index: 0, text: "Time — my schedule leaves little room", weights: { movement: -1, life_balance: -1 } },
+      { index: 1, text: "Energy — I feel too depleted to exercise", weights: { movement: -1, recovery: -2 } },
+      { index: 2, text: "Motivation — starting feels like the hardest part", weights: { movement: -1, emotional: -1 } },
+      { index: 3, text: "Pain or injury — physical limitations hold me back", weights: { movement: -1, recovery: -1 } },
+    ],
+    showIf: { questionId: 'q-movement-01', optionIndex: [2, 3] },
+  },
+  {
+    id: 'q-movement-b02',
+    section: 'Movement — Adaptive',
+    dimension: 'movement',
+    text: 'How much time do you spend sitting continuously without breaks?',
+    type: 'single',
+    tags: ['movement', 'sedentary', 'sitting', 'adaptive'],
+    options: [
+      { index: 0, text: "Under 1 hour — I get up and move regularly", weights: { movement: 2 } },
+      { index: 1, text: "1–2 hours at a stretch", weights: { movement: 0 } },
+      { index: 2, text: "2–4 hours — I often forget to move", weights: { movement: -1, energy: -1 } },
+      { index: 3, text: "Over 4 hours — I can go half a day without standing", weights: { movement: -2, energy: -2, recovery: -1 } },
+    ],
+    showIf: { questionId: 'q-movement-01', optionIndex: [2, 3] },
+  },
+
+  // ── Stress Branches ──────────────────────────────────────────
+
+  {
+    id: 'q-stress-b01',
+    section: 'Stress — Adaptive',
+    dimension: 'stress',
+    text: 'How does chronic stress most visibly affect you?',
+    type: 'single',
+    tags: ['stress', 'symptoms', 'somatic', 'adaptive'],
+    options: [
+      { index: 0, text: "Physically — tension, headaches, gut issues", weights: { stress: 2, recovery: -1 } },
+      { index: 1, text: "Cognitively — poor focus, forgetfulness, mental fog", weights: { stress: 2, energy: -1 } },
+      { index: 2, text: "Emotionally — irritability, anxiety, or low mood", weights: { stress: 2, emotional: -2 } },
+      { index: 3, text: "Behaviourally — disrupted sleep, overeating, withdrawal", weights: { stress: 2, sleep: -1, nutrition: -1 } },
+    ],
+    showIf: { questionId: 'q-stress-01', optionIndex: [1, 3] },
+  },
+  {
+    id: 'q-stress-b02',
+    section: 'Stress — Adaptive',
+    dimension: 'stress',
+    text: 'Do you have a regular practice that helps you decompress (meditation, breathwork, journalling, nature)?',
+    type: 'single',
+    tags: ['stress', 'resilience', 'practice', 'adaptive'],
+    options: [
+      { index: 0, text: "Yes — a daily or near-daily practice I rely on", weights: { stress: -2, emotional: 1 } },
+      { index: 1, text: "Occasionally — I use it when things get bad", weights: { stress: -1 } },
+      { index: 2, text: "Rarely — I want to but haven't made it stick", weights: { stress: 1 } },
+      { index: 3, text: "No — I don't have any such practice", weights: { stress: 2 } },
+    ],
+    showIf: { questionId: 'q-stress-02', optionIndex: [2, 3] },
+  },
+  {
+    id: 'q-stress-b03',
+    section: 'Stress — Adaptive',
+    dimension: 'stress',
+    text: 'How well do you disconnect from work in the evenings and weekends?',
+    type: 'single',
+    tags: ['stress', 'work-life', 'recovery', 'adaptive'],
+    options: [
+      { index: 0, text: "Well — I have clear boundaries and honour them", weights: { stress: -2, life_balance: 1 } },
+      { index: 1, text: "Mostly — occasional intrusion but generally protected", weights: { stress: -1 } },
+      { index: 2, text: "With difficulty — work thoughts follow me home", weights: { stress: 1, life_balance: -1 } },
+      { index: 3, text: "I never truly disconnect", weights: { stress: 2, life_balance: -2, sleep: -1 } },
+    ],
+    showIf: { questionId: 'q-stress-02', optionIndex: [2, 3] },
+  },
+
+  // ── Recovery Branches ────────────────────────────────────────
+
+  {
+    id: 'q-recovery-b01',
+    section: 'Recovery — Adaptive',
+    dimension: 'recovery',
+    text: 'Do you include intentional recovery practices in your weekly routine?',
+    type: 'single',
+    tags: ['recovery', 'protocol', 'adaptive'],
+    options: [
+      { index: 0, text: "Yes — sauna, cold exposure, breathwork, or targeted rest", weights: { recovery: 2 } },
+      { index: 1, text: "Occasionally — massage or passive rest", weights: { recovery: 1 } },
+      { index: 2, text: "Rarely — recovery is unplanned rest only", weights: { recovery: -1 } },
+      { index: 3, text: "No specific practices — I just wait to feel better", weights: { recovery: -2 } },
+    ],
+    showIf: { questionId: 'q-recovery-01', optionIndex: [2, 3] },
+  },
+  {
+    id: 'q-recovery-b02',
+    section: 'Recovery — Adaptive',
+    dimension: 'recovery',
+    text: 'How often do you get ill or feel run down during a typical month?',
+    type: 'single',
+    tags: ['recovery', 'immunity', 'adaptive'],
+    options: [
+      { index: 0, text: "Rarely — robust immunity, occasional minor illness", weights: { recovery: 2, nutrition: 1 } },
+      { index: 1, text: "Once monthly — manageable", weights: { recovery: 0 } },
+      { index: 2, text: "2–3 times monthly — frequent run-down periods", weights: { recovery: -1, stress: 1 } },
+      { index: 3, text: "Almost constantly — I never feel fully well", weights: { recovery: -2, stress: 2, sleep: -1 } },
+    ],
+    showIf: { questionId: 'q-recovery-01', optionIndex: [2, 3] },
+  },
+
+  // ── Emotional Wellbeing Branches ─────────────────────────────
+
+  {
+    id: 'q-emotional-b01',
+    section: 'Emotional — Adaptive',
+    dimension: 'emotional',
+    text: 'How often do you feel emotionally supported by people in your life?',
+    type: 'single',
+    tags: ['emotional', 'social', 'support', 'adaptive'],
+    options: [
+      { index: 0, text: "Consistently — I have people I can lean on", weights: { emotional: 2, life_balance: 1 } },
+      { index: 1, text: "Sometimes — support exists but isn't always available", weights: { emotional: 1 } },
+      { index: 2, text: "Rarely — I mostly navigate difficulties alone", weights: { emotional: -1, stress: 1 } },
+      { index: 3, text: "Almost never — I feel isolated in my struggles", weights: { emotional: -2, stress: 2 } },
+    ],
+    showIf: { questionId: 'q-emotional-01', optionIndex: [2, 3] },
+  },
+  {
+    id: 'q-emotional-b02',
+    section: 'Emotional — Adaptive',
+    dimension: 'emotional',
+    text: 'How often do you experience moments of genuine joy or deep satisfaction?',
+    type: 'single',
+    tags: ['emotional', 'joy', 'positive-affect', 'adaptive'],
+    options: [
+      { index: 0, text: "Daily — small moments of joy are present and noticed", weights: { emotional: 2, purpose: 1 } },
+      { index: 1, text: "A few times per week", weights: { emotional: 1 } },
+      { index: 2, text: "Rarely — joy feels distant or fleeting", weights: { emotional: -1, purpose: -1 } },
+      { index: 3, text: "Almost never — I feel emotionally flat or empty", weights: { emotional: -2, purpose: -2 } },
+    ],
+    showIf: { questionId: 'q-emotional-01', optionIndex: [2, 3] },
+  },
+
+  // ── Life Balance Branches ────────────────────────────────────
+
+  {
+    id: 'q-balance-b01',
+    section: 'Life Balance — Adaptive',
+    dimension: 'life_balance',
+    text: 'Which life area feels most neglected right now?',
+    type: 'single',
+    tags: ['balance', 'priorities', 'adaptive'],
+    options: [
+      { index: 0, text: "Health — I don't have time or space to prioritise it", weights: { life_balance: -1, movement: -1, nutrition: -1 } },
+      { index: 1, text: "Relationships — connections feel thin or underfed", weights: { life_balance: -1, emotional: -1 } },
+      { index: 2, text: "Personal growth — I feel stagnant and unchallenged", weights: { life_balance: -1, purpose: -1 } },
+      { index: 3, text: "Rest and play — I can't remember the last time I truly relaxed", weights: { life_balance: -1, recovery: -1, stress: 1 } },
+    ],
+    showIf: { questionId: 'q-balance-01', optionIndex: [1, 2, 3] },
+  },
+  {
+    id: 'q-balance-b02',
+    section: 'Life Balance — Adaptive',
+    dimension: 'life_balance',
+    text: 'How nourishing are your closest relationships?',
+    type: 'single',
+    tags: ['balance', 'relationships', 'social', 'adaptive'],
+    options: [
+      { index: 0, text: 'Very nourishing — I feel seen, loved, and supported', weights: { life_balance: 2, emotional: 2, purpose: 1 } },
+      { index: 1, text: 'Mostly good with occasional friction', weights: { life_balance: 1, emotional: 1 } },
+      { index: 2, text: 'Strained — there is tension, distance, or unresolved issues', weights: { life_balance: -1, emotional: -1, stress: 1 } },
+      { index: 3, text: 'Significantly depleting or absent — I feel unsupported', weights: { life_balance: -2, emotional: -2, stress: 2 } },
+    ],
+    showIf: { questionId: 'q-balance-01', optionIndex: [1, 2, 3] },
+  },
+  {
+    id: 'q-balance-b03',
+    section: 'Life Balance — Adaptive',
+    dimension: 'life_balance',
+    text: 'What does rest and play look like in your current life?',
+    type: 'single',
+    tags: ['balance', 'play', 'leisure', 'rest'],
+    options: [
+      { index: 0, text: 'Rich — I have hobbies, interests, and genuine downtime', weights: { life_balance: 2, emotional: 1, recovery: 1 } },
+      { index: 1, text: 'Limited but present — I squeeze in leisure when I can', weights: { life_balance: 1 } },
+      { index: 2, text: "Minimal — I don't really have space for it anymore", weights: { life_balance: -1, stress: 1, recovery: -1 } },
+      { index: 3, text: "Absent — I've forgotten what rest without guilt feels like", weights: { life_balance: -2, stress: 2, emotional: -1 } },
+    ],
+    showIf: { questionId: 'q-balance-01', optionIndex: [2, 3] },
+  },
+]
+
+// ── Branching infrastructure ─────────────────────────────────
+
+export const QUESTION_BRANCH_MAP: Record<string, Question[]> = {}
+for (const q of QUESTION_BANK) {
+  if (q.showIf) {
+    const key = `${q.showIf.questionId}:${q.showIf.optionIndex.join(',')}`
+    if (!QUESTION_BRANCH_MAP[key]) QUESTION_BRANCH_MAP[key] = []
+    QUESTION_BRANCH_MAP[key].push(q)
+  }
+}
+
+export function getNextQuestions(
+  questionId: string,
+  optionIndex: number,
+  allAnswered: Set<string>
+): Question[] {
+  const candidates: Question[] = []
+  for (const q of QUESTION_BANK) {
+    if (!q.showIf) continue
+    if (
+      q.showIf.questionId === questionId &&
+      q.showIf.optionIndex.includes(optionIndex) &&
+      !allAnswered.has(q.id)
+    ) {
+      candidates.push(q)
+    }
+  }
+  return candidates
+}
+
+/**
+ * Returns the initial (non-adaptive) question set.
+ *
+ * When `seed` is supplied, draws 3 questions per dimension from the
+ * extended pools (src/data/questions/pools.ts), giving 27 varied core
+ * questions per assessment.  Without a seed the legacy bank is used as
+ * fallback — this preserves backwards-compat for any test that calls
+ * getInitialQuestions() without arguments.
+ */
+export function getInitialQuestions(seed?: number): Question[] {
+  if (seed !== undefined) {
+    return selectAssessmentQuestions(seed)
+  }
+  return QUESTION_BANK.filter(q => !q.showIf)
+}

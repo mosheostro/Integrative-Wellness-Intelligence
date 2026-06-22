@@ -71,4 +71,13 @@ export async function POST(req: NextRequest) {
       }),
     })
 
-    if (!for
+    if (!formSubmitRes.ok) {
+      throw new Error('FormSubmit failed')
+    }
+
+    return NextResponse.json({ ok: true })
+  } catch (err) {
+    console.error('Contact API error:', err)
+    return NextResponse.json({ error: 'Failed to send message' }, { status: 500 })
+  }
+}

@@ -204,4 +204,16 @@ export default function SiteFooter() {
             </Link>
             <Link href="/terms"
               style={{
-                
+                fontFamily:     'var(--font-body)',
+                fontSize:       '.75rem',
+                color:          'rgba(255,255,255,.55)',
+                textDecoration: 'none',
+              }}>
+              {f.termsOfService}
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}

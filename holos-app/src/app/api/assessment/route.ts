@@ -114,6 +114,7 @@ export async function POST(req: NextRequest) {
           difficulty_score: r.difficulty_score,
           priority_score: Math.round(r.impact_score - r.difficulty_score * 0.2),
           framework,
+          status: 'pending',
         }))
       )
     }
@@ -132,4 +133,15 @@ export async function POST(req: NextRequest) {
       life_balance: result.scores.life_balance,
       purpose: result.scores.purpose,
       energy: result.scores.energy,
-      
+      wellness_state: result.state,
+    }, { onConflict: 'user_id,snapshot_date' })
+
+    // XP reward
+    try { await db.rpc('add_xp', { p_user_id: user.id, p_xp: 50 }) } catch { /* non-critical */ }
+
+    return NextResponse.json({ assessmentId, result }, { status: 201 })
+  } catch (err) {
+    console.error('Assessment API error:', err)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}

@@ -7,6 +7,7 @@ interface Message {
   role: 'user' | 'assistant'
   content: string
   timestamp: Date
+  suggestions?: string[]
 }
 
 export default function CoachPage() {
@@ -59,7 +60,12 @@ export default function CoachPage() {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error ?? 'Request failed')
-      setMessages(prev => [...prev, { role: 'assistant', content: data.reply, timestamp: new Date() }])
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: data.reply,
+        timestamp: new Date(),
+        suggestions: Array.isArray(data.suggestions) ? data.suggestions : [],
+      }])
     } catch (err) {
       const isTimeout = err instanceof Error && err.name === 'AbortError'
       setMessages(prev => [...prev, { role: 'assistant', content: isTimeout ? s.errorTimeout : s.errorConnection, timestamp: new Date() }])
@@ -141,22 +147,34 @@ export default function CoachPage() {
         </div>
       </div>
 
-      {/* Quick starters (only when 1 message) */}
-      {messages.length === 1 && (
-        <div style={{ padding:'0 16px 12px', flexShrink:0 }}>
-          <div style={{ maxWidth:720, margin:'0 auto', display:'flex', flexWrap:'wrap', gap:8 }}>
-            {starterKeys.map(starter => (
-              <button key={starter} onClick={() => send(starter)}
-                style={{
-                  padding:'7px 14px', borderRadius:20, border:'1px solid var(--line)',
-                  background:'var(--canvas2)', color:'var(--ink-soft)', fontSize:'.8rem',
-                  cursor:'pointer', fontFamily:'inherit',
-                }}
-              >{starter}</button>
-            ))}
+      {/* Contextual suggestions — starters on first message, AI-driven chips after each reply */}
+      {(() => {
+        const lastMsg = messages[messages.length - 1]
+        if (lastMsg?.role !== 'assistant') return null
+
+        const chips = messages.length === 1
+          ? starterKeys
+          : (lastMsg.suggestions ?? [])
+
+        if (chips.length === 0) return null
+
+        return (
+          <div style={{ padding:'0 16px 12px', flexShrink:0 }}>
+            <div style={{ maxWidth:720, margin:'0 auto', display:'flex', flexWrap:'wrap', gap:8 }}>
+              {chips.map((chip, i) => (
+                <button key={i} onClick={() => send(chip)} disabled={loading}
+                  style={{
+                    padding:'7px 14px', borderRadius:20, border:'1px solid var(--line)',
+                    background:'var(--canvas2)', color:'var(--ink-soft)', fontSize:'.8rem',
+                    cursor: loading ? 'default' : 'pointer', fontFamily:'inherit',
+                    opacity: loading ? 0.5 : 1, transition:'opacity .15s',
+                  }}
+                >{chip}</button>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )
+      })()}
 
       {/* Input */}
       <div style={{ padding:'12px 16px 20px', borderTop:'1px solid var(--line)', background:'var(--canvas)', flexShrink:0 }}>
@@ -176,4 +194,17 @@ export default function CoachPage() {
             }}
           />
           <button onClick={() => send()} disabled={loading || !input.trim()}
-            className
+            className="btn btn-sage"
+            style={{ padding:'0 20px', borderRadius:14, alignSelf:'stretch' }}
+          >↑</button>
+        </div>
+      </div>
+      <style>{`
+        @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+        @media (max-width: 767px) {
+          .coach-page { bottom: calc(56px + env(safe-area-inset-bottom, 0px)) !important; }
+        }
+      `}</style>
+    </div>
+  )
+}

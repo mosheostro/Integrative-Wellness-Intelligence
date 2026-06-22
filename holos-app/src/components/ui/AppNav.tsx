@@ -150,4 +150,122 @@ export function AppNav() {
 
         /* ── Logo ───────────────────────────────────────────── */
         .app-nav-logo {
-          display
+          display: flex; align-items: center; gap: 9px;
+          text-decoration: none; margin-inline-end: 10px; flex-shrink: 0;
+        }
+        .app-nav-brand {
+          font-family: var(--font-serif); font-weight: 500; font-size: 1rem;
+          color: var(--ink); letter-spacing: -.01em;
+          transition: color .2s;
+        }
+        .app-nav-logo:hover .app-nav-brand { color: var(--sage-deep); }
+        [data-theme="dark"] .app-nav-logo:hover .app-nav-brand,
+        html:not([data-theme="light"]) .app-nav-logo:hover .app-nav-brand {
+          color: var(--neon-sage, #4ebf94);
+        }
+
+        /* ── Items container ────────────────────────────────── */
+        .app-nav-items {
+          flex: 1; overflow-x: auto; scrollbar-width: none;
+          display: flex; gap: 2px; align-items: center;
+        }
+        .app-nav-items::-webkit-scrollbar { display: none; }
+
+        /* ── Individual link ────────────────────────────────── */
+        .app-nav-link {
+          position: relative;
+          display: inline-flex; align-items: center; gap: 5px;
+          padding: 6px 11px; border-radius: 8px;
+          text-decoration: none; white-space: nowrap; flex-shrink: 0;
+          font-family: var(--font-body); font-size: .82rem; font-weight: 400;
+          color: var(--ink-soft);
+          transition: background .15s, color .15s;
+        }
+        .app-nav-link:hover {
+          background: var(--surface-2);
+          color: var(--ink);
+        }
+        .app-nav-link-secondary {
+          font-size: .80rem;
+          color: var(--ink-faint);
+        }
+        .app-nav-link-active {
+          background: var(--surface-2);
+          color: var(--ink);
+          font-weight: 600;
+        }
+        [data-theme="dark"] .app-nav-link-active,
+        html:not([data-theme="light"]) .app-nav-link-active {
+          background: rgba(255,255,255,.07);
+          box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+        }
+
+        /* Glow active indicator */
+        .app-nav-active-dot {
+          position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%);
+          width: 20px; height: 2px; border-radius: 2px;
+          background: var(--sage);
+          opacity: 0;
+          transition: opacity .2s;
+        }
+        [data-theme="dark"] .app-nav-link-active .app-nav-active-dot,
+        html:not([data-theme="light"]) .app-nav-link-active .app-nav-active-dot {
+          opacity: 1;
+          background: var(--neon-sage, #4ebf94);
+          box-shadow: 0 0 8px rgba(78,191,148,.7);
+        }
+        .app-nav-link-active .app-nav-active-dot { opacity: 0.7; }
+
+        /* ── Icon ───────────────────────────────────────────── */
+        .app-nav-icon {
+          font-family: var(--font-mono); font-size: .68rem;
+          color: var(--ink-faint);
+          transition: color .15s;
+        }
+        .app-nav-link-active .app-nav-icon,
+        .app-nav-link:hover .app-nav-icon { color: var(--sage); }
+        [data-theme="dark"] .app-nav-link-active .app-nav-icon,
+        html:not([data-theme="light"]) .app-nav-link-active .app-nav-icon {
+          color: var(--neon-sage, #4ebf94);
+        }
+
+        /* ── Divider ────────────────────────────────────────── */
+        .app-nav-divider {
+          width: 1px; height: 18px;
+          background: var(--line); margin: 0 6px; flex-shrink: 0; align-self: center;
+        }
+
+        /* ── Right cluster ──────────────────────────────────── */
+        .app-nav-right {
+          display: flex; gap: 4px; align-items: center;
+          margin-inline-start: 8px; flex-shrink: 0;
+        }
+
+        /* ── Sign out ───────────────────────────────────────── */
+        .app-nav-signout {
+          display: flex; align-items: center;
+          padding: 6px 12px; border-radius: 8px;
+          border: 1px solid var(--line); background: transparent;
+          color: var(--ink-faint); font-family: var(--font-body);
+          font-size: .78rem; cursor: pointer;
+          transition: background .15s, color .15s, border-color .15s;
+        }
+        .app-nav-signout:hover {
+          background: var(--surface-2); color: var(--ink); border-color: var(--ink-faint);
+        }
+
+        /* ── Responsive ─────────────────────────────────────── */
+        @media (max-width: 767px) {
+          .app-nav-desktop      { display: none !important; }
+          .app-nav-mobile-right { display: flex !important; }
+        }
+        @media (min-width: 768px) {
+          .app-nav-mobile-right { display: none !important; }
+        }
+        .app-nav-mobile-right {
+          margin-inline-start: auto; align-items: center; gap: 6px;
+        }
+      `}</style>
+    </>
+  )
+}
