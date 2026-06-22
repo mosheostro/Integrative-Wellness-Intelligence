@@ -7,6 +7,34 @@ import { BackButton } from '@/components/ui/BackButton'
 
 const DIMENSION_KEYS = ['nutrition','sleep','recovery','stress','movement','emotional','life_balance','purpose','energy']
 
+const STATE_LABELS_L: Record<string, Record<string, string>> = {
+  HIGH_PERFORMANCE:     { en:'High Performance',     ru:'Высокая эффективность',   he:'ביצועים גבוהים',        de:'Hochleistung'           },
+  OPTIMIZATION:         { en:'Optimization Mode',    ru:'Режим оптимизации',       he:'מצב אופטימיזציה',       de:'Optimierungsmodus'      },
+  BALANCED:             { en:'Balanced',              ru:'Сбалансированный',        he:'מאוזן',                 de:'Ausgewogen'             },
+  MAINTENANCE:          { en:'Maintenance',           ru:'Поддержание',             he:'תחזוקה',                de:'Erhaltung'              },
+  SLEEP_DEFICIT:        { en:'Sleep Deficit',         ru:'Дефицит сна',             he:'חוסר שינה',             de:'Schlafdefizit'          },
+  STRESS_DOMINANT:      { en:'Stress Dominant',       ru:'Доминирует стресс',       he:'דומיננטיות של לחץ',     de:'Stressdominant'         },
+  LOW_RECOVERY:         { en:'Low Recovery',          ru:'Слабое восстановление',   he:'התאוששות נמוכה',        de:'Geringe Erholung'       },
+  ENERGY_IMBALANCE:     { en:'Energy Imbalance',      ru:'Дисбаланс энергии',       he:'חוסר איזון אנרגטי',    de:'Energieungleichgewicht' },
+  INFLAMMATORY_PATTERN: { en:'Inflammatory Pattern',  ru:'Воспалительный паттерн',  he:'דפוס דלקתי',            de:'Entzündungsmuster'      },
+  LIFESTYLE_IMPROVEMENT:{ en:'Lifestyle Improvement', ru:'Улучшение образа жизни',  he:'שיפור אורח חיים',       de:'Lebensstilverbesserung' },
+}
+const TRADITION_LABELS_L: Record<string, Record<string, string>> = {
+  tibetan:          { en:'Tibetan',        ru:'Тибетская',       he:'טיבטי',          de:'Tibetisch'      },
+  swarga:           { en:'Swarga',         ru:'Сварга',          he:'סוורגה',         de:'Swarga'         },
+  ayurveda:         { en:'Ayurveda',       ru:'Аюрведа',         he:'אורוודה',        de:'Ayurveda'       },
+  tcm:              { en:'TCM',            ru:'ТКМ',             he:'רפואה סינית',    de:'TCM'            },
+  functional:       { en:'Functional',     ru:'Функциональная',  he:'פונקציונלי',     de:'Funktionell'    },
+  biorhythm:        { en:'Biorhythm',      ru:'Биоритм',         he:'ביוריתם',        de:'Biorhythmus'    },
+  naturopathy:      { en:'Naturopathy',    ru:'Натуропатия',     he:'נטורופתיה',      de:'Naturheilkunde' },
+  integrative:      { en:'Integrative',    ru:'Интегративная',   he:'אינטגרטיבי',     de:'Integrativ'     },
+  rambam:           { en:'Rambam',         ru:'Рамбам',          he:'רמב"ם',          de:'Rambam'         },
+  hippocrates:      { en:'Hippocrates',    ru:'Гиппократ',       he:'היפוקרטס',       de:'Hippokrates'    },
+  avicenna:         { en:'Avicenna',       ru:'Авиценна',        he:'אביצנה',         de:'Avicenna'       },
+  daoist:           { en:'Daoist',         ru:'Даосская',        he:'דאואיסטי',       de:'Daoistisch'     },
+  'evidence-based': { en:'Evidence-Based', ru:'Доказательная',   he:'מבוסס ראיות',    de:'Evidenzbasiert' },
+}
+
 const COLORS: Record<string, string> = {
   nutrition: '#7A9E8E', sleep: '#6B6FA8', recovery: '#B07A60',
   stress: '#B06070', movement: '#C4A55A', emotional: '#6B6FA8',
@@ -37,7 +65,7 @@ export default async function ReportsPage() {
   const { data: { user } } = await sb.auth.getUser()
   if (!user) redirect('/auth/login')
 
-  const { strings, dateLocale } = await getServerStrings()
+  const { strings, dateLocale, locale } = await getServerStrings()
   const s = strings.reports
   const dims = strings.dimensions
   const nav = strings.nav
@@ -108,7 +136,7 @@ export default async function ReportsPage() {
                 {latest.composite ?? '—'}
               </div>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: '.8rem', color: 'rgba(255,255,255,.45)', marginTop: 8 }}>
-                {latest.wellness_state ?? ''}
+                {STATE_LABELS_L[latest.wellness_state ?? '']?.[locale] ?? (latest.wellness_state ?? '').replace(/_/g, ' ')}
               </div>
               {compositeChange !== null && (
                 <div style={{ marginTop: 12, fontFamily: 'var(--font-body)', fontSize: '.8rem', color: compositeChange >= 0 ? '#7A9E8E' : '#B06070', fontWeight: 600 }}>
@@ -123,63 +151,4 @@ export default async function ReportsPage() {
                 </div>
                 <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2.2rem', fontWeight: 500, color: 'var(--ink)', letterSpacing: '-.02em' }}>
                   {(latest as Record<string, number>)[k] ?? '—'}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Full dimension breakdown */}
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--radius-lg)', padding: '28px' }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 20 }}>
-              {s.allNineDims}
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              {DIMENSION_KEYS.map(k => (
-                <ScoreBar
-                  key={k}
-                  dim={k}
-                  score={(latest as Record<string, number>)[k] ?? 0}
-                  label={DIM_LABELS[k]}
-                  thriving={s.thriving}
-                  stable={s.stable}
-                  needsAttention={s.needsAttention}
-                  critical={s.critical}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Assessment history */}
-          {assessments && assessments.length > 0 && (
-            <div style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--radius-lg)', padding: '24px 28px' }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', textTransform: 'uppercase', letterSpacing: '.12em', color: 'var(--ink-faint)', marginBottom: 16 }}>
-                {s.assessmentHistory}
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                {assessments.map((a, i) => (
-                  <Link key={a.id} href={`/results/${a.id}`}
-                    style={{
-                      display: 'grid', gridTemplateColumns: '1fr auto auto auto', alignItems: 'center',
-                      gap: 16, padding: '12px 0',
-                      borderBottom: i < assessments.length - 1 ? '1px solid var(--line)' : 'none',
-                      textDecoration: 'none',
-                    }}>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '.85rem', color: 'var(--ink)' }}>
-                      {new Date(a.completed_at).toLocaleDateString(dateLocale, { month: 'short', day: 'numeric', year: 'numeric' })}
-                    </span>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--sage-deep)', background: 'rgba(122,158,142,.1)', padding: '2px 10px', borderRadius: 100 }}>{a.framework}</span>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--ink-soft)' }}>{a.wellness_state}</span>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.85rem', fontWeight: 600, color: 'var(--ink)' }}>{a.composite_score}</span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Actions */}
-          <div style={{ display: 'flex', gap: 12 }}>
-            <Link href="/assessment" style={{ padding: '11px 24px', borderRadius: 'var(--radius)', background: 'var(--sage-deep)', color: '#fff', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '.9rem', textDecoration: 'none' }}>
-              {s.newAssessment}
-            </Link>
-            <Link href="/progress" style={{ padding: '11px 24px', borderRadius: 'var(--radius)', border: '1.5px solid var(--line)', color: 'var(--ink)', fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: '.9rem', textDecoration: 'none' }}>
-              
+         
