@@ -96,4 +96,256 @@ const ARTICLES: Record<string, {
     body: [
       'Tibetan medicine (Sowa Rigpa, "the knowledge of healing") is one of the world\'s oldest complete medical systems, developed over two millennia at the intersection of Indian Ayurveda, Chinese medicine, and the indigenous Bön healing tradition. Its foundational model identifies three humours — Lung, Tripa, and Beken — as the primary forces that determine health, and disease as the disruption of their dynamic balance.',
       'Lung (pronounced "loong") is the wind principle: it governs all movement, both physical — breath, nerve impulse, circulation — and mental — thought, intention, and emotion. Balanced Lung produces vitality, clarity, enthusiasm, and creative intelligence. Disturbed Lung manifests as anxiety, insomnia, trembling, dry skin, tinnitus, and a scattered, overwhelmed mental state — mapping closely onto what Western psychiatry describes as anxiety spectrum disorders and what Ayurveda calls Vata aggravation.',
-      'Tripa — bile — is the fire principle: transformation, digestion of food and experience, sharp perception, and the capacity for discrimination and decision. Balanced Tripa produces intelligence, courage, and metabolic efficiency. Disturbed Tripa produces inflammation, skin disease, fever, irritability, perfectionism, and the chronic dissatisfaction of insatiability. This correlates with Ayurvedic Pitta imbalance and, in biomedical terms, with the chronic low-grade inflammatory state now recognised as a 
+      'Tripa — bile — is the fire principle: transformation, digestion of food and experience, sharp perception, and the capacity for discrimination and decision. Balanced Tripa produces intelligence, courage, and metabolic efficiency. Disturbed Tripa produces inflammation, skin disease, fever, irritability, perfectionism, and the chronic dissatisfaction of insatiability. This correlates with Ayurvedic Pitta imbalance and, in biomedical terms, with the chronic low-grade inflammatory state now recognised as a primary driver of cardiovascular disease, diabetes, and depression.',
+      'Beken — phlegm — is the water-earth principle: structure, moisture, cohesion, and stability. Balanced Beken provides endurance, compassion, patience, and deep immunity. Disturbed Beken manifests as obesity, lethargy, excessive sleep, congestion, and a low-arousal depressive state. This corresponds to Ayurvedic Kapha imbalance and, in modern terms, to the metabolic syndrome cluster and the hypotonic presentations of depression.',
+      'What distinguishes Tibetan medicine is the sophistication of its psychophysical integration. The three nyépa are not purely physical or purely psychological categories — they are psychophysical principles. Lung disorder is simultaneously a nervous system disturbance and an existential one: the unsettled mind and the agitated body are understood as one phenomenon with one treatment arc. The protocol accordingly addresses both levels: dietary modifications, specific herbal formulations, external therapies, and contemplative practices — particularly those that work with the quality of mental movement itself. This dual-track integration of somatic and psychological intervention is precisely where evidence-based medicine is now moving.',
+    ]
+  },
+}
+
+
+const CAT_COLORS: Record<string, string> = {
+  'Research':         '#6B6FA8',
+  'Исследования':     '#6B6FA8',
+  'מחקר':            '#6B6FA8',
+  'Forschung':        '#6B6FA8',
+  'Sleep':            '#7A9E8E',
+  'Сон':              '#7A9E8E',
+  'שינה':            '#7A9E8E',
+  'Schlaf':           '#7A9E8E',
+  'Nutrition':        '#B07A60',
+  'Питание':          '#B07A60',
+  'תזונה':           '#B07A60',
+  'Ernährung':        '#B07A60',
+  'Stress':           '#B06070',
+  'Стресс':           '#B06070',
+  'לחץ':             '#B06070',
+  'Movement':         '#C4A55A',
+  'Движение':         '#C4A55A',
+  'תנועה':           '#C4A55A',
+  'Bewegung':         '#C4A55A',
+  'Emotional Health': '#9B7BB0',
+  'Эмоциональное здоровье': '#9B7BB0',
+  'בריאות רגשית':   '#9B7BB0',
+  'Emotionale Gesundheit': '#9B7BB0',
+  'Purpose':          '#7A9E8E',
+  'Цель':             '#7A9E8E',
+  'מטרה':            '#7A9E8E',
+  'Zweck':            '#7A9E8E',
+  'Traditions':       '#C4A55A',
+  'Традиции':         '#C4A55A',
+  'מסורות':          '#C4A55A',
+  'Traditionen':      '#C4A55A',
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const { locale } = await getServerStrings()
+  const meta = (SLUG_META[locale as Locale] ?? SLUG_META.en)[slug] ?? SLUG_META.en[slug]
+  if (!meta) return { title: 'Article Not Found — Holos' }
+  return {
+    title: `${meta.title} — Holos Knowledge Center`,
+    description: meta.intro,
+  }
+}
+
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const [{ slug }, { strings, locale }] = await Promise.all([params, getServerStrings()])
+  const k = strings.knowledge
+
+  const localeKey = locale as Locale
+  const localeMeta = SLUG_META[localeKey] ?? SLUG_META.en
+  const meta = localeMeta[slug] ?? SLUG_META.en[slug]
+  const body = ARTICLES[slug]
+
+  const article = meta && body ? {
+    title:    meta.title,
+    category: meta.category,
+    intro:    meta.intro,
+    date:     meta.date,
+    readTime: meta.readTime,
+    author:   body.author,
+    body:     body.body,
+  } : {
+    title:    k.articleNotFound,
+    category: 'Knowledge',
+    readTime: '—',
+    date:     '—',
+    author:   'HOLOS',
+    intro:    k.articleNotFoundBody,
+    body:     [k.articleNotFoundMore],
+  }
+
+  const catColor = CAT_COLORS[article.category] ?? '#7A9E8E'
+
+  // Other articles — show localized titles from SLUG_META
+  const otherArticles = Object.keys(ARTICLES)
+    .filter(s => s !== slug)
+    .slice(0, 3)
+    .map(s => ({
+      slug: s,
+      ...(localeMeta[s] ?? SLUG_META.en[s]),
+    }))
+
+  return (
+    <div style={{ minHeight: '100vh', background: 'var(--canvas, #FAF7F2)' }}>
+
+      {/* Hero — uses ink-stable so it stays dark in both light and dark mode */}
+      <section style={{
+        background: 'var(--ink-stable, #2B2F45)', color: '#EDE9E0',
+        padding: 'clamp(60px,10vw,100px) clamp(20px,6vw,80px) clamp(40px,6vw,60px)',
+      }}>
+        <div style={{ maxWidth: 760, margin: '0 auto' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
+            <Link href="/knowledge" style={{
+              color: 'rgba(237,233,224,.6)', fontSize: '0.85rem',
+              fontFamily: 'var(--font-body)', textDecoration: 'none',
+            }}>
+              {k.articleBack}
+            </Link>
+            <span style={{ color: 'rgba(237,233,224,.3)' }}>·</span>
+            <span style={{
+              background: catColor, color: '#FAF7F2',
+              fontSize: '0.75rem', fontWeight: 600, fontFamily: 'var(--font-body)',
+              padding: '3px 10px', borderRadius: 20, letterSpacing: '0.04em',
+            }}>{article.category}</span>
+          </div>
+
+          <h1 style={{
+            fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem,4vw,2.8rem)',
+            fontWeight: 500, lineHeight: 1.2, marginBottom: 20, letterSpacing: '-0.02em',
+          }}>{article.title}</h1>
+
+          <p style={{
+            fontSize: 'clamp(1rem,1.5vw,1.15rem)', lineHeight: 1.6, opacity: 0.8,
+            fontFamily: 'var(--font-body)', marginBottom: 28,
+          }}>{article.intro}</p>
+
+          <div style={{
+            display: 'flex', gap: 20, flexWrap: 'wrap',
+            fontSize: '0.85rem', opacity: 0.6, fontFamily: 'var(--font-mono)',
+          }}>
+            <span>{article.author}</span>
+            <span>·</span>
+            <span>{article.date}</span>
+            <span>·</span>
+            <span>{article.readTime}</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Article body */}
+      <article style={{
+        maxWidth: 760, margin: '0 auto',
+        padding: 'clamp(40px,6vw,80px) clamp(20px,6vw,80px)',
+      }}>
+        {article.body.map((paragraph, i) => (
+          <p key={i} style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: 'clamp(1rem,1.2vw,1.05rem)',
+            lineHeight: 1.75,
+            color: 'var(--ink, #2B2F45)',
+            marginBottom: 24,
+          }}>{paragraph}</p>
+        ))}
+
+        {/* Medical disclaimer */}
+        <div style={{
+          background: 'rgba(122,158,142,.08)',
+          border: '1px solid rgba(122,158,142,.25)',
+          borderRadius: 12, padding: '20px 24px', marginTop: 48,
+        }}>
+          <p style={{
+            fontFamily: 'var(--font-body)', fontSize: '0.85rem',
+            color: 'var(--ink-soft, #5A5F78)', lineHeight: 1.6, margin: 0,
+          }}>
+            <strong style={{ color: 'var(--sage, #7A9E8E)' }}>{k.articleDisclaimer}</strong>{' '}
+            {k.articleDisclaimerBody}
+          </p>
+        </div>
+      </article>
+
+      {/* More articles — localized titles */}
+      {otherArticles.length > 0 && (
+        <section style={{
+          borderTop: '1px solid var(--line, #DDD8CC)',
+          padding: 'clamp(40px,6vw,80px) clamp(20px,6vw,80px)',
+          maxWidth: 1100, margin: '0 auto',
+        }}>
+          <h2 style={{
+            fontFamily: 'var(--font-serif)', fontSize: '1.5rem',
+            fontWeight: 500, color: 'var(--ink, #2B2F45)',
+            marginBottom: 32, letterSpacing: '-0.02em',
+          }}>{k.articleMore}</h2>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: 24,
+          }}>
+            {otherArticles.map(a => (
+              <Link key={a.slug} href={`/knowledge/${a.slug}`} style={{ textDecoration: 'none' }}>
+                <div style={{
+                  background: 'var(--surface, #FFFFFF)',
+                  border: '1px solid var(--line, #DDD8CC)',
+                  borderRadius: 16, padding: 24,
+                }}>
+                  <span style={{
+                    background: CAT_COLORS[a.category] ?? '#7A9E8E',
+                    color: '#FAF7F2', fontSize: '0.7rem', fontWeight: 600,
+                    fontFamily: 'var(--font-body)', padding: '2px 8px',
+                    borderRadius: 20, letterSpacing: '0.04em',
+                  }}>{a.category}</span>
+                  <h3 style={{
+                    fontFamily: 'var(--font-serif)', fontSize: '1.05rem',
+                    fontWeight: 500, color: 'var(--ink, #2B2F45)',
+                    marginTop: 12, marginBottom: 8, lineHeight: 1.3,
+                  }}>{a.title}</h3>
+                  <p style={{
+                    fontFamily: 'var(--font-body)', fontSize: '0.85rem',
+                    color: 'var(--ink-soft, #5A5F78)', lineHeight: 1.5, margin: 0,
+                  }}>{a.intro.slice(0, 100)}…</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: 40 }}>
+            <Link href="/knowledge" style={{
+              fontFamily: 'var(--font-body)', fontSize: '0.95rem',
+              color: 'var(--sage, #7A9E8E)', textDecoration: 'none', fontWeight: 500,
+            }}>
+              {k.articleViewAll}
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* CTA — uses ink-stable so it stays dark in both light and dark mode */}
+      <section style={{
+        background: 'var(--ink-stable, #2B2F45)',
+        padding: 'clamp(40px,6vw,80px) clamp(20px,6vw,80px)',
+        textAlign: 'center',
+      }}>
+        <h2 style={{
+          fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.5rem,3vw,2.2rem)',
+          color: '#EDE9E0', fontWeight: 500, marginBottom: 16,
+        }}>{k.articleCtaTitle}</h2>
+        <p style={{
+          fontFamily: 'var(--font-body)', color: 'rgba(237,233,224,.7)',
+          fontSize: '1.05rem', marginBottom: 32, maxWidth: 500, margin: '0 auto 32px',
+        }}>
+          {k.articleCtaBody}
+        </p>
+        <Link href="/auth/signup" style={{
+          display: 'inline-block',
+          background: 'var(--sage, #7A9E8E)', color: '#FAF7F2',
+          padding: '14px 32px', borderRadius: 50, fontFamily: 'var(--font-body)',
+          fontSize: '1rem', fontWeight: 600, textDecoration: 'none', letterSpacing: '0.01em',
+        }}>
+          {k.articleCtaCta}
+        </Link>
+      </section>
+    </div>
+  )
+}

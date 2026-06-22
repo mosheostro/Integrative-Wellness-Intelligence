@@ -270,4 +270,6 @@ export default async function PricingPage() {
           </div>
         </div>
       </section>
-    </div
+    </div>
+  )
+}

@@ -110,4 +110,21 @@ export default async function PrivacyPage() {
               <p>We will notify you of material changes to this policy by email and by posting a notice on the platform at least 30 days before the changes take effect.</p>
             </Section>
 
-            <Sectio
+            <Section title="11. Contact Us">
+              <p>For any privacy-related questions, to exercise your rights, or to report a concern, contact us at <a href={`mailto:${FOUNDER.email}`} style={{ color: 'var(--sage-deep)' }}>{FOUNDER.email}</a>. We aim to respond within 2 business days.</p>
+            </Section>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div style={{ marginBottom: 32, paddingBottom: 32, borderBottom: '1px solid var(--line)' }}>
+      <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 600, color: 'var(--ink)', marginBottom: 12 }}>{title}</h2>
+      {children}
+    </div>
+  )
+}
