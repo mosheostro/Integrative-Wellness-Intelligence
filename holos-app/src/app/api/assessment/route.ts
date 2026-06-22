@@ -99,10 +99,17 @@ export async function POST(req: NextRequest) {
       raw_data: { swarga: fr.swarga, customDimensions: fr.customDimensions },
     })
 
-    // Issue top recommendations
+    // Issue top recommendations — dismiss previous active ones first so the
+    // Действия page always reflects the latest assessment, not all history.
+    await db
+      .from('issued_recommendations')
+      .update({ status: 'dismissed' })
+      .eq('user_id', user.id)
+      .eq('status', 'active')
+
     const recs = result.recommendations.slice(0, 8)
     if (recs.length) {
-      await db.from('issued_recommendations').insert(
+      const { error: recErr } = await db.from('issued_recommendations').insert(
         recs.map(r => ({
           user_id: user.id,
           assessment_id: assessmentId,
@@ -114,9 +121,10 @@ export async function POST(req: NextRequest) {
           difficulty_score: r.difficulty_score,
           priority_score: Math.round(r.impact_score - r.difficulty_score * 0.2),
           framework,
-          status: 'pending',
+          status: 'active',   // matches CHECK constraint: active|completed|dismissed|snoozed
         }))
       )
+      if (recErr) console.error('Recommendations insert error:', JSON.stringify(recErr))
     }
 
     // Progress snapshot

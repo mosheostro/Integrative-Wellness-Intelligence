@@ -73,7 +73,7 @@ export default function RecommendationsPage() {
 
   const [recs, setRecs]       = useState<Rec[]>([])
   const [loading, setLoading] = useState(true)
-  const [filter, setFilter]   = useState<'all' | 'pending' | 'completed'>('pending')
+  const [filter, setFilter]   = useState<'all' | 'pending' | 'completed'>('all')
 
   const sbRef = useRef(createClient())
   const sb    = sbRef.current
@@ -98,7 +98,7 @@ export default function RecommendationsPage() {
 
   const visible = recs.filter(r =>
     filter === 'all'       ? r.status !== 'dismissed' :
-    filter === 'pending'   ? r.status === 'pending' || r.status === 'active' :
+    filter === 'pending'   ? r.status === 'active' || r.status === 'pending' :
     filter === 'completed' ? r.status === 'completed' : true
   )
 
