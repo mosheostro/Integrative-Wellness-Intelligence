@@ -62,7 +62,7 @@ export default function GoalsPage() {
     setSaveError('')
     try {
       const { data: { user } } = await sb.auth.getUser()
-      if (!user) { setSaveError('Not signed in. Please refresh.'); return }
+      if (!user) { setSaveError(strings.common.notSignedIn); return }
       const { data, error } = await sb.from('goals').insert({
         user_id: user.id, title: form.title.trim(), description: form.description.trim(),
         dimension: form.dimension, target_date: form.target_date || null,
@@ -71,7 +71,7 @@ export default function GoalsPage() {
       if (error) { setSaveError(error.message); return }
       if (data) { setGoals(g => [data as Goal, ...g]); setForm(EMPTY_FORM); setAdding(false) }
     } catch (e: unknown) {
-      setSaveError(e instanceof Error ? e.message : 'Save failed')
+      setSaveError(e instanceof Error ? e.message : strings.common.saveFailed)
     } finally {
       setSaving(false)
     }
@@ -193,4 +193,4 @@ function GoalCard({ goal, onProgress, target, dateLocale, dimLabel, statusLabels
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6, flexShrink: 0 }}>
           <StatusBadge status={goal.status} label={statusLabels[goal.status] ?? goal.status} />
-          <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--sage-deep)', background: 'rgba(12
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: '.78rem', color: 'var(--sage-deep)', background: 'r

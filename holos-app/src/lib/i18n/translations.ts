@@ -37,6 +37,7 @@ export interface Translations {
     next: string; submit: string; loading: string; error: string; success: string
     confirm: string; close: string; export: string; or: string; free: string; new: string
     yes: string; no: string
+    notSignedIn: string; saveFailed: string
   }
   dashboard: {
     title: string; greeting: string; noData: string; noDataDesc: string
@@ -338,6 +339,7 @@ const en: Translations = {
     next: 'Next', submit: 'Submit', loading: 'Loading…', error: 'Error',
     success: 'Success', confirm: 'Confirm', close: 'Close', export: 'Export',
     or: 'or', free: 'free', new: 'New', yes: 'Yes', no: 'No',
+    notSignedIn: 'Not signed in. Please refresh the page.', saveFailed: 'Save failed. Please try again.',
   },
   dashboard: {
     title: 'Holos Dashboard', greeting: 'Hello',
@@ -890,6 +892,7 @@ const ru: Translations = {
     next: 'Далее', submit: 'Отправить', loading: 'Загрузка…', error: 'Ошибка',
     success: 'Успешно', confirm: 'Подтвердить', close: 'Закрыть', export: 'Экспорт',
     or: 'или', free: 'бесплатно', new: 'Новый', yes: 'Да', no: 'Нет',
+    notSignedIn: 'Вы не авторизованы. Пожалуйста, обновите страницу.', saveFailed: 'Ошибка сохранения. Попробуйте ещё раз.',
   },
   dashboard: {
     title: 'Панель Holos', greeting: 'Здравствуй',
@@ -1446,6 +1449,7 @@ const he: Translations = {
     next: 'הבא', submit: 'שלח', loading: 'טוען…', error: 'שגיאה',
     success: 'הצלחה', confirm: 'אשר', close: 'סגור', export: 'ייצוא',
     or: 'או', free: 'חינם', new: 'חדש', yes: 'כן', no: 'לא',
+    notSignedIn: 'אינך מחובר. אנא רענן את הדף.', saveFailed: 'השמירה נכשלה. אנא נסה שנית.',
   },
   dashboard: {
     title: 'לוח Holos', greeting: 'שלום',
@@ -1998,6 +2002,7 @@ const de: Translations = {
     next: 'Weiter', submit: 'Absenden', loading: 'Lädt…', error: 'Fehler',
     success: 'Erfolgreich', confirm: 'Bestätigen', close: 'Schließen', export: 'Exportieren',
     or: 'oder', free: 'kostenlos', new: 'Neu', yes: 'Ja', no: 'Nein',
+    notSignedIn: 'Nicht angemeldet. Bitte Seite aktualisieren.', saveFailed: 'Speichern fehlgeschlagen. Bitte erneut versuchen.',
   },
   dashboard: {
     title: 'Holos Dashboard', greeting: 'Hallo',
@@ -2404,7 +2409,4 @@ const de: Translations = {
     feat2Title: 'KI-Wellness-Coach', feat2Desc: 'Ein Coach, der Ihr vollständiges Profil — Ayurvedische Konstitution, Chronotyp, Stressmuster — synthetisiert und evidenzbasierte Empfehlungen gibt.', feat2Cta: 'Coach kennenlernen',
     feat3Title: 'Wellness-Dashboard', feat3Desc: 'Ihre tägliche Kommandozentrale. Dimensionsbewertungen, Serien, heutige Prioritäten und Trend-Sparklines auf einen Blick.', feat3Cta: 'Dashboard ansehen',
     feat4Title: 'Tagesjournal', feat4Desc: 'Geführte Reflexionen, die Ihren KI-Coach speisen. Sprachnotizen, Stimmungs-Tags und KI-generierte Mustereinblicke.', feat4Cta: 'Journal öffnen',
-    feat5Title: 'Ziele & Gewohnheiten', feat5Desc: 'Setzen Sie Absichten, die auf Ihr Wellness-Profil abgestimmt sind. Bauen Sie Mikrogewohnheiten mit adaptiver Planung auf, die Ihren Chronotyp respektiert.', feat5Cta: 'Gewohnheiten aufbauen',
-    feat6Title: 'Fortschritt & Berichte', feat6Desc: 'Langzeit-Tracking über alle 9 Dimensionen. Exportierbare PDF-Berichte für Sie und optional Ihren Arzt.', feat6Cta: 'Berichte ansehen',
-    feat7Title: 'Personalisierte Empfehlungen', feat7Desc: 'Protokolle aus sechs Weisheitstraditionen und klinischer Forschung — Ernährung, Bewegung, Schlaf, Atmung und mehr — auf Ihr Profil zugeschnitten.', feat7Cta: 'Empfehlungen ansehen',
-    feat8Title: 'Fortschrittsverfolgung', feat8Desc: 'Wöchentliche Dimensions-Trends, Korrelationseinblick
+    feat5Title: 'Ziele & Gewohnheiten', feat5Desc: 'Setzen Sie Absichten, die auf Ihr Wellness-Profil abgestimmt sind. Bauen Sie Mikrogewohnheiten mit adaptiver Planung auf, di

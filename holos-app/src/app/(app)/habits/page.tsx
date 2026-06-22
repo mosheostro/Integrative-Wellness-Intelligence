@@ -66,7 +66,7 @@ export default function HabitsPage() {
     setSaveError('')
     try {
       const { data: { user } } = await sb.auth.getUser()
-      if (!user) { setSaveError('Not signed in. Please refresh.'); return }
+      if (!user) { setSaveError(strings.common.notSignedIn); return }
       const { data, error } = await sb.from('habits').insert({
         user_id: user.id, title: form.title.trim(),
         dimension: form.dimension, frequency: form.frequency,
@@ -75,7 +75,7 @@ export default function HabitsPage() {
       if (error) { setSaveError(error.message); return }
       if (data) { setHabits(h => [...h, data as Habit]); setForm(EMPTY_FORM); setAdding(false) }
     } catch (e: unknown) {
-      setSaveError(e instanceof Error ? e.message : 'Save failed')
+      setSaveError(e instanceof Error ? e.message : strings.common.saveFailed)
     } finally {
       setSaving(false)
     }
@@ -200,4 +200,4 @@ export default function HabitsPage() {
                   color: '#fff', fontSize: '.75rem', flexShrink: 0, transition: 'all .2s',
                 }}>
                   {h.completed_today && '✓'}
-                </div>
+                

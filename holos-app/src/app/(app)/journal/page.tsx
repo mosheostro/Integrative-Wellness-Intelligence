@@ -69,7 +69,7 @@ export default function JournalPage() {
     setSaveError('')
     try {
       const { data: { user } } = await sb.auth.getUser()
-      if (!user) { setSaveError('Not signed in. Please refresh and try again.'); return }
+      if (!user) { setSaveError(strings.common.notSignedIn); return }
       const { data, error } = await sb.from('journal_entries').insert({
         user_id:        user.id,
         content:        draft.trim(),
@@ -85,7 +85,7 @@ export default function JournalPage() {
         setView('history')
       }
     } catch (e: unknown) {
-      setSaveError(e instanceof Error ? e.message : 'Save failed')
+      setSaveError(e instanceof Error ? e.message : strings.common.saveFailed)
     } finally {
       setSaving(false)
     }
@@ -232,3 +232,4 @@ export default function JournalPage() {
             const m = MOODS.find(x => x.v === entry.mood)
             return (
               <div key={entry.id} style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--radius-lg)', padding: '24px 28px', marginBottom: 16 }}>
+       
