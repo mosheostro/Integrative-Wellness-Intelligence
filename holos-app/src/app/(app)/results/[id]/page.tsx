@@ -81,7 +81,7 @@ interface ResultData {
     dosha_vata?: number; dosha_pitta?: number; dosha_kapha?: number; dominant_dosha?: string
     element_wood?: number; element_fire?: number; element_earth?: number; element_metal?: number; element_water?: number
   }
-  recommendations: (Recommendation & { id: string; status: string })[]
+  recommendations: (Recommendation & { id: string; rec_id?: string; status: string })[]
   snapshots?: Array<{ composite: number; snapshot_date: string }>
 }
 
@@ -769,7 +769,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                           <ConfidenceBadge level={confLevel} locale={locale} />
                         </div>
                         <h3 style={{ fontFamily:'var(--font-serif)', fontSize:'1.05rem', color:'var(--ink)' }}>
-                          {i + 1}. {getRecTitle(rec.id, rec.title, locale)}
+                          {i + 1}. {getRecTitle(rec.rec_id ?? rec.id, rec.title, locale)}
                         </h3>
                       </div>
                       <div style={{ textAlign:'right', flexShrink:0 }}>
@@ -777,7 +777,7 @@ export default function ResultsPage({ params }: { params: Promise<{ id: string }
                         <div style={{ fontFamily:'var(--font-mono)', fontSize:18, fontWeight:700, color:'var(--sage-deep)' }}>+{rec.impact_score}</div>
                       </div>
                     </div>
-                    <p style={{ color:'var(--ink-soft)', fontSize:'.9rem', lineHeight:1.7 }}>{REC_DESCRIPTIONS_L[rec.id]?.[locale] ?? rec.description}</p>
+                    <p style={{ color:'var(--ink-soft)', fontSize:'.9rem', lineHeight:1.7 }}>{REC_DESCRIPTIONS_L[rec.rec_id ?? rec.id]?.[locale] ?? rec.description}</p>
                     {rec.evidence_level && (
                       <div style={{ marginTop:12 }}>
                         <span className="badge">{rec.evidence_level} {s.evidence}</span>
