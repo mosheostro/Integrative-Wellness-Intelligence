@@ -1226,6 +1226,8 @@ export const QUESTION_I18N: Record<string, Record<string, QuestionLocale>> = {
 
 // ── Helper: get localized question text + option labels ───────────────────────
 // Returns English as fallback if locale not found.
+import { POOLS_I18N } from './pools.i18n'
+
 export function getLocalizedQuestion(
   questionId: string,
   optionTextsEN: string[],
@@ -1233,7 +1235,7 @@ export function getLocalizedQuestion(
   locale: string,
 ): { text: string; options: string[] } {
   if (locale === 'en') return { text: textEN, options: optionTextsEN }
-  const t = QUESTION_I18N[questionId]?.[locale]
+  const t = QUESTION_I18N[questionId]?.[locale] ?? POOLS_I18N[questionId]?.[locale]
   if (t) return t
   return { text: textEN, options: optionTextsEN }
 }
