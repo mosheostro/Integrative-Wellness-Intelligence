@@ -116,6 +116,8 @@ export interface Translations {
     markDone: string; dismiss: string; completedLabel: string
     filterPending: string; filterCompleted: string; filterAll: string; loading: string
     impact: string; difficulty: string
+    sendToJournal: string; sentToJournal: string
+    progressOf: string; progressDone: string
   }
   reports: {
     title: string; noData: string; noDataDesc: string; takeFirst: string
@@ -463,6 +465,8 @@ const en: Translations = {
     markDone: '✓ Mark done', dismiss: 'Dismiss', completedLabel: '✓ Completed',
     filterPending: 'pending', filterCompleted: 'completed', filterAll: 'all', loading: 'Loading…',
     impact: 'Impact', difficulty: 'Difficulty',
+    sendToJournal: '📔 Add to journal', sentToJournal: '✓ Added to journal',
+    progressOf: 'of', progressDone: 'done',
   },
   reports: {
     title: 'Wellness Reports', noData: 'No report data yet',
@@ -1019,6 +1023,8 @@ deleteAccountBtn: 'Удалить аккаунт',
     markDone: '✓ Отметить выполненным', dismiss: 'Отклонить', completedLabel: '✓ Выполнено',
     filterPending: 'в процессе', filterCompleted: 'завершённые', filterAll: 'все', loading: 'Загрузка…',
     impact: 'Влияние', difficulty: 'Сложность',
+    sendToJournal: '📔 В дневник', sentToJournal: '✓ Добавлено в дневник',
+    progressOf: 'из', progressDone: 'выполнено',
   },
   reports: {
     title: 'Отчёты о благополучии', noData: 'Данных отчёта пока нет',
@@ -1573,6 +1579,8 @@ const he: Translations = {
     markDone: '✓ סמן כהושלם', dismiss: 'סגור', completedLabel: '✓ הושלם',
     filterPending: 'בהמתנה', filterCompleted: 'הושלם', filterAll: 'הכל', loading: 'טוען…',
     impact: 'השפעה', difficulty: 'קושי',
+    sendToJournal: '📔 הוסף ליומן', sentToJournal: '✓ נוסף ליומן',
+    progressOf: 'מתוך', progressDone: 'הושלמו',
   },
   reports: {
     title: 'דוחות בריאות', noData: 'אין נתוני דוח עדיין',
@@ -2127,6 +2135,8 @@ const de: Translations = {
     markDone: '✓ Als erledigt markieren', dismiss: 'Verwerfen', completedLabel: '✓ Abgeschlossen',
     filterPending: 'ausstehend', filterCompleted: 'abgeschlossen', filterAll: 'alle', loading: 'Lädt…',
     impact: 'Wirkung', difficulty: 'Schwierigkeit',
+    sendToJournal: '📔 Ins Tagebuch', sentToJournal: '✓ Ins Tagebuch hinzugefügt',
+    progressOf: 'von', progressDone: 'erledigt',
   },
   reports: {
     title: 'Wellness-Berichte', noData: 'Noch keine Berichtsdaten',
@@ -2533,21 +2543,7 @@ const de: Translations = {
 // ── Dictionary map + lookup helper ───────────────────────────────────────────
 export const TRANSLATIONS: Record<Locale, Translations> = { en, ru, he, de }
 
-/** Deep key lookup: t('nav.dashboard') */
 export function getTranslation(locale: Locale, key: string): string {
-  const parts = key.split('.')
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let val: any = TRANSLATIONS[locale]
-  for (const part of parts) {
-    val = val?.[part]
-    if (val === undefined) break
-  }
-  // Fall back to English if key missing in locale
-  if (typeof val !== 'string') {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let fallback: any = TRANSLATIONS.en
-    for (const part of parts) { fallback = fallback?.[part] }
-    return typeof fallback === 'string' ? fallback : key
-  }
-  return val
+  const t = TRANSLATIONS[locale] ?? TRANSLATIONS.en
+  return (t as unknown as Record<string, string>)[key] ?? key
 }

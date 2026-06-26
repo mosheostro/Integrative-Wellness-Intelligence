@@ -117,7 +117,7 @@ export async function POST(req: NextRequest) {
       const rows = recs.map(r => ({
         user_id:          user.id,
         assessment_id:    assessmentId,
-        rec_id:           r.id ?? null,
+        rec_id:           r.id ?? `auto-${Date.now()}-${Math.random().toString(36).slice(2)}`,
         category:         r.category ?? 'general',
         title:            r.title ?? '',
         description:      r.description ?? '',
