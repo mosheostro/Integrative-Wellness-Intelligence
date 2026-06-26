@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { BackButton } from '@/components/ui/BackButton'
-import { getRecTitle } from '@/lib/i18n/recommendation-titles'
+import { getRecTranslation } from '@/data/recommendations/i18n'
 
 type Rec = {
   id: string
@@ -108,7 +108,8 @@ export default function RecommendationsPage() {
     setJournalState(s => ({ ...s, [rec.id]: 'sending' }))
     const catKey = (rec.category ?? '').toUpperCase()
     const catLabel = CATEGORY_LABELS[catKey]?.[locale] ?? rec.category
-    const content = `[${catLabel}] ${getRecTitle(rec.rec_id, rec.title, locale)}\n\n${rec.description}`
+    const localRec = getRecTranslation(rec.rec_id ?? '', locale, { title: rec.title, description: rec.description })
+    const content = `[${catLabel}] ${localRec.title}\n\n${localRec.description}`
     const res = await fetch('/api/journal', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -326,14 +327,12 @@ function RecCard({
             </span>
           </div>
 
-          {/* Title */}
+          {/* Title + Description — localized */}
           <div style={{ fontFamily: 'var(--font-body)', fontSize: '.95rem', fontWeight: 600, color: 'var(--ink)', marginBottom: 6, textDecoration: done ? 'line-through' : 'none', textDecorationColor: 'var(--ink-faint)' }}>
-            {getRecTitle(rec.rec_id, rec.title, locale)}
+            {getRecTranslation(rec.rec_id ?? '', locale, { title: rec.title, description: rec.description }).title}
           </div>
-
-          {/* Description */}
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '.84rem', color: 'var(--ink-soft)', lineHeight: 1.65, margin: '0 0 14px' }}>
-            {rec.description}
+            {getRecTranslation(rec.rec_id ?? '', locale, { title: rec.title, description: rec.description }).description}
           </p>
 
           {/* Score bars */}
@@ -377,7 +376,6 @@ function ScoreBar({ label, value, color }: { label: string; value: number; color
       <div style={{ flex: 1, height: 4, background: 'var(--line)', borderRadius: 2, overflow: 'hidden' }}>
         <div style={{ height: '100%', width: `${value}%`, background: color, borderRadius: 2 }} />
       </div>
-      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.73rem', color: 'var(--ink-soft)', width: 22, textAlign: 'right' }}>{value}</span>
     </div>
   )
 }
