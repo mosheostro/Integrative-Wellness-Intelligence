@@ -79,11 +79,19 @@ export default function RecommendationsPage() {
   const sb    = sbRef.current
 
   useEffect(() => {
-    sb.from('issued_recommendations')
-      .select('id, rec_id, title, description, category, impact_score, difficulty_score, priority_score, framework, status, created_at')
-      .order('priority_score', { ascending: false })
-      .limit(50)
-      .then(({ data }) => { setRecs((data as Rec[]) ?? []); setLoading(false) })
+    // Ensure user is authenticated before querying (RLS returns 0 rows if auth.uid() is null)
+    sb.auth.getUser().then(({ data: { user } }) => {
+      if (!user) { window.location.href = '/login'; return }
+      sb.from('issued_recommendations')
+        .select('id, rec_id, title, description, category, impact_score, difficulty_score, priority_score, framework, status, created_at')
+        .order('priority_score', { ascending: false })
+        .limit(50)
+        .then(({ data, error }) => {
+          if (error) console.error('Recs fetch error:', JSON.stringify(error))
+          setRecs((data as Rec[]) ?? [])
+          setLoading(false)
+        })
+    })
   }, [])
 
   async function markDone(id: string) {

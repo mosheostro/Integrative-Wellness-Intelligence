@@ -101,30 +101,55 @@ export async function POST(req: NextRequest) {
 
     // Issue top recommendations — dismiss previous active ones first so the
     // Действия page always reflects the latest assessment, not all history.
-    await db
+    const { error: dismissErr } = await db
       .from('issued_recommendations')
       .update({ status: 'dismissed' })
       .eq('user_id', user.id)
       .eq('status', 'active')
+    if (dismissErr) console.error('Dismiss recs error:', JSON.stringify(dismissErr))
 
     const recs = result.recommendations.slice(0, 8)
+    let recsSaved = 0
+    let recsError: string | null = null
+
     if (recs.length) {
-      const { error: recErr } = await db.from('issued_recommendations').insert(
-        recs.map(r => ({
-          user_id: user.id,
-          assessment_id: assessmentId,
-          rec_id: r.id,
-          category: r.category,
-          title: r.title,
-          description: r.description,
-          impact_score: r.impact_score,
-          difficulty_score: r.difficulty_score,
-          priority_score: Math.round(r.impact_score - r.difficulty_score * 0.2),
-          framework,
-          status: 'active',   // matches CHECK constraint: active|completed|dismissed|snoozed
-        }))
-      )
-      if (recErr) console.error('Recommendations insert error:', JSON.stringify(recErr))
+      // Build insert rows defensively — ensure no NaN/undefined values
+      const rows = recs.map(r => ({
+        user_id:          user.id,
+        assessment_id:    assessmentId,
+        rec_id:           r.id ?? null,
+        category:         r.category ?? 'general',
+        title:            r.title ?? '',
+        description:      r.description ?? '',
+        impact_score:     Number.isFinite(r.impact_score)     ? r.impact_score     : 50,
+        difficulty_score: Number.isFinite(r.difficulty_score) ? r.difficulty_score : 50,
+        priority_score:   Number.isFinite(r.impact_score) && Number.isFinite(r.difficulty_score)
+          ? Math.round(r.impact_score - r.difficulty_score * 0.2)
+          : 0,
+        framework,
+        status: 'active' as const,  // CHECK constraint: active|completed|dismissed|snoozed
+      }))
+
+      const { error: recErr, data: savedRecs } = await db
+        .from('issued_recommendations')
+        .insert(rows)
+        .select('id')
+
+      if (recErr) {
+        recsError = recErr.message
+        console.error('Recommendations insert error:', JSON.stringify(recErr), 'rows:', JSON.stringify(rows.map(r => ({ rec_id: r.rec_id, status: r.status, user_id: r.user_id }))))
+        // Try one-by-one as fallback to save partial results
+        for (const row of rows) {
+          const { error: singleErr } = await db.from('issued_recommendations').insert(row)
+          if (singleErr) {
+            console.error('Single rec insert failed:', row.rec_id, JSON.stringify(singleErr))
+          } else {
+            recsSaved++
+          }
+        }
+      } else {
+        recsSaved = savedRecs?.length ?? rows.length
+      }
     }
 
     // Progress snapshot
@@ -147,7 +172,7 @@ export async function POST(req: NextRequest) {
     // XP reward
     try { await db.rpc('add_xp', { p_user_id: user.id, p_xp: 50 }) } catch { /* non-critical */ }
 
-    return NextResponse.json({ assessmentId, result }, { status: 201 })
+    return NextResponse.json({ assessmentId, result, recsSaved, recsError }, { status: 201 })
   } catch (err) {
     console.error('Assessment API error:', err)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
